@@ -1,9 +1,11 @@
 import os
 import numpy as np
 from pandas import DataFrame, concat
+from utils import start_timer, end_timer
 from quantile_forest import RandomForestQuantileRegressor
 
-class DropsetQRF():
+
+class DropsetQRF:
     def __init__(self, datasets, CI):
         self.data = datasets
         self.stations = datasets.keys()
@@ -20,6 +22,7 @@ class DropsetQRF():
 
         # test data
         yTest = xyTest['temperature']
+        xTime = xyTest['datetime']
         xTest = xyTest.drop(["datetime", 'time', "temperature"], axis=1)
         del xyTest
 
@@ -27,20 +30,29 @@ class DropsetQRF():
         yTrain = xyTrain['temperature']
         xTrain = xyTrain.drop(["datetime", 'time', "temperature"], axis=1)
 
-        return xTrain.dropna(), xTest, yTrain, yTest
+        return xTrain.dropna(), xTest, yTrain, yTest, xTime
 
     def run_error_estimation(self):
         self.Output = {}
         for key in self.stations:
+            print(f'Key {key} \n  Generating dataset')
             stationData = {}
-            xTrain, xTest, yTrain, yTest = self.xy_generation(key)
+            xTrain, xTest, yTrain, yTest, xTime = self.xy_generation(key)
             qrf = RandomForestQuantileRegressor()
+            print('  Training QRF Regressor....     ', end='')
+            start_timer()
             qrf.fit(xTrain, yTrain)
+            end_timer()
 
             # predict test set
+            print('  Predicting test set....     ', end='')
+            start_timer()
             yPred = qrf.predict(xTest, quantiles=[0.025, 0.5, 0.975])
+            end_timer()
 
             # calculate relevant error metrics and fill into dictionary
+            print('  Generating output dataset....')
+            stationData['Datetime'] = xTime
             stationData['True Temperature'] = yTest
             stationData['Predicted Temperature'] = yPred[:, 1]
             stationData['2.5%'] = yPred[:, 0]
@@ -56,5 +68,4 @@ class DropsetQRF():
             os.mkdir(savepath)
         for key in self.Output:
             MSE = self.Output[key].pop('MSE')
-            df = DataFrame(self.Output[key])
-            df.to_csv(os.path.join(savepath, f'{key}_MSE_{np.round(MSE, 2)}.csv'))
+            DataFrame(self.Output[key]).to_csv(os.path.join(savepath, f'errors_{key}.csv'), index=False)
