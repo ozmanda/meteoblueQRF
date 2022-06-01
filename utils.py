@@ -21,19 +21,35 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
         if idx == 0 and not dropset:
             data = pd.DataFrame(columns=file.columns)
 
-        # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
-            afterStart = (pd.to_datetime(file['datetime']) >= pd.to_datetime(startDatetime, format='%Y/%m/%d_%H:%M')).to_list()
-            beforeEnd = (pd.to_datetime(file['datetime']) <= pd.to_datetime(endDatetime, format='%Y/%m/%d_%H:%M')).to_list()
-            inWindow = file.index[[a and b for a, b in zip(afterStart, beforeEnd)]]
+            # extract data points within the time window, if one is given
+            if len(startDatetime) > 1:
+                inWindow = [False for x in range(len(file))]
+                for idx, startTime in enumerate(startDatetime):
+                    afterStart = (pd.to_datetime(file['datetime']) >= pd.to_datetime(startTime, format='%Y/%m/%d_%H:%M')).to_list()
+                    beforeEnd = (pd.to_datetime(file['datetime']) <= pd.to_datetime(endDatetime[idx], format='%Y/%m/%d_%H:%M')).to_list()
+                    inWindow_ = [a and b for a, b in zip(afterStart, beforeEnd)]
 
-            # user a warning if station has no datapoints within time window and continue to next station
-            if len(inWindow) == 0:
-                noData.append(filename.split(".csv")[0])
-                continue
+                    # if station has no datapoints within time window, output to logfile and continue to next station
+                    if np.sum(inWindow_) == 0:
+                        noData.append(filename.split(".csv")[0])
+                        continue
+                    else:
+                        inWindow = [a or b for a, b in zip(inWindow, inWindow_)]
 
-            # isolate relevant features and append to relevant dataset depending on dropset True/False
-            file = file.iloc[inWindow]
+                file = file.iloc[file.index[inWindow]]
+
+            elif len(startDatetime) == 1:
+                afterStart = (pd.to_datetime(file['datetime']) >= pd.to_datetime(startDatetime[0], format='%Y/%m/%d_%H:%M')).to_list()
+                beforeEnd = (pd.to_datetime(file['datetime']) <= pd.to_datetime(endDatetime[0], format='%Y/%m/%d_%H:%M')).to_list()
+                inWindow = file.index[[a and b for a, b in zip(afterStart, beforeEnd)]]
+
+                # if station has no datapoints within time window, output to logfile and continue to next station
+                if len(inWindow) == 0:
+                    noData.append(filename.split(".csv")[0])
+                    continue
+                # isolate relevant features and append to relevant dataset depending on dropset True/False
+                file = file.iloc[inWindow]
 
         if not dropset:
             data = pd.concat((data, file))

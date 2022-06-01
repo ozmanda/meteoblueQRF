@@ -1,8 +1,10 @@
 import os
+from pickle import dump
 from sklearn.utils import shuffle
 import numpy as np
 from pandas import DataFrame, concat
 from utils import start_timer, end_timer, mse
+from datetime import date
 from quantile_forest import RandomForestQuantileRegressor
 
 
@@ -39,11 +41,23 @@ class QRF:
 
 
     def save_ouput(self, savedir):
+        modeldir = os.path.join(os.path.dirname(savedir), f'Trained_Models/{date.today()}_{self.MSE}.pickle')
+        savedir = os.path.join(savedir, 'Training')
+        if not os.path.isdir(savedir):
+            os.mkdir(savedir)
+        savedir = os.path.join(savedir, f'{date.today()}_{self.MSE}.csv')
+
         output = {}
         for featurekey in self.xTest.keys():
             output[featurekey] = self.xTest[featurekey]
         output['Prediction'] = self.yPred
         output['True Temperature'] = self.yTest
 
+        for key in output.keys():
+            output[key] = list(output[key])
         output_df = DataFrame(output)
+
+        # save data output and model
         output_df.to_csv(savedir, index=False)
+        dump(self.qrf, open(modeldir, "wb"))
+        # dump(self.qrf, modeldir)
