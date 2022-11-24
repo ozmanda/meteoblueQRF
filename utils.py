@@ -2,13 +2,12 @@ import os
 import time
 import numpy as np
 import pandas as pd
-from warnings import warn
 import logging
 
 
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
     # debug configuration
-    logging.basicConfig(filename='stationdata.log', level=logging.DEBUG)
+    logging.basicConfig(filename='stationdata.log', level=logging.DEBUG, filemode='w')
     noData = []
 
     # For Dropset: dictionary with station name as key and pandas DataFrame as value
