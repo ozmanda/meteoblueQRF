@@ -57,7 +57,8 @@ class DropsetQRF:
             stationData['Predicted Temperature'] = yPred[:, 1]
             stationData['2.5%'] = yPred[:, 0]
             stationData['97.5%'] = yPred[:, 2]
-            stationData['Absolute Deviation'] = np.abs(yTest - yPred[:, 1])
+            stationData['Deviation'] = yTest - yPred[:, 1]
+            stationData['Absolute Deviation'] = np.abs(stationData['Deviation'])
             stationData['MSE'] = np.sum(stationData['Absolute Deviation'] ** 2) / len(stationData['Absolute Deviation'])
 
             # enter station dictionary into ouput dictionary
