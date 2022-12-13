@@ -5,64 +5,89 @@ import pandas as pd
 import logging
 
 
+def empty_dict(keylist):
+    empty_dict = {}
+    for key in keylist:
+        empty_dict[key] = []
+    return empty_dict
+
+
+def empty_df(keylist):
+    empty_df = {}
+    for key in keylist:
+        empty_df[key] = []
+    return pd.DataFrame(empty_df)
+
+
+def initialise_empty_df(datapath, dropset=False):
+    if not dropset:
+        file = pd.read_csv(os.path.join(datapath, os.listdir(datapath)[0]), delimiter=';')
+        return pd.DataFrame(columns=file.columns)
+
+
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
     # debug configuration
     logging.basicConfig(filename='stationdata.log', level=logging.DEBUG, filemode='w')
-    noData = []
+
+    # Not Dropset: concatenate DataFrames
+    if not dropset:
+        noData = []
+        data = initialise_empty_df(datapath)
+        for idx, filename in enumerate(os.listdir(datapath)):
+            file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+            if startDatetime and endDatetime:
+                # extract data points within the time window, if one is given
+                file, noData = data_in_window(startDatetime, endDatetime, file, filename)
+            data = pd.concat((data, file))
+        if noData:
+            logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
+            logging.debug(f'List of stations with no data:\n{noData}')
+        return data
 
     # For Dropset: dictionary with station name as key and pandas DataFrame as value
-    # Not Dropset: concatenate DataFrames
-    if dropset:
+    else:
+        noData = []
         datasets = {}
-
-    for idx, filename in enumerate(os.listdir(datapath)):
-        file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
-        if idx == 0 and not dropset:
-            data = pd.DataFrame(columns=file.columns)
-
-        if startDatetime and endDatetime:
-            # extract data points within the time window, if one is given
-            if len(startDatetime) > 1:
-                inWindow = [False for x in range(len(file))]
-                for idx, startTime in enumerate(startDatetime):
-                    afterStart = (pd.to_datetime(file['datetime']) >= pd.to_datetime(startTime, format='%Y/%m/%d_%H:%M')).to_list()
-                    beforeEnd = (pd.to_datetime(file['datetime']) <= pd.to_datetime(endDatetime[idx], format='%Y/%m/%d_%H:%M')).to_list()
-                    inWindow_ = [a and b for a, b in zip(afterStart, beforeEnd)]
-
-                    # if station has no datapoints within time window, output to logfile and continue to next station
-                    if np.sum(inWindow_) == 0:
-                        noData.append(filename.split(".csv")[0])
-                        continue
-                    else:
-                        inWindow = [a or b for a, b in zip(inWindow, inWindow_)]
-
-                file = file.iloc[file.index[inWindow]]
-
-            elif len(startDatetime) == 1:
-                afterStart = (pd.to_datetime(file['datetime']) >= pd.to_datetime(startDatetime[0], format='%Y/%m/%d_%H:%M')).to_list()
-                beforeEnd = (pd.to_datetime(file['datetime']) <= pd.to_datetime(endDatetime[0], format='%Y/%m/%d_%H:%M')).to_list()
-                inWindow = file.index[[a and b for a, b in zip(afterStart, beforeEnd)]]
-
-                # if station has no datapoints within time window, output to logfile and continue to next station
-                if len(inWindow) == 0:
-                    noData.append(filename.split(".csv")[0])
-                    continue
-                # isolate relevant features and append to relevant dataset depending on dropset True/False
-                file = file.iloc[inWindow]
-
-        if not dropset:
-            data = pd.concat((data, file))
-        elif dropset:
+        for idx, filename in enumerate(os.listdir(datapath)):
+            file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+            if startDatetime and endDatetime:
+                # extract data points within the time window, if one is given
+                file, noData = data_in_window(startDatetime, endDatetime, file, filename)
             # add rows to datasets dictionary for Dropset
             datasets[f'{filename.split(".csv")[0]}'] = file.dropna()
+        if noData:
+            logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
+            logging.debug(f'List of stations with no data:\n{noData}')
 
-    logging.debug(f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
-    logging.debug(f'List of stations with no data:\n{noData}')
-
-    if dropset:
         return datasets
-    elif not dropset:
-        return data
+
+
+def data_in_window(starttimes, endtimes, file, filename):
+    # time formatting
+    starttimes = pd.to_datetime(starttimes, format='%Y/%m/%d_%H:%M')
+    endtimes = pd.to_datetime(endtimes, format='%Y/%m/%d_%H:%M')
+    file['datetime'] = pd.to_datetime(file['datetime'])
+    noData = []
+    inWindow = [False for x in range(len(file))]
+    for idx, startTime in enumerate(starttimes):
+        inWindow_idxs = idxs_in_window(startTime, endtimes[idx], file)
+
+        # if station has no datapoints within time window, output to logfile and continue to next station
+        if np.sum(inWindow_idxs) == 0:
+            noData.append(filename.split(".csv")[0])
+            continue
+        else:
+            inWindow = [a or b for a, b in zip(inWindow, inWindow_idxs)]
+
+    data = file.iloc[inWindow]
+    return data, noData
+
+
+def idxs_in_window(starttime, endtime, timecolumn):
+    afterStart = (timecolumn >= starttime).to_list()
+    beforeEnd = (timecolumn <= endtime).to_list()
+    inWindow = [a and b for a, b in zip(afterStart, beforeEnd)]
+    return inWindow
 
 
 _start_time = time.time()
