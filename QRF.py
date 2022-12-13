@@ -1,8 +1,6 @@
 import os
 import joblib
-from pickle import dump
 from sklearn.utils import shuffle
-import numpy as np
 from pandas import DataFrame, concat
 from utils import start_timer, end_timer, mse
 from datetime import date
@@ -32,7 +30,6 @@ class QRF:
         self.qrf.fit(self.xTrain, self.yTrain)
         end_timer()
 
-
     def run_inference(self):
         print('  Predicting test set....     ', end='')
         start_timer()
@@ -41,19 +38,11 @@ class QRF:
 
         self.MSE = mse(self.yTest, self.yPred)
 
-
     def save_model(self, modelpath):
         joblib.dump(self.qrf, os.path.join(modelpath, f'{date.today()}_{self.MSE}'), compress=3)
 
-
     def save_ouput(self, savedir, modelpath):
-        if modelpath:
-            self.save_model(os.path.join(os.path.dirname(savedir), 'Trained_Models'))
-        else:
-            self.save_model(modelpath)
-        savedir = os.path.join(savedir, 'Training')
-        if not os.path.isdir(savedir):
-            os.mkdir(savedir)
+        self.save_model(modelpath)
         savedir = os.path.join(savedir, f'{date.today()}_{self.MSE}.csv')
 
         output = {}
