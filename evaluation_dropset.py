@@ -17,9 +17,9 @@ def gather_data(datapath, featurepath):
         data = {}
         for file in os.listdir(featurepath):
             stationname = file.split('.')[0]
-            features = pd.read_csv(f'{featurepath}/{file}', delimiter=';')
+            features = pd.read_csv(f'{featurepath}/{file}', delimiter=';', parse_dates=['datetime'])
             try:
-                dropseterrors = pd.read_csv(f'{datapath}/errors_{stationname}.csv', delimiter=',')
+                dropseterrors = pd.read_csv(f'{datapath}/errors_{stationname}.csv', delimiter=',', parse_dates=['datetime'])
             except FileNotFoundError:
                 print(f'No file found for station {stationname}')
                 continue
