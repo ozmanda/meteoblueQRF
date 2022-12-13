@@ -1,29 +1,10 @@
 import os
 import joblib
-import csv
 import numpy as np
-import scipy as sp
 import pandas as pd
-from utils import start_timer, end_timer
-import seaborn as sns
+from utils import empty_df, empty_dict
 from pandas import DataFrame
-from datetime import datetime
 import matplotlib.pyplot as plt
-from argparse import ArgumentParser
-
-
-def empty_dict(keylist):
-    empty_dict = {}
-    for key in keylist:
-        empty_dict[key] = []
-    return empty_dict
-
-
-def empty_df(keylist):
-    empty_df = {}
-    for key in keylist:
-        empty_df[key] = []
-    return DataFrame(empty_df)
 
 
 def gather_data(datapath, featurepath):
@@ -156,9 +137,6 @@ def interpolation_extrapolation(data, featurenames):
 def analyse_errors():
     datapath = 'Data/DropsetData'
     featurepath = 'Data/MeasurementFeatures_v6'
-    # featurenames = ['urbangreen', 'urbangreen_10',
-    #                 'urbangreen_30', 'urbangreen_100', 'urbangreen_200', 'urbangreen_500', 'humidity', 'irradiation',
-    #                 'moving_average', 'temperature']
     featurenames = ['altitude', 'buildings_10', 'buildings_30', 'buildings_100', 'buildings_200',
                     'buildings_500', 'forests', 'forests_10', 'forests_30', 'forests_100', 'forests_200',
                     'forests_500', 'pavedsurfaces', 'pavedsurfaces_10', 'pavedsurfaces_30', 'pavedsurfaces_100',
