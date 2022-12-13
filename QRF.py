@@ -43,6 +43,8 @@ class QRF:
 
     def save_ouput(self, savedir, modelpath):
         self.save_model(modelpath)
+        if not os.path.isdir(savedir):
+            os.mkdir(savedir)
         savedir = os.path.join(savedir, f'{date.today()}_{self.MSE}.csv')
 
         output = {}
