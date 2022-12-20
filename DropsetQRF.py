@@ -1,5 +1,6 @@
 import os
 import numpy as np
+from warnings import warn
 from pandas import DataFrame, concat
 from utils import start_timer, end_timer
 from quantile_forest import RandomForestQuantileRegressor
@@ -13,6 +14,8 @@ class DropsetQRF:
         self.upperCI = 100 - self.lowerCI
 
     def xy_generation(self, testkey):
+        # assert the key has data
+        assert len(self.data[testkey]) != 0, f'No data available for key {testkey}'
         # separate test from training data
         xyTest = self.data[testkey]
         xyTrain = DataFrame(columns=xyTest.columns)
@@ -37,7 +40,11 @@ class DropsetQRF:
         for key in self.stations:
             print(f'Key {key} \n  Generating dataset')
             stationData = {}
-            xTrain, xTest, yTrain, yTest, xTime = self.xy_generation(key)
+            try:
+                xTrain, xTest, yTrain, yTest, xTime = self.xy_generation(key)
+            except AssertionError:
+                warn(f'Skipping station {key}')
+                continue
             qrf = RandomForestQuantileRegressor()
             print('  Training QRF Regressor....     ', end='')
             start_timer()
