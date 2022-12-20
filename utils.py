@@ -25,6 +25,14 @@ def initialise_empty_df(datapath, dropset=False):
         return pd.DataFrame(columns=file.columns)
 
 
+def test_data(file):
+    try:
+        test = file['datetime']
+        return True
+    except KeyError:
+        return False
+
+
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
     # debug configuration
     logging.basicConfig(filename='stationdata.log', level=logging.DEBUG, filemode='w')
@@ -35,8 +43,11 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
         data = initialise_empty_df(datapath)
         for idx, filename in enumerate(os.listdir(datapath)):
             file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+            # check correct delimiter usage (not uniform)
+            if not test_data(file):
+                file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
+            # extract data points within the time window, if one is given
             if startDatetime and endDatetime:
-                # extract data points within the time window, if one is given
                 file, noData = data_in_window(startDatetime, endDatetime, file, filename)
             data = pd.concat((data, file))
         if noData:
@@ -50,8 +61,11 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
         datasets = {}
         for idx, filename in enumerate(os.listdir(datapath)):
             file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+            # check correct delimiter usage (not uniform)
+            if not test_data(file):
+                file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
+            # extract data points within the time window, if one is given
             if startDatetime and endDatetime:
-                # extract data points within the time window, if one is given
                 file, noData = data_in_window(startDatetime, endDatetime, file, filename)
             # add rows to datasets dictionary for Dropset
             datasets[f'{filename.split(".csv")[0]}'] = file.dropna()
