@@ -1,14 +1,20 @@
 import os
 import joblib
 from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split
 from pandas import DataFrame, concat
 from utils import start_timer, end_timer, mse
-from datetime import date
+from datetime import datetime
 from quantile_forest import RandomForestQuantileRegressor
 
 
 class QRF:
-    def __init__(self, dataTrain, dataTest):
+    def __init__(self):
+        # variables used later on
+        self.yPred = 0
+        self.MSE = 0
+
+    def set_data(self, dataTrain, dataTest):
         # shuffle data
         dataTrain = shuffle(dataTrain)
         dataTest = shuffle(dataTest)
@@ -17,11 +23,14 @@ class QRF:
         self.yTrain = dataTrain['temperature']
         self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature'], axis=1)
         self.yTest = dataTest['temperature']
+        self.test_time = dataTest['datetime']
         self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
 
-        # variables used later on
-        self.yPred = 0
-        self.MSE = 0
+    def set_split_data(self, data):
+        self.data = data
+        x = self.data.drop(['datetime', 'time', 'temperature'], axis=1)
+        y = self.data['temperature']
+        self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=0.042)
 
     def run_training(self):
         self.qrf = RandomForestQuantileRegressor()
@@ -39,13 +48,13 @@ class QRF:
         self.MSE = mse(self.yTest, self.yPred)
 
     def save_model(self, modelpath):
-        joblib.dump(self.qrf, os.path.join(modelpath, f'{date.today()}_{self.MSE}'), compress=3)
+        joblib.dump(self.qrf, os.path.join(modelpath, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}'), compress=3)
 
     def save_ouput(self, savedir, modelpath):
         self.save_model(modelpath)
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
-        savedir = os.path.join(savedir, f'{date.today()}_{self.MSE}.csv')
+        savedir = os.path.join(savedir, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}.csv')
 
         output = {}
         for featurekey in self.xTest.keys():
