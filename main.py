@@ -45,23 +45,25 @@ if __name__ == '__main__':
                 warn(f'Number of start and end times for test set cannot be matched', UserWarning)
                 raise ValueError
 
-        dataset_train = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
-                                        startDatetime=args.starttime, endDatetime=args.endtime)
-        if len(dataset_train) == 0:
-            warn('No data found for the given training times')
-            raise ValueError
+        qrf = QRF()
+        # QRF run with one shuffled time window
+        if not args.test_start and not args.test_end:
+            dataset = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath))
+            qrf = QRF()
+            qrf.set_split_data(dataset)
 
-        dataset_test = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
-                                       startDatetime=args.test_start, endDatetime=args.test_end)
-
-        qrf = QRF(dataset_train, dataset_test)
-        qrf.run_training()
-
-        if len(dataset_test) != 0:
-            qrf.run_inference()
+        # QRF run with specific training and test time windows
         else:
-            warn('No data found for the given testing times')
+            dataset_train = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
+                                            startDatetime=args.starttime, endDatetime=args.endtime)
+            assert len(dataset_train) != 0, 'No data found in training window'
+            dataset_test = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
+                                           startDatetime=args.test_start, endDatetime=args.test_end)
+            assert len(dataset_test) != 0, 'No data found in test window'
 
+            qrf.set_data(dataTrain=dataset_train, dataTest=dataset_test)
+
+        qrf.run_training()
         qrf.save_ouput(os.path.join(os.getcwd(), args.savedir), args.modeldir)
 
     # DROPSET ERROR ESTIMATION
