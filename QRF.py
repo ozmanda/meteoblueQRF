@@ -23,14 +23,19 @@ class QRF:
         self.yTrain = dataTrain['temperature']
         self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature'], axis=1)
         self.yTest = dataTest['temperature']
-        self.test_time = dataTest['datetime']
+        self.test_times = dataTest['datetime']
         self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
 
     def set_split_data(self, data):
         self.data = data
-        x = self.data.drop(['datetime', 'time', 'temperature'], axis=1)
+        x = self.data.drop(['time', 'temperature'], axis=1)
         y = self.data['temperature']
-        self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=0.042)
+        self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
+
+        # extract time and remove as feature variable
+        self.test_times = self.xTest['datetime']
+        self.xTrain = self.xTrain.drop(['datetime'])
+        self.xTest = self.xTest.drop(['datetime'])
 
     def run_training(self):
         self.qrf = RandomForestQuantileRegressor()
@@ -48,7 +53,8 @@ class QRF:
         self.MSE = mse(self.yTest, self.yPred)
 
     def save_model(self, modelpath):
-        joblib.dump(self.qrf, os.path.join(modelpath, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}'), compress=3)
+        joblib.dump(self.qrf, os.path.join(modelpath, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}'),
+                    compress=3)
 
     def save_ouput(self, savedir, modelpath):
         self.save_model(modelpath)
@@ -61,6 +67,7 @@ class QRF:
             output[featurekey] = self.xTest[featurekey]
         output['Prediction'] = self.yPred
         output['True Temperature'] = self.yTest
+        output['datetime'] = self.test_times
 
         for key in output.keys():
             output[key] = list(output[key])
