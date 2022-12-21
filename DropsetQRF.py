@@ -59,7 +59,7 @@ class DropsetQRF:
 
             # calculate relevant error metrics and fill into dictionary
             print('  Generating output dataset....')
-            stationData['Datetime'] = xTime
+            stationData['datetime'] = xTime
             stationData['True Temperature'] = yTest
             stationData['Predicted Temperature'] = yPred[:, 1]
             stationData['2.5%'] = yPred[:, 0]
