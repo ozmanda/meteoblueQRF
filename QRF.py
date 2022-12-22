@@ -34,8 +34,8 @@ class QRF:
 
         # extract time and remove as feature variable
         self.test_times = self.xTest['datetime']
-        self.xTrain = self.xTrain.drop(['datetime'])
-        self.xTest = self.xTest.drop(['datetime'])
+        self.xTrain = self.xTrain.drop(['datetime'], axis=1)
+        self.xTest = self.xTest.drop(['datetime'], axis=1)
 
     def run_training(self):
         self.qrf = RandomForestQuantileRegressor()
