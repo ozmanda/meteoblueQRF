@@ -22,6 +22,8 @@ def empty_df(keylist):
 def initialise_empty_df(datapath, dropset=False):
     if not dropset:
         file = pd.read_csv(os.path.join(datapath, os.listdir(datapath)[0]), delimiter=';')
+        if not test_data(file):
+            file = pd.read_csv(os.path.join(datapath, os.listdir(datapath)[0]), delimiter=',')
         return pd.DataFrame(columns=file.columns)
 
 
