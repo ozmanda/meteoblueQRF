@@ -53,7 +53,9 @@ class QRF:
         self.MSE = mse(self.yTest, self.yPred)
 
     def save_model(self, modelpath):
-        joblib.dump(self.qrf, os.path.join(modelpath, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}'),
+        timenow = datetime.now().replace(second=0, microsecond=0)
+        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}-{timenow.minute}'
+        joblib.dump(self.qrf, os.path.join(modelpath, f'{timenow}_{self.MSE}.z'),
                     compress=3)
 
     def save_ouput(self, savedir, modelpath):
