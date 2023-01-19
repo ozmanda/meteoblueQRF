@@ -65,11 +65,11 @@ class QRF:
         savedir = os.path.join(savedir, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}.csv')
 
         output = {}
+        output['datetime'] = self.test_times
         for featurekey in self.xTest.keys():
             output[featurekey] = self.xTest[featurekey]
         output['Prediction'] = self.yPred
         output['True Temperature'] = self.yTest
-        output['datetime'] = self.test_times
 
         for key in output.keys():
             output[key] = list(output[key])
