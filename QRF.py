@@ -62,7 +62,10 @@ class QRF:
         self.save_model(modelpath)
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
-        savedir = os.path.join(savedir, f'{datetime.now().replace(second=0, microsecond=0)}_{self.MSE}.csv')
+
+        timenow = datetime.now().replace(second=0, microsecond=0)
+        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
+        savedir = os.path.join(savedir, f'{timenow}_{self.MSE}.csv')
 
         output = {}
         output['datetime'] = self.test_times
