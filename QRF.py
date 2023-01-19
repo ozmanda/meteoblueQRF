@@ -44,7 +44,7 @@ class QRF:
         self.qrf.fit(self.xTrain, self.yTrain)
         end_timer()
 
-    def run_inference(self):
+    def run_test(self):
         print('  Predicting test set....     ', end='')
         start_timer()
         self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
@@ -54,7 +54,7 @@ class QRF:
 
     def save_model(self, modelpath):
         timenow = datetime.now().replace(second=0, microsecond=0)
-        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}-{timenow.minute}'
+        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
         joblib.dump(self.qrf, os.path.join(modelpath, f'{timenow}_{self.MSE}.z'),
                     compress=3)
 
