@@ -1,11 +1,12 @@
 import os
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from warnings import warn
 from collections import Counter
 import matplotlib.pyplot as plt
 from utils import empty_df, empty_dict
-from statistical_analysis import add_month_season
+# from statistical_analysis import add_month_season
 
 # GLOBAL VARIABLES
 seasons = ['summer', 'autumn', 'winter', 'spring']
@@ -129,8 +130,9 @@ def feature_hist(df):
             plt.show()
             plt.pause(0)
         except ValueError:
-            print(f'plot forfeature {feature} failed')
+            print(f'plot for feature {feature} failed')
             pass
+
 
 def analyse_feature_distributions(data):
     feature_hist(data)
@@ -165,5 +167,21 @@ def statistical_analysis():
     # analyse_errors(data)
 
 
+def station_analysis():
+    featurepath = 'Data/Datasets/MeasurementFeatures_v6'
+    savedir = f'Data/Statistics/Datasets/{featurepath.split("/")[-1]}'
+    if not os.path.isdir(savedir):
+        os.mkdir(savedir)
+    for stationfile in os.listdir(featurepath):
+        stationname = stationfile.split('.csv')[0]
+        file = pd.read_csv(os.path.join(featurepath, stationfile), delimiter=';')
+        file['datetime'] = pd.to_datetime(file['datetime'])
+        ax = sns.lineplot(x='datetime', y='temperature', data=file)
+        ax.set(xlabel='Time', ylabel=f'Temperature [°C]', title=f'Measured temperature at station {stationname}')
+        plt.savefig(os.path.join(savedir, f'{stationname}_temp.png'))
+        plt.close()
+
+
 if __name__ == '__main__':
-    statistical_analysis()
+    # statistical_analysis()
+    station_analysis()
