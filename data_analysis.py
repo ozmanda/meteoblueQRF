@@ -169,16 +169,17 @@ def statistical_analysis():
 
 def station_analysis():
     featurepath = 'Data/Datasets/MeasurementFeatures_v6'
-    savedir = f'Data/Statistics/Datasets/{featurepath.split("/")[-1]}'
+    savedir = f'Data/Statistics/Datasets/{featurepath.split("/")[-1]}_scatter'
     if not os.path.isdir(savedir):
         os.mkdir(savedir)
     for stationfile in os.listdir(featurepath):
         stationname = stationfile.split('.csv')[0]
         file = pd.read_csv(os.path.join(featurepath, stationfile), delimiter=';')
         file['datetime'] = pd.to_datetime(file['datetime'])
-        ax = sns.lineplot(x='datetime', y='temperature', data=file)
+        ax = sns.scatterplot(x='datetime', y='temperature', data=file)
         ax.set(xlabel='Time', ylabel=f'Temperature [°C]', title=f'Measured temperature at station {stationname}')
-        plt.savefig(os.path.join(savedir, f'{stationname}_temp.png'))
+        plt.xticks(rotation=45)
+        plt.savefig(os.path.join(savedir, f'{stationname}_temp.png'), bbox_inches='tight')
         plt.close()
 
 
