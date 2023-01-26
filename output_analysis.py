@@ -108,7 +108,7 @@ def error_by_feature(file, savedir):
         plt.close()
 
 
-def metrics(data, savedir):
+def metrics(data, savedir, output=False):
     metrics = {}
     n = len(data)
 
@@ -131,25 +131,29 @@ def metrics(data, savedir):
 
     # output metrics to .txt file
     write_metrics(metrics, savedir)
+    if output:
+        return metrics
 
 
 def write_metrics(metrics, savedir):
     # create lines for .txt file
     lines = []
     for metric in metrics.keys():
-        lines.append(f'{metric}:\t {metrics[metric]}')
-        lines.append('\n')
+        lines.append(f'{metric}:\t {metrics[metric]}\n')
 
     # write lines to .txt file
     with open(os.path.join(savedir, 'metrics.txt'), 'w') as file:
         file.writelines(lines)
 
 
-def analyse_errors(errordata, savedir):
+def analyse_errors(errordata, savedir, output=False):
     # graphs
     error_distributions(errordata, savedir)
     # numerical statistics
-    metrics(errordata, savedir)
+    if output:
+        return metrics(errordata, savedir, output)
+    else:
+        metrics(errordata, savedir, output)
 
 
 # +-----------------------------------------+
@@ -291,6 +295,7 @@ def test_statistics(datapath, savedir):
 
 def dropset_statistics(datapath, featurepath, savedir):
     data = gather_dropsetdata(datapath, featurepath)
+    rmses = {}
     # inter- and extrapolation errors
     # int_ext_errors(data, savedir)
     # per station analysis
@@ -298,8 +303,40 @@ def dropset_statistics(datapath, featurepath, savedir):
         stationpath = f'{savedir}/{stationname}'
         if not os.path.isdir(stationpath):
             os.mkdir(stationpath)
-        analyse_errors(data[stationname], stationpath)
-        error_by_feature(data[stationname], stationpath)
+        # error_by_feature(data[stationname], stationpath)
+        metrics = analyse_errors(data[stationname], stationpath, output=True)
+        rmses[stationname] = metrics['RMSE']
+
+    # nbins = np.round((np.max(rmses.values()) - np.min(rmses.values())))
+    rmses_vals = list(rmses.values())
+    rmses_vals.sort()
+    plt.figure()
+    fig = sns.histplot(rmses_vals, stat='frequency', bins=30)
+    plt.savefig(os.path.join(savedir, 'error_frequency'))
+    plt.close()
+
+    # write txt file
+    lines = []
+    lines.append(f'Mean RMSE over all stations: {np.mean(rmses_vals)}\n')
+    min_stat = min(rmses, key=rmses.get)
+    max_stat = max(rmses, key=rmses.get)
+    lines.append(f'Minimum RMSE: {rmses[min_stat]} ({min_stat})\n')
+    lines.append(f'Maximum RMSE: {rmses[max_stat]} ({max_stat})\n')
+
+    min05 = rmses_vals[round(len(rmses_vals)*0.05)]
+    max95 = rmses_vals[round(len(rmses_vals)*0.95)]
+
+    lines.append('Lowest and Highest 5% of RMSEs:\n')
+    lowest = []
+    for key in rmses.keys():
+        if rmses[key] <= min05:
+            lines.append(f'{key}:\t {rmses[key]}\n')
+    for key in rmses.keys():
+        if rmses[key] >= max95:
+            lines.append(f'{key}:\t {rmses[key]}\n')
+
+    with open(os.path.join(savedir, 'dropset_overview.txt'), 'w') as file:
+        file.writelines(lines)
 
 
 if __name__ == '__main__':
