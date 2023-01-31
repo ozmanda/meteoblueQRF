@@ -87,7 +87,7 @@ class QRF:
     def save_model(self, modelpath):
         timenow = datetime.now().replace(second=0, microsecond=0)
         timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
-        joblib.dump(self.qrf, os.path.join(modelpath, f'{timenow}_{self.MSE}.z'),
+        joblib.dump(self, os.path.join(modelpath, f'{timenow}_{self.MSE}.z'),
                     compress=3)
 
     def save_ouput(self, savedir, modelpath):
@@ -99,8 +99,7 @@ class QRF:
         timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
         savedir = os.path.join(savedir, f'{timenow}_{self.MSE}.csv')
 
-        output = {}
-        output['datetime'] = self.test_times
+        output = {'datetime': self.test_times}
         for featurekey in self.xTest.keys():
             output[featurekey] = self.xTest[featurekey]
         output['Prediction'] = self.yPred
