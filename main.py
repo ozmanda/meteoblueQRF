@@ -1,15 +1,17 @@
 import os
-import argparse
 import utils
-from DropsetQRF import DropsetQRF
-from warnings import warn
+import joblib
+import argparse
 from QRF import QRF
+from warnings import warn
+from DropsetQRF import DropsetQRF
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--type', help='Type of QRF: "training" for normal QRF model training and testing or "dropset"'
-                                       'for error estimation using dropset method', default=None)
+                                       'for error estimation using dropset method, "evaluation" for the evaluation of'
+                                       'pretrained models', default=None)
     parser.add_argument('--stationDatapath', help='Relative path to folder containing station data',
                         default='Data/MeasurementFeatures_v6')
     parser.add_argument('--starttime', help='Date and time of the beginning of the data interval in the format'
@@ -23,17 +25,19 @@ if __name__ == '__main__':
     parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
                         default='Data')
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models')
-    parser.add_argument('--CI', help='Confidence interval in percent (i.e. 95 for the 95% CI)', default=95)
-
+    parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
+    parser.add_argument('--modelname', default=None, help='Name of the model to be evaluated')
+    parser.add_argument('--nestimators', default=None, help='Number of OOB predictions used to estimate varaible '
+                                                            'importance')
     args = parser.parse_args()
 
     # ASSERT REQUIRED PARAMETERS
     assert args.type, 'A training type must be given'
-    assert args.savedir, 'Directory for saving QRF output is required'
-    assert args.modeldir, 'A path must be given for model saving'
 
     # QRF TRAINING RUN
     if args.type == "training":
+        assert args.savedir, 'Directory for saving QRF output is required'
+        assert args.modeldir, 'A path must be given for model saving'
         if args.starttime:
             assert args.endtime, 'If start time(s) for training is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -69,6 +73,7 @@ if __name__ == '__main__':
 
     # DROPSET ERROR ESTIMATION
     if args.type == 'dropset':
+        assert args.savedir, 'Directory for saving QRF output is required'
         if args.starttime:
             assert args.endtime, 'If start time(s) is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -80,3 +85,13 @@ if __name__ == '__main__':
         dropsetQRF = DropsetQRF(datasets, args.CI)
         dropsetQRF.run_error_estimation()
         dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
+
+    # VARIABLE IMPORTANCE ANALYSIS
+    if args.type == 'evaluation':
+        assert args.modelname, 'Model name flag must be given for model evaluation'
+        assert args.modeldir, 'Relative path to trained model directory must be given'
+
+        # load trained model and run variable importance analysis
+        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
+        qrf.run_variable_importance_estimation()
+
