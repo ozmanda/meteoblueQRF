@@ -1,5 +1,9 @@
 import os
+import warnings
+
 import joblib
+import numpy as np
+import sklearn.utils
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 from pandas import DataFrame, concat
@@ -51,6 +55,34 @@ class QRF:
         end_timer()
 
         self.MSE = mse(self.yTest, self.yPred)
+
+    def run_variable_importance_estimation(self, n=10):
+        # ignores UserWarning "X does not have valid feature names, but RandomForestQuantileRegressor
+        # was fitted with feature names" and FutureWarning (iteritems -> .items and series[i:j] -> label-based indexing)
+        with warnings.catch_warnings():
+            warnings.simplefilter('ignore')
+            print(f'  Estimating variable importance')
+            variables = list(self.xTrain.columns)
+            oob_preds = self.qrf.predict(self.xTrain, oob_score=True)
+            og_oob_error = np.mean(oob_preds - self.yTrain)
+            diffsum = 0
+            oob_errors = {}
+            self.variable_importance = {}
+            print(f'    Gathering error differences...........')
+            for variable in variables:
+                xtrain = self.xTrain
+                var_oob_errors = []
+                for i in range(n):
+                    xtrain[variable] = sklearn.utils.shuffle(self.xTrain[variable]).values
+                    var_oob_preds = self.qrf.predict(xtrain, oob_score=True)
+                    var_oob_errors.append(np.mean(var_oob_preds - self.yTrain))
+                oob_errors[variable] = np.mean(var_oob_errors) - og_oob_error
+                diffsum += oob_errors[variable]
+
+            print(f'    Calculating variable importances.......')
+            for variable in variables:
+                self.variable_importance[variable] = np.round((oob_errors[variable] / diffsum)*100, 2)
+                print(f'      {variable}:\t {self.variable_importance[variable]}')
 
     def save_model(self, modelpath):
         timenow = datetime.now().replace(second=0, microsecond=0)
