@@ -56,7 +56,17 @@ class QRF:
 
         self.MSE = mse(self.yTest, self.yPred)
 
-    def run_variable_importance_estimation(self, n=10):
+    def write_variable_importance(self, modelpath, filename):
+        print(f'    Writing variable importance file......')
+        filepath = os.path.join(modelpath, f'{filename.split(".z")[0]}_variable_importance.txt')
+        lines = []
+        for key in self.variable_importance.keys():
+            lines.append(f'{key}:\t {self.variable_importance[key]}\n')
+
+        with open(filepath, 'w') as file:
+            file.writelines(lines)
+
+    def run_variable_importance_estimation(self, modelpath, filename, n=10):
         # ignores UserWarning "X does not have valid feature names, but RandomForestQuantileRegressor
         # was fitted with feature names" and FutureWarning (iteritems -> .items and series[i:j] -> label-based indexing)
         with warnings.catch_warnings():
@@ -83,6 +93,8 @@ class QRF:
             for variable in variables:
                 self.variable_importance[variable] = np.round((oob_errors[variable] / diffsum)*100, 2)
                 print(f'      {variable}:\t {self.variable_importance[variable]}')
+
+            self.write_variable_importance(modelpath, filename)
 
     def save_model(self, modelpath):
         timenow = datetime.now().replace(second=0, microsecond=0)
