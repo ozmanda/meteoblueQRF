@@ -93,5 +93,5 @@ if __name__ == '__main__':
 
         # load trained model and run variable importance analysis
         qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
-        qrf.run_variable_importance_estimation()
+        qrf.run_variable_importance_estimation(args.modeldir, args.modelname)
 
