@@ -63,7 +63,8 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='True Temperature', y='Deviation', data=file)
-        plt.savefig(filepath)
+        plt.set(xlabel='True Temperature [°C]', ylabel='Deviation by True Temperature', title='')
+        plt.savefig(filepath, bbox_inches='tight')
         plt.close()
 
     # error distribution by datetime
@@ -71,7 +72,9 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='datetime', y='Deviation', data=file)
-        plt.savefig(filepath)
+        plt.set(xlabel='Datetime', ylabel='Deviation', title='Deviation by Datetime')
+        plt.xticks(rotation=45)
+        plt.savefig(filepath, bbox_inches='tight')
         plt.close()
 
     # true vs. predicted temperature
@@ -79,7 +82,8 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='True Temperature', y='Predicted Temperature', data=file)
-        plt.savefig(filepath)
+        plt.set(xlabel='True Temperature [°C]', ylabel='Predicted Temperature [°C]', title='True vs. Predicted Temperature')
+        plt.savefig(filepath, bbox_inches='tight')
         plt.close()
 
     # error distribution by time
@@ -89,7 +93,9 @@ def error_distributions(file, savedir):
         file['time'] = file['time'].map(normalise_datetime)
         plt.figure()
         fig = sns.scatterplot(x='time', y='Deviation', data=file)
-        plt.savefig(os.path.join(savedir, f'error_by_time.png'))
+        plt.set(xlabel='Time', ylabel='Deviation', title='Deviation by Time')
+        plt.xticks(rotation=45)
+        plt.savefig(os.path.join(savedir, f'error_by_time.png'), bbox_inches='tight')
         plt.close()
 
 
@@ -285,36 +291,15 @@ def int_ext_errors(data, savedir):
     int_ext_bystation(data, features, savedir)
 
 
-# +-------------------+
-# | WRAPPER FUNCTIONS |
-# +-------------------+
-def test_statistics(datapath, savedir):
-    data = load_data(datapath)
-    analyse_errors(data, savedir)
-
-
-def dropset_statistics(datapath, featurepath, savedir):
-    data = gather_dropsetdata(datapath, featurepath)
-    rmses = {}
-    # inter- and extrapolation errors
-    # int_ext_errors(data, savedir)
-    # per station analysis
-    for stationname in data.keys():
-        stationpath = f'{savedir}/{stationname}'
-        if not os.path.isdir(stationpath):
-            os.mkdir(stationpath)
-        # error_by_feature(data[stationname], stationpath)
-        metrics = analyse_errors(data[stationname], stationpath, output=True)
-        rmses[stationname] = metrics['RMSE']
-
-    # nbins = np.round((np.max(rmses.values()) - np.min(rmses.values())))
-    rmses_vals = list(rmses.values())
-    rmses_vals.sort()
+def error_frequency(rmses, savepath):
     plt.figure()
-    fig = sns.histplot(rmses_vals, stat='frequency', bins=30)
-    plt.savefig(os.path.join(savedir, 'error_frequency'))
+    fig = sns.histplot(rmses, stat='frequency', bins=30)
+    plt.set(xlabel='RMSE', ylabel='Frequency', title='Dropset station prediction error distribution')
+    plt.savefig(savepath)
     plt.close()
 
+
+def write_dropset(rmses, rmses_vals):
     # write txt file
     lines = []
     lines.append(f'Mean RMSE over all stations: {np.mean(rmses_vals)}\n')
@@ -323,8 +308,8 @@ def dropset_statistics(datapath, featurepath, savedir):
     lines.append(f'Minimum RMSE: {rmses[min_stat]} ({min_stat})\n')
     lines.append(f'Maximum RMSE: {rmses[max_stat]} ({max_stat})\n')
 
-    min05 = rmses_vals[round(len(rmses_vals)*0.05)]
-    max95 = rmses_vals[round(len(rmses_vals)*0.95)]
+    min05 = rmses_vals[round(len(rmses_vals) * 0.05)]
+    max95 = rmses_vals[round(len(rmses_vals) * 0.95)]
 
     lines.append('Lowest and Highest 5% of RMSEs:\n')
     lowest = []
@@ -337,6 +322,36 @@ def dropset_statistics(datapath, featurepath, savedir):
 
     with open(os.path.join(savedir, 'dropset_overview.txt'), 'w') as file:
         file.writelines(lines)
+
+
+# +-------------------+
+# | WRAPPER FUNCTIONS |
+# +-------------------+
+def test_statistics(datapath, savedir):
+    data = load_data(datapath)
+    analyse_errors(data, savedir)
+
+
+def dropset_statistics(datapath, featurepath, savedir):
+    data = gather_dropsetdata(datapath, featurepath)
+    rmses = {}
+    # inter- and extrapolation errors
+    int_ext_errors(data, savedir)
+
+    # per station analysis
+    for stationname in data.keys():
+        stationpath = f'{savedir}/{stationname}'
+        if not os.path.isdir(stationpath):
+            os.mkdir(stationpath)
+        # error_by_feature(data[stationname], stationpath)
+        metrics = analyse_errors(data[stationname], stationpath, output=True)
+        rmses[stationname] = metrics['RMSE']
+
+    # nbins = np.round((np.max(rmses.values()) - np.min(rmses.values())))
+    rmses_vals = list(rmses.values())
+    rmses_vals.sort()
+    error_frequency(rmses_vals, os.path.join(savedir, 'error_frequency.png'))
+    write_dropset(rmses, rmses_vals)
 
 
 if __name__ == '__main__':
