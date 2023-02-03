@@ -86,7 +86,7 @@ def data_in_window(starttimes, endtimes, file, filename):
     noData = []
     inWindow = [False for x in range(len(file))]
     for idx, startTime in enumerate(starttimes):
-        inWindow_idxs = idxs_in_window(startTime, endtimes[idx], file)
+        inWindow_idxs = idxs_in_window(startTime, endtimes[idx], file['datetime'])
 
         # if station has no datapoints within time window, output to logfile and continue to next station
         if np.sum(inWindow_idxs) == 0:
