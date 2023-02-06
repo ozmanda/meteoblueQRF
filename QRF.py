@@ -74,7 +74,7 @@ class QRF:
             print(f'  Estimating variable importance')
             variables = list(self.xTrain.columns)
             oob_preds = self.qrf.predict(self.xTrain, oob_score=True)
-            og_oob_error = np.mean(oob_preds - self.yTrain)
+            og_oob_error = np.mean(np.abs(oob_preds - self.yTrain))
             diffsum = 0
             oob_errors = {}
             self.variable_importance = {}
@@ -85,7 +85,7 @@ class QRF:
                 for i in range(n):
                     xtrain[variable] = sklearn.utils.shuffle(self.xTrain[variable]).values
                     var_oob_preds = self.qrf.predict(xtrain, oob_score=True)
-                    var_oob_errors.append(np.mean(var_oob_preds - self.yTrain))
+                    var_oob_errors.append(np.mean(np.abs(var_oob_preds - self.yTrain)))
                 oob_errors[variable] = np.mean(var_oob_errors) - og_oob_error
                 diffsum += oob_errors[variable]
 
