@@ -18,9 +18,9 @@ if __name__ == '__main__':
                                             'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--endtime', help='Date and time of the end of the data interval in the format'
                                           'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
-    parser.add_argument('--test_start', help='Date and time of the beginning of test interval in the format'
+    parser.add_argument('--test_start', help='Date and time of the beginning of test/inference interval in the format'
                                              'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
-    parser.add_argument('--test_end', help='Date and time of the beginning of test interval in the format'
+    parser.add_argument('--test_end', help='Date and time of the beginning of test/inference interval in the format'
                                            'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
                         default='Data')
@@ -85,6 +85,15 @@ if __name__ == '__main__':
         dropsetQRF = DropsetQRF(datasets, args.CI)
         dropsetQRF.run_error_estimation()
         dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
+
+    # INFERENCE
+    if args.type == 'inference':
+        assert args.modeldir, 'Model directory must be given'
+        assert args.modelname, 'Model name must be given for inference'
+        dataset = utils.load_data(args.stationDatapath)
+        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
+        qrf.run_inference(dataset)
+
 
     # VARIABLE IMPORTANCE ANALYSIS
     if args.type == 'evaluation':

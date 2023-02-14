@@ -56,6 +56,12 @@ class QRF:
 
         self.MSE = mse(self.yTest, self.yPred)
 
+    def run_inference(self, data):
+        print('  Predicting inference data....     ', end='')
+        start_timer()
+
+        end_timer()
+
     def write_variable_importance(self, modelpath, filename):
         print(f'    Writing variable importance file......')
         filepath = os.path.join(modelpath, f'{filename.split(".z")[0]}_variable_importance.txt')

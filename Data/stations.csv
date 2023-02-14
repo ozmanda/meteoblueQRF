@@ -1,422 +1,422 @@
-"id_station";"gridcoord";"stationid";"CH_E";"CH_N";"altitude";"streetname";"type";"lat";"lon";"Mastnummer";"distance_building";"shadowing";"classification";"montage";"functional_check";"remarks";"stationid_new";"stationid_new2"
-923;"A6";"A2EB";2678068;1250637;395;"Paul-Pflueger-Strasse";"Sensirion";47.40192;8.47285;"19";"25";"";"8(9)";"2019-06-13 14:30:00";"ok";"Verschiebung um 190m nach Nordosten (naechstmoegliche Stelle)";"EE2AA2FBA2EB";"NA"
-926;"A8";"6099";2678039;1249544;414;"Dachslernstrasse";"Sensirion";47.3921;8.47227;"29";"10";"";"6";"2019-06-13 12:55:00";"ok";"Hecke ziemlich nahe unter Sensor (Foto!)";"D8F463676099";"NA"
-928;"A9";"63A4";2678055;1249021;428;"Rautistrasse";"Sensirion";47.38739;8.4724;"69";"25";"";"5(6)";"2019-06-13 11:25:00";"ok";"";"EF7BDB8163A4";"NA"
-931;"AWEL-Blumenfeld";"6DD1";2680581;1252968;454;"Dora-Staudinger-Strasse";"Sensirion";47.42258;8.50655;"3";"10";"";"5";"2019-06-12 14:25:00";"";"";"CE59CF126DD1";"NA"
-933;"AWEL-Bucheggplatz";"A05A";2682646;1250251;472;"Bucheggstrasse";"Sensirion";47.39789;8.53341;"";"0";"Dach Haltestelle";"5";"2019-06-17 11:05:00";"";"ca. 2 m ueber Boden";"D5804FDCA05A";"NA"
-935;"AWEL-Eichbuehl";"4733";2678224;1248693;443;"Girhaldenstrasse";"Sensirion";47.38442;8.47457;"16.2";"10";"";"6(9)";"2019-06-13 11:20:00";"";"";"E17EFD9B4733";"NA"
-937;"AWEL-Gruenau";"AB6D";2679440;1250050;401;"unbekannt";"Sensirion";47.39648;8.49091;"";"25";"";"5";"2019-06-13 14:45:00";"";"";"FACBC32BAB6D";"NA"
-939;"AWEL-Lindenhof";"280F";2683258;1247485;428;"Lindenhof";"Sensirion";47.37294;8.54101;"3";"25";"Laterne";"B(2)";"2019-07-23 16:20:00";"";"";"EE561C93280F";"EE561C000093280F"
-940;"AWEL-Lindenhof";"8CDE";2683258;1247485;428;"Lindenhof";"Sensirion";47.37294;8.54101;"3";"25";"Laterne";"B(2)";"2020-02-11 09:00:00";"";"";"F1085FFEFF9A8CDE";"NA"
-941;"AWEL-Oerlikerpark";"F16D";2683023;1252127;439;"Oerlikerpark";"Sensirion";47.41471;8.53876;"45";"40";"";"2(B)";"2019-06-12 11:55:00";"";"Parkanlage";"EA8E056FF16D";"NA"
-943;"AWEL-Paradeplatz";"69A8";2683117;1247176;410;"Bahnhofstrasse";"Sensirion";47.37018;8.53908;"133";"5";"Laterne";"2";"2019-07-23 15:45:00";"";"";"EB53861769A8";"NA"
-944;"AWEL-Paradeplatz";"37FE";2683117;1247176;410;"Bahnhofstrasse";"Sensirion";47.37018;8.53908;"133";"5";"Laterne";"2";"2020-02-11 09:35:00";"";"";"F6AD34FEFF7337FE";"NA"
-945;"AWEL-Sechelaeutenplatz";"2C4A";2683684;1246724;409;"Sechselaeutenplatz";"Sensirion";47.36604;8.5465;"15";"15";"";"2(E )";"2019-07-23 08:25:00";"";"";"D323E3CA2C4A";"NA"
-946;"AWEL-Sechelaeutenplatz";"2EF7";2683684;1246724;409;"Sechselaeutenplatz";"Sensirion";47.36604;8.5465;"15";"15";"";"2(E )";"2020-02-14 10:35:00";"";"";"C39502FEFF572EF7";"NA"
-947;"AWEL-Vulkanplatz";"6FD5";2679397;1249598;399;"Vulkanplatz/Aargauerstrasse";"Sensirion";47.39242;8.49026;"22";"35";"";"5";"2019-06-13 08:25:00";"";"";"CAA0AB956FD5";"NA"
-949;"AWEL-Witikon";"A62F";2687049;1245924;607;"Berghaldenstrasse";"Sensirion";47.35841;8.59089;"2";"25";"";"6(5)";"2019-07-25 09:30:00";"";"";"E6879E24A62F";"NA"
-950;"AWEL-Witikon";"3A9A";2687049;1245924;607;"Berghaldenstrasse";"Sensirion";47.35841;8.59089;"2";"25";"";"6(5)";"2020-02-06 10:20:00";"";"";"E6D8DBFEFF893A9A";"NA"
-951;"AWEL-Zuerihorn";"EFAE";2684040;1245344;408;"unbekannt (Zuerihorn)";"Sensirion";47.35358;8.55096;"66";"50";"";"9(G)";"2019-07-24 13:50:00";"";"";"C39AF8DAEFAE";"NA"
-952;"AWEL-Zuerihorn";"3B30";2684040;1245344;408;"unbekannt (Zuerihorn)";"Sensirion";47.35358;8.55096;"66";"50";"";"9(G)";"2020-02-06 14:30:00";"";"";"CF6E84FEFFF23B30";"NA"
-954;"B5";"F2D8";2678387;1251094;430;"Rebbergstrasse";"Sensirion";47.40599;8.47716;"43";"20";"";"6(5)";"2019-06-14 10:05:00";"ok";"Grenze zu Oberengstringen";"CAFEC514F2D8";"NA"
-957;"B7";"AB7D";2678453;1250076;397;"Bernerstrasse Sued";"Sensirion";47.39683;8.47785;"80";"200";"";"9";"2019-06-13 13:55:00";"ok";"";"C29B4E18AB7D";"NA"
-959;"B8";"AB4E";2678489;1249496;398;"Badenerstrasse";"Sensirion";47.39161;8.47823;"keine (Brueckenpfeiler)";"0(15)";"Bruecke";"5";"2019-06-13 13:40:00";"ok";"Rechteckige Masten eignen sich nicht! ->Bruecke";"E0A18DBCAB4E";"NA"
-962;"B10";"875D";2678652;1248608;426;"Zwischenbaechen";"Sensirion";47.3836;8.48023;"11";"5";"";"6(5)";"2019-06-13 11:05:00";"ok";"";"EC97724D875D";"NA"
-964;"B11";"188C";2678675;1248100;431;"Unbekannt (Diggelmannstrasse)";"Sensirion";47.37903;8.48044;"3";"60";"Lampe";"6";"2019-06-13 10:50:00";"ok";"";"D3FE8EEF188C";"NA"
-967;"C3";"AA35";2678698;1252142;507;"Im oberen Boden";"Sensirion";47.41538;8.48146;"5";"25";"";"5";"2019-06-14 10:20:00";"ok";"Flaeche oestlich des Sensors zugewachsen!";"C3FE363AAA35";"NA"
-969;"C4";"8FED";2678783;1251431;474;"Riedhofstrasse";"Sensirion";47.40898;8.48246;"42";"15";"";"5";"2019-06-14 10:30:00";"ok";"Privatgelaende: Verschiebung um 75m nach Suedosten";"E77BF21F8FED";"NA"
-972;"C6-AWEL-Werdinsel";"52E3";2679030;1250494;399;"Werdinsel";"Sensirion";47.40052;8.48557;"";"80";"";"9(G)";"2019-06-14 09:44:00";"ok";"verschiebung um 180m nach Suedosten, 1.5 m ueber Boden an Fahrverbotsschild";"E7B64FD552E3";"NA"
-974;"C7";"C1BC";2678950;1250050;397;"Baendlistrasse";"Sensirion";47.39654;8.48443;"27";"15";"";"5";"2019-06-13 14:15:00";"ok";"Verschiebung um 90m nach Sueden, keine Befestigungsmoeglichkeit im Schrebergarten";"C3FD36A6C1BC";"NA"
-977;"C9";"FFC6";2679046;1249233;400;"Meier-Bosshard-Strasse";"Sensirion";47.38918;8.48556;"3";"10";"";"2(5)";"2019-06-13 12:45:00";"ok";"Verschiebung um 50m nach Norden, da an Segnestrasse keine Laternen";"D30CBD2BFFC6";"D30CBD00002BFFC6"
-979;"C10";"21C6";2679167;1248657;407;"Saumackerstrasse";"Sensirion";47.38398;8.48706;"26";"5";"";"6(5)";"2019-06-13 11:40:00";"ok";"";"DA522D0B21C6";"NA"
-982;"C12";"A528";2679183;1247639;426;"In der Ey/ In der Waesseri";"Sensirion";47.37483;8.48709;"3";"5";"";"5(6)";"2019-06-13 10:20:00";"ok";"";"EDEA504AA528";"NA"
-984;"C13";"06DA";2679304;1247167;445;"Im Heimgaertli";"Sensirion";47.37057;8.48861;"6";"5";"";"6";"2019-06-13 10:30:00";"ok";"";"EC9C805C06DA";"NA"
-988;"D5";"29E3";2679372;1251179;477;"Lachenacker";"Sensirion";47.40664;8.49022;"6";"5";"Laterne";"6(5)";"2019-06-14 10:50:00";"ok";"";"D36951B629E3";"NA"
-990;"D6";"1572";2679385;1250688;444;"Hohenklingenallee";"Sensirion";47.40222;8.4903;"2";"10";"";"6";"2019-06-14 11:50:00";"ok";"";"C4598BF41572";"NA"
-993;"D8";"EF9E";2679547;1249697;399;"Max-Hoegger-Strasse";"Sensirion";47.39329;8.49227;"3";"40";"";"5(4/E)";"2019-06-13 08:40:00";"ok";"Autos auf Luftaufnahme mussten Containerwohnungen weichen";"C0B425A3EF9E";"C0B4250000A3EF9E"
-995;"D9";"3D34";2679502;1249207;401;"Albulastrasse/Luggerwegstrasse";"Sensirion";47.38889;8.49159;"14";"15";"";"5(4)";"2019-06-13 09:00:00";"ok";"";"F00106D73D34";"NA"
-998;"D11";"47DE";2679662;1248252;409;"Rautistrasse";"Sensirion";47.38028;8.49354;"";"5";"";"5";"2019-06-13 09:55:00";"ok";"";"F371C02547DE";"NA"
-1000;"D12";"ABED";2679730;1247745;416;"Ginsterstrasse";"Sensirion";47.37571;8.49435;"3";"5";"";"6(5)";"2019-06-13 10:10:00";"ok";"Baustelle";"D71E3290ABED";"NA"
-1003;"D14";"36AD";2679834;1246827;454;"Hohensteinweg";"Sensirion";47.36745;8.49556;"1";"35";"";"4(5)";"2019-06-17 16:40:00";"ok";"";"DB0614A936AD";"DB06140000A936AD"
-1004;"D14";"FA25";2679834;1246827;454;"Hohensteinweg";"Sensirion";47.36745;8.49556;"1";"35";"";"4(5)";"2020-02-12 12:15:00";"ok";"";"CE7E76FEFFFEFA25";"NA"
-1005;"D15";"EF8F";2679926;1246267;498;"Doeltschiweg";"Sensirion";47.3624;8.49668;"66";"30";"Laterne";"9";"2019-06-17 16:25:00";"ok";"";"CEC54F00000BEF8F";"NA"
-1006;"D15";"04DD";2679926;1246267;498;"Doeltschiweg";"Sensirion";47.3624;8.49668;"66";"30";"Laterne";"9";"2020-02-12 11:45:00";"ok";"";"FABBB4FEFF8F04DD";"NA"
-1008;"E1";"09E7";2679670;1252996;458;"Im Holzerhurd";"Sensirion";47.42295;8.49449;"1";"15";"";"6(5/A)";"2019-06-12 13:50:00";"ok";"";"CF91012809E7";"NA"
-1010;"E4";"8CFB";2679583;1251567;527;"Kappenbuehstrasse";"Sensirion";47.4101;8.49308;"20";"70";"";"9";"2019-06-14 11:25:00";"ok";"Verschiebung um 230m nach Suedwesten";"F4683D808CFB";"NA"
-1012;"E5";"50F9";2679805;1251219;508;"Benedikt-Fontana-Weg";"Sensirion";47.40695;8.49596;"3";"5";"";"6";"2019-06-14 11:35:00";"ok";"";"D65E797650F9";"NA"
-1015;"E7";"C178";2679990;1250216;399;"unbekannt";"Sensirion";47.39791;8.49823;"";"20";"";"9(8/G)";"2019-06-13 14:55:00";"ok";"Verschiebung um 50m nach Suedosten";"FBBA0760C178";"NA"
-1017;"E8";"EC9F";2680010;1249775;399;"Bernerstrasse Nord";"Sensirion";47.39394;8.49842;"15";"90";"";"9";"2019-06-13 15:15:00";"ok";"";"CEA3FACCEC9F";"NA"
-1020;"E10";"A7DC";2680123;1248848;405;"Baslerstrasse";"Sensirion";47.38559;8.49975;"23";"10";"";"3(2) or 6(5)";"2019-06-13 09:25:00";"ok";"";"E3918841A7DC";"NA"
-1022;"E11";"9C4C";2680207;1248300;410;"Edelweissstrasse";"Sensirion";47.38065;8.50076;"3";"10";"";"6";"2019-06-13 09:40:00";"ok";"";"E095685A9C4C";"NA"
-1025;"E13";"7162";2680327;1247262;425;"Schaufelbergerstrasse";"Sensirion";47.3713;8.50217;"11";"10";"";"5";"2019-06-17 16:00:00";"ok";"";"CA83550000E17162";"NA"
-1026;"E13";"D586";2680327;1247262;425;"Schaufelbergerstrasse";"Sensirion";47.3713;8.50217;"11";"10";"";"5";"2019-07-25 12:00:00";"ok";"";"EED09FCCD586";"NA"
-1027;"E13";"0399";2680327;1247262;425;"Schaufelbergerstrasse";"Sensirion";47.3713;8.50217;"11";"10";"";"5";"2020-02-12 12:25:00";"ok";"";"DB99FCFEFFE60399";"NA"
-1028;"E14";"E672";2680322;1246767;446;"Schweighofstrasse";"Sensirion";47.36685;8.50201;"71";"10";"Baeume";"5";"2019-06-17 16:15:00";"ok";"";"E2A3140000ACE672";"NA"
-1029;"E14";"32DC";2680322;1246767;446;"Schweighofstrasse";"Sensirion";47.36685;8.50201;"71";"10";"Baeume";"5";"2020-02-12 11:55:00";"ok";"";"EE0117FEFFC432DC";"NA"
-1031;"E16";"7D4B";2680593;1245835;489;"Im Hagacker";"Sensirion";47.35843;8.50543;"7";"15";"";"6";"2019-06-18 15:20:00";"ok";"Verschiebung um 150m nach Nordosten";"F19BF90000AC7D4B";"NA"
-1032;"E16";"B089";2680593;1245835;489;"Im Hagacker";"Sensirion";47.35843;8.50543;"7";"15";"";"6";"2020-02-11 15:55:00";"ok";"Verschiebung um 150m nach Nordosten";"EF136BFEFF28B089";"NA"
-1033;"E17";"07FB";2680435;1245189;539;"Kolbenhofstrasse";"Sensirion";47.35264;8.50322;"4";"130";"";"D(A)";"2019-06-18 15:50:00";"ok";"Verschiebung um 125m nach Suedwesten";"D083B9FD07FB";"D083B90000FD07FB"
-1035;"F1";"8929";2680154;1253233;451;"Muehlackerstrasse";"Sensirion";47.42502;8.50095;"45";"20";"";"5";"2019-06-12 14:00:00";"ok";"";"DB2B87838929";"NA"
-1038;"F3";"EF2E";2680165;1252298;507;"Holderbachweg";"Sensirion";47.41661;8.50092;"17";"10";"";"6(A)";"2019-06-12 13:30:00";"ok";"Am Hang, nahe beim Waldrand";"DFE4ADAAEF2E";"NA"
-1041;"F6";"BBAB";2680416;1250796;498;"Blaesistrasse";"Sensirion";47.40307;8.50398;"13";"15";"";"6";"2019-06-14 12:55:00";"ok";"";"F7E569EBBBAB";"NA"
-1043;"F7";"3592";2680434;1250337;442;"Ackersteinstrasse";"Sensirion";47.39894;8.50414;"35";"15";"";"6";"2019-06-14 14:10:00";"ok";"";"EFAF13FC3592";"NA"
-1046;"F9";"5311";2680633;1249242;403;"";"Sensirion";47.38907;8.50657;"";"15";"";"8";"2019-06-14 15:25:00";"ok";"Verschiebung um 120m nach Suedosten an SBB-Laterne nahe Gleisfeld";"DCE99DFE5311";"NA"
-1048;"F10";"E92B";2680608;1248862;405;"Hohlstrasse";"Sensirion";47.38565;8.50617;"92";"20";"";"9";"2019-06-13 09:15:00";"ok";"";"D287C3B0E92B";"NA"
-1051;"F12";"2355";2680666;1247879;412;"Gutstrasse";"Sensirion";47.37681;8.50677;"5";"15";"Baeume";"9";"2019-06-17 15:30:00";"ok";"Verschiebung um 90m nach Nordwesten";"E89346A12355";"E893460000A12355"
-1052;"F12";"4D86";2680666;1247879;412;"Gutstrasse";"Sensirion";47.37681;8.50677;"5";"15";"Baeume";"9";"2020-02-12 13:35:00";"ok";"Verschiebung um 90m nach Nordwesten";"E8F22EFEFF694D86";"NA"
-1053;"F13";"E7AF";2680785;1247339;419;"unbekannt (Schrebergaerten)";"Sensirion";47.37193;8.50824;"18.9";"20";"Laterne";"5";"2019-06-17 15:50:00";"ok";"";"D89061AEE7AF";"D890610000AEE7AF"
-1054;"F13";"00FB";2680785;1247339;419;"unbekannt (Schrebergaerten)";"Sensirion";47.37193;8.50824;"18.9";"20";"Laterne";"5";"2020-02-12 13:20:00";"ok";"";"D97CDBFEFFBD00FB";"NA"
-1056;"F15";"2D4E";2680866;1246367;443;"Borrweg";"Sensirion";47.36318;8.50914;"4.6";"10";"";"5";"2019-06-18 15:00:00";"ok";"";"C7519E172D4E";"C7519E0000172D4E"
-1057;"F15";"B9C9";2680866;1246367;443;"Borrweg";"Sensirion";47.36318;8.50914;"4.6";"10";"";"5";"2020-02-12 11:30:00";"ok";"";"EF0CD4FEFFC1B9C9";"NA"
-1058;"F16";"FAB1";2680953;1245848;465;"Bachtobelstrasse";"Sensirion";47.3585;8.5102;"35";"15";"Baeume";"6(5)";"2019-06-18 15:35:00";"ok";"";"F0844823FAB1";"F08448000023FAB1"
-1059;"F16";"5C6B";2680953;1245848;465;"Bachtobelstrasse";"Sensirion";47.3585;8.5102;"35";"15";"Baeume";"6(5)";"2020-02-12 11:15:00";"ok";"";"D36A5DFEFF435C6B";"NA"
-1061;"F18";"F8B0";2681062;1244961;473;"unbekannt (nahe Gaenzilooweg)";"Sensirion";47.35051;8.51148;"";">100";"Baeume";"9";"2019-07-23 11:40:00";"ok";"Verschiebung um 80m nach Nordwesten";"FAE436C1F8B0";"NA"
-1064;"G2";"9668";2680634;1252820;456;"kein (Bachmannweg)";"Sensirion";47.42125;8.50723;"1";"30";"";"5";"2019-06-12 14:15:00";"ok";"";"EA7F85FA9668";"NA"
-1065;"G2";"A112";2680634;1252820;456;"kein (Bachmannweg)";"Sensirion";47.42125;8.50723;"1";"30";"";"5";"2020-02-05 11:25:00";"ok";"";"F3FEE1FEFF10A112";"NA"
-1066;"G3";"832D";2680739;1252381;463;"Regulastrasse";"Sensirion";47.41728;8.50854;"20";"<5";"";"6";"2019-06-12 15:20:00";"ok";"";"E67C175F832D";"NA"
-1069;"G5_AWEL-ScienceCity";"25B2";2680698;1251423;524;"Wolfgang-Pauli-Strasse";"Sensirion";47.40867;8.50783;"";"5";"Baeume";"5";"2019-06-12 13:10:00";"ok";"Verschiebung um 100m nach Westen, 1.5m ueber Boden";"F903128025B2";"NA"
-1071;"G6";"3033";2680637;1250848;527;"Am Hoenggerberg";"Sensirion";47.40351;8.50692;"";"20";"";"9";"2019-06-14 13:05:00";"ok";"Verschiebung um 250m nach Westen";"CED67E6C3033";"NA"
-1074;"G8";"117A";2680953;1249913;407;"Am Wasser";"Sensirion";47.39506;8.51093;"8";"15";"";"5(6)";"2019-06-14 14:25:00";"ok";"";"CC64BEFD117A";"NA"
-1076;"G9";"6A24";2681062;1249351;402;"Duttweilerstrasse";"Sensirion";47.39;8.51228;"9";"5";"";"2";"2019-06-14 15:05:00";"ok";"Eher hoch (ca. 4m)";"D883D89E6A24";"NA"
-1079;"G11_AWEL-Hardplatz";"1F0C";2681255;1248509;407;"Hardplatz";"Sensirion";47.3824;8.51468;"";"15";"";"2(E)";"2019-06-17 13:55:00";"ok";"130m zu AWEL Sensor verschoben, Hardplatz bereits fertiggestellt (nicht wie auf Luftaufnahme!)";"E54201831F0C";"E542010000831F0C"
-1081;"G12";"BB79";2681218;1247863;412;"Badenerstrasse";"Sensirion";47.37659;8.51407;"";"8";"";"2";"2019-06-17 15:00:00";"ok";"an Tramhaltestelle, da sonst keine Befestigungsmoeglichkeit weit und breit";"F033A8C6BB79";"F033A80000C6BB79"
-1082;"G12";"2DF1";2681218;1247863;412;"Badenerstrasse";"Sensirion";47.37659;8.51407;"";"8";"";"2";"2020-02-12 13:50:00";"ok";"an Tramhaltestelle, da sonst keine Befestigungsmoeglichkeit weit und breit";"CCF945FEFF332DF1";"NA"
-1084;"G14";"0A5D";2681399;1246872;435;"Goldbrunnenstrasse";"Sensirion";47.36766;8.51629;"5";"10";"Baeume";"5";"2019-06-18 14:35:00";"ok";"";"D333B5190A5D";"D333B50000190A5D"
-1086;"G15";"89A0";2681396;1246415;428;"Talwiesenstrasse";"Sensirion";47.36355;8.51616;"";"20";"";"2";"2019-06-18 14:45:00";"ok";"";"D2989E5289A0";"D2989E00005289A0"
-1087;"G15";"E034";2681396;1246415;428;"Talwiesenstrasse";"Sensirion";47.36355;8.51616;"";"20";"";"2";"2020-02-12 11:00:00";"ok";"";"C39B55FEFF53E034";"NA"
-1089;"G18";"3984";2681625;1244975;424;"Gfellstrasse";"Sensirion";47.35057;8.51893;"11";"60";"";"9(D/G)";"2019-07-23 11:00:00";"ok";"Verschiebung um 100m nach Nordosten";"DA4AA0863984";"DA4AA00000863984"
-1091;"H1";"B9A0";2681082;1253556;437;"";"Sensirion";47.42781;8.5133;"";"150";"Baeume";"9";"2019-06-12 14:40:00";"ok";"Verschiebung um 70m nach Norden, Biotop im Norden fertig (nicht wie auf Luftbild!)";"CBC69477B9A0";"NA"
-1093;"H2";"BBC4";2681173;1252895;454;"Reckenholzstrasse";"Sensirion";47.42185;8.51439;"8";"35";"Baeume";"5(A)";"2019-06-12 15:05:00";"ok";"";"DEB60BB6BBC4";"NA"
-1096;"H4";"A9BF";2681306;1251915;472;"Erchenbuehlstrasse";"Sensirion";47.41302;8.51597;"3";"5";"Baeume";"6(5)";"2019-06-12 15:30:00";"ok";"";"D19C7256A9BF";"NA"
-1098;"H7";"2B12";2681438;1250485;252;"Obere Waidstrasse";"Sensirion";47.40015;8.51746;"33";"35";"";"9(A)";"2019-06-14 13:20:00";"ok";"";"F76A88A42B12";"NA"
-1100;"H8";"90D2";2681489;1249922;422;"Waidfussweg";"Sensirion";47.39508;8.51803;"4";"<5";"Laterne";"5";"2019-06-14 14:50:00";"ok";"";"D57F1CD290D2";"NA"
-1103;"H10";"7A8D";2681612;1248902;404;"Geroldstrasse (-rampe)";"Sensirion";47.38589;8.51948;"48.6";"15";"";"2(1)";"2019-06-17 13:35:00";"ok";"";"CCFEC5737A8D";"CCFEC50000737A8D"
-1105;"H11";"7684";2681645;1248305;408;"Hohlstrasse";"Sensirion";47.38052;8.5198;"";"15";"";"2";"2019-06-17 14:25:00";"ok";"Wegen Baustelle 145m nach Sued(westen) verschoben";"C49A830000597684";"NA"
-1107;"H13";"0D01";2681714;1247485;413;"Seebahnstrasse";"Sensirion";47.37313;8.52057;"12";"20";"Baeume";"2";"2019-06-18 09:00:00";"ok";"";"E21573F50D01";"E215730000F50D01"
-1108;"H13";"06C6";2681714;1247485;413;"Seebahnstrasse";"Sensirion";47.37313;8.52057;"12";"20";"Baeume";"2";"2020-02-12 10:05:00";"ok";"";"EDDC88FEFFC806C6";"NA"
-1109;"H14";"777E";2681833;1246984;414;"Zurlindenstrasse";"Sensirion";47.36861;8.52205;"";"20";"Baeume";"2";"2019-06-18 08:30:00";"ok";"";"E338B90000EB777E";"NA"
-1112;"H16";"2916";2681916;1246010;420;"Utoplatz";"Sensirion";47.35984;8.52297;"";"5";"";"2";"2019-07-23 13:05:00";"ok";"";"FF868BB42916";"NA"
-1114;"H17";"0F10";2682008;1245481;420;"Kanalstrasse";"Sensirion";47.35507;8.52409;"28";"65";"";"9(E)";"2019-07-23 12:00:00";"ok";"";"EF88B3220F10";"NA"
-1117;"H19";"05B6";2682098;1244544;448;"Rainstrasse";"Sensirion";47.34664;8.52511;"27";"25";"";"6(5)";"2019-07-23 10:30:00";"ok";"";"EA68FF6905B6";"NA"
-1118;"H19";"DBDC";2682098;1244544;448;"Rainstrasse";"Sensirion";47.34664;8.52511;"27";"25";"";"6(5)";"2020-02-11 13:30:00";"ok";"";"D54B92FEFFEBDBDC";"NA"
-1119;"H20";"60EB";2682195;1243950;463;"Drosselstrasse";"Sensirion";47.34128;8.52629;"2";"<5";"";"5(6)";"2019-07-23 10:15:00";"ok";"";"EC032D8260EB";"NA"
-1120;"H20";"B28F";2682195;1243950;463;"Drosselstrasse";"Sensirion";47.34128;8.52629;"2";"<5";"";"5(6)";"2020-02-11 13:45:00";"ok";"";"EBEDD2FEFF59B28F";"NA"
-1122;"H22";"28BB";2682383;1242971;464;"Dangelstrasse";"Sensirion";47.33244;8.5286;"8";"5";"";"5";"2019-07-23 08:30:00";"ok";"Verschiebung um 80m nach Nordosten";"F679AEDC28BB";"NA"
-1124;"I4";"25BD";2681711;1251947;459;"Wehntalerstrasse";"Sensirion";47.41326;8.52134;"";"10";"";"6(5)";"2019-06-12 15:45:00";"";"";"FFC7795625BD";"NA"
-1127;"I7";"9B86";2682005;1250372;500;"Obere Waidstrasse";"Sensirion";47.39906;8.52495;"19";"45";"";"6(9/A)";"2019-06-14 13:50:00";"";"";"FD0E0CBC9B86";"NA"
-1129;"I8_Zuerich-Rosengartenstrasse";"5F05";2682085;1249922;431;"Rosengartenstrasse";"Sensirion";47.395;8.52592;"11,2";"5";"";"2";"2019-06-21 12:55:00";"";"";"C2B669005F05";"NA"
-1132;"I9";"DC69";2682039;1249507;403;"Kloster-Fahr-Weg";"Sensirion";47.39128;8.52524;"44";"10";"Laterne";"5(G)";"2019-06-17 12:20:00";"";"";"F61F95D7DC69";"F61F950000D7DC69"
-1134;"I10";"53E1";2682002;1248888;404;"Ottostrasse";"Sensirion";47.38571;8.52464;"9";"15";"";"5";"2019-06-17 13:20:00";"";"Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe";"C5C0290753E1";"C5C02900000753E1"
-1135;"I10";"ED89";2682002;1248888;404;"Ottostrasse";"Sensirion";47.38571;8.52464;"9";"15";"";"5";"2020-02-12 15:05:00";"";"Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe";"DB8E70FEFF20ED89";"NA"
-1138;"I12";"6D16";2682075;1248092;409;"Brauerstrasse";"Sensirion";47.37855;8.52546;"12";"15";"";"2";"2020-02-12 09:30:00";"";"Verschiebung um 120m nach Nordwesten";"C1C84DFEFF046D16";"NA"
-1139;"I13";"32DE";2682271;1247515;411;"Badernerstrasse/Kanzleistrasse";"Sensirion";47.37333;8.52795;"28";"10";"";"2";"2019-06-18 09:15:00";"";"";"D2DF1A7E32DE";"D2DF1A00007E32DE"
-1140;"I13";"B7C0";2682271;1247515;411;"Badernerstrasse/Kanzleistrasse";"Sensirion";47.37333;8.52795;"28";"10";"";"2";"2020-02-12 09:55:00";"";"";"C178D6FEFF6DB7C0";"NA"
-1142;"I15";"0084";2682363;1246500;417;"Bederstrasse";"Sensirion";47.36419;8.52898;"";"20";"";"5";"2019-07-23 14:30:00";"";"";"EA9DC87B0084";"NA"
-1143;"I15";"B012";2682363;1246500;417;"Bederstrasse";"Sensirion";47.36419;8.52898;"";"20";"";"5";"2020-02-11 10:20:00";"";"";"FB33C0FEFFA1B012";"NA"
-1144;"I16";"8535";2682486;1246026;428;"unbekannt (nahe Gablerstrasse)";"Sensirion";47.35991;8.53052;"4,5";"20";"Laterne";"5";"2019-07-23 13:45:00";"";"";"FAF863BE8535";"NA"
-1147;"I18";"A100";2682610;1245018;414;"Seestrasse";"Sensirion";47.35083;8.53197;"";"8";"";"5";"2019-07-23 09:45:00";"";"";"C3F042CEA100";"C3F0420000CEA100"
-1148;"I18";"E2ED";2682610;1245018;414;"Seestrasse";"Sensirion";47.35083;8.53197;"";"8";"";"5";"2020-02-11 13:00:00";"";"";"DE4872FEFF9FE2ED";"NA"
-1149;"I19";"00FD";2682623;1244519;424;"Renggerstrasse";"Sensirion";47.34634;8.53205;"4";"5";"";"5";"2019-07-23 10:00:00";"";"";"E13EEA4F00FD";"NA"
-1150;"I19";"C968";2682623;1244519;424;"Renggerstrasse";"Sensirion";47.34634;8.53205;"4";"5";"";"5";"2020-02-11 13:15:00";"";"";"D8542EFEFF4BC968";"NA"
-1152;"I21";"B094";2682752;1243480;455;"Widmerstrasse";"Sensirion";47.33698;8.53357;"20";"8";"";"6(5)";"2019-07-23 08:55:00";"";"";"C73FA918B094";"NA"
-1153;"I21";"0C46";2682752;1243480;455;"Widmerstrasse";"Sensirion";47.33698;8.53357;"20";"8";"";"6(5)";"2020-02-11 14:25:00";"";"";"F575FFFEFF590C46";"NA"
-1154;"I22";"A8DB";2682851;1243011;474;"Nidelbadstrasse";"Sensirion";47.33275;8.53479;"17";"8";"";"5";"2019-07-23 08:45:00";"";"";"D6F5062AA8DB";"NA"
-1155;"I22";"A12D";2682851;1243011;474;"Nidelbadstrasse";"Sensirion";47.33275;8.53479;"17";"8";"";"5";"2020-02-11 14:20:00";"";"";"DBE8BEFEFF89A12D";"NA"
-1157;"J5";"5C90";2682286;1251522;460;"Maienstrasse";"Sensirion";47.40937;8.52888;"1";"10";"";"6";"2019-06-12 16:40:00";"";"";"C588D3825C90";"NA"
-1159;"J6";"6393";2682361;1251010;489;"Kaeferholzstrasse";"Sensirion";47.40475;8.52978;"22";"65";"";"9(A)";"2019-06-12 16:55:00";"";"";"E1AB46EC6393";"NA"
-1162;"J8";"BFC6";2682528;1250023;457;"Wibichstrasse";"Sensirion";47.39586;8.53181;"1";"5";"";"5(6)";"2019-06-17 11:20:00";"";"";"E9CC9A8ABFC6";"E9CC9A00008ABFC6"
-1167;"J11";"5266";2682588;1248567;406;"Konradstrasse/Ackerstrasse";"Sensirion";47.38275;8.53234;"keine (Fahnenmast)";"5";"";"2";"2019-06-18 10:30:00";"";"";"C059A2225266";"NA"
-1168;"J11";"5CA3";2682588;1248567;406;"Konradstrasse/Ackerstrasse";"Sensirion";47.38275;8.53234;"keine (Fahnenmast)";"5";"";"2";"2020-02-12 08:45:00";"";"";"F8362EFEFF405CA3";"NA"
-1169;"J12";"D0B1";2682742;1248089;409;"Europaallee";"Sensirion";47.37844;8.53429;"";"10";"";"1(2)";"2019-06-18 09:45:00";"";"";"EBE724AED0B1";"EBE7240000AED0B1"
-1170;"J12";"A6A7";2682742;1248089;409;"Europaallee";"Sensirion";47.37844;8.53429;"";"10";"";"1(2)";"2019-07-25 12:00:00";"";"keine Baustelle mehr, neuer Masten (Nummer wird evtl noch montiert)";"CC3EAD20A6A7";"NA"
-1173;"J14";"4941";2682815;1247048;408;"Am Schanzengraben";"Sensirion";47.36906;8.53506;"6";"5";"";"2(G)";"2019-07-23 15:00:00";"";"";"E2A0DF1A4941";"E2A0DF00001A4941"
-1174;"J14";"6989";2682815;1247048;408;"Am Schanzengraben";"Sensirion";47.36906;8.53506;"6";"5";"";"2(G)";"2020-02-11 09:55:00";"";"";"D2CA3BFEFF0C6989";"NA"
-1175;"J15";"998D";2682879;1246566;408;"Toedistrasse";"Sensirion";47.36472;8.53582;"3";"<5";"";"2";"2019-07-23 14:45:00";"";"";"CBEF2A7D998D";"NA"
-1176;"J15";"691E";2682879;1246566;408;"Toedistrasse";"Sensirion";47.36472;8.53582;"3";"<5";"";"2";"2020-02-11 10:10:00";"";"";"C30B1EFEFFB8691E";"NA"
-1178;"J17";"6B20";2682896;1245505;408;"unbekannt (nahe Mythenquai)";"Sensirion";47.35518;8.53585;"13";"20";"Laterne";"G(5)";"2019-07-23 14:10:00";"";"";"E574968D6B20";"NA"
-1179;"J17";"C906";2682896;1245505;408;"unbekannt (nahe Mythenquai)";"Sensirion";47.35518;8.53585;"13";"20";"Laterne";"G(5)";"2020-02-11 12:40:00";"";"";"FA5EF2FEFFF3C906";"NA"
-1180;"J20";"E334";2683133;1243917;407;"Cassiopeiasteg";"Sensirion";47.34087;8.53869;"4";"50";"";"G(5)";"2019-07-23 09:20:00";"";"Verschiebung um 120m nach Sueden";"D35B2568E334";"NA"
-1181;"J20";"DCF7";2683133;1243917;407;"Cassiopeiasteg";"Sensirion";47.34087;8.53869;"4";"50";"";"G(5)";"2020-02-11 14:55:00";"";"Verschiebung um 120m nach Sueden";"FD4864FEFFABDCF7";"NA"
-1182;"J21";"F5EE";2683254;1243612;407;"Forellenweg";"Sensirion";47.33811;8.54023;"19";"20";"";"G(5)";"2019-07-23 09:10:00";"";"";"E7E31C73F5EE";"NA"
-1183;"J21";"1018";2683254;1243612;407;"Forellenweg";"Sensirion";47.33811;8.54023;"19";"20";"";"G(5)";"2020-02-11 14:45:00";"";"";"F7EA76FEFFA51018";"NA"
-1185;"K2";"15BA";2682663;1253071;453;"Schwandenholzstrasse";"Sensirion";47.42325;8.53416;"13";"100";"";"5(A)";"2019-06-12 10:35:00";"";"Am Waldrand";"D39B113915BA";"NA"
-1188;"K4";"2135";2682745;1252062;441;"Eduard-Imhof-Strasse";"Sensirion";47.41417;8.53506;"4";"15";"";"8(5)";"2019-06-12 16:15:00";"";"";"DC3250532135";"NA"
-1190;"K5";"EA2A";2682775;1251584;452;"Holunderweg";"Sensirion";47.40986;8.53537;"12";"10";"";"5";"2019-06-12 16:30:00";"";"Verschiebung um 60m nach Westen aufgrund von Baustelle";"F1EF9487EA2A";"NA"
-1194;"K7";"A33E";2682917;1250593;465;"Wehntalerstrasse";"Sensirion";47.40093;8.537;"";"5";"";"5(6)";"2019-07-25 12:00:00";"";"";"E79EAD34A33E";"NA"
-1196;"K8";"82B3";2682963;1250106;477;"Spelteriniweg";"Sensirion";47.39655;8.53759;"5";"8";"";"6(5)";"2019-06-17 11:35:00";"";"";"F200C70782B3";"F200C700000782B3"
-1199;"K10_Zuerich-Stampfenbachstrasse";"570D";2683144;1249055;442;"Stampfenbachstrasse";"Sensirion";47.387;8.53979;"";"5";"";"2";"2019-06-18 10:40:00";"";"";"FA8C8B59570D";"NA"
-1202;"K11";"B365";2683166;1248556;412;"Neumuehlequai";"Sensirion";47.38258;8.53999;"38";"15";"";"2(G/1)";"2019-06-18 10:00:00";"";"";"FA74438EB365";"FA744300008EB365"
-1203;"K11";"37DC";2683166;1248556;412;"Neumuehlequai";"Sensirion";47.38258;8.53999;"38";"15";"";"2(G/1)";"2020-02-07 12:45:00";"";"";"C8C996FEFF9C37DC";"NA"
-1205;"K13";"E6B1";2683247;1247633;409;"Uraniastrasse";"Sensirion";47.37427;8.54089;"";"10";"";"5(2)";"2019-07-23 16:15:00";"";"";"C9EA63B8E6B1";"NA"
-1206;"K13";"EE77";2683247;1247633;409;"Uraniastrasse";"Sensirion";47.37427;8.54089;"";"10";"";"5(2)";"2020-02-11 08:45:00";"";"";"E89101FEFFA4EE77";"NA"
-1207;"K14";"AEC4";2683337;1247125;409;"Stadthausquai";"Sensirion";47.36969;8.54198;"12";"25";"";"2(G)";"2019-07-23 15:25:00";"";"sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt)";"D7DCF918AEC4";"NA"
-1208;"K14";"4F29";2683337;1247125;409;"Stadthausquai";"Sensirion";47.36969;8.54198;"12";"25";"";"2(G)";"2020-02-11 09:25:00";"";"sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt)";"FB277FFEFF834F29";"NA"
-1210;"L1";"703C";2683096;1253598;435;"unbekannt (naehe Schoenauweg)";"Sensirion";47.42793;8.54;"";"10";"";"6";"2019-06-12 10:20:00";"";"";"E6C742C0703C";"NA"
-1213;"L3";"E465";2683216;1252669;460;"Hoehenring";"Sensirion";47.41956;8.54141;"23";"60";"";"6";"2019-06-12 10:50:00";"";"Auf einem kleinen Huegel";"C8FD7DA6E465";"NA"
-1215;"L4";"3785";2683246;1252066;440;"Binzmuehlestrasse/Ruedi-Walter-Strasse";"Sensirion";47.41414;8.5417;"23";"<5m";"";"2";"2019-06-12 11:30:00";"";"";"F2B3B6C43785";"NA"
-1218;"L6";"6340";2683364;1251175;461;"Venusstrasse";"Sensirion";47.40611;8.5431;"5";"15";"";"6";"2019-06-17 09:55:00";"";"";"F5C16A4B6340";"F5C16A00004B6340"
-1220;"L7";"FEFD";2683422;1250634;471;"Oerlikonerstrasse";"Sensirion";47.40124;8.54376;"5";"5";"";"6";"2019-06-17 10:20:00";"";"";"D9E6349DFEFD";"NA"
-1223;"L8_AWEL-Irchelpark";"F55C";2683531;1250190;489;"Irchelpark";"Sensirion";47.39723;8.54512;"K27";"25";"";"9";"2019-06-21 12:25:00";"";"Verschiebung um 70m nach Nord(-westen)";"D141C007F55C";"NA"
-1225;"L9";"9164";2683524;1249635;488;"Winterthurerstrasse";"Sensirion";47.39224;8.54493;"5";"<5";"";"5";"2019-06-18 11:10:00";"";"";"FD2866B59164";"NA"
-1230;"L12";"4F3E";2683651;1248239;454;"Clausiussteig";"Sensirion";47.37967;8.54635;"2";"<5";"Laterne";"2";"2019-06-18 13:00:00";"";"Verschiebung um 85m nach Nordwesten";"EB90524D4F3E";"EB905200004D4F3E"
-1231;"L12";"1A7B";2683651;1248239;454;"Clausiussteig";"Sensirion";47.37967;8.54635;"2";"<5";"Laterne";"2";"2020-02-07 11:30:00";"";"Verschiebung um 85m nach Nordwesten";"F5B872FEFF3F1A7B";"NA"
-1232;"L13";"AA69";2683740;1247721;445;"Kuenstlergasse";"Sensirion";47.375;8.54743;"10";"15";"";"5";"2019-07-24 09:00:00";"";"";"DF2C6F3FAA69";"NA"
-1233;"L13";"2BED";2683740;1247721;445;"Kuenstlergasse";"Sensirion";47.375;8.54743;"10";"15";"";"5";"2020-02-07 12:30:00";"";"";"F16AEAFEFF542BED";"NA"
-1235;"L15";"4841";2683907;1246728;413;"Kreuzbuehlstrasse";"Sensirion";47.36605;8.54946;"";"15";"";"2";"2019-07-24 08:15:00";"";"";"D52514A74841";"NA"
-1236;"L15";"7705";2683907;1246728;413;"Kreuzbuehlstrasse";"Sensirion";47.36605;8.54946;"";"15";"";"2";"2020-02-06 08:45:00";"";"";"FB8CDAFEFF307705";"NA"
-1237;"L16";"5712";2683897;1246219;408;"Seegartenstrasse";"Sensirion";47.36147;8.54923;"4";"<5";"";"2";"2019-07-24 12:20:00";"";"Verschiebung um 60m nach Nordwesten 2020-02-06 15:00:00";"FD02A95D5712";"NA"
-1239;"L18";"54EA";2684207;1245163;406;"unbekannt (Steg am Zuerihorn)";"Sensirion";47.35194;8.55313;"7";"30";"";"G";"2019-07-24 13:40:00";"";"Verschiebung um 105m nach Suedosten";"F080F81D54EA";"NA"
-1240;"L18";"A673";2684207;1245163;406;"unbekannt (Steg am Zuerihorn)";"Sensirion";47.35194;8.55313;"7";"30";"";"G";"2020-02-06 14:20:00";"";"Verschiebung um 105m nach Suedosten";"FDB129FEFFBFA673";"NA"
-1242;"M2";"4B15";2683558;1253232;437;"unbekannt (nahe Ausserdorfstrasse)";"Sensirion";47.42458;8.54605;"10";"10";"";"6";"2019-06-12 10:00:00";"";"Verschiebung um 85m nach Nordwesten (wegen Badi)";"DF15D23E4B15";"NA"
-1244;"M3";"52BC";2683669;1252756;438;"Seebacherstrasse";"Sensirion";47.42029;8.54743;"6";"10";"";"6";"2019-06-12 11:00:00";"";"Baustelle zum Zeitpunkt der Montage in unmittelbarer Naehe (Fotos!)";"D13558D752BC";"NA"
-1247;"M5";"23AA";2683799;1251670;434;"Wallisellenstrasse";"Sensirion";47.41051;8.54895;"10";"5";"";"5(6)";"2019-06-11 16:15:00";"";"";"C792BA7C23AA";"NA"
-1249;"M6";"F9D7";2683865;1251222;444;"Allenmoosstrasse";"Sensirion";47.40647;8.54974;"37";"<5";"";"";"2019-06-17 10:10:00";"";"";"CF21F134F9D7";"CF21F1000034F9D7"
-1252;"M8";"88A3";2684095;1250233;507;"Frohburgstrasse";"Sensirion";47.39755;8.5526;"50";"10";"";"6(5)";"2019-06-18 11:35:00";"";"Verschiebung um 110m nach Osten";"E40153D188A3";"E401530000D188A3"
-1254;"M9";"1403";2684005;1249728;532;"Letziweg";"Sensirion";47.39302;8.55132;"2";"10";"";"6(9)";"2019-06-18 11:25:00";"";"";"F1EFF80000ED1403";"NA"
-1257;"M11";"145C";2684168;1248743;538;"Hadlaubstrasse";"Sensirion";47.38414;8.55329;"14";"0";"";"5";"2019-06-18 13:40:00";"";"";"F98A21AD145C";"F98A210000AD145C"
-1258;"M11";"2CA8";2684168;1248743;538;"Hadlaubstrasse";"Sensirion";47.38414;8.55329;"14";"0";"";"5";"2020-02-07 11:05:00";"";"";"FA1D35FEFF3C2CA8";"NA"
-1259;"M12";"A91F";2684223;1248207;510;"Voltastrasse/Hochstrasse";"Sensirion";47.37931;8.55392;"";"15";"";"6(5)";"2019-06-18 13:25:00";"";"";"DAC4A6F3A91F";"DAC4A60000F3A91F"
-1260;"M12";"DDE4";2684223;1248207;510;"Voltastrasse/Hochstrasse";"Sensirion";47.37931;8.55392;"";"15";"";"6(5)";"2020-02-07 11:20:00";"";"";"DFEEABFEFFB1DDE4";"NA"
-1262;"M14";"5B6A";2684305;1247282;436;"Steinwiesstrasse";"Sensirion";47.37098;8.55483;"14";"5";"";"5";"2019-07-24 09:20:00";"";"Verschiebung um 60m nach Norden, wenig Abschattung durch Baum";"FD349E8C5B6A";"NA"
-1263;"M14";"CF53";2684305;1247282;436;"Steinwiesstrasse";"Sensirion";47.37098;8.55483;"14";"5";"";"5";"2020-02-07 09:00:00";"";"Verschiebung um 60m nach Norden, wenig Abschattung durch Baum";"C7F147FEFF74CF53";"NA"
-1264;"M15";"3199";2684402;1246727;428;"Minervastrasse";"Sensirion";47.36598;8.55601;"14";"10";"";"5(2)";"2019-07-24 12:05:00";"";"";"CE3D994A3199";"NA"
-1265;"M15";"67D2";2684402;1246727;428;"Minervastrasse";"Sensirion";47.36598;8.55601;"14";"10";"";"5(2)";"2020-02-07 08:50:00";"";"";"FEE5CFFEFF0367D2";"NA"
-1267;"M17";"D6A4";2684492;1245734;415;"Wildbachstrasse";"Sensirion";47.35703;8.55701;"7";"15";"";"2";"2019-07-24 14:30:00";"";"";"F689C7C6D6A4";"NA"
-1268;"M17";"F15E";2684492;1245734;415;"Wildbachstrasse";"Sensirion";47.35703;8.55701;"7";"15";"";"2";"2020-02-06 12:00:00";"";"";"F3C55AFEFF19F15E";"NA"
-1269;"M18";"164B";2684527;1245252;408;"Bellerivestrasse";"Sensirion";47.35269;8.55738;"";"10";"";"2(B)";"2019-07-24 14:15:00";"";"";"D63DFE9B164B";"NA"
-1270;"M18";"B6F3";2684527;1245252;408;"Bellerivestrasse";"Sensirion";47.35269;8.55738;"";"10";"";"2(B)";"2020-02-06 14:05:00";"";"";"CB81B5FEFFFDB6F3";"NA"
-1271;"N1";"B0B2";2684119;1253703;446;"Frohbuehlstrasse";"Sensirion";47.42875;8.55357;"14";"40";"";"6";"2019-06-12 09:30:00";"";"";"C51C8C80B0B2";"NA"
-1273;"N2";"4D92";2684155;1253262;434;"Schaffhauserstrasse (parallel)";"Sensirion";47.42478;8.55397;"keine";"10";"";"5";"2019-06-12 09:50:00";"";"";"EA5FDA604D92";"NA"
-1276;"N4";"B99A";2684169;1252266;426;"Leutschenbachstrasse";"Sensirion";47.41582;8.55397;"25";"8";"";"2(1)";"2019-06-11 15:25:00";"";"grosse Baustelle suedlich";"DAF24A57B99A";"NA"
-1278;"N5";"8792";2684382;1251701;426;"Wallisellenstrasse";"Sensirion";47.41071;8.55668;"30";"25";"";"6(5)";"2019-06-11 15:45:00";"";"Verschiebung um 90m nach Suedosten";"DB558CF58792";"NA"
-1281;"N7";"1A1F";2684382;1250792;466;"Frohburgstrasse";"Sensirion";47.40254;8.55651;"72";"10";"";"6(A)";"2019-06-11 14:45:00";"";"";"F92A08541A1F";"NA"
-1283;"N11";"64B9";2684651;1248768;608;"Schloesslistrasse";"Sensirion";47.3843;8.55969;"11";"15";"";"6(5)";"2019-06-18 13:55:00";"";"";"FD9CDC3364B9";"FD9CDC00003364B9"
-1284;"N11";"E337";2684651;1248768;608;"Schloesslistrasse";"Sensirion";47.3843;8.55969;"11";"15";"";"6(5)";"2020-02-07 10:50:00";"";"";"F376B1FEFF63E337";"NA"
-1286;"N13";"80CB";2684739;1247765;503;"Schneckenmannstrasse";"Sensirion";47.37527;8.56067;"1,5";"8";"";"5";"2019-07-24 09:50:00";"";"";"C9F90D4780CB";"NA"
-1287;"N13";"EFB3";2684739;1247765;503;"Schneckenmannstrasse";"Sensirion";47.37527;8.56067;"1,5";"8";"";"5";"2020-02-07 09:30:00";"";"";"CCF055FEFF67EFB3";"NA"
-1288;"N14";"E522";2684826;1247289;472;"Dolderstrasse";"Sensirion";47.37098;8.56173;"16";"5";"";"5";"2019-07-24 09:35:00";"";"";"FA064577E522";"NA"
-1291;"N16";"F75E";2684897;1246369;448;"Hegibachstrasse";"Sensirion";47.36269;8.56249;"";"<5";"";"5";"2019-07-24 11:50:00";"";"Verschiebung um 60m nach Nordwesten";"DF551B81F75E";"NA"
-1292;"N16";"9D81";2684897;1246369;448;"Hegibachstrasse";"Sensirion";47.36269;8.56249;"";"<5";"";"5";"2020-02-06 11:45:00";"";"Verschiebung um 60m nach Nordwesten";"C21B45FEFF839D81";"NA"
-1293;"N17";"4635";2684990;1245689;451;"Kartausstrasse";"Sensirion";47.35656;8.56359;"8";"50";"Laterne";"A(9/6)";"2019-07-24 14:55:00";"";"Verschiebung um 130m nach Sueden";"F42387104635";"NA"
-1294;"N17";"A2BD";2684990;1245689;451;"Kartausstrasse";"Sensirion";47.35656;8.56359;"8";"50";"Laterne";"A(9/6)";"2020-02-06 13:10:00";"";"Verschiebung um 130m nach Sueden";"E2B815FEFFD6A2BD";"NA"
-1296;"N19";"62D0";2685051;1244862;421;"Fluehgasse";"Sensirion";47.34912;8.56424;"3";"15";"";"5";"2019-07-24 15:10:00";"";"Verschiebung um 55m nach Nordwesten";"DEF780AA62D0";"NA"
-1297;"N19";"A317";2685051;1244862;421;"Fluehgasse";"Sensirion";47.34912;8.56424;"3";"15";"";"5";"2020-02-06 13:55:00";"";"Verschiebung um 55m nach Nordwesten";"D595DEFEFF7CA317";"NA"
-1298;"O4";"2705";2684686;1252262;425;"Cornelia-Guggenheim-Weg";"Sensirion";47.41572;8.56082;"4";"8";"";"2";"2019-06-11 15:10:00";"";"Verschiebung um 80m nach Suedwesten";"DD49065E2705";"NA"
-1301;"O6";"22CC";2684850;1251334;431;"Heideggerweg";"Sensirion";47.40735;8.56281;"2";"10";"";"6";"2019-06-11 14:00:00";"";"";"C32A342622CC";"NA"
-1303;"O7";"474A";2684934;1250840;477;"Hubenstrasse";"Sensirion";47.4029;8.56383;"15";"80";"";"A(D)";"2019-06-11 14:30:00";"";"";"C35F82D7474A";"NA"
-1305;"O12";"0BAE";2685182;1248324;588;"Zuerichbergstrasse";"Sensirion";47.38024;8.56664;"57";"10";"";"6";"2019-07-24 10:25:00";"";"";"EEAE5E770BAE";"NA"
-1306;"O12";"D09B";2685182;1248324;588;"Zuerichbergstrasse";"Sensirion";47.38024;8.56664;"57";"10";"";"6";"2020-02-07 10:40:00";"";"";"CFA980FEFF2FD09B";"NA"
-1307;"O13";"DBE1";2685297;1247814;539;"Waldhausstrasse";"Sensirion";47.37564;8.568;"3";"60";"";"A";"2019-07-24 10:05:00";"";"";"F02179FFDBE1";"NA"
-1308;"O13";"A112";2685297;1247814;539;"Waldhausstrasse";"Sensirion";47.37564;8.568;"3";"60";"";"A";"2020-02-07 10:05:00";"";"";"DE7D6CFEFF2AA112";"NA"
-1310;"O15";"FAFF";2685359;1246808;515;"Hitzigweg";"Sensirion";47.36658;8.56869;"8";"15";"";"6(A)";"2019-07-24 11:10:00";"";"";"F1845057FAFF";"NA"
-1311;"O15";"1BAE";2685359;1246808;515;"Hitzigweg";"Sensirion";47.36658;8.56869;"8";"15";"";"6(A)";"2020-02-06 11:30:00";"";"";"D07C49FEFF681BAE";"NA"
-1312;"O16";"D2C2";2685358;1246416;475;"Biberlinstrasse";"Sensirion";47.36306;8.5686;"2";"5";"";"5";"2019-07-24 11:30:00";"";"Verschiebung um 65m nach Nordwesten";"E797D34ED2C2";"NA"
-1313;"O16";"76B1";2685358;1246416;475;"Biberlinstrasse";"Sensirion";47.36306;8.5686;"2";"5";"";"5";"2020-02-06 11:15:00";"";"Verschiebung um 65m nach Nordwesten";"DC0C88FEFFD676B1";"NA"
-1315;"O18";"DA68";2685627;1245419;469;"August-Forel-Strasse";"Sensirion";47.35405;8.57197;"11";"45";"";"5";"2019-07-24 15:35:00";"";"grosse Baustelle im Osten (Fotos!)";"F647406ADA68";"NA"
-1316;"O18";"D36A";2685627;1245419;469;"August-Forel-Strasse";"Sensirion";47.35405;8.57197;"11";"45";"";"5";"2020-02-06 13:25:00";"";"grosse Baustelle im Osten (Fotos!)";"CFEDE3FEFFD0D36A";"NA"
-1317;"O19";"B1DB";2685592;1244803;461;"Enzenbuehlstrasse";"Sensirion";47.34852;8.57139;"2";"45";"";"5(D)";"2019-07-24 15:25:00";"";"";"CE18FB86B1DB";"NA"
-1318;"O19";"5F84";2685592;1244803;461;"Enzenbuehlstrasse";"Sensirion";47.34852;8.57139;"2";"45";"";"5(D)";"2020-02-06 13:45:00";"";"";"F67A49FEFF9B5F84";"NA"
-1320;"P5";"8F45";2685388;1251816;428;"Aubruggstrasse";"Sensirion";47.41162;8.57003;"9";"50";"";"5(6/9)";"2019-06-11 13:45:00";"";"Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt";"F1D5EB8D8F45";"NA"
-1321;"P5";"37FE";2685388;1251816;428;"Aubruggstrasse";"Sensirion";47.41162;8.57003;"9";"50";"";"5(6/9)";"2020-02-04 10:20:00";"";"Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt";"C6AA6FFEFF7C37FE";"NA"
-1322;"P6";"A890";2685381;1251384;429;"Auhofstrasse";"Sensirion";47.40773;8.56986;"7";"10";"";"5";"2019-06-11 13:10:00";"";"evtl. leichte Abschattung durch Baum im Norden";"C9DD17CFA890";"NA"
-1325;"P12";"F225";2685631;1248364;608;"Dreiwiesenstrasse";"Sensirion";47.38054;8.57259;"4";"75";"";"9";"2019-07-24 10:45:00";"";"";"E437CB2AF225";"NA"
-1326;"P12";"9A41";2685631;1248364;608;"Dreiwiesenstrasse";"Sensirion";47.38054;8.57259;"4";"75";"";"9";"2020-02-07 10:30:00";"";"Orientierung geaendert (alt:Nordost -> neu: Suedost)";"F35696FEFF959A41";"NA"
-1328;"P14";"26FB";2685792;1247441;590;"Kurhausstrasse";"Sensirion";47.37222;8.57455;"28";"15";"";"9(5)";"2019-07-24 11:00:00";"";"";"CE3F022C26FB";"NA"
-1329;"P14";"F1BE";2685792;1247441;590;"Kurhausstrasse";"Sensirion";47.37222;8.57455;"28";"15";"";"9(5)";"2020-02-07 10:15:00";"";"";"EAD219FEFF46F1BE";"NA"
-1331;"P17";"A54B";2685967;1245934;500;"Waserstrasse";"Sensirion";47.35864;8.57657;"14";"10";"";"6(5)";"2019-07-25 08:35:00";"";"";"F184476AA54B";"NA"
-1332;"P17";"2FAD";2685967;1245934;500;"Waserstrasse";"Sensirion";47.35864;8.57657;"14";"10";"";"6(5)";"2020-02-06 11:00:00";"";"";"E44961FEFF372FAD";"NA"
-1333;"P18";"2131";2686130;1245427;479;"Balgriststrasse";"Sensirion";47.35406;8.57863;"10";"10";"";"5";"2019-07-24 15:55:00";"";"";"C376298E2131";"NA"
-1334;"P18";"8E55";2686130;1245427;479;"Balgriststrasse";"Sensirion";47.35406;8.57863;"10";"10";"";"5";"2020-02-06 13:35:00";"";"";"D6F343FEFF418E55";"NA"
-1337;"Q7";"486C";2685932;1250964;430;"Altwiesenstrasse";"Sensirion";47.40388;8.57707;"1";"5";"";"6";"2019-06-11 11:35:00";"";"";"F9D459A7486C";"NA"
-1339;"Q8";"7CE3";2686089;1250568;447;"Probsteistrasse";"Sensirion";47.4003;8.57908;"6(?)";"40";"";"9";"2019-06-11 12:10:00";"";"Knapp 200m an Strasse nach Norden verschoben!";"DAA190887CE3";"NA"
-1341;"Q17";"B769";2686463;1245923;569;"Witikonerstrasse";"Sensirion";47.35848;8.58313;"88";"5";"";"6";"2019-07-25 08:55:00";"";"";"EB296C53B769";"NA"
-1342;"Q17";"F010";2686463;1245923;569;"Witikonerstrasse";"Sensirion";47.35848;8.58313;"88";"5";"";"6";"2020-02-06 10:50:00";"";"";"D50E20FEFF89F010";"NA"
-1344;"R6";"A768";2686316;1251458;427;"ueberlandstrasse";"Sensirion";47.40827;8.58226;"109";"5";"";"5";"2019-06-11 11:15:00";"";"";"FC98B5EDA768";"NA"
-1346;"R7";"57C1";2686393;1250935;428;"Grosswiesenstrasse";"Sensirion";47.40356;8.58318;"3";"15";"";"6(5)";"2019-06-11 10:50:00";"";"";"C735835657C1";"NA"
-1349;"R16";"726F";2686998;1246549;606;"Loorenhalde";"Sensirion";47.36404;8.59034;"4";"15";"Laterne";"6";"2019-07-25 10:05:00";"";"Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok.";"C7FFEBCD726F";"NA"
-1350;"R16";"1D03";2686998;1246549;606;"Loorenhalde";"Sensirion";47.36404;8.59034;"4";"15";"Laterne";"6";"2020-02-06 10:10:00";"";"Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok.";"F853C3FEFFC01D03";"NA"
-1352;"R18";"9AE5";2687001;1245611;586;"unbekannt (nahe Segetenweg)";"Sensirion";47.3556;8.59019;"10";"10";"Laterne";"5";"2019-07-25 09:15:00";"";"";"C7D2A89C9AE5";"NA"
-1353;"R18";"8471";2687001;1245611;586;"unbekannt (nahe Segetenweg)";"Sensirion";47.3556;8.59019;"10";"10";"Laterne";"5";"2020-02-06 10:35:00";"";"";"D7D020FEFF6A8471";"NA"
-1356;"S8";"60CE";2686972;1250560;431;"Altwiesenstrasse";"Sensirion";47.40011;8.59077;"32";"10";"";"5(6)";"2019-07-25 12:00:00";"";"";"C739690860CE";"NA"
-1359;"S17";"6004";2687439;1246067;616;"Oetlisbergerstrasse";"Sensirion";47.35964;8.59608;"2";"<5";"";"5(6)";"2019-07-25 09:55:00";"";"";"E8BD5C816004";"NA"
-1360;"S17";"AB8B";2687439;1246067;616;"Oetlisbergerstrasse";"Sensirion";47.35964;8.59608;"2";"<5";"";"5(6)";"2020-02-06 09:30:00";"";"";"E82421FEFFE1AB8B";"NA"
-1361;"S18";"1508";2687486;1245577;601;"Wiesliacher";"Sensirion";47.35523;8.59661;"14";"<5";"";"5";"2019-07-25 10:50:00";"";"";"F81EDF521508";"NA"
-1362;"S18";"D3FC";2687486;1245577;601;"Wiesliacher";"Sensirion";47.35523;8.59661;"14";"<5";"";"5";"2020-02-06 09:55:00";"";"";"DB9C34FEFF72D3FC";"NA"
-1363;"T16";"F4D4";2687856;1246652;610;"Im Hau";"Sensirion";47.36485;8.60171;"9";"20";"";"9(D/A)";"2019-07-25 10:20:00";"";"";"DB2BF374F4D4";"NA"
-1364;"T16";"050D";2687856;1246652;610;"Im Hau";"Sensirion";47.36485;8.60171;"9";"20";"";"9(D/A)";"2020-02-06 09:10:00";"";"";"E12A17FEFF65050D";"NA"
-1365;"T17";"208C";2687920;1246205;629;"Im Glockenacker";"Sensirion";47.36082;8.60247;"17";"15";"Laterne";"5(D)";"2019-07-25 10:35:00";"";"";"D07769DF208C";"NA"
-1366;"T17";"8BA6";2687920;1246205;629;"Im Glockenacker";"Sensirion";47.36082;8.60247;"17";"15";"Laterne";"5(D)";"2020-02-06 09:40:00";"";"";"E8A37FFEFF298BA6";"NA"
-1369;"Zuerich-Affoltern";"3AD0";2681472;1253542;443;"Reckenholzstrasse";"Sensirion";47.42763;8.51846;"42";"70";"";"9";"2019-06-12 14:55:00";"";"40m von der MeteoSchwiez-Referenzstation entfernt";"D13057B73AD0";"NA"
-1372;"Zuerich-Fluntern";"DB2C";2685114;1248015;548;"Ackermannstrasse";"Sensirion";47.37747;8.56568;"7";"15";"";"5(6)";"2019-07-01 15:50:00";"";"40m von MeteoSchweiz-Referenzstation entfernt";"FCBBD3B1DB2C";"NA"
-1373;"Zuerich-Fluntern";"4BA5";2685114;1248015;548;"Ackermannstrasse";"Sensirion";47.37747;8.56568;"7";"15";"";"5(6)";"2020-02-07 09:45:00";"";"40m von MeteoSchweiz-Referenzstation entfernt";"F74548FEFF944BA5";"NA"
-1375;"Zuerich-Kaserne";"DCA8";2682484;1248039;409;"Militaerstrasse";"Sensirion";47.37802;8.53086;"";"10";"";"2";"2019-07-29 11:50:00";"";"60m nordoestlich der offiziellen Messstation";"D4A1D5E6DCA8";"NA"
-1378;"Zuerich-Schimmelstrasse";"3A6D";2681948;1247241;413;"Gerhardstrasse/Schimmelstrasse";"Sensirion";47.37091;8.52362;"1";"15";"";"2";"2019-06-18 08:45:00";"";"";"D46FCEEB3A6D";"D46FCE0000EB3A6D"
-1384;"A6";"7751";2678068;1250637;395;"Paul-Pflueger-Strasse";"Sensirion";47.40192;8.47285;"19";"25";"NA";"8(9)";"2020-04-24 10:30:00";NA;"Verschiebung um 190m nach Nordosten (naechstmoegliche Stelle)";"D59112FEFF357751";"NA"
-1385;"A8";"BF88";2678039;1249544;414;"Dachslernstrasse";"Sensirion";47.3921;8.47227;"29";"10";"NA";"6";"2020-04-23 15:45:00";NA;"Hecke ziemlich nahe unter Sensor (Foto!)";"FDB193FEFF2BBF88";"NA"
-1386;"A9";"0A81";2678055;1249021;428;"Rautistrasse";"Sensirion";47.38739;8.4724;"69";"25";"NA";"5(6)";"2020-04-23 15:55:00";NA;"NA";"CC0808FEFFA60A81";"NA"
-1387;"AWEL-Blumenfeld";"EE4D";2680581;1252968;454;"Dora-Staudinger-Strasse";"Sensirion";47.42258;8.50655;"3";"10";"NA";"5";"2020-04-27 09:45:00";NA;"NA";"EEB755FEFF0EEE4D";"NA"
-1388;"AWEL-Bucheggplatz";"B08A";2682646;1250251;472;"Bucheggstrasse";"Sensirion";47.39789;8.53341;"NA";"0";"Dach Haltestelle";"5";"2020-04-27 18:00:00";NA;"ca. 2 m ueber Boden";"C695B7FEFF5BB08A";"NA"
-1391;"AWEL-Lindenhof";"6A14";2683258;1247485;428;"Lindenhof";"Sensirion";47.37294;8.54101;"3";"25";"Laterne";"B(2)";"2020-04-22 09:00:00";NA;"NA";"DE3093FEFF8F6A14";"NA"
-1392;"AWEL-Oerlikerpark";"B4D7";2683023;1252127;439;"Oerlikerpark";"Sensirion";47.41471;8.53876;"45";"40";"NA";"2(B)";"2020-04-27 12:45:00";NA;"Parkanlage";"F29AFAFEFF67B4D7";"NA"
-1393;"AWEL-Paradeplatz";"7411";2683117;1247176;410;"Bahnhofstrasse";"Sensirion";47.37018;8.53908;"133";"5";"Laterne";"2";"2020-04-22 09:45:00";NA;"NA";"F339EAFEFF017411";"NA"
-1394;"AWEL-Sechelaeutenplatz";"ABB2";2683684;1246724;409;"Sechselaeutenplatz";"Sensirion";47.36604;8.5465;"15";"15";"NA";"2(E )";"2020-04-21 15:20:00";NA;"NA";"C80646FEFF9DABB2";"NA"
-1396;"AWEL-Witikon";"8B69";2687049;1245924;607;"Berghaldenstrasse";"Sensirion";47.35841;8.59089;"2";"25";"NA";"6(5)";"2020-04-20 16:45:00";NA;"NA";"EA68D5FEFF588B69";"NA"
-1397;"AWEL-Zuerihorn";"CFC6";2684040;1245344;408;"unbekannt (Zuerihorn)";"Sensirion";47.35358;8.55096;"66";"50";"NA";"9(G)";"2020-04-21 10:55:00";NA;"NA";"D1B8F4FEFF4DCFC6";"NA"
-1399;"B5";"B15B";2678387;1251094;430;"Rebbergstrasse";"Sensirion";47.40599;8.47716;"43";"20";"NA";"6(5)";"2020-04-24 11:55:00";NA;"Grenze zu Oberengstringen";"DBDD94FEFF87B15B";"NA"
-1400;"B7";"3CE3";2678453;1250076;397;"Bernerstrasse Sued";"Sensirion";47.39683;8.47785;"80";"200";"NA";"9";"2020-04-24 10:45:00";NA;"NA";"E1D445FEFF833CE3";"NA"
-1401;"B8";"49DA";2678489;1249496;398;"Badenerstrasse";"Sensirion";47.39161;8.47823;"keine (Brückenpfeiler)";"0(15)";"Brücke";"5";"2020-04-23 15:35:00";NA;"Rechteckige Masten eignen sich nicht! ->Bruecke";"FBF3A3FEFF6E49DA";"NA"
-1402;"B10";"6AB2";2678652;1248608;426;"Zwischenbaechen";"Sensirion";47.3836;8.48023;"11";"5";"NA";"6(5)";"2020-04-23 16:25:00";NA;"NA";"F3D870FEFF596AB2";"NA"
-1403;"B11";"20E0";2678675;1248100;431;"Unbekannt (Diggelmannstrasse)";"Sensirion";47.37903;8.48044;"3";"60";"Lampe";"6";"2020-04-23 16:40:00";NA;"NA";"E7453CFEFFC020E0";"NA"
-1404;"C3";"99EA";2678698;1252142;507;"Im oberen Boden";"Sensirion";47.41538;8.48146;"5";"25";"NA";"5";"2020-04-24 12:10:00";NA;"Flaeche oestlich des Sensors zugewachsen!";"C76020FEFFAC99EA";"NA"
-1405;"C4";"D379";2678783;1251431;474;"Riedhofstrasse";"Sensirion";47.40898;8.48246;"42";"15";"NA";"5";"2020-04-24 13:20:00";NA;"Privatgelaende: Verschiebung um 75m nach Suedosten";"F47C63FEFF16D379";"NA"
-1406;"C7";"676F";2678950;1250050;397;"Baendlistrasse";"Sensirion";47.39654;8.48443;"27";"15";"NA";"5";"2020-04-24 10:15:00";NA;"Verschiebung um 90m nach Sueden, keine Befestigungsmoeglichkeit im Schrebergarten…";"FA5D1DFEFFDA676F";"NA"
-1407;"C9";"0590";2679046;1249233;400;"Meier-Bosshard-Strasse";"Sensirion";47.38918;8.48556;"3";"10";"NA";"2(5)";"2020-04-23 15:20:00";NA;"Verschiebung um 50m nach Norden, da an Segnestrasse keine Laternen";"CF9C7EFEFF0A0590";"NA"
-1408;"C10";"4231";2679167;1248657;407;"Saumackerstrasse";"Sensirion";47.38398;8.48706;"26";"5";"NA";"6(5)";"2020-04-23 16:55:00";NA;"NA";"E21898FEFFC74231";"NA"
-1409;"C12";"1234";2679183;1247639;426;"In der Ey/ In der Waesseri";"Sensirion";47.37483;8.48709;"3";"5";"NA";"5(6)";"2020-04-23 13:25:00";NA;"NA";"FBB472FEFFAC1234";"NA"
-1410;"C13";"30D6";2679304;1247167;445;"Im Heimgaertli";"Sensirion";47.37057;8.48861;"6";"5";"NA";"6";"2020-04-23 13:15:00";NA;"NA";"DB9450FEFFB430D6";"NA"
-1411;"D5";"A2FA";2679372;1251179;477;"Lachenacker";"Sensirion";47.40664;8.49022;"6";"5";"Laterne";"6(5)";"2020-04-24 13:05:00";NA;"NA";"F8FC36FEFF47A2FA";"NA"
-1412;"D6";"DCA4";2679385;1250688;444;"Hohenklingenallee";"Sensirion";47.40222;8.4903;"2";"10";"NA";"6";"2020-04-24 14:00:00";NA;"NA";"DAC818FEFF1EDCA4";"NA"
-1413;"D8";"6554";2679547;1249697;399;"Max-Hoegger-Strasse";"Sensirion";47.39329;8.49227;"3";"40";"NA";"5(4/E)";"2020-04-24 11:15:00";NA;"Autos auf Luftaufnahme mussten Containerwohnungen weichen";"D667D7FEFF5C6554";"NA"
-1414;"D9";"0C97";2679502;1249207;401;"Albulastrasse/Luggerwegstrasse";"Sensirion";47.38889;8.49159;"14";"15";"NA";"5(4)";"2020-04-23 15:00:00";NA;"NA";"F1C120FEFF8B0C97";"NA"
-1415;"D11";"D755";2679662;1248252;409;"Rautistrasse";"Sensirion";47.38028;8.49354;"NA";"5";"NA";"5";"2020-04-23 13:55:00";NA;"NA";"C70B67FEFFF1D755";"NA"
-1416;"D12";"499B";2679730;1247745;416;"Ginsterstrasse";"Sensirion";47.37571;8.49435;"3";"5";"NA";"6(5)";"2020-04-23 13:45:00";NA;"Baustelle";"DF33B3FEFFDE499B";"NA"
-1417;"D14";"B855";2679834;1246827;454;"Hohensteinweg";"Sensirion";47.36745;8.49556;"1";"35";"NA";"4(5)";"2020-04-23 12:55:00";NA;"NA";"ED01F2FEFF98B855";"NA"
-1418;"D15";"0B88";2679926;1246267;498;"Doeltschiweg";"Sensirion";47.3624;8.49668;"66";"30";"Laterne";"9";"2020-04-23 12:30:00";NA;"NA";"D534CFFEFF150B88";"NA"
-1419;"E1";"48AC";2679670;1252996;458;"Im Holzerhurd";"Sensirion";47.42295;8.49449;"1";"15";"NA";"6(5/A)";"2020-04-24 16:20:00";NA;"NA";"F105F4FEFFE548AC";"NA"
-1420;"E4";"C1F3";2679583;1251567;527;"Kappenbuehstrasse";"Sensirion";47.4101;8.49308;"20";"70";"NA";"9";"2020-04-24 13:35:00";NA;"Verschiebung um 230m nach Suedwesten";"F0F631FEFF6CC1F3";"NA"
-1421;"E5";"B1A1";2679805;1251219;508;"Benedikt-Fontana-Weg";"Sensirion";47.40695;8.49596;"3";"5";"NA";"6";"2020-04-24 13:45:00";NA;"NA";"DABCE0FEFF7FB1A1";"NA"
-1422;"E8";"0E74";2680010;1249775;399;"Bernerstrasse Nord";"Sensirion";47.39394;8.49842;"15";"90";"NA";"9";"2020-04-24 09:40:00";NA;"NA";"E97F7EFEFFDB0E74";"NA"
-1423;"E10";"812E";2680123;1248848;405;"Baslerstrasse";"Sensirion";47.38559;8.49975;"23";"10";"NA";"3(2) or 6(5)";"2020-04-23 14:25:00";NA;"NA";"F35EA0FEFF77812E";"NA"
-1424;"E11";"4287";2680207;1248300;410;"Edelweissstrasse";"Sensirion";47.38065;8.50076;"3";"10";"NA";"6";"2020-04-23 14:10:00";NA;"NA";"D042E1FEFFDD4287";"NA"
-1425;"E13";"618F";2680327;1247262;425;"Schaufelbergerstrasse";"Sensirion";47.3713;8.50217;"11";"10";"NA";"5";"2020-04-23 12:05:00";NA;"NA";"D3F638FEFF66618F";"NA"
-1427;"E16";"68A9";2680593;1245835;489;"Im Hagacker";"Sensirion";47.35843;8.50543;"7";"15";"NA";"6";"2020-04-22 16:05:00";NA;"Verschiebung um 150m nach Nordosten";"C6D4BCFEFF7868A9";"NA"
-1428;"E17";"FC5F";2680435;1245189;539;"Kolbenhofstrasse";"Sensirion";47.35264;8.50322;"4";"130";"NA";"D(A)";"2020-04-22 15:40:00";NA;"Verschiebung um 125m nach Suedwesten";"E7135EFEFF13FC5F";"NA"
-1429;"F1";"981B";2680154;1253233;451;"Muehlackerstrasse";"Sensirion";47.42502;8.50095;"45";"20";"NA";"5";"2020-04-27 09:30:00";NA;"NA";"E45D9DFEFF2F981B";"NA"
-1430;"F3";"B986";2680165;1252298;507;"Holderbachweg";"Sensirion";47.41661;8.50092;"17";"10";"NA";"6(A)";"2020-04-24 16:05:00";NA;"Am Hang, nahe beim Waldrand";"CBBFE6FEFFD6B986";"NA"
-1431;"F6";"17ED";2680416;1250796;498;"Blaesistrasse";"Sensirion";47.40307;8.50398;"13";"15";"NA";"6";"2020-04-24 15:00:00";NA;"NA";"EAB4C4FEFFD217ED";"NA"
-1432;"F7";"583C";2680434;1250337;442;"Ackersteinstrasse";"Sensirion";47.39894;8.50414;"35";"15";"NA";"6";"2020-04-24 14:15:00";NA;"NA";"E70831FEFFDF583C";"NA"
-1433;"F9";"B143";2680633;1249242;403;"NA";"Sensirion";47.38907;8.50657;"NA";"15";"NA";"8";"2020-04-24 09:15:00";NA;"Verschiebung um 120m nach Suedosten an SBB-Laterne nahe Gleisfeld";"DD8F6EFEFF73B143";"NA"
-1435;"F12";"8C3B";2680666;1247879;412;"Gutstrasse";"Sensirion";47.37681;8.50677;"5";"15";"Bäume";"9";"2020-04-23 11:20:00";NA;"Verschiebung um 90m nach Nordwesten";"CB6A16FEFFA88C3B";"NA"
-1436;"F13";"A4A9";2680785;1247339;419;"unbekannt (Schrebergaerten)";"Sensirion";47.37193;8.50824;"18.899999999999999";"20";"Laterne";"5";"2020-04-23 11:55:00";NA;"NA";"CBBAF8FEFF75A4A9";"NA"
-1437;"F15";"00F7";2680866;1246367;443;"Borrweg";"Sensirion";47.36318;8.50914;"4.5999999999999996";"10";"NA";"5";"2020-04-22 16:25:00";NA;"NA";"FCD57DFEFF5E00F7";"NA"
-1438;"F16";"C8FB";2680953;1245848;465;"Bachtobelstrasse";"Sensirion";47.3585;8.5102;"35";"15";"Bäume";"6(5)";"2020-04-22 15:55:00";NA;"NA";"E5AC35FEFFF0C8FB";"NA"
-1439;"F18";"5067";2681062;1244961;473;"unbekannt (nahe Gaenzilooweg)";"Sensirion";47.35051;8.51148;"NA";">100";"Bäume";"9";"2020-04-22 15:25:00";NA;"Verschiebung um 80m nach Nordwesten";"F662B8FEFFFE5067";"NA"
-1440;"G2";"710E";2680634;1252820;456;"kein (Bachmannweg)";"Sensirion";47.42125;8.50723;"1";"30";"NA";"5";"2020-04-27 10:00:00";NA;"NA";"D86081FEFF3E710E";"NA"
-1441;"G3";"9FFF";2680739;1252381;463;"Regulastrasse";"Sensirion";47.41728;8.50854;"20";"<5";"NA";"6";"2020-04-24 15:50:00";NA;"NA";"E96DF9FEFF479FFF";"NA"
-1442;"G5_AWEL-ScienceCity";"E1E1";2680698;1251423;524;"Wolfgang-Pauli-Strasse";"Sensirion";47.40867;8.50783;"NA";"5";"Bäume";"5";"2020-04-24 15:30:00";NA;"Verschiebung um 100m nach Westen, 1.5m ueber Boden";"C32495FEFF53E1E1";"NA"
-1444;"G8";"AE4D";2680953;1249913;407;"Am Wasser";"Sensirion";47.39506;8.51093;"8";"15";"NA";"5(6)";"2020-04-28 10:25:00";NA;"NA";"E3967EFEFFB5AE4D";"NA"
-1445;"G9";"1738";2681062;1249351;402;"Duttweilerstrasse";"Sensirion";47.39;8.51228;"9";"5";"NA";"2";"2020-04-24 09:00:00";NA;"Eher hoch (ca. 4m)";"C55E2EFEFF291738";"NA"
-1446;"G11_AWEL-Hardplatz";"9403";2681255;1248509;407;"Hardplatz";"Sensirion";47.3824;8.51468;"NA";"15";"NA";"2(E)";"2020-04-23 10:55:00";NA;"130m zu AWEL Sensor verschoben, Hardplatz bereits fertiggestellt (nicht wie auf Luftaufnahme!)";"C3963AFEFFCE9403";"NA"
-1448;"G14";"A2FF";2681399;1246872;435;"Goldbrunnenstrasse";"Sensirion";47.36766;8.51629;"5";"10";"Bäume";"5";"2020-04-22 16:40:00";NA;"NA";"F2A598FEFFD1A2FF";"NA"
-1449;"G15";"D672";2681396;1246415;428;"Talwiesenstrasse";"Sensirion";47.36355;8.51616;"NA";"20";"NA";"2";"2020-04-22 16:50:00";NA;"NA";"EA16AFFEFF19D672";"NA"
-1450;"G18";"56B2";2681625;1244975;424;"Gfellstrasse";"Sensirion";47.35057;8.51893;"11";"60";"NA";"9(D/G)";"2020-04-22 15:00:00";NA;"Verschiebung um 100m nach Nordosten";"DE9D17FEFFFB56B2";"NA"
-1451;"H1";"F798";2681082;1253556;437;"NA";"Sensirion";47.42781;8.5133;"NA";"150";"Bäume";"9";"2020-04-27 10:45:00";NA;"Verschiebung um 70m nach Norden, Biotop im Norden fertig (nicht wie auf Luftbild!)";"F3147BFEFF22F798";"NA"
-1452;"H2";"3826";2681173;1252895;454;"Reckenholzstrasse";"Sensirion";47.42185;8.51439;"8";"35";"Bäume";"5(A)";"2020-04-27 10:15:00";NA;"NA";"C7D4F1FEFFBB3826";"NA"
-1453;"H4";"0E34";2681306;1251915;472;"Erchenbuehlstrasse";"Sensirion";47.41302;8.51597;"3";"5";"Bäume";"6(5)";"2020-04-27 11:00:00";NA;"NA";"D6A418FEFF4F0E34";"NA"
-1454;"H7";"708D";2681438;1250485;252;"Obere Waidstrasse";"Sensirion";47.40015;8.51746;"33";"35";"NA";"9(A)";"2020-04-28 11:40:00";NA;"NA";"DA33F1FEFFF1708D";"NA"
-1455;"H8";"1823";2681489;1249922;422;"Waidfussweg";"Sensirion";47.39508;8.51803;"4";"<5";"Laterne";"5";"2020-04-28 10:10:00";NA;"NA";"F85B7CFEFF521823";"NA"
-1456;"H10";"FC73";2681612;1248902;404;"Geroldstrasse (-rampe)";"Sensirion";47.38589;8.51948;"48.6";"15";"NA";"2(1)";"2020-04-23 10:40:00";NA;"NA";"E94168FEFFE7FC73";"NA"
-1457;"H11";"73B9";2681645;1248305;408;"Hohlstrasse";"Sensirion";47.38052;8.5198;"NA";"15";"NA";"2";"2020-04-24 08:35:00";NA;"Wegen Baustelle 145m nach Sued(westen) verschoben";"C81DB0FEFFB373B9";"NA"
-1458;"H13";"982B";2681714;1247485;413;"Seebahnstrasse";"Sensirion";47.37313;8.52057;"12";"20";"Bäume";"2";"2020-04-22 17:50:00";NA;"NA";"DDCD91FEFFA9982B";"NA"
-1459;"H14";"61EC";2681833;1246984;414;"Zurlindenstrasse";"Sensirion";47.36861;8.52205;"NA";"20";"Bäume";"2";"2020-04-22 17:15:00";NA;"NA";"EAA31CFEFF1461EC";"NA"
-1460;"H16";"78CA";2681916;1246010;420;"Utoplatz";"Sensirion";47.35984;8.52297;"NA";"5";"NA";"2";"2020-04-22 14:45:00";NA;"NA";"E032BFFEFFCF78CA";"NA"
-1461;"H17";"79D0";2682008;1245481;420;"Kanalstrasse";"Sensirion";47.35507;8.52409;"28";"65";"NA";"9(E)";"2020-04-22 14:25:00";NA;"NA";"F1DE70FEFF5079D0";"NA"
-1462;"H19";"A740";2682098;1244544;448;"Rainstrasse";"Sensirion";47.34664;8.52511;"27";"25";"NA";"6(5)";"2020-04-22 14:05:00";NA;"NA";"E7E4E9FEFFE1A740";"NA"
-1463;"H20";"429A";2682195;1243950;463;"Drosselstrasse";"Sensirion";47.34128;8.52629;"2";"<5";"NA";"5(6)";"2020-04-22 13:55:00";NA;"NA";"FCF95AFEFF2C429A";"NA"
-1464;"H22";"1A7D";2682383;1242971;464;"Dangelstrasse";"Sensirion";47.33244;8.5286;"8";"5";"NA";"5";"2020-04-22 13:25:00";NA;"Verschiebung um 80m nach Nordosten";"CABA5EFEFF421A7D";"NA"
-1465;"I4";"71A5";2681711;1251947;459;"Wehntalerstrasse";"Sensirion";47.41326;8.52134;"NA";"10";"NA";"6(5)";"2020-04-27 11:20:00";NA;"NA";"DE2D41FEFF6471A5";"NA"
-1466;"I7";"78AE";2682005;1250372;500;"Obere Waidstrasse";"Sensirion";47.39906;8.52495;"19";"45";"NA";"6(9/A)";"2020-04-28 12:00:00";NA;"NA";"F0191CFEFF1678AE";"NA"
-1467;"I8_Zuerich-Rosengartenstrasse";"0982";2682085;1249922;431;"Rosengartenstrasse";"Sensirion";47.395;8.52592;"11,2";"5";"NA";"2";"2020-04-28 09:45:00";NA;"NA";"FA1CEFFEFF480982";"NA"
-1468;"I9";"7A12";2682039;1249507;403;"Kloster-Fahr-Weg";"Sensirion";47.39128;8.52524;"44";"10";"Laterne";"5(G)";"2020-04-27 10:45:00";NA;"NA";"C7E9ACFEFFDF7A12";"NA"
-1469;"I10";"7F4E";2682002;1248888;404;"Ottostrasse";"Sensirion";47.38571;8.52464;"9";"15";"NA";"5";"2020-04-23 10:25:00";NA;"Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe";"F5A24FFEFF7C7F4E";"NA"
-1470;"I12";"F5E4";2682075;1248092;409;"Brauerstrasse";"Sensirion";47.37855;8.52546;"12";"15";"NA";"2";"2020-04-23 08:50:00";NA;"Verschiebung um 120m nach Nordwesten";"CDAE6BFEFFF9F5E4";"NA"
-1471;"I13";"C7B4";2682271;1247515;411;"Badernerstrasse/Kanzleistrasse";"Sensirion";47.37333;8.52795;"28";"10";"NA";"2";"2020-04-22 18:05:00";NA;"NA";"F4A459FEFF55C7B4";"NA"
-1472;"I15";"6ED9";2682363;1246500;417;"Bederstrasse";"Sensirion";47.36419;8.52898;"NA";"20";"NA";"5";"2020-04-22 10:30:00";NA;"NA";"FD27F4FEFFDB6ED9";"NA"
-1473;"I16";"10C3";2682486;1246026;428;"unbekannt (nahe Gablerstrasse)";"Sensirion";47.35991;8.53052;"4,5";"20";"Laterne";"5";"2020-04-22 10:50:00";NA;"NA";"F1EA5EFEFF1910C3";"NA"
-1474;"I18";"69D4";2682610;1245018;414;"Seestrasse";"Sensirion";47.35083;8.53197;"NA";"8";"NA";"5";"2020-04-22 11:30:00";NA;"NA";"F78BBDFEFFE569D4";"NA"
-1475;"I19";"3455";2682623;1244519;424;"Renggerstrasse";"Sensirion";47.34634;8.53205;"4";"5";"NA";"5";"2020-04-22 11:40:00";NA;"NA";"CC9C6CFEFF5B3455";"NA"
-1476;"I21";"C50A";2682752;1243480;455;"Widmerstrasse";"Sensirion";47.33698;8.53357;"20";"8";"NA";"6(5)";"2020-04-22 13:00:00";NA;"NA";"EBC5A1FEFFDDC50A";"NA"
-1477;"I22";"10F6";2682851;1243011;474;"Nidelbadstrasse";"Sensirion";47.33275;8.53479;"17";"8";"NA";"5";"2020-04-22 13:10:00";NA;"NA";"E87A5FFEFF5310F6";"NA"
-1478;"J5";"139F";2682286;1251522;460;"Maienstrasse";"Sensirion";47.40937;8.52888;"1";"10";"NA";"6";"2020-04-27 11:55:00";NA;"NA";"D4F23CFEFFCF139F";"NA"
-1480;"J6";"BD2B";2682361;1251010;489;"Kaeferholzstrasse";"Sensirion";47.40475;8.52978;"22";"65";"NA";"9(A)";"2020-04-27 11:40:00";NA;"NA";"CAAC25FEFF6BBD2B";"NA"
-1481;"J8";"F6E9";2682528;1250023;457;"Wibichstrasse";"Sensirion";47.39586;8.53181;"1";"5";"NA";"5(6)";"2020-04-27 11:20:00";NA;"NA";"C9B330FEFF44F6E9";"NA"
-1482;"J9";"2EFF";2682564;1249583;431;"Nuerenbergstrasse";"Sensirion";47.39189;8.5322;"1";"<5";"NA";"5";"2020-04-27 11:10:00";NA;"NA";"E19799FEFF9C2EFF";"NA"
-1483;"J11";"0E52";2682588;1248567;406;"Konradstrasse/Ackerstrasse";"Sensirion";47.38275;8.53234;"keine (Fahnenmast)";"5";"NA";"2";"2020-04-23 09:50:00";NA;"NA";"E1BFA9FEFF6B0E52";"NA"
-1484;"J12";"8501";2682742;1248089;409;"Europaallee";"Sensirion";47.37844;8.53429;"NA";"10";"NA";"1(2)";"2020-04-23 09:30:00";NA;"NA";"D9EADCFEFF298501";"NA"
-1485;"J14";"5215";2682815;1247048;408;"Am Schanzengraben";"Sensirion";47.36906;8.53506;"6";"5";"NA";"2(G)";"2020-04-22 10:00:00";NA;"NA";"EEE861FEFF6E5215";"NA"
-1486;"J15";"924F";2682879;1246566;408;"Toedistrasse";"Sensirion";47.36472;8.53582;"3";"<5";"NA";"2";"2020-04-22 10:15:00";NA;"NA";"DAAB9DFEFFFA924F";"NA"
-1487;"J17";"4B47";2682896;1245505;408;"unbekannt (nahe Mythenquai)";"Sensirion";47.35518;8.53585;"13";"20";"Laterne";"G(5)";"2020-04-22 11:05:00";NA;"NA";"D6B1EDFEFFFF4B47";"NA"
-1488;"J20";"C2D4";2683133;1243917;407;"Cassiopeiasteg";"Sensirion";47.34087;8.53869;"4";"50";"NA";"G(5)";"2020-04-22 12:15:00";NA;"\"Verschiebung um 120m nach Sueden \"";"DCFB4DFEFF94C2D4";"NA"
-1489;"J21";"F6FB";2683254;1243612;407;"Forellenweg";"Sensirion";47.33811;8.54023;"19";"20";"NA";"G(5)";"2020-04-22 12:00:00";NA;"NA";"C8EBD4FEFFB7F6FB";"NA"
-1490;"K2";"EDA4";2682663;1253071;453;"Schwandenholzstrasse";"Sensirion";47.42325;8.53416;"13";"100";"NA";"5(A)";"2020-04-27 14:10:00";NA;"Am Waldrand";"E04C0AFEFF15EDA4";"NA"
-1491;"K4";"F623";2682745;1252062;441;"Eduard-Imhof-Strasse";"Sensirion";47.41417;8.53506;"4";"15";"NA";"8(5)";"2020-04-27 12:30:00";NA;"NA";"D5D67CFEFFD9F623";"NA"
-1492;"K5";"EE54";2682775;1251584;452;"Holunderweg";"Sensirion";47.40986;8.53537;"12";"10";"NA";"5";"2020-04-27 12:15:00";NA;"\"Verschiebung um 60m nach Westen aufgrund von Baustelle \"";"F3AE95FEFFAAEE54";"NA"
-1494;"K7";"7148";2682917;1250593;465;"Wehntalerstrasse";"Sensirion";47.40093;8.537;"NA";"5";"NA";"5(6)";"2020-04-27 17:40:00";NA;"NA";"DF6208FEFFFD7148";"NA"
-1495;"K8";"15A2";2682963;1250106;477;"Spelteriniweg";"Sensirion";47.39655;8.53759;"5";"8";"NA";"6(5)";"2020-04-28 12:40:00";NA;"NA";"D230FFFEFF9115A2";"NA"
-1496;"K10_Zuerich-Stampfenbachstrasse";"0D9F";2683144;1249055;442;"Stampfenbachstrasse";"Sensirion";47.387;8.53979;"NA";"5";"NA";"2";"2020-04-28 17:20:00";NA;"NA";"E29C06FEFF160D9F";"NA"
-1497;"K11";"A187";2683166;1248556;412;"Neumuehlequai";"Sensirion";47.38258;8.53999;"38";"15";"NA";"2(G/1)";"2020-04-23 10:05:00";NA;"NA";"F0CB55FEFF1FA187";"NA"
-1498;"K13";"D8E7";2683247;1247633;409;"Uraniastrasse";"Sensirion";47.37427;8.54089;"NA";"10";"NA";"5(2)";"2020-04-22 08:50:00";NA;"NA";"C8BB76FEFFCAD8E7";"NA"
-1499;"K14";"4819";2683337;1247125;409;"Stadthausquai";"Sensirion";47.36969;8.54198;"12";"25";"NA";"2(G)";"2020-04-22 09:30:00";NA;"\"sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt) \"";"F2754EFEFFD44819";"NA"
-1500;"L1";"1B21";2683096;1253598;435;"unbekannt (naehe Schoenauweg)";"Sensirion";47.42793;8.54;"NA";"10";"NA";"6";"2020-04-27 14:25:00";NA;"NA";"F25226FEFF301B21";"NA"
-1501;"L3";"2FD9";2683216;1252669;460;"Hoehenring";"Sensirion";47.41956;8.54141;"23";"60";"NA";"6";"2020-04-27 14:00:00";NA;"Auf einem kleinen Huegel";"EC6806FEFFCD2FD9";"NA"
-1502;"L4";"15F1";2683246;1252066;440;"Binzmuehlestrasse/Ruedi-Walter-Strasse";"Sensirion";47.41414;8.5417;"23";"<5m";"NA";"2";"2020-04-27 13:00:00";NA;"NA";"C66D3FFEFFC515F1";"NA"
-1504;"L6";"723E";2683364;1251175;461;"Venusstrasse";"Sensirion";47.40611;8.5431;"5";"15";"NA";"6";"2020-04-27 17:00:00";NA;"NA";"D56170FEFF61723E";"NA"
-1505;"L7";"F981";2683422;1250634;471;"Oerlikonerstrasse";"Sensirion";47.40124;8.54376;"5";"5";"NA";"6";"2020-04-27 17:20:00";NA;"NA";"F0334DFEFF20F981";"NA"
-1507;"L9";"C859";2683524;1249635;488;"Winterthurerstrasse";"Sensirion";47.39224;8.54493;"5";"<5";"NA";"5";"2020-04-28 16:45:00";NA;"NA";"FBB3D0FEFF52C859";"NA"
-1508;"L10";"8FF1";2683573;1249142;481;"Stolzestrasse";"Sensirion";47.3878;8.54549;"9";"5";"NA";"5";"2020-04-28 17:00:00";NA;"NA";"F359D1FEFF6B8FF1";"NA"
-1509;"L12";"60C9";2683651;1248239;454;"Clausiussteig";"Sensirion";47.37967;8.54635;"2";"<5";"Laterne";"2";"2020-04-21 16:15:00";NA;"\"Verschiebung um 85m nach Nordwesten \"";"F08CD5FEFFD860C9";"NA"
-1510;"L13";"0557";2683740;1247721;445;"Kuenstlergasse";"Sensirion";47.375;8.54743;"10";"15";"NA";"5";"2020-04-21 15:55:00";NA;"NA";"F2B76FFEFFA90557";"NA"
-1511;"L15";"258D";2683907;1246728;413;"Kreuzbuehlstrasse";"Sensirion";47.36605;8.54946;"NA";"15";"NA";"2";"2020-04-21 15:10:00";NA;"NA";"CECB25FEFFBD258D";"NA"
-1512;"L16";"7102";2683897;1246219;408;"Seegartenstrasse";"Sensirion";47.36147;8.54923;"4";"<5";"NA";"2";"2020-02-06 15:00:00";NA;"\"Verschiebung um 60m nach Nordwesten \"";"E779B5FEFFEE7102";"NA"
-1513;"L16";"9BC3";2683897;1246219;408;"Seegartenstrasse";"Sensirion";47.36147;8.54923;"4";"<5";"NA";"2";"2020-04-21 15:35:00";NA;"\"Verschiebung um 60m nach Nordwesten \"";"F09856FEFF009BC3";"NA"
-1514;"L18";"04FE";2684207;1245163;406;"unbekannt (Steg am Zuerihorn)";"Sensirion";47.35194;8.55313;"7";"30";"NA";"G";"2020-04-21 10:50:00";NA;"\"Verschiebung um 105m nach Suedosten \"";"CCEBAAFEFF3D04FE";"NA"
-1515;"M2";"7776";2683558;1253232;437;"unbekannt (nahe Ausserdorfstrasse)";"Sensirion";47.42458;8.54605;"10";"10";"NA";"6";"2020-04-27 15:20:00";NA;"\"Verschiebung um 85m nach Nordwesten (wegen Badi)";"F68C9DFEFF117776";"NA"
-1517;"M5";"E307";2683799;1251670;434;"Wallisellenstrasse";"Sensirion";47.41051;8.54895;"10";"5";"NA";"5(6)";"2020-04-27 16:10:00";NA;"NA";"C8B762FEFF7CE307";"NA"
-1518;"M6";"EC8B";2683865;1251222;444;"Allenmoosstrasse";"Sensirion";47.40647;8.54974;"37";"<5";"NA";"NA";"2020-04-27 16:50:00";NA;"NA";"D20872FEFF18EC8B";"NA"
-1519;"M8";"576B";2684095;1250233;507;"Frohburgstrasse";"Sensirion";47.39755;8.5526;"50";"10";"NA";"6(5)";"2020-04-28 16:15:00";NA;"\"Verschiebung um 110m nach Osten \"";"CA1A8FFEFF67576B";"NA"
-1520;"M9";"8D67";2684005;1249728;532;"Letziweg";"Sensirion";47.39302;8.55132;"2";"10";"NA";"6(9)";"2020-04-28 16:25:00";NA;"NA";"E30BD7FEFF3E8D67";"NA"
-1521;"M11";"EFDF";2684168;1248743;538;"Hadlaubstrasse";"Sensirion";47.38414;8.55329;"14";"0";"NA";"5";"2020-04-21 17:00:00";NA;"NA";"D7CB15FEFF22EFDF";"NA"
-1522;"M12";"748C";2684223;1248207;510;"Voltastrasse/Hochstrasse";"Sensirion";47.37931;8.55392;"NA";"15";"NA";"6(5)";"2020-04-21 16:30:00";NA;"NA";"FF0C9CFEFF09748C";"NA"
-1523;"M14";"BC17";2684305;1247282;436;"Steinwiesstrasse";"Sensirion";47.37098;8.55483;"14";"5";"NA";"5";"2020-04-21 14:45:00";NA;"\"Verschiebung um 60m nach Norden, wenig Abschattung durch Baum \"";"F7A552FEFF2DBC17";"NA"
-1524;"M15";"2560";2684402;1246727;428;"Minervastrasse";"Sensirion";47.36598;8.55601;"14";"10";"NA";"5(2)";"2020-04-21 15:00:00";NA;"NA";"E2420EFEFF312560";"NA"
-1525;"M17";"AEA7";2684492;1245734;415;"Wildbachstrasse";"Sensirion";47.35703;8.55701;"7";"15";"NA";"2";"2020-04-21 11:30:00";NA;"NA";"C093EDFEFFB3AEA7";"NA"
-1526;"M18";"02DA";2684527;1245252;408;"Bellerivestrasse";"Sensirion";47.35269;8.55738;"NA";"10";"NA";"2(B)";"2020-04-21 10:30:00";NA;"NA";"F61EE2FEFFB102DA";"NA"
-1527;"N1";"94AB";2684119;1253703;446;"Frohbuehlstrasse";"Sensirion";47.42875;8.55357;"14";"40";"NA";"6";"2020-04-27 14:55:00";NA;"NA";"D3E547FEFF1294AB";"NA"
-1528;"N2";"1158";2684155;1253262;434;"Schaffhauserstrasse (parallel)";"Sensirion";47.42478;8.55397;"keine";"10";"NA";"5";"2020-04-27 15:05:00";NA;"NA";"F579CBFEFF081158";"NA"
-1529;"N4";"4D32";2684169;1252266;426;"Leutschenbachstrasse";"Sensirion";47.41582;8.55397;"25";"8";"NA";"2(1)";"2020-04-27 15:40:00";NA;"grosse Baustelle suedlich";"DFB881FEFF544D32";"NA"
-1531;"N5";"B44E";2684382;1251701;426;"Wallisellenstrasse";"Sensirion";47.41071;8.55668;"30";"25";"NA";"6(5)";"2020-04-27 16:30:00";NA;"\"Verschiebung um 90m nach Suedosten \"";"DFD90CFEFF96B44E";"NA"
-1532;"N7";"EEBA";2684382;1250792;466;"Frohburgstrasse";"Sensirion";47.40254;8.55651;"72";"10";"NA";"6(A)";"2020-04-28 13:00:00";NA;"NA";"C614C1FEFF8AEEBA";"NA"
-1533;"N11";"B40D";2684651;1248768;608;"Schloesslistrasse";"Sensirion";47.3843;8.55969;"11";"15";"NA";"6(5)";"2020-04-21 16:45:00";NA;"NA";"CBA42DFEFF18B40D";"NA"
-1534;"N13";"DEB9";2684739;1247765;503;"Schneckenmannstrasse";"Sensirion";47.37527;8.56067;"1,5";"8";"NA";"5";"2020-04-21 14:10:00";NA;"NA";"CE4CFCFEFFD6DEB9";"NA"
-1535;"N14";"4691";2684826;1247289;472;"Dolderstrasse";"Sensirion";47.37098;8.56173;"16";"5";"NA";"5";"2020-04-21 14:25:00";NA;"NA";"C54731FEFF2A4691";"NA"
-1536;"N16";"5346";2684897;1246369;448;"Hegibachstrasse";"Sensirion";47.36269;8.56249;"NA";"<5";"NA";"5";"2020-04-21 12:00:00";NA;"\"Verschiebung um 60m nach Nordwesten \"";"E8FEEAFEFF845346";"NA"
-1537;"N17";"A860";2684990;1245689;451;"Kartausstrasse";"Sensirion";47.35656;8.56359;"8";"50";"Laterne";"A(9/6)";"2020-04-21 11:45:00";NA;"\"Verschiebung um 130m nach Sueden \"";"F16715FEFFBEA860";"NA"
-1538;"N19";"A4A1";2685051;1244862;421;"Fluehgasse";"Sensirion";47.34912;8.56424;"3";"15";"NA";"5";"2020-04-21 10:15:00";NA;"\"Verschiebung um 55m nach Nordwesten \"";"C2F8C8FEFFC9A4A1";"NA"
-1539;"O4";"8BEA";2684686;1252262;425;"Cornelia-Guggenheim-Weg";"Sensirion";47.41572;8.56082;"4";"8";"NA";"2";"2020-04-27 15:50:00";NA;"\"Verschiebung um 80m nach Suedwesten \"";"D2BB5EFEFFDE8BEA";"NA"
-1541;"O6";"0F80";2684850;1251334;431;"Heideggerweg";"Sensirion";47.40735;8.56281;"2";"10";"NA";"6";"2020-04-28 15:25:00";NA;"NA";"C7952DFEFF5E0F80";"NA"
-1543;"O12";"DF9A";2685182;1248324;588;"Zuerichbergstrasse";"Sensirion";47.38024;8.56664;"57";"10";"NA";"6";"2020-04-21 13:30:00";NA;"NA";"EDD63AFEFF6EDF9A";"NA"
-1544;"O13";"E1DE";2685297;1247814;539;"Waldhausstrasse";"Sensirion";47.37564;8.568;"3";"60";"NA";"A";"2020-04-21 13:55:00";NA;"NA";"F1B162FEFF67E1DE";"NA"
-1545;"O15";"6557";2685359;1246808;515;"Hitzigweg";"Sensirion";47.36658;8.56869;"8";"15";"NA";"6(A)";"2020-04-21 12:30:00";NA;"NA";"FF37A4FEFFE16557";"NA"
-1546;"O16";"A0D3";2685358;1246416;475;"Biberlinstrasse";"Sensirion";47.36306;8.5686;"2";"5";"NA";"5";"2020-04-21 12:15:00";NA;"\"Verschiebung um 65m nach Nordwesten \"";"EC9735FEFF32A0D3";"NA"
-1547;"O18";"C79B";2685627;1245419;469;"August-Forel-Strasse";"Sensirion";47.35405;8.57197;"11";"45";"NA";"5";"2020-04-21 09:50:00";NA;"grosse Baustelle im Osten (Fotos!)";"C620F5FEFFC7C79B";"NA"
-1548;"O19";"A3E7";2685592;1244803;461;"Enzenbuehlstrasse";"Sensirion";47.34852;8.57139;"2";"45";"NA";"5(D)";"2020-04-21 10:05:00";NA;"NA";"E8286FFEFF9EA3E7";"NA"
-1549;"P5";"2496";2685388;1251816;428;"Aubruggstrasse";"Sensirion";47.41162;8.57003;"9";"50";"NA";"5(6/9)";"2020-04-28 14:50:00";NA;"\"Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt \"";"EF96DFFEFFE02496";"NA"
-1550;"P6";"3B2E";2685381;1251384;429;"Auhofstrasse";"Sensirion";47.40773;8.56986;"7";"10";"NA";"5";"2020-04-28 15:05:00";NA;"\"evtl. leichte Abschattung durch Baum im Norden \"";"CA007AFEFF4A3B2E";"NA"
-1551;"P12";"A729";2685631;1248364;608;"Dreiwiesenstrasse";"Sensirion";47.38054;8.57259;"4";"75";"NA";"9";"2020-04-21 13:15:00";NA;"NA";"EB5D32FEFF41A729";"NA"
-1553;"P17";"C740";2685967;1245934;500;"Waserstrasse";"Sensirion";47.35864;8.57657;"14";"10";"NA";"6(5)";"2020-04-20 17:25:00";NA;"NA";"DBEBD3FEFF77C740";"NA"
-1554;"P18";"DD47";2686130;1245427;479;"Balgriststrasse";"Sensirion";47.35406;8.57863;"10";"10";"NA";"5";"2020-04-21 09:30:00";NA;"NA";"FF24C6FEFF3CDD47";"NA"
-1555;"Q7";"C139";2685932;1250964;430;"Altwiesenstrasse";"Sensirion";47.40388;8.57707;"1";"5";"NA";"6";"2020-04-28 13:50:00";NA;"NA";"C8897CFEFFC5C139";"NA"
-1556;"Q8";"4C0A";2686089;1250568;447;"Probsteistrasse";"Sensirion";47.4003;8.57908;"6(?)";"40";"NA";"9";"2020-04-28 13:30:00";NA;"Knapp 200m an Strasse nach Norden verschoben!";"FB43D2FEFF184C0A";"NA"
-1557;"Q17";"2BFA";2686463;1245923;569;"Witikonerstrasse";"Sensirion";47.35848;8.58313;"88";"5";"NA";"6";"2020-04-20 17:10:00";NA;"NA";"C9B40DFEFF8C2BFA";"NA"
-1558;"R6";"41CC";2686316;1251458;427;"Ueberlandstrasse";"Sensirion";47.40827;8.58226;"109";"5";"NA";"5";"2020-04-28 14:30:00";NA;"NA";"DDF870FEFF3C41CC";"NA"
-1561;"R16";"A56D";2686998;1246549;606;"Loorenhalde";"Sensirion";47.36404;8.59034;"4";"15";"Laterne";"6";"2020-04-20 15:15:00";NA;"\"Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok. \"";"E1BC41FEFF44A56D";"NA"
-1562;"R18";"65A1";2687001;1245611;586;"unbekannt (nahe Segetenweg)";"Sensirion";47.3556;8.59019;"10";"10";"Laterne";"5";"2020-04-20 17:00:00";NA;"NA";"CAE649FEFF5B65A1";"NA"
-1563;"S8";"5C8F";2686972;1250560;431;"Altwiesenstrasse";"Sensirion";47.40011;8.59077;"32";"10";"NA";"5(6)";"2020-04-28 14:15:00";NA;"NA";"C56CAAFEFF665C8F";"NA"
-1564;"S17";"E864";2687439;1246067;616;"Oetlisbergerstrasse";"Sensirion";47.35964;8.59608;"2";"<5";"NA";"5(6)";"2020-04-20 15:30:00";NA;"NA";"F9E7A5FEFF60E864";"NA"
-1565;"S18";"0573";2687486;1245577;601;"Wiesliacher";"Sensirion";47.35523;8.59661;"14";"<5";"NA";"5";"2020-04-20 16:30:00";NA;"NA";"F391D4FEFF880573";"NA"
-1566;"T16";"4143";2687856;1246652;610;"Im Hau";"Sensirion";47.36485;8.60171;"9";"20";"NA";"9(D/A)";"2020-04-20 15:00:00";NA;"NA";"D670F5FEFF004143";"NA"
-1567;"T17";"49A4";2687920;1246205;629;"Im Glockenacker";"Sensirion";47.36082;8.60247;"17";"15";"Laterne";"5(D)";"2020-04-20 15:40:00";NA;"NA";"C85741FEFF8549A4";"NA"
-1568;"Zuerich-Affoltern";"C0BD";2681472;1253542;443;"Reckenholzstrasse";"Sensirion";47.42763;8.51846;"42";"70";"NA";"9";"2020-04-27 10:30:00";NA;"\"40m von der MeteoSchwiez-Referenzstation entfernt \"";"DF01E5FEFF23C0BD";"NA"
-1569;"Zuerich-Fluntern";"8F0E";2685114;1248015;548;"Ackermannstrasse";"Sensirion";47.37747;8.56568;"7";"15";"NA";"5(6)";"2020-04-21 13:45:00";NA;"\"40m von MeteoSchweiz-Referenzstation entfernt \"";"FCD019FEFF758F0E";"NA"
-1570;"Zuerich-Kaserne";"3C6D";2682484;1248039;409;"Militaerstrasse";"Sensirion";47.37802;8.53086;"NA";"10";"NA";"2";"2020-04-23 09:10:00";NA;"\"60m nordoestlich der offiziellen Messstation \"";"E23C48FEFFB53C6D";"NA"
-1571;"Zuerich-Schimmelstrasse";"0DFB";2681948;1247241;413;"Gerhardstrasse/Schimmelstrasse";"Sensirion";47.37091;8.52362;"1";"15";"NA";"2";"2020-04-22 17:30:00";NA;"NA";"F44DF7FEFF720DFB";"NA"
+﻿id_station;gridcoord;stationid;CH_E;CH_N;altitude;streetname;type;lat;lon;Mastnummer;distance_building;shadowing;classification;montage;functional_check;remarks;stationid_new;stationid_new2
+923;A6;A2EB;2678068;1250637;395;Paul-Pflueger-Strasse;Sensirion;47.40192;8.47285;19;25;;8(9);13.06.2019 14:30;ok;Verschiebung um 190m nach Nordosten (naechstmoegliche Stelle);EE2AA2FBA2EB;NA
+926;A8;6099;2678039;1249544;414;Dachslernstrasse;Sensirion;47.3921;8.47227;29;10;;6;13.06.2019 12:55;ok;Hecke ziemlich nahe unter Sensor (Foto!);D8F463676099;NA
+928;A9;63A4;2678055;1249021;428;Rautistrasse;Sensirion;47.38739;8.4724;69;25;;5(6);13.06.2019 11:25;ok;;EF7BDB8163A4;NA
+931;AWEL-Blumenfeld;6DD1;2680581;1252968;454;Dora-Staudinger-Strasse;Sensirion;47.42258;8.50655;3;10;;5;12.06.2019 14:25;;;CE59CF126DD1;NA
+933;AWEL-Bucheggplatz;A05A;2682646;1250251;472;Bucheggstrasse;Sensirion;47.39789;8.53341;;0;Dach Haltestelle;5;17.06.2019 11:05;;ca. 2 m ueber Boden;D5804FDCA05A;NA
+935;AWEL-Eichbuehl;4733;2678224;1248693;443;Girhaldenstrasse;Sensirion;47.38442;8.47457;16.2;10;;6(9);13.06.2019 11:20;;;E17EFD9B4733;NA
+937;AWEL-Gruenau;AB6D;2679440;1250050;401;unbekannt;Sensirion;47.39648;8.49091;;25;;5;13.06.2019 14:45;;;FACBC32BAB6D;NA
+939;AWEL-Lindenhof;280F;2683258;1247485;428;Lindenhof;Sensirion;47.37294;8.54101;3;25;Laterne;B(2);23.07.2019 16:20;;;EE561C93280F;EE561C000093280F
+940;AWEL-Lindenhof;8CDE;2683258;1247485;428;Lindenhof;Sensirion;47.37294;8.54101;3;25;Laterne;B(2);11.02.2020 09:00;;;F1085FFEFF9A8CDE;NA
+941;AWEL-Oerlikerpark;F16D;2683023;1252127;439;Oerlikerpark;Sensirion;47.41471;8.53876;45;40;;2(B);12.06.2019 11:55;;Parkanlage;EA8E056FF16D;NA
+943;AWEL-Paradeplatz;69A8;2683117;1247176;410;Bahnhofstrasse;Sensirion;47.37018;8.53908;133;5;Laterne;2;23.07.2019 15:45;;;EB53861769A8;NA
+944;AWEL-Paradeplatz;37FE;2683117;1247176;410;Bahnhofstrasse;Sensirion;47.37018;8.53908;133;5;Laterne;2;11.02.2020 09:35;;;F6AD34FEFF7337FE;NA
+945;AWEL-Sechelaeutenplatz;2C4A;2683684;1246724;409;Sechselaeutenplatz;Sensirion;47.36604;8.5465;15;15;;2(E );23.07.2019 08:25;;;D323E3CA2C4A;NA
+946;AWEL-Sechelaeutenplatz;2EF7;2683684;1246724;409;Sechselaeutenplatz;Sensirion;47.36604;8.5465;15;15;;2(E );14.02.2020 10:35;;;C39502FEFF572EF7;NA
+947;AWEL-Vulkanplatz;6FD5;2679397;1249598;399;Vulkanplatz/Aargauerstrasse;Sensirion;47.39242;8.49026;22;35;;5;13.06.2019 08:25;;;CAA0AB956FD5;NA
+949;AWEL-Witikon;A62F;2687049;1245924;607;Berghaldenstrasse;Sensirion;47.35841;8.59089;2;25;;6(5);25.07.2019 09:30;;;E6879E24A62F;NA
+950;AWEL-Witikon;3A9A;2687049;1245924;607;Berghaldenstrasse;Sensirion;47.35841;8.59089;2;25;;6(5);06.02.2020 10:20;;;E6D8DBFEFF893A9A;NA
+951;AWEL-Zuerihorn;EFAE;2684040;1245344;408;unbekannt (Zuerihorn);Sensirion;47.35358;8.55096;66;50;;9(G);24.07.2019 13:50;;;C39AF8DAEFAE;NA
+952;AWEL-Zuerihorn;3B30;2684040;1245344;408;unbekannt (Zuerihorn);Sensirion;47.35358;8.55096;66;50;;9(G);06.02.2020 14:30;;;CF6E84FEFFF23B30;NA
+954;B5;F2D8;2678387;1251094;430;Rebbergstrasse;Sensirion;47.40599;8.47716;43;20;;6(5);14.06.2019 10:05;ok;Grenze zu Oberengstringen;CAFEC514F2D8;NA
+957;B7;AB7D;2678453;1250076;397;Bernerstrasse Sued;Sensirion;47.39683;8.47785;80;200;;9;13.06.2019 13:55;ok;;C29B4E18AB7D;NA
+959;B8;AB4E;2678489;1249496;398;Badenerstrasse;Sensirion;47.39161;8.47823;keine (Brueckenpfeiler);0(15);Bruecke;5;13.06.2019 13:40;ok;Rechteckige Masten eignen sich nicht! ->Bruecke;E0A18DBCAB4E;NA
+962;B10;875D;2678652;1248608;426;Zwischenbaechen;Sensirion;47.3836;8.48023;11;5;;6(5);13.06.2019 11:05;ok;;EC97724D875D;NA
+964;B11;188C;2678675;1248100;431;Unbekannt (Diggelmannstrasse);Sensirion;47.37903;8.48044;3;60;Lampe;6;13.06.2019 10:50;ok;;D3FE8EEF188C;NA
+967;C3;AA35;2678698;1252142;507;Im oberen Boden;Sensirion;47.41538;8.48146;5;25;;5;14.06.2019 10:20;ok;Flaeche oestlich des Sensors zugewachsen!;C3FE363AAA35;NA
+969;C4;8FED;2678783;1251431;474;Riedhofstrasse;Sensirion;47.40898;8.48246;42;15;;5;14.06.2019 10:30;ok;Privatgelaende: Verschiebung um 75m nach Suedosten;E77BF21F8FED;NA
+972;C6-AWEL-Werdinsel;5.20E+04;2679030;1250494;399;Werdinsel;Sensirion;47.40052;8.48557;;80;;9(G);14.06.2019 09:44;ok;verschiebung um 180m nach Suedosten, 1.5 m ueber Boden an Fahrverbotsschild;E7B64FD552E3;NA
+974;C7;C1BC;2678950;1250050;397;Baendlistrasse;Sensirion;47.39654;8.48443;27;15;;5;13.06.2019 14:15;ok;Verschiebung um 90m nach Sueden, keine Befestigungsmoeglichkeit im Schrebergarten;C3FD36A6C1BC;NA
+977;C9;FFC6;2679046;1249233;400;Meier-Bosshard-Strasse;Sensirion;47.38918;8.48556;3;10;;2(5);13.06.2019 12:45;ok;Verschiebung um 50m nach Norden, da an Segnestrasse keine Laternen;D30CBD2BFFC6;D30CBD00002BFFC6
+979;C10;21C6;2679167;1248657;407;Saumackerstrasse;Sensirion;47.38398;8.48706;26;5;;6(5);13.06.2019 11:40;ok;;DA522D0B21C6;NA
+982;C12;A528;2679183;1247639;426;In der Ey/ In der Waesseri;Sensirion;47.37483;8.48709;3;5;;5(6);13.06.2019 10:20;ok;;EDEA504AA528;NA
+984;C13;06DA;2679304;1247167;445;Im Heimgaertli;Sensirion;47.37057;8.48861;6;5;;6;13.06.2019 10:30;ok;;EC9C805C06DA;NA
+988;D5;2.90E+04;2679372;1251179;477;Lachenacker;Sensirion;47.40664;8.49022;6;5;Laterne;6(5);14.06.2019 10:50;ok;;D36951B629E3;NA
+990;D6;1572;2679385;1250688;444;Hohenklingenallee;Sensirion;47.40222;8.4903;2;10;;6;14.06.2019 11:50;ok;;C4598BF41572;NA
+993;D8;EF9E;2679547;1249697;399;Max-Hoegger-Strasse;Sensirion;47.39329;8.49227;3;40;;5(4/E);13.06.2019 08:40;ok;Autos auf Luftaufnahme mussten Containerwohnungen weichen;C0B425A3EF9E;C0B4250000A3EF9E
+995;D9;3D34;2679502;1249207;401;Albulastrasse/Luggerwegstrasse;Sensirion;47.38889;8.49159;14;15;;5(4);13.06.2019 09:00;ok;;F00106D73D34;NA
+998;D11;47DE;2679662;1248252;409;Rautistrasse;Sensirion;47.38028;8.49354;;5;;5;13.06.2019 09:55;ok;;F371C02547DE;NA
+1000;D12;ABED;2679730;1247745;416;Ginsterstrasse;Sensirion;47.37571;8.49435;3;5;;6(5);13.06.2019 10:10;ok;Baustelle;D71E3290ABED;NA
+1003;D14;36AD;2679834;1246827;454;Hohensteinweg;Sensirion;47.36745;8.49556;1;35;;4(5);17.06.2019 16:40;ok;;DB0614A936AD;DB06140000A936AD
+1004;D14;FA25;2679834;1246827;454;Hohensteinweg;Sensirion;47.36745;8.49556;1;35;;4(5);12.02.2020 12:15;ok;;CE7E76FEFFFEFA25;NA
+1005;D15;EF8F;2679926;1246267;498;Doeltschiweg;Sensirion;47.3624;8.49668;66;30;Laterne;9;17.06.2019 16:25;ok;;CEC54F00000BEF8F;NA
+1006;D15;04DD;2679926;1246267;498;Doeltschiweg;Sensirion;47.3624;8.49668;66;30;Laterne;9;12.02.2020 11:45;ok;;FABBB4FEFF8F04DD;NA
+1008;E1;9.00E+07;2679670;1252996;458;Im Holzerhurd;Sensirion;47.42295;8.49449;1;15;;6(5/A);12.06.2019 13:50;ok;;CF91012809E7;NA
+1010;E4;8CFB;2679583;1251567;527;Kappenbuehstrasse;Sensirion;47.4101;8.49308;20;70;;9;14.06.2019 11:25;ok;Verschiebung um 230m nach Suedwesten;F4683D808CFB;NA
+1012;E5;50F9;2679805;1251219;508;Benedikt-Fontana-Weg;Sensirion;47.40695;8.49596;3;5;;6;14.06.2019 11:35;ok;;D65E797650F9;NA
+1015;E7;C178;2679990;1250216;399;unbekannt;Sensirion;47.39791;8.49823;;20;;9(8/G);13.06.2019 14:55;ok;Verschiebung um 50m nach Suedosten;FBBA0760C178;NA
+1017;E8;EC9F;2680010;1249775;399;Bernerstrasse Nord;Sensirion;47.39394;8.49842;15;90;;9;13.06.2019 15:15;ok;;CEA3FACCEC9F;NA
+1020;E10;A7DC;2680123;1248848;405;Baslerstrasse;Sensirion;47.38559;8.49975;23;10;;3(2) or 6(5);13.06.2019 09:25;ok;;E3918841A7DC;NA
+1022;E11;9C4C;2680207;1248300;410;Edelweissstrasse;Sensirion;47.38065;8.50076;3;10;;6;13.06.2019 09:40;ok;;E095685A9C4C;NA
+1025;E13;7162;2680327;1247262;425;Schaufelbergerstrasse;Sensirion;47.3713;8.50217;11;10;;5;17.06.2019 16:00;ok;;CA83550000E17162;NA
+1026;E13;D586;2680327;1247262;425;Schaufelbergerstrasse;Sensirion;47.3713;8.50217;11;10;;5;25.07.2019 12:00;ok;;EED09FCCD586;NA
+1027;E13;399;2680327;1247262;425;Schaufelbergerstrasse;Sensirion;47.3713;8.50217;11;10;;5;12.02.2020 12:25;ok;;DB99FCFEFFE60399;NA
+1028;E14;E672;2680322;1246767;446;Schweighofstrasse;Sensirion;47.36685;8.50201;71;10;Baeume;5;17.06.2019 16:15;ok;;E2A3140000ACE672;NA
+1029;E14;32DC;2680322;1246767;446;Schweighofstrasse;Sensirion;47.36685;8.50201;71;10;Baeume;5;12.02.2020 11:55;ok;;EE0117FEFFC432DC;NA
+1031;E16;7D4B;2680593;1245835;489;Im Hagacker;Sensirion;47.35843;8.50543;7;15;;6;18.06.2019 15:20;ok;Verschiebung um 150m nach Nordosten;F19BF90000AC7D4B;NA
+1032;E16;B089;2680593;1245835;489;Im Hagacker;Sensirion;47.35843;8.50543;7;15;;6;11.02.2020 15:55;ok;Verschiebung um 150m nach Nordosten;EF136BFEFF28B089;NA
+1033;E17;07FB;2680435;1245189;539;Kolbenhofstrasse;Sensirion;47.35264;8.50322;4;130;;D(A);18.06.2019 15:50;ok;Verschiebung um 125m nach Suedwesten;D083B9FD07FB;D083B90000FD07FB
+1035;F1;8929;2680154;1253233;451;Muehlackerstrasse;Sensirion;47.42502;8.50095;45;20;;5;12.06.2019 14:00;ok;;DB2B87838929;NA
+1038;F3;EF2E;2680165;1252298;507;Holderbachweg;Sensirion;47.41661;8.50092;17;10;;6(A);12.06.2019 13:30;ok;Am Hang, nahe beim Waldrand;DFE4ADAAEF2E;NA
+1041;F6;BBAB;2680416;1250796;498;Blaesistrasse;Sensirion;47.40307;8.50398;13;15;;6;14.06.2019 12:55;ok;;F7E569EBBBAB;NA
+1043;F7;3592;2680434;1250337;442;Ackersteinstrasse;Sensirion;47.39894;8.50414;35;15;;6;14.06.2019 14:10;ok;;EFAF13FC3592;NA
+1046;F9;5311;2680633;1249242;403;;Sensirion;47.38907;8.50657;;15;;8;14.06.2019 15:25;ok;Verschiebung um 120m nach Suedosten an SBB-Laterne nahe Gleisfeld;DCE99DFE5311;NA
+1048;F10;E92B;2680608;1248862;405;Hohlstrasse;Sensirion;47.38565;8.50617;92;20;;9;13.06.2019 09:15;ok;;D287C3B0E92B;NA
+1051;F12;2355;2680666;1247879;412;Gutstrasse;Sensirion;47.37681;8.50677;5;15;Baeume;9;17.06.2019 15:30;ok;Verschiebung um 90m nach Nordwesten;E89346A12355;E893460000A12355
+1052;F12;4D86;2680666;1247879;412;Gutstrasse;Sensirion;47.37681;8.50677;5;15;Baeume;9;12.02.2020 13:35;ok;Verschiebung um 90m nach Nordwesten;E8F22EFEFF694D86;NA
+1053;F13;E7AF;2680785;1247339;419;unbekannt (Schrebergaerten);Sensirion;47.37193;8.50824;18.9;20;Laterne;5;17.06.2019 15:50;ok;;D89061AEE7AF;D890610000AEE7AF
+1054;F13;00FB;2680785;1247339;419;unbekannt (Schrebergaerten);Sensirion;47.37193;8.50824;18.9;20;Laterne;5;12.02.2020 13:20;ok;;D97CDBFEFFBD00FB;NA
+1056;F15;2D4E;2680866;1246367;443;Borrweg;Sensirion;47.36318;8.50914;4.6;10;;5;18.06.2019 15:00;ok;;C7519E172D4E;C7519E0000172D4E
+1057;F15;B9C9;2680866;1246367;443;Borrweg;Sensirion;47.36318;8.50914;4.6;10;;5;12.02.2020 11:30;ok;;EF0CD4FEFFC1B9C9;NA
+1058;F16;FAB1;2680953;1245848;465;Bachtobelstrasse;Sensirion;47.3585;8.5102;35;15;Baeume;6(5);18.06.2019 15:35;ok;;F0844823FAB1;F08448000023FAB1
+1059;F16;5C6B;2680953;1245848;465;Bachtobelstrasse;Sensirion;47.3585;8.5102;35;15;Baeume;6(5);12.02.2020 11:15;ok;;D36A5DFEFF435C6B;NA
+1061;F18;F8B0;2681062;1244961;473;unbekannt (nahe Gaenzilooweg);Sensirion;47.35051;8.51148;;>100;Baeume;9;23.07.2019 11:40;ok;Verschiebung um 80m nach Nordwesten;FAE436C1F8B0;NA
+1064;G2;9668;2680634;1252820;456;kein (Bachmannweg);Sensirion;47.42125;8.50723;1;30;;5;12.06.2019 14:15;ok;;EA7F85FA9668;NA
+1065;G2;A112;2680634;1252820;456;kein (Bachmannweg);Sensirion;47.42125;8.50723;1;30;;5;05.02.2020 11:25;ok;;F3FEE1FEFF10A112;NA
+1066;G3;832D;2680739;1252381;463;Regulastrasse;Sensirion;47.41728;8.50854;20;<5;;6;12.06.2019 15:20;ok;;E67C175F832D;NA
+1069;G5_AWEL-ScienceCity;25B2;2680698;1251423;524;Wolfgang-Pauli-Strasse;Sensirion;47.40867;8.50783;;5;Baeume;5;12.06.2019 13:10;ok;Verschiebung um 100m nach Westen, 1.5m ueber Boden;F903128025B2;NA
+1071;G6;3033;2680637;1250848;527;Am Hoenggerberg;Sensirion;47.40351;8.50692;;20;;9;14.06.2019 13:05;ok;Verschiebung um 250m nach Westen;CED67E6C3033;NA
+1074;G8;117A;2680953;1249913;407;Am Wasser;Sensirion;47.39506;8.51093;8;15;;5(6);14.06.2019 14:25;ok;;CC64BEFD117A;NA
+1076;G9;6A24;2681062;1249351;402;Duttweilerstrasse;Sensirion;47.39;8.51228;9;5;;2;14.06.2019 15:05;ok;Eher hoch (ca. 4m);D883D89E6A24;NA
+1079;G11_AWEL-Hardplatz;1F0C;2681255;1248509;407;Hardplatz;Sensirion;47.3824;8.51468;;15;;2(E);17.06.2019 13:55;ok;130m zu AWEL Sensor verschoben, Hardplatz bereits fertiggestellt (nicht wie auf Luftaufnahme!);E54201831F0C;E542010000831F0C
+1081;G12;BB79;2681218;1247863;412;Badenerstrasse;Sensirion;47.37659;8.51407;;8;;2;17.06.2019 15:00;ok;an Tramhaltestelle, da sonst keine Befestigungsmoeglichkeit weit und breit;F033A8C6BB79;F033A80000C6BB79
+1082;G12;2DF1;2681218;1247863;412;Badenerstrasse;Sensirion;47.37659;8.51407;;8;;2;12.02.2020 13:50;ok;an Tramhaltestelle, da sonst keine Befestigungsmoeglichkeit weit und breit;CCF945FEFF332DF1;NA
+1084;G14;0A5D;2681399;1246872;435;Goldbrunnenstrasse;Sensirion;47.36766;8.51629;5;10;Baeume;5;18.06.2019 14:35;ok;;D333B5190A5D;D333B50000190A5D
+1086;G15;89A0;2681396;1246415;428;Talwiesenstrasse;Sensirion;47.36355;8.51616;;20;;2;18.06.2019 14:45;ok;;D2989E5289A0;D2989E00005289A0
+1087;G15;E034;2681396;1246415;428;Talwiesenstrasse;Sensirion;47.36355;8.51616;;20;;2;12.02.2020 11:00;ok;;C39B55FEFF53E034;NA
+1089;G18;3984;2681625;1244975;424;Gfellstrasse;Sensirion;47.35057;8.51893;11;60;;9(D/G);23.07.2019 11:00;ok;Verschiebung um 100m nach Nordosten;DA4AA0863984;DA4AA00000863984
+1091;H1;B9A0;2681082;1253556;437;;Sensirion;47.42781;8.5133;;150;Baeume;9;12.06.2019 14:40;ok;Verschiebung um 70m nach Norden, Biotop im Norden fertig (nicht wie auf Luftbild!);CBC69477B9A0;NA
+1093;H2;BBC4;2681173;1252895;454;Reckenholzstrasse;Sensirion;47.42185;8.51439;8;35;Baeume;5(A);12.06.2019 15:05;ok;;DEB60BB6BBC4;NA
+1096;H4;A9BF;2681306;1251915;472;Erchenbuehlstrasse;Sensirion;47.41302;8.51597;3;5;Baeume;6(5);12.06.2019 15:30;ok;;D19C7256A9BF;NA
+1098;H7;2B12;2681438;1250485;252;Obere Waidstrasse;Sensirion;47.40015;8.51746;33;35;;9(A);14.06.2019 13:20;ok;;F76A88A42B12;NA
+1100;H8;90D2;2681489;1249922;422;Waidfussweg;Sensirion;47.39508;8.51803;4;<5;Laterne;5;14.06.2019 14:50;ok;;D57F1CD290D2;NA
+1103;H10;7A8D;2681612;1248902;404;Geroldstrasse (-rampe);Sensirion;47.38589;8.51948;48.6;15;;2(1);17.06.2019 13:35;ok;;CCFEC5737A8D;CCFEC50000737A8D
+1105;H11;7684;2681645;1248305;408;Hohlstrasse;Sensirion;47.38052;8.5198;;15;;2;17.06.2019 14:25;ok;Wegen Baustelle 145m nach Sued(westen) verschoben;C49A830000597684;NA
+1107;H13;0D01;2681714;1247485;413;Seebahnstrasse;Sensirion;47.37313;8.52057;12;20;Baeume;2;18.06.2019 09:00;ok;;E21573F50D01;E215730000F50D01
+1108;H13;06C6;2681714;1247485;413;Seebahnstrasse;Sensirion;47.37313;8.52057;12;20;Baeume;2;12.02.2020 10:05;ok;;EDDC88FEFFC806C6;NA
+1109;H14;777E;2681833;1246984;414;Zurlindenstrasse;Sensirion;47.36861;8.52205;;20;Baeume;2;18.06.2019 08:30;ok;;E338B90000EB777E;NA
+1112;H16;2916;2681916;1246010;420;Utoplatz;Sensirion;47.35984;8.52297;;5;;2;23.07.2019 13:05;ok;;FF868BB42916;NA
+1114;H17;0F10;2682008;1245481;420;Kanalstrasse;Sensirion;47.35507;8.52409;28;65;;9(E);23.07.2019 12:00;ok;;EF88B3220F10;NA
+1117;H19;05B6;2682098;1244544;448;Rainstrasse;Sensirion;47.34664;8.52511;27;25;;6(5);23.07.2019 10:30;ok;;EA68FF6905B6;NA
+1118;H19;DBDC;2682098;1244544;448;Rainstrasse;Sensirion;47.34664;8.52511;27;25;;6(5);11.02.2020 13:30;ok;;D54B92FEFFEBDBDC;NA
+1119;H20;60EB;2682195;1243950;463;Drosselstrasse;Sensirion;47.34128;8.52629;2;<5;;5(6);23.07.2019 10:15;ok;;EC032D8260EB;NA
+1120;H20;B28F;2682195;1243950;463;Drosselstrasse;Sensirion;47.34128;8.52629;2;<5;;5(6);11.02.2020 13:45;ok;;EBEDD2FEFF59B28F;NA
+1122;H22;28BB;2682383;1242971;464;Dangelstrasse;Sensirion;47.33244;8.5286;8;5;;5;23.07.2019 08:30;ok;Verschiebung um 80m nach Nordosten;F679AEDC28BB;NA
+1124;I4;25BD;2681711;1251947;459;Wehntalerstrasse;Sensirion;47.41326;8.52134;;10;;6(5);12.06.2019 15:45;;;FFC7795625BD;NA
+1127;I7;9B86;2682005;1250372;500;Obere Waidstrasse;Sensirion;47.39906;8.52495;19;45;;6(9/A);14.06.2019 13:50;;;FD0E0CBC9B86;NA
+1129;I8_Zuerich-Rosengartenstrasse;5F05;2682085;1249922;431;Rosengartenstrasse;Sensirion;47.395;8.52592;11,2;5;;2;21.06.2019 12:55;;;C2B669005F05;NA
+1132;I9;DC69;2682039;1249507;403;Kloster-Fahr-Weg;Sensirion;47.39128;8.52524;44;10;Laterne;5(G);17.06.2019 12:20;;;F61F95D7DC69;F61F950000D7DC69
+1134;I10;5.30E+02;2682002;1248888;404;Ottostrasse;Sensirion;47.38571;8.52464;9;15;;5;17.06.2019 13:20;;Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe;C5C0290753E1;C5C02900000753E1
+1135;I10;ED89;2682002;1248888;404;Ottostrasse;Sensirion;47.38571;8.52464;9;15;;5;12.02.2020 15:05;;Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe;DB8E70FEFF20ED89;NA
+1138;I12;6D16;2682075;1248092;409;Brauerstrasse;Sensirion;47.37855;8.52546;12;15;;2;12.02.2020 09:30;;Verschiebung um 120m nach Nordwesten;C1C84DFEFF046D16;NA
+1139;I13;32DE;2682271;1247515;411;Badernerstrasse/Kanzleistrasse;Sensirion;47.37333;8.52795;28;10;;2;18.06.2019 09:15;;;D2DF1A7E32DE;D2DF1A00007E32DE
+1140;I13;B7C0;2682271;1247515;411;Badernerstrasse/Kanzleistrasse;Sensirion;47.37333;8.52795;28;10;;2;12.02.2020 09:55;;;C178D6FEFF6DB7C0;NA
+1142;I15;84;2682363;1246500;417;Bederstrasse;Sensirion;47.36419;8.52898;;20;;5;23.07.2019 14:30;;;EA9DC87B0084;NA
+1143;I15;B012;2682363;1246500;417;Bederstrasse;Sensirion;47.36419;8.52898;;20;;5;11.02.2020 10:20;;;FB33C0FEFFA1B012;NA
+1144;I16;8535;2682486;1246026;428;unbekannt (nahe Gablerstrasse);Sensirion;47.35991;8.53052;4,5;20;Laterne;5;23.07.2019 13:45;;;FAF863BE8535;NA
+1147;I18;A100;2682610;1245018;414;Seestrasse;Sensirion;47.35083;8.53197;;8;;5;23.07.2019 09:45;;;C3F042CEA100;C3F0420000CEA100
+1148;I18;E2ED;2682610;1245018;414;Seestrasse;Sensirion;47.35083;8.53197;;8;;5;11.02.2020 13:00;;;DE4872FEFF9FE2ED;NA
+1149;I19;00FD;2682623;1244519;424;Renggerstrasse;Sensirion;47.34634;8.53205;4;5;;5;23.07.2019 10:00;;;E13EEA4F00FD;NA
+1150;I19;C968;2682623;1244519;424;Renggerstrasse;Sensirion;47.34634;8.53205;4;5;;5;11.02.2020 13:15;;;D8542EFEFF4BC968;NA
+1152;I21;B094;2682752;1243480;455;Widmerstrasse;Sensirion;47.33698;8.53357;20;8;;6(5);23.07.2019 08:55;;;C73FA918B094;NA
+1153;I21;0C46;2682752;1243480;455;Widmerstrasse;Sensirion;47.33698;8.53357;20;8;;6(5);11.02.2020 14:25;;;F575FFFEFF590C46;NA
+1154;I22;A8DB;2682851;1243011;474;Nidelbadstrasse;Sensirion;47.33275;8.53479;17;8;;5;23.07.2019 08:45;;;D6F5062AA8DB;NA
+1155;I22;A12D;2682851;1243011;474;Nidelbadstrasse;Sensirion;47.33275;8.53479;17;8;;5;11.02.2020 14:20;;;DBE8BEFEFF89A12D;NA
+1157;J5;5C90;2682286;1251522;460;Maienstrasse;Sensirion;47.40937;8.52888;1;10;;6;12.06.2019 16:40;;;C588D3825C90;NA
+1159;J6;6393;2682361;1251010;489;Kaeferholzstrasse;Sensirion;47.40475;8.52978;22;65;;9(A);12.06.2019 16:55;;;E1AB46EC6393;NA
+1162;J8;BFC6;2682528;1250023;457;Wibichstrasse;Sensirion;47.39586;8.53181;1;5;;5(6);17.06.2019 11:20;;;E9CC9A8ABFC6;E9CC9A00008ABFC6
+1167;J11;5266;2682588;1248567;406;Konradstrasse/Ackerstrasse;Sensirion;47.38275;8.53234;keine (Fahnenmast);5;;2;18.06.2019 10:30;;;C059A2225266;NA
+1168;J11;5CA3;2682588;1248567;406;Konradstrasse/Ackerstrasse;Sensirion;47.38275;8.53234;keine (Fahnenmast);5;;2;12.02.2020 08:45;;;F8362EFEFF405CA3;NA
+1169;J12;D0B1;2682742;1248089;409;Europaallee;Sensirion;47.37844;8.53429;;10;;1(2);18.06.2019 09:45;;;EBE724AED0B1;EBE7240000AED0B1
+1170;J12;A6A7;2682742;1248089;409;Europaallee;Sensirion;47.37844;8.53429;;10;;1(2);25.07.2019 12:00;;keine Baustelle mehr, neuer Masten (Nummer wird evtl noch montiert);CC3EAD20A6A7;NA
+1173;J14;4941;2682815;1247048;408;Am Schanzengraben;Sensirion;47.36906;8.53506;6;5;;2(G);23.07.2019 15:00;;;E2A0DF1A4941;E2A0DF00001A4941
+1174;J14;6989;2682815;1247048;408;Am Schanzengraben;Sensirion;47.36906;8.53506;6;5;;2(G);11.02.2020 09:55;;;D2CA3BFEFF0C6989;NA
+1175;J15;998D;2682879;1246566;408;Toedistrasse;Sensirion;47.36472;8.53582;3;<5;;2;23.07.2019 14:45;;;CBEF2A7D998D;NA
+1176;J15;691E;2682879;1246566;408;Toedistrasse;Sensirion;47.36472;8.53582;3;<5;;2;11.02.2020 10:10;;;C30B1EFEFFB8691E;NA
+1178;J17;6B20;2682896;1245505;408;unbekannt (nahe Mythenquai);Sensirion;47.35518;8.53585;13;20;Laterne;G(5);23.07.2019 14:10;;;E574968D6B20;NA
+1179;J17;C906;2682896;1245505;408;unbekannt (nahe Mythenquai);Sensirion;47.35518;8.53585;13;20;Laterne;G(5);11.02.2020 12:40;;;FA5EF2FEFFF3C906;NA
+1180;J20;E334;2683133;1243917;407;Cassiopeiasteg;Sensirion;47.34087;8.53869;4;50;;G(5);23.07.2019 09:20;;Verschiebung um 120m nach Sueden;D35B2568E334;NA
+1181;J20;DCF7;2683133;1243917;407;Cassiopeiasteg;Sensirion;47.34087;8.53869;4;50;;G(5);11.02.2020 14:55;;Verschiebung um 120m nach Sueden;FD4864FEFFABDCF7;NA
+1182;J21;F5EE;2683254;1243612;407;Forellenweg;Sensirion;47.33811;8.54023;19;20;;G(5);23.07.2019 09:10;;;E7E31C73F5EE;NA
+1183;J21;1018;2683254;1243612;407;Forellenweg;Sensirion;47.33811;8.54023;19;20;;G(5);11.02.2020 14:45;;;F7EA76FEFFA51018;NA
+1185;K2;15BA;2682663;1253071;453;Schwandenholzstrasse;Sensirion;47.42325;8.53416;13;100;;5(A);12.06.2019 10:35;;Am Waldrand;D39B113915BA;NA
+1188;K4;2135;2682745;1252062;441;Eduard-Imhof-Strasse;Sensirion;47.41417;8.53506;4;15;;8(5);12.06.2019 16:15;;;DC3250532135;NA
+1190;K5;EA2A;2682775;1251584;452;Holunderweg;Sensirion;47.40986;8.53537;12;10;;5;12.06.2019 16:30;;Verschiebung um 60m nach Westen aufgrund von Baustelle;F1EF9487EA2A;NA
+1194;K7;A33E;2682917;1250593;465;Wehntalerstrasse;Sensirion;47.40093;8.537;;5;;5(6);25.07.2019 12:00;;;E79EAD34A33E;NA
+1196;K8;82B3;2682963;1250106;477;Spelteriniweg;Sensirion;47.39655;8.53759;5;8;;6(5);17.06.2019 11:35;;;F200C70782B3;F200C700000782B3
+1199;K10_Zuerich-Stampfenbachstrasse;570D;2683144;1249055;442;Stampfenbachstrasse;Sensirion;47.387;8.53979;;5;;2;18.06.2019 10:40;;;FA8C8B59570D;NA
+1202;K11;B365;2683166;1248556;412;Neumuehlequai;Sensirion;47.38258;8.53999;38;15;;2(G/1);18.06.2019 10:00;;;FA74438EB365;FA744300008EB365
+1203;K11;37DC;2683166;1248556;412;Neumuehlequai;Sensirion;47.38258;8.53999;38;15;;2(G/1);07.02.2020 12:45;;;C8C996FEFF9C37DC;NA
+1205;K13;E6B1;2683247;1247633;409;Uraniastrasse;Sensirion;47.37427;8.54089;;10;;5(2);23.07.2019 16:15;;;C9EA63B8E6B1;NA
+1206;K13;EE77;2683247;1247633;409;Uraniastrasse;Sensirion;47.37427;8.54089;;10;;5(2);11.02.2020 08:45;;;E89101FEFFA4EE77;NA
+1207;K14;AEC4;2683337;1247125;409;Stadthausquai;Sensirion;47.36969;8.54198;12;25;;2(G);23.07.2019 15:25;;sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt);D7DCF918AEC4;NA
+1208;K14;4F29;2683337;1247125;409;Stadthausquai;Sensirion;47.36969;8.54198;12;25;;2(G);11.02.2020 09:25;;sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt);FB277FFEFF834F29;NA
+1210;L1;703C;2683096;1253598;435;unbekannt (naehe Schoenauweg);Sensirion;47.42793;8.54;;10;;6;12.06.2019 10:20;;;E6C742C0703C;NA
+1213;L3;E465;2683216;1252669;460;Hoehenring;Sensirion;47.41956;8.54141;23;60;;6;12.06.2019 10:50;;Auf einem kleinen Huegel;C8FD7DA6E465;NA
+1215;L4;3785;2683246;1252066;440;Binzmuehlestrasse/Ruedi-Walter-Strasse;Sensirion;47.41414;8.5417;23;<5m;;2;12.06.2019 11:30;;;F2B3B6C43785;NA
+1218;L6;6340;2683364;1251175;461;Venusstrasse;Sensirion;47.40611;8.5431;5;15;;6;17.06.2019 09:55;;;F5C16A4B6340;F5C16A00004B6340
+1220;L7;FEFD;2683422;1250634;471;Oerlikonerstrasse;Sensirion;47.40124;8.54376;5;5;;6;17.06.2019 10:20;;;D9E6349DFEFD;NA
+1223;L8_AWEL-Irchelpark;F55C;2683531;1250190;489;Irchelpark;Sensirion;47.39723;8.54512;K27;25;;9;21.06.2019 12:25;;Verschiebung um 70m nach Nord(-westen);D141C007F55C;NA
+1225;L9;9164;2683524;1249635;488;Winterthurerstrasse;Sensirion;47.39224;8.54493;5;<5;;5;18.06.2019 11:10;;;FD2866B59164;NA
+1230;L12;4F3E;2683651;1248239;454;Clausiussteig;Sensirion;47.37967;8.54635;2;<5;Laterne;2;18.06.2019 13:00;;Verschiebung um 85m nach Nordwesten;EB90524D4F3E;EB905200004D4F3E
+1231;L12;1A7B;2683651;1248239;454;Clausiussteig;Sensirion;47.37967;8.54635;2;<5;Laterne;2;07.02.2020 11:30;;Verschiebung um 85m nach Nordwesten;F5B872FEFF3F1A7B;NA
+1232;L13;AA69;2683740;1247721;445;Kuenstlergasse;Sensirion;47.375;8.54743;10;15;;5;24.07.2019 09:00;;;DF2C6F3FAA69;NA
+1233;L13;2BED;2683740;1247721;445;Kuenstlergasse;Sensirion;47.375;8.54743;10;15;;5;07.02.2020 12:30;;;F16AEAFEFF542BED;NA
+1235;L15;4841;2683907;1246728;413;Kreuzbuehlstrasse;Sensirion;47.36605;8.54946;;15;;2;24.07.2019 08:15;;;D52514A74841;NA
+1236;L15;7705;2683907;1246728;413;Kreuzbuehlstrasse;Sensirion;47.36605;8.54946;;15;;2;06.02.2020 08:45;;;FB8CDAFEFF307705;NA
+1237;L16;5712;2683897;1246219;408;Seegartenstrasse;Sensirion;47.36147;8.54923;4;<5;;2;24.07.2019 12:20;;Verschiebung um 60m nach Nordwesten 2020-02-06 15:00:00;FD02A95D5712;NA
+1239;L18;54EA;2684207;1245163;406;unbekannt (Steg am Zuerihorn);Sensirion;47.35194;8.55313;7;30;;G;24.07.2019 13:40;;Verschiebung um 105m nach Suedosten;F080F81D54EA;NA
+1240;L18;A673;2684207;1245163;406;unbekannt (Steg am Zuerihorn);Sensirion;47.35194;8.55313;7;30;;G;06.02.2020 14:20;;Verschiebung um 105m nach Suedosten;FDB129FEFFBFA673;NA
+1242;M2;4B15;2683558;1253232;437;unbekannt (nahe Ausserdorfstrasse);Sensirion;47.42458;8.54605;10;10;;6;12.06.2019 10:00;;Verschiebung um 85m nach Nordwesten (wegen Badi);DF15D23E4B15;NA
+1244;M3;52BC;2683669;1252756;438;Seebacherstrasse;Sensirion;47.42029;8.54743;6;10;;6;12.06.2019 11:00;;Baustelle zum Zeitpunkt der Montage in unmittelbarer Naehe (Fotos!);D13558D752BC;NA
+1247;M5;23AA;2683799;1251670;434;Wallisellenstrasse;Sensirion;47.41051;8.54895;10;5;;5(6);11.06.2019 16:15;;;C792BA7C23AA;NA
+1249;M6;F9D7;2683865;1251222;444;Allenmoosstrasse;Sensirion;47.40647;8.54974;37;<5;;;17.06.2019 10:10;;;CF21F134F9D7;CF21F1000034F9D7
+1252;M8;88A3;2684095;1250233;507;Frohburgstrasse;Sensirion;47.39755;8.5526;50;10;;6(5);18.06.2019 11:35;;Verschiebung um 110m nach Osten;E40153D188A3;E401530000D188A3
+1254;M9;1403;2684005;1249728;532;Letziweg;Sensirion;47.39302;8.55132;2;10;;6(9);18.06.2019 11:25;;;F1EFF80000ED1403;NA
+1257;M11;145C;2684168;1248743;538;Hadlaubstrasse;Sensirion;47.38414;8.55329;14;0;;5;18.06.2019 13:40;;;F98A21AD145C;F98A210000AD145C
+1258;M11;2CA8;2684168;1248743;538;Hadlaubstrasse;Sensirion;47.38414;8.55329;14;0;;5;07.02.2020 11:05;;;FA1D35FEFF3C2CA8;NA
+1259;M12;A91F;2684223;1248207;510;Voltastrasse/Hochstrasse;Sensirion;47.37931;8.55392;;15;;6(5);18.06.2019 13:25;;;DAC4A6F3A91F;DAC4A60000F3A91F
+1260;M12;DDE4;2684223;1248207;510;Voltastrasse/Hochstrasse;Sensirion;47.37931;8.55392;;15;;6(5);07.02.2020 11:20;;;DFEEABFEFFB1DDE4;NA
+1262;M14;5B6A;2684305;1247282;436;Steinwiesstrasse;Sensirion;47.37098;8.55483;14;5;;5;24.07.2019 09:20;;Verschiebung um 60m nach Norden, wenig Abschattung durch Baum;FD349E8C5B6A;NA
+1263;M14;CF53;2684305;1247282;436;Steinwiesstrasse;Sensirion;47.37098;8.55483;14;5;;5;07.02.2020 09:00;;Verschiebung um 60m nach Norden, wenig Abschattung durch Baum;C7F147FEFF74CF53;NA
+1264;M15;3199;2684402;1246727;428;Minervastrasse;Sensirion;47.36598;8.55601;14;10;;5(2);24.07.2019 12:05;;;CE3D994A3199;NA
+1265;M15;67D2;2684402;1246727;428;Minervastrasse;Sensirion;47.36598;8.55601;14;10;;5(2);07.02.2020 08:50;;;FEE5CFFEFF0367D2;NA
+1267;M17;D6A4;2684492;1245734;415;Wildbachstrasse;Sensirion;47.35703;8.55701;7;15;;2;24.07.2019 14:30;;;F689C7C6D6A4;NA
+1268;M17;F15E;2684492;1245734;415;Wildbachstrasse;Sensirion;47.35703;8.55701;7;15;;2;06.02.2020 12:00;;;F3C55AFEFF19F15E;NA
+1269;M18;164B;2684527;1245252;408;Bellerivestrasse;Sensirion;47.35269;8.55738;;10;;2(B);24.07.2019 14:15;;;D63DFE9B164B;NA
+1270;M18;B6F3;2684527;1245252;408;Bellerivestrasse;Sensirion;47.35269;8.55738;;10;;2(B);06.02.2020 14:05;;;CB81B5FEFFFDB6F3;NA
+1271;N1;B0B2;2684119;1253703;446;Frohbuehlstrasse;Sensirion;47.42875;8.55357;14;40;;6;12.06.2019 09:30;;;C51C8C80B0B2;NA
+1273;N2;4D92;2684155;1253262;434;Schaffhauserstrasse (parallel);Sensirion;47.42478;8.55397;keine;10;;5;12.06.2019 09:50;;;EA5FDA604D92;NA
+1276;N4;B99A;2684169;1252266;426;Leutschenbachstrasse;Sensirion;47.41582;8.55397;25;8;;2(1);11.06.2019 15:25;;grosse Baustelle suedlich;DAF24A57B99A;NA
+1278;N5;8792;2684382;1251701;426;Wallisellenstrasse;Sensirion;47.41071;8.55668;30;25;;6(5);11.06.2019 15:45;;Verschiebung um 90m nach Suedosten;DB558CF58792;NA
+1281;N7;1A1F;2684382;1250792;466;Frohburgstrasse;Sensirion;47.40254;8.55651;72;10;;6(A);11.06.2019 14:45;;;F92A08541A1F;NA
+1283;N11;64B9;2684651;1248768;608;Schloesslistrasse;Sensirion;47.3843;8.55969;11;15;;6(5);18.06.2019 13:55;;;FD9CDC3364B9;FD9CDC00003364B9
+1284;N11;E337;2684651;1248768;608;Schloesslistrasse;Sensirion;47.3843;8.55969;11;15;;6(5);07.02.2020 10:50;;;F376B1FEFF63E337;NA
+1286;N13;80CB;2684739;1247765;503;Schneckenmannstrasse;Sensirion;47.37527;8.56067;1,5;8;;5;24.07.2019 09:50;;;C9F90D4780CB;NA
+1287;N13;EFB3;2684739;1247765;503;Schneckenmannstrasse;Sensirion;47.37527;8.56067;1,5;8;;5;07.02.2020 09:30;;;CCF055FEFF67EFB3;NA
+1288;N14;E522;2684826;1247289;472;Dolderstrasse;Sensirion;47.37098;8.56173;16;5;;5;24.07.2019 09:35;;;FA064577E522;NA
+1291;N16;F75E;2684897;1246369;448;Hegibachstrasse;Sensirion;47.36269;8.56249;;<5;;5;24.07.2019 11:50;;Verschiebung um 60m nach Nordwesten;DF551B81F75E;NA
+1292;N16;9D81;2684897;1246369;448;Hegibachstrasse;Sensirion;47.36269;8.56249;;<5;;5;06.02.2020 11:45;;Verschiebung um 60m nach Nordwesten;C21B45FEFF839D81;NA
+1293;N17;4635;2684990;1245689;451;Kartausstrasse;Sensirion;47.35656;8.56359;8;50;Laterne;A(9/6);24.07.2019 14:55;;Verschiebung um 130m nach Sueden;F42387104635;NA
+1294;N17;A2BD;2684990;1245689;451;Kartausstrasse;Sensirion;47.35656;8.56359;8;50;Laterne;A(9/6);06.02.2020 13:10;;Verschiebung um 130m nach Sueden;E2B815FEFFD6A2BD;NA
+1296;N19;62D0;2685051;1244862;421;Fluehgasse;Sensirion;47.34912;8.56424;3;15;;5;24.07.2019 15:10;;Verschiebung um 55m nach Nordwesten;DEF780AA62D0;NA
+1297;N19;A317;2685051;1244862;421;Fluehgasse;Sensirion;47.34912;8.56424;3;15;;5;06.02.2020 13:55;;Verschiebung um 55m nach Nordwesten;D595DEFEFF7CA317;NA
+1298;O4;2705;2684686;1252262;425;Cornelia-Guggenheim-Weg;Sensirion;47.41572;8.56082;4;8;;2;11.06.2019 15:10;;Verschiebung um 80m nach Suedwesten;DD49065E2705;NA
+1301;O6;22CC;2684850;1251334;431;Heideggerweg;Sensirion;47.40735;8.56281;2;10;;6;11.06.2019 14:00;;;C32A342622CC;NA
+1303;O7;474A;2684934;1250840;477;Hubenstrasse;Sensirion;47.4029;8.56383;15;80;;A(D);11.06.2019 14:30;;;C35F82D7474A;NA
+1305;O12;0BAE;2685182;1248324;588;Zuerichbergstrasse;Sensirion;47.38024;8.56664;57;10;;6;24.07.2019 10:25;;;EEAE5E770BAE;NA
+1306;O12;D09B;2685182;1248324;588;Zuerichbergstrasse;Sensirion;47.38024;8.56664;57;10;;6;07.02.2020 10:40;;;CFA980FEFF2FD09B;NA
+1307;O13;DBE1;2685297;1247814;539;Waldhausstrasse;Sensirion;47.37564;8.568;3;60;;A;24.07.2019 10:05;;;F02179FFDBE1;NA
+1308;O13;A112;2685297;1247814;539;Waldhausstrasse;Sensirion;47.37564;8.568;3;60;;A;07.02.2020 10:05;;;DE7D6CFEFF2AA112;NA
+1310;O15;FAFF;2685359;1246808;515;Hitzigweg;Sensirion;47.36658;8.56869;8;15;;6(A);24.07.2019 11:10;;;F1845057FAFF;NA
+1311;O15;1BAE;2685359;1246808;515;Hitzigweg;Sensirion;47.36658;8.56869;8;15;;6(A);06.02.2020 11:30;;;D07C49FEFF681BAE;NA
+1312;O16;D2C2;2685358;1246416;475;Biberlinstrasse;Sensirion;47.36306;8.5686;2;5;;5;24.07.2019 11:30;;Verschiebung um 65m nach Nordwesten;E797D34ED2C2;NA
+1313;O16;76B1;2685358;1246416;475;Biberlinstrasse;Sensirion;47.36306;8.5686;2;5;;5;06.02.2020 11:15;;Verschiebung um 65m nach Nordwesten;DC0C88FEFFD676B1;NA
+1315;O18;DA68;2685627;1245419;469;August-Forel-Strasse;Sensirion;47.35405;8.57197;11;45;;5;24.07.2019 15:35;;grosse Baustelle im Osten (Fotos!);F647406ADA68;NA
+1316;O18;D36A;2685627;1245419;469;August-Forel-Strasse;Sensirion;47.35405;8.57197;11;45;;5;06.02.2020 13:25;;grosse Baustelle im Osten (Fotos!);CFEDE3FEFFD0D36A;NA
+1317;O19;B1DB;2685592;1244803;461;Enzenbuehlstrasse;Sensirion;47.34852;8.57139;2;45;;5(D);24.07.2019 15:25;;;CE18FB86B1DB;NA
+1318;O19;5F84;2685592;1244803;461;Enzenbuehlstrasse;Sensirion;47.34852;8.57139;2;45;;5(D);06.02.2020 13:45;;;F67A49FEFF9B5F84;NA
+1320;P5;8F45;2685388;1251816;428;Aubruggstrasse;Sensirion;47.41162;8.57003;9;50;;5(6/9);11.06.2019 13:45;;Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt;F1D5EB8D8F45;NA
+1321;P5;37FE;2685388;1251816;428;Aubruggstrasse;Sensirion;47.41162;8.57003;9;50;;5(6/9);04.02.2020 10:20;;Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt;C6AA6FFEFF7C37FE;NA
+1322;P6;A890;2685381;1251384;429;Auhofstrasse;Sensirion;47.40773;8.56986;7;10;;5;11.06.2019 13:10;;evtl. leichte Abschattung durch Baum im Norden;C9DD17CFA890;NA
+1325;P12;F225;2685631;1248364;608;Dreiwiesenstrasse;Sensirion;47.38054;8.57259;4;75;;9;24.07.2019 10:45;;;E437CB2AF225;NA
+1326;P12;9A41;2685631;1248364;608;Dreiwiesenstrasse;Sensirion;47.38054;8.57259;4;75;;9;07.02.2020 10:30;;Orientierung geaendert (alt:Nordost -> neu: Suedost);F35696FEFF959A41;NA
+1328;P14;26FB;2685792;1247441;590;Kurhausstrasse;Sensirion;47.37222;8.57455;28;15;;9(5);24.07.2019 11:00;;;CE3F022C26FB;NA
+1329;P14;F1BE;2685792;1247441;590;Kurhausstrasse;Sensirion;47.37222;8.57455;28;15;;9(5);07.02.2020 10:15;;;EAD219FEFF46F1BE;NA
+1331;P17;A54B;2685967;1245934;500;Waserstrasse;Sensirion;47.35864;8.57657;14;10;;6(5);25.07.2019 08:35;;;F184476AA54B;NA
+1332;P17;2FAD;2685967;1245934;500;Waserstrasse;Sensirion;47.35864;8.57657;14;10;;6(5);06.02.2020 11:00;;;E44961FEFF372FAD;NA
+1333;P18;2131;2686130;1245427;479;Balgriststrasse;Sensirion;47.35406;8.57863;10;10;;5;24.07.2019 15:55;;;C376298E2131;NA
+1334;P18;8.00E+55;2686130;1245427;479;Balgriststrasse;Sensirion;47.35406;8.57863;10;10;;5;06.02.2020 13:35;;;D6F343FEFF418E55;NA
+1337;Q7;486C;2685932;1250964;430;Altwiesenstrasse;Sensirion;47.40388;8.57707;1;5;;6;11.06.2019 11:35;;;F9D459A7486C;NA
+1339;Q8;7CE3;2686089;1250568;447;Probsteistrasse;Sensirion;47.4003;8.57908;6(?);40;;9;11.06.2019 12:10;;Knapp 200m an Strasse nach Norden verschoben!;DAA190887CE3;NA
+1341;Q17;B769;2686463;1245923;569;Witikonerstrasse;Sensirion;47.35848;8.58313;88;5;;6;25.07.2019 08:55;;;EB296C53B769;NA
+1342;Q17;F010;2686463;1245923;569;Witikonerstrasse;Sensirion;47.35848;8.58313;88;5;;6;06.02.2020 10:50;;;D50E20FEFF89F010;NA
+1344;R6;A768;2686316;1251458;427;ueberlandstrasse;Sensirion;47.40827;8.58226;109;5;;5;11.06.2019 11:15;;;FC98B5EDA768;NA
+1346;R7;57C1;2686393;1250935;428;Grosswiesenstrasse;Sensirion;47.40356;8.58318;3;15;;6(5);11.06.2019 10:50;;;C735835657C1;NA
+1349;R16;726F;2686998;1246549;606;Loorenhalde;Sensirion;47.36404;8.59034;4;15;Laterne;6;25.07.2019 10:05;;Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok.;C7FFEBCD726F;NA
+1350;R16;1D03;2686998;1246549;606;Loorenhalde;Sensirion;47.36404;8.59034;4;15;Laterne;6;06.02.2020 10:10;;Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok.;F853C3FEFFC01D03;NA
+1352;R18;9AE5;2687001;1245611;586;unbekannt (nahe Segetenweg);Sensirion;47.3556;8.59019;10;10;Laterne;5;25.07.2019 09:15;;;C7D2A89C9AE5;NA
+1353;R18;8471;2687001;1245611;586;unbekannt (nahe Segetenweg);Sensirion;47.3556;8.59019;10;10;Laterne;5;06.02.2020 10:35;;;D7D020FEFF6A8471;NA
+1356;S8;60CE;2686972;1250560;431;Altwiesenstrasse;Sensirion;47.40011;8.59077;32;10;;5(6);25.07.2019 12:00;;;C739690860CE;NA
+1359;S17;6004;2687439;1246067;616;Oetlisbergerstrasse;Sensirion;47.35964;8.59608;2;<5;;5(6);25.07.2019 09:55;;;E8BD5C816004;NA
+1360;S17;AB8B;2687439;1246067;616;Oetlisbergerstrasse;Sensirion;47.35964;8.59608;2;<5;;5(6);06.02.2020 09:30;;;E82421FEFFE1AB8B;NA
+1361;S18;1508;2687486;1245577;601;Wiesliacher;Sensirion;47.35523;8.59661;14;<5;;5;25.07.2019 10:50;;;F81EDF521508;NA
+1362;S18;D3FC;2687486;1245577;601;Wiesliacher;Sensirion;47.35523;8.59661;14;<5;;5;06.02.2020 09:55;;;DB9C34FEFF72D3FC;NA
+1363;T16;F4D4;2687856;1246652;610;Im Hau;Sensirion;47.36485;8.60171;9;20;;9(D/A);25.07.2019 10:20;;;DB2BF374F4D4;NA
+1364;T16;050D;2687856;1246652;610;Im Hau;Sensirion;47.36485;8.60171;9;20;;9(D/A);06.02.2020 09:10;;;E12A17FEFF65050D;NA
+1365;T17;208C;2687920;1246205;629;Im Glockenacker;Sensirion;47.36082;8.60247;17;15;Laterne;5(D);25.07.2019 10:35;;;D07769DF208C;NA
+1366;T17;8BA6;2687920;1246205;629;Im Glockenacker;Sensirion;47.36082;8.60247;17;15;Laterne;5(D);06.02.2020 09:40;;;E8A37FFEFF298BA6;NA
+1369;Zuerich-Affoltern;3AD0;2681472;1253542;443;Reckenholzstrasse;Sensirion;47.42763;8.51846;42;70;;9;12.06.2019 14:55;;40m von der MeteoSchwiez-Referenzstation entfernt;D13057B73AD0;NA
+1372;Zuerich-Fluntern;DB2C;2685114;1248015;548;Ackermannstrasse;Sensirion;47.37747;8.56568;7;15;;5(6);01.07.2019 15:50;;40m von MeteoSchweiz-Referenzstation entfernt;FCBBD3B1DB2C;NA
+1373;Zuerich-Fluntern;4BA5;2685114;1248015;548;Ackermannstrasse;Sensirion;47.37747;8.56568;7;15;;5(6);07.02.2020 09:45;;40m von MeteoSchweiz-Referenzstation entfernt;F74548FEFF944BA5;NA
+1375;Zuerich-Kaserne;DCA8;2682484;1248039;409;Militaerstrasse;Sensirion;47.37802;8.53086;;10;;2;29.07.2019 11:50;;60m nordoestlich der offiziellen Messstation;D4A1D5E6DCA8;NA
+1378;Zuerich-Schimmelstrasse;3A6D;2681948;1247241;413;Gerhardstrasse/Schimmelstrasse;Sensirion;47.37091;8.52362;1;15;;2;18.06.2019 08:45;;;D46FCEEB3A6D;D46FCE0000EB3A6D
+1384;A6;7751;2678068;1250637;395;Paul-Pflueger-Strasse;Sensirion;47.40192;8.47285;19;25;NA;8(9);24.04.2020 10:30;NA;Verschiebung um 190m nach Nordosten (naechstmoegliche Stelle);D59112FEFF357751;NA
+1385;A8;BF88;2678039;1249544;414;Dachslernstrasse;Sensirion;47.3921;8.47227;29;10;NA;6;23.04.2020 15:45;NA;Hecke ziemlich nahe unter Sensor (Foto!);FDB193FEFF2BBF88;NA
+1386;A9;0A81;2678055;1249021;428;Rautistrasse;Sensirion;47.38739;8.4724;69;25;NA;5(6);23.04.2020 15:55;NA;NA;CC0808FEFFA60A81;NA
+1387;AWEL-Blumenfeld;EE4D;2680581;1252968;454;Dora-Staudinger-Strasse;Sensirion;47.42258;8.50655;3;10;NA;5;27.04.2020 09:45;NA;NA;EEB755FEFF0EEE4D;NA
+1388;AWEL-Bucheggplatz;B08A;2682646;1250251;472;Bucheggstrasse;Sensirion;47.39789;8.53341;NA;0;Dach Haltestelle;5;27.04.2020 18:00;NA;ca. 2 m ueber Boden;C695B7FEFF5BB08A;NA
+1391;AWEL-Lindenhof;6A14;2683258;1247485;428;Lindenhof;Sensirion;47.37294;8.54101;3;25;Laterne;B(2);22.04.2020 09:00;NA;NA;DE3093FEFF8F6A14;NA
+1392;AWEL-Oerlikerpark;B4D7;2683023;1252127;439;Oerlikerpark;Sensirion;47.41471;8.53876;45;40;NA;2(B);27.04.2020 12:45;NA;Parkanlage;F29AFAFEFF67B4D7;NA
+1393;AWEL-Paradeplatz;7411;2683117;1247176;410;Bahnhofstrasse;Sensirion;47.37018;8.53908;133;5;Laterne;2;22.04.2020 09:45;NA;NA;F339EAFEFF017411;NA
+1394;AWEL-Sechelaeutenplatz;ABB2;2683684;1246724;409;Sechselaeutenplatz;Sensirion;47.36604;8.5465;15;15;NA;2(E );21.04.2020 15:20;NA;NA;C80646FEFF9DABB2;NA
+1396;AWEL-Witikon;8B69;2687049;1245924;607;Berghaldenstrasse;Sensirion;47.35841;8.59089;2;25;NA;6(5);20.04.2020 16:45;NA;NA;EA68D5FEFF588B69;NA
+1397;AWEL-Zuerihorn;CFC6;2684040;1245344;408;unbekannt (Zuerihorn);Sensirion;47.35358;8.55096;66;50;NA;9(G);21.04.2020 10:55;NA;NA;D1B8F4FEFF4DCFC6;NA
+1399;B5;B15B;2678387;1251094;430;Rebbergstrasse;Sensirion;47.40599;8.47716;43;20;NA;6(5);24.04.2020 11:55;NA;Grenze zu Oberengstringen;DBDD94FEFF87B15B;NA
+1400;B7;3CE3;2678453;1250076;397;Bernerstrasse Sued;Sensirion;47.39683;8.47785;80;200;NA;9;24.04.2020 10:45;NA;NA;E1D445FEFF833CE3;NA
+1401;B8;49DA;2678489;1249496;398;Badenerstrasse;Sensirion;47.39161;8.47823;keine (BrÃ¼ckenpfeiler);0(15);BrÃ¼cke;5;23.04.2020 15:35;NA;Rechteckige Masten eignen sich nicht! ->Bruecke;FBF3A3FEFF6E49DA;NA
+1402;B10;6AB2;2678652;1248608;426;Zwischenbaechen;Sensirion;47.3836;8.48023;11;5;NA;6(5);23.04.2020 16:25;NA;NA;F3D870FEFF596AB2;NA
+1403;B11;2.00E+01;2678675;1248100;431;Unbekannt (Diggelmannstrasse);Sensirion;47.37903;8.48044;3;60;Lampe;6;23.04.2020 16:40;NA;NA;E7453CFEFFC020E0;NA
+1404;C3;99EA;2678698;1252142;507;Im oberen Boden;Sensirion;47.41538;8.48146;5;25;NA;5;24.04.2020 12:10;NA;Flaeche oestlich des Sensors zugewachsen!;C76020FEFFAC99EA;NA
+1405;C4;D379;2678783;1251431;474;Riedhofstrasse;Sensirion;47.40898;8.48246;42;15;NA;5;24.04.2020 13:20;NA;Privatgelaende: Verschiebung um 75m nach Suedosten;F47C63FEFF16D379;NA
+1406;C7;676F;2678950;1250050;397;Baendlistrasse;Sensirion;47.39654;8.48443;27;15;NA;5;24.04.2020 10:15;NA;Verschiebung um 90m nach Sueden, keine Befestigungsmoeglichkeit im Schrebergartenâ€¦;FA5D1DFEFFDA676F;NA
+1407;C9;590;2679046;1249233;400;Meier-Bosshard-Strasse;Sensirion;47.38918;8.48556;3;10;NA;2(5);23.04.2020 15:20;NA;Verschiebung um 50m nach Norden, da an Segnestrasse keine Laternen;CF9C7EFEFF0A0590;NA
+1408;C10;4231;2679167;1248657;407;Saumackerstrasse;Sensirion;47.38398;8.48706;26;5;NA;6(5);23.04.2020 16:55;NA;NA;E21898FEFFC74231;NA
+1409;C12;1234;2679183;1247639;426;In der Ey/ In der Waesseri;Sensirion;47.37483;8.48709;3;5;NA;5(6);23.04.2020 13:25;NA;NA;FBB472FEFFAC1234;NA
+1410;C13;30D6;2679304;1247167;445;Im Heimgaertli;Sensirion;47.37057;8.48861;6;5;NA;6;23.04.2020 13:15;NA;NA;DB9450FEFFB430D6;NA
+1411;D5;A2FA;2679372;1251179;477;Lachenacker;Sensirion;47.40664;8.49022;6;5;Laterne;6(5);24.04.2020 13:05;NA;NA;F8FC36FEFF47A2FA;NA
+1412;D6;DCA4;2679385;1250688;444;Hohenklingenallee;Sensirion;47.40222;8.4903;2;10;NA;6;24.04.2020 14:00;NA;NA;DAC818FEFF1EDCA4;NA
+1413;D8;6554;2679547;1249697;399;Max-Hoegger-Strasse;Sensirion;47.39329;8.49227;3;40;NA;5(4/E);24.04.2020 11:15;NA;Autos auf Luftaufnahme mussten Containerwohnungen weichen;D667D7FEFF5C6554;NA
+1414;D9;0C97;2679502;1249207;401;Albulastrasse/Luggerwegstrasse;Sensirion;47.38889;8.49159;14;15;NA;5(4);23.04.2020 15:00;NA;NA;F1C120FEFF8B0C97;NA
+1415;D11;D755;2679662;1248252;409;Rautistrasse;Sensirion;47.38028;8.49354;NA;5;NA;5;23.04.2020 13:55;NA;NA;C70B67FEFFF1D755;NA
+1416;D12;499B;2679730;1247745;416;Ginsterstrasse;Sensirion;47.37571;8.49435;3;5;NA;6(5);23.04.2020 13:45;NA;Baustelle;DF33B3FEFFDE499B;NA
+1417;D14;B855;2679834;1246827;454;Hohensteinweg;Sensirion;47.36745;8.49556;1;35;NA;4(5);23.04.2020 12:55;NA;NA;ED01F2FEFF98B855;NA
+1418;D15;0B88;2679926;1246267;498;Doeltschiweg;Sensirion;47.3624;8.49668;66;30;Laterne;9;23.04.2020 12:30;NA;NA;D534CFFEFF150B88;NA
+1419;E1;48AC;2679670;1252996;458;Im Holzerhurd;Sensirion;47.42295;8.49449;1;15;NA;6(5/A);24.04.2020 16:20;NA;NA;F105F4FEFFE548AC;NA
+1420;E4;C1F3;2679583;1251567;527;Kappenbuehstrasse;Sensirion;47.4101;8.49308;20;70;NA;9;24.04.2020 13:35;NA;Verschiebung um 230m nach Suedwesten;F0F631FEFF6CC1F3;NA
+1421;E5;B1A1;2679805;1251219;508;Benedikt-Fontana-Weg;Sensirion;47.40695;8.49596;3;5;NA;6;24.04.2020 13:45;NA;NA;DABCE0FEFF7FB1A1;NA
+1422;E8;0.00E+00;2680010;1249775;399;Bernerstrasse Nord;Sensirion;47.39394;8.49842;15;90;NA;9;24.04.2020 09:40;NA;NA;E97F7EFEFFDB0E74;NA
+1423;E10;812E;2680123;1248848;405;Baslerstrasse;Sensirion;47.38559;8.49975;23;10;NA;3(2) or 6(5);23.04.2020 14:25;NA;NA;F35EA0FEFF77812E;NA
+1424;E11;4287;2680207;1248300;410;Edelweissstrasse;Sensirion;47.38065;8.50076;3;10;NA;6;23.04.2020 14:10;NA;NA;D042E1FEFFDD4287;NA
+1425;E13;618F;2680327;1247262;425;Schaufelbergerstrasse;Sensirion;47.3713;8.50217;11;10;NA;5;23.04.2020 12:05;NA;NA;D3F638FEFF66618F;NA
+1427;E16;68A9;2680593;1245835;489;Im Hagacker;Sensirion;47.35843;8.50543;7;15;NA;6;22.04.2020 16:05;NA;Verschiebung um 150m nach Nordosten;C6D4BCFEFF7868A9;NA
+1428;E17;FC5F;2680435;1245189;539;Kolbenhofstrasse;Sensirion;47.35264;8.50322;4;130;NA;D(A);22.04.2020 15:40;NA;Verschiebung um 125m nach Suedwesten;E7135EFEFF13FC5F;NA
+1429;F1;981B;2680154;1253233;451;Muehlackerstrasse;Sensirion;47.42502;8.50095;45;20;NA;5;27.04.2020 09:30;NA;NA;E45D9DFEFF2F981B;NA
+1430;F3;B986;2680165;1252298;507;Holderbachweg;Sensirion;47.41661;8.50092;17;10;NA;6(A);24.04.2020 16:05;NA;Am Hang, nahe beim Waldrand;CBBFE6FEFFD6B986;NA
+1431;F6;17ED;2680416;1250796;498;Blaesistrasse;Sensirion;47.40307;8.50398;13;15;NA;6;24.04.2020 15:00;NA;NA;EAB4C4FEFFD217ED;NA
+1432;F7;583C;2680434;1250337;442;Ackersteinstrasse;Sensirion;47.39894;8.50414;35;15;NA;6;24.04.2020 14:15;NA;NA;E70831FEFFDF583C;NA
+1433;F9;B143;2680633;1249242;403;NA;Sensirion;47.38907;8.50657;NA;15;NA;8;24.04.2020 09:15;NA;Verschiebung um 120m nach Suedosten an SBB-Laterne nahe Gleisfeld;DD8F6EFEFF73B143;NA
+1435;F12;8C3B;2680666;1247879;412;Gutstrasse;Sensirion;47.37681;8.50677;5;15;BÃ¤ume;9;23.04.2020 11:20;NA;Verschiebung um 90m nach Nordwesten;CB6A16FEFFA88C3B;NA
+1436;F13;A4A9;2680785;1247339;419;unbekannt (Schrebergaerten);Sensirion;47.37193;8.50824;18.9;20;Laterne;5;23.04.2020 11:55;NA;NA;CBBAF8FEFF75A4A9;NA
+1437;F15;00F7;2680866;1246367;443;Borrweg;Sensirion;47.36318;8.50914;4.6;10;NA;5;22.04.2020 16:25;NA;NA;FCD57DFEFF5E00F7;NA
+1438;F16;C8FB;2680953;1245848;465;Bachtobelstrasse;Sensirion;47.3585;8.5102;35;15;BÃ¤ume;6(5);22.04.2020 15:55;NA;NA;E5AC35FEFFF0C8FB;NA
+1439;F18;5067;2681062;1244961;473;unbekannt (nahe Gaenzilooweg);Sensirion;47.35051;8.51148;NA;>100;BÃ¤ume;9;22.04.2020 15:25;NA;Verschiebung um 80m nach Nordwesten;F662B8FEFFFE5067;NA
+1440;G2;710E;2680634;1252820;456;kein (Bachmannweg);Sensirion;47.42125;8.50723;1;30;NA;5;27.04.2020 10:00;NA;NA;D86081FEFF3E710E;NA
+1441;G3;9FFF;2680739;1252381;463;Regulastrasse;Sensirion;47.41728;8.50854;20;<5;NA;6;24.04.2020 15:50;NA;NA;E96DF9FEFF479FFF;NA
+1442;G5_AWEL-ScienceCity;E1E1;2680698;1251423;524;Wolfgang-Pauli-Strasse;Sensirion;47.40867;8.50783;NA;5;BÃ¤ume;5;24.04.2020 15:30;NA;Verschiebung um 100m nach Westen, 1.5m ueber Boden;C32495FEFF53E1E1;NA
+1444;G8;AE4D;2680953;1249913;407;Am Wasser;Sensirion;47.39506;8.51093;8;15;NA;5(6);28.04.2020 10:25;NA;NA;E3967EFEFFB5AE4D;NA
+1445;G9;1738;2681062;1249351;402;Duttweilerstrasse;Sensirion;47.39;8.51228;9;5;NA;2;24.04.2020 09:00;NA;Eher hoch (ca. 4m);C55E2EFEFF291738;NA
+1446;G11_AWEL-Hardplatz;9403;2681255;1248509;407;Hardplatz;Sensirion;47.3824;8.51468;NA;15;NA;2(E);23.04.2020 10:55;NA;130m zu AWEL Sensor verschoben, Hardplatz bereits fertiggestellt (nicht wie auf Luftaufnahme!);C3963AFEFFCE9403;NA
+1448;G14;A2FF;2681399;1246872;435;Goldbrunnenstrasse;Sensirion;47.36766;8.51629;5;10;BÃ¤ume;5;22.04.2020 16:40;NA;NA;F2A598FEFFD1A2FF;NA
+1449;G15;D672;2681396;1246415;428;Talwiesenstrasse;Sensirion;47.36355;8.51616;NA;20;NA;2;22.04.2020 16:50;NA;NA;EA16AFFEFF19D672;NA
+1450;G18;56B2;2681625;1244975;424;Gfellstrasse;Sensirion;47.35057;8.51893;11;60;NA;9(D/G);22.04.2020 15:00;NA;Verschiebung um 100m nach Nordosten;DE9D17FEFFFB56B2;NA
+1451;H1;F798;2681082;1253556;437;NA;Sensirion;47.42781;8.5133;NA;150;BÃ¤ume;9;27.04.2020 10:45;NA;Verschiebung um 70m nach Norden, Biotop im Norden fertig (nicht wie auf Luftbild!);F3147BFEFF22F798;NA
+1452;H2;3826;2681173;1252895;454;Reckenholzstrasse;Sensirion;47.42185;8.51439;8;35;BÃ¤ume;5(A);27.04.2020 10:15;NA;NA;C7D4F1FEFFBB3826;NA
+1453;H4;0.00E+00;2681306;1251915;472;Erchenbuehlstrasse;Sensirion;47.41302;8.51597;3;5;BÃ¤ume;6(5);27.04.2020 11:00;NA;NA;D6A418FEFF4F0E34;NA
+1454;H7;708D;2681438;1250485;252;Obere Waidstrasse;Sensirion;47.40015;8.51746;33;35;NA;9(A);28.04.2020 11:40;NA;NA;DA33F1FEFFF1708D;NA
+1455;H8;1823;2681489;1249922;422;Waidfussweg;Sensirion;47.39508;8.51803;4;<5;Laterne;5;28.04.2020 10:10;NA;NA;F85B7CFEFF521823;NA
+1456;H10;FC73;2681612;1248902;404;Geroldstrasse (-rampe);Sensirion;47.38589;8.51948;48.6;15;NA;2(1);23.04.2020 10:40;NA;NA;E94168FEFFE7FC73;NA
+1457;H11;73B9;2681645;1248305;408;Hohlstrasse;Sensirion;47.38052;8.5198;NA;15;NA;2;24.04.2020 08:35;NA;Wegen Baustelle 145m nach Sued(westen) verschoben;C81DB0FEFFB373B9;NA
+1458;H13;982B;2681714;1247485;413;Seebahnstrasse;Sensirion;47.37313;8.52057;12;20;BÃ¤ume;2;22.04.2020 17:50;NA;NA;DDCD91FEFFA9982B;NA
+1459;H14;61EC;2681833;1246984;414;Zurlindenstrasse;Sensirion;47.36861;8.52205;NA;20;BÃ¤ume;2;22.04.2020 17:15;NA;NA;EAA31CFEFF1461EC;NA
+1460;H16;78CA;2681916;1246010;420;Utoplatz;Sensirion;47.35984;8.52297;NA;5;NA;2;22.04.2020 14:45;NA;NA;E032BFFEFFCF78CA;NA
+1461;H17;79D0;2682008;1245481;420;Kanalstrasse;Sensirion;47.35507;8.52409;28;65;NA;9(E);22.04.2020 14:25;NA;NA;F1DE70FEFF5079D0;NA
+1462;H19;A740;2682098;1244544;448;Rainstrasse;Sensirion;47.34664;8.52511;27;25;NA;6(5);22.04.2020 14:05;NA;NA;E7E4E9FEFFE1A740;NA
+1463;H20;429A;2682195;1243950;463;Drosselstrasse;Sensirion;47.34128;8.52629;2;<5;NA;5(6);22.04.2020 13:55;NA;NA;FCF95AFEFF2C429A;NA
+1464;H22;1A7D;2682383;1242971;464;Dangelstrasse;Sensirion;47.33244;8.5286;8;5;NA;5;22.04.2020 13:25;NA;Verschiebung um 80m nach Nordosten;CABA5EFEFF421A7D;NA
+1465;I4;71A5;2681711;1251947;459;Wehntalerstrasse;Sensirion;47.41326;8.52134;NA;10;NA;6(5);27.04.2020 11:20;NA;NA;DE2D41FEFF6471A5;NA
+1466;I7;78AE;2682005;1250372;500;Obere Waidstrasse;Sensirion;47.39906;8.52495;19;45;NA;6(9/A);28.04.2020 12:00;NA;NA;F0191CFEFF1678AE;NA
+1467;I8_Zuerich-Rosengartenstrasse;982;2682085;1249922;431;Rosengartenstrasse;Sensirion;47.395;8.52592;11,2;5;NA;2;28.04.2020 09:45;NA;NA;FA1CEFFEFF480982;NA
+1468;I9;7A12;2682039;1249507;403;Kloster-Fahr-Weg;Sensirion;47.39128;8.52524;44;10;Laterne;5(G);27.04.2020 10:45;NA;NA;C7E9ACFEFFDF7A12;NA
+1469;I10;7F4E;2682002;1248888;404;Ottostrasse;Sensirion;47.38571;8.52464;9;15;NA;5;23.04.2020 10:25;NA;Verschiebung um 120m nach Suedwesten, weil keine Laterne in der Naehe;F5A24FFEFF7C7F4E;NA
+1470;I12;F5E4;2682075;1248092;409;Brauerstrasse;Sensirion;47.37855;8.52546;12;15;NA;2;23.04.2020 08:50;NA;Verschiebung um 120m nach Nordwesten;CDAE6BFEFFF9F5E4;NA
+1471;I13;C7B4;2682271;1247515;411;Badernerstrasse/Kanzleistrasse;Sensirion;47.37333;8.52795;28;10;NA;2;22.04.2020 18:05;NA;NA;F4A459FEFF55C7B4;NA
+1472;I15;6ED9;2682363;1246500;417;Bederstrasse;Sensirion;47.36419;8.52898;NA;20;NA;5;22.04.2020 10:30;NA;NA;FD27F4FEFFDB6ED9;NA
+1473;I16;10C3;2682486;1246026;428;unbekannt (nahe Gablerstrasse);Sensirion;47.35991;8.53052;4,5;20;Laterne;5;22.04.2020 10:50;NA;NA;F1EA5EFEFF1910C3;NA
+1474;I18;69D4;2682610;1245018;414;Seestrasse;Sensirion;47.35083;8.53197;NA;8;NA;5;22.04.2020 11:30;NA;NA;F78BBDFEFFE569D4;NA
+1475;I19;3455;2682623;1244519;424;Renggerstrasse;Sensirion;47.34634;8.53205;4;5;NA;5;22.04.2020 11:40;NA;NA;CC9C6CFEFF5B3455;NA
+1476;I21;C50A;2682752;1243480;455;Widmerstrasse;Sensirion;47.33698;8.53357;20;8;NA;6(5);22.04.2020 13:00;NA;NA;EBC5A1FEFFDDC50A;NA
+1477;I22;10F6;2682851;1243011;474;Nidelbadstrasse;Sensirion;47.33275;8.53479;17;8;NA;5;22.04.2020 13:10;NA;NA;E87A5FFEFF5310F6;NA
+1478;J5;139F;2682286;1251522;460;Maienstrasse;Sensirion;47.40937;8.52888;1;10;NA;6;27.04.2020 11:55;NA;NA;D4F23CFEFFCF139F;NA
+1480;J6;BD2B;2682361;1251010;489;Kaeferholzstrasse;Sensirion;47.40475;8.52978;22;65;NA;9(A);27.04.2020 11:40;NA;NA;CAAC25FEFF6BBD2B;NA
+1481;J8;F6E9;2682528;1250023;457;Wibichstrasse;Sensirion;47.39586;8.53181;1;5;NA;5(6);27.04.2020 11:20;NA;NA;C9B330FEFF44F6E9;NA
+1482;J9;2EFF;2682564;1249583;431;Nuerenbergstrasse;Sensirion;47.39189;8.5322;1;<5;NA;5;27.04.2020 11:10;NA;NA;E19799FEFF9C2EFF;NA
+1483;J11;0.00E+00;2682588;1248567;406;Konradstrasse/Ackerstrasse;Sensirion;47.38275;8.53234;keine (Fahnenmast);5;NA;2;23.04.2020 09:50;NA;NA;E1BFA9FEFF6B0E52;NA
+1484;J12;8501;2682742;1248089;409;Europaallee;Sensirion;47.37844;8.53429;NA;10;NA;1(2);23.04.2020 09:30;NA;NA;D9EADCFEFF298501;NA
+1485;J14;5215;2682815;1247048;408;Am Schanzengraben;Sensirion;47.36906;8.53506;6;5;NA;2(G);22.04.2020 10:00;NA;NA;EEE861FEFF6E5215;NA
+1486;J15;924F;2682879;1246566;408;Toedistrasse;Sensirion;47.36472;8.53582;3;<5;NA;2;22.04.2020 10:15;NA;NA;DAAB9DFEFFFA924F;NA
+1487;J17;4B47;2682896;1245505;408;unbekannt (nahe Mythenquai);Sensirion;47.35518;8.53585;13;20;Laterne;G(5);22.04.2020 11:05;NA;NA;D6B1EDFEFFFF4B47;NA
+1488;J20;C2D4;2683133;1243917;407;Cassiopeiasteg;Sensirion;47.34087;8.53869;4;50;NA;G(5);22.04.2020 12:15;NA;"\Verschiebung um 120m nach Sueden \""""";DCFB4DFEFF94C2D4;NA
+1489;J21;F6FB;2683254;1243612;407;Forellenweg;Sensirion;47.33811;8.54023;19;20;NA;G(5);22.04.2020 12:00;NA;NA;C8EBD4FEFFB7F6FB;NA
+1490;K2;EDA4;2682663;1253071;453;Schwandenholzstrasse;Sensirion;47.42325;8.53416;13;100;NA;5(A);27.04.2020 14:10;NA;Am Waldrand;E04C0AFEFF15EDA4;NA
+1491;K4;F623;2682745;1252062;441;Eduard-Imhof-Strasse;Sensirion;47.41417;8.53506;4;15;NA;8(5);27.04.2020 12:30;NA;NA;D5D67CFEFFD9F623;NA
+1492;K5;EE54;2682775;1251584;452;Holunderweg;Sensirion;47.40986;8.53537;12;10;NA;5;27.04.2020 12:15;NA;"\Verschiebung um 60m nach Westen aufgrund von Baustelle \""""";F3AE95FEFFAAEE54;NA
+1494;K7;7148;2682917;1250593;465;Wehntalerstrasse;Sensirion;47.40093;8.537;NA;5;NA;5(6);27.04.2020 17:40;NA;NA;DF6208FEFFFD7148;NA
+1495;K8;15A2;2682963;1250106;477;Spelteriniweg;Sensirion;47.39655;8.53759;5;8;NA;6(5);28.04.2020 12:40;NA;NA;D230FFFEFF9115A2;NA
+1496;K10_Zuerich-Stampfenbachstrasse;0D9F;2683144;1249055;442;Stampfenbachstrasse;Sensirion;47.387;8.53979;NA;5;NA;2;28.04.2020 17:20;NA;NA;E29C06FEFF160D9F;NA
+1497;K11;A187;2683166;1248556;412;Neumuehlequai;Sensirion;47.38258;8.53999;38;15;NA;2(G/1);23.04.2020 10:05;NA;NA;F0CB55FEFF1FA187;NA
+1498;K13;D8E7;2683247;1247633;409;Uraniastrasse;Sensirion;47.37427;8.54089;NA;10;NA;5(2);22.04.2020 08:50;NA;NA;C8BB76FEFFCAD8E7;NA
+1499;K14;4819;2683337;1247125;409;Stadthausquai;Sensirion;47.36969;8.54198;12;25;NA;2(G);22.04.2020 09:30;NA;"\sehr dunkler Mast, keine Moeglichkeit im Muensterhof (Projekt) \""""";F2754EFEFFD44819;NA
+1500;L1;1B21;2683096;1253598;435;unbekannt (naehe Schoenauweg);Sensirion;47.42793;8.54;NA;10;NA;6;27.04.2020 14:25;NA;NA;F25226FEFF301B21;NA
+1501;L3;2FD9;2683216;1252669;460;Hoehenring;Sensirion;47.41956;8.54141;23;60;NA;6;27.04.2020 14:00;NA;Auf einem kleinen Huegel;EC6806FEFFCD2FD9;NA
+1502;L4;15F1;2683246;1252066;440;Binzmuehlestrasse/Ruedi-Walter-Strasse;Sensirion;47.41414;8.5417;23;<5m;NA;2;27.04.2020 13:00;NA;NA;C66D3FFEFFC515F1;NA
+1504;L6;723E;2683364;1251175;461;Venusstrasse;Sensirion;47.40611;8.5431;5;15;NA;6;27.04.2020 17:00;NA;NA;D56170FEFF61723E;NA
+1505;L7;F981;2683422;1250634;471;Oerlikonerstrasse;Sensirion;47.40124;8.54376;5;5;NA;6;27.04.2020 17:20;NA;NA;F0334DFEFF20F981;NA
+1507;L9;C859;2683524;1249635;488;Winterthurerstrasse;Sensirion;47.39224;8.54493;5;<5;NA;5;28.04.2020 16:45;NA;NA;FBB3D0FEFF52C859;NA
+1508;L10;8FF1;2683573;1249142;481;Stolzestrasse;Sensirion;47.3878;8.54549;9;5;NA;5;28.04.2020 17:00;NA;NA;F359D1FEFF6B8FF1;NA
+1509;L12;60C9;2683651;1248239;454;Clausiussteig;Sensirion;47.37967;8.54635;2;<5;Laterne;2;21.04.2020 16:15;NA;"\Verschiebung um 85m nach Nordwesten \""""";F08CD5FEFFD860C9;NA
+1510;L13;557;2683740;1247721;445;Kuenstlergasse;Sensirion;47.375;8.54743;10;15;NA;5;21.04.2020 15:55;NA;NA;F2B76FFEFFA90557;NA
+1511;L15;258D;2683907;1246728;413;Kreuzbuehlstrasse;Sensirion;47.36605;8.54946;NA;15;NA;2;21.04.2020 15:10;NA;NA;CECB25FEFFBD258D;NA
+1512;L16;7102;2683897;1246219;408;Seegartenstrasse;Sensirion;47.36147;8.54923;4;<5;NA;2;06.02.2020 15:00;NA;"\Verschiebung um 60m nach Nordwesten \""""";E779B5FEFFEE7102;NA
+1513;L16;9BC3;2683897;1246219;408;Seegartenstrasse;Sensirion;47.36147;8.54923;4;<5;NA;2;21.04.2020 15:35;NA;"\Verschiebung um 60m nach Nordwesten \""""";F09856FEFF009BC3;NA
+1514;L18;04FE;2684207;1245163;406;unbekannt (Steg am Zuerihorn);Sensirion;47.35194;8.55313;7;30;NA;G;21.04.2020 10:50;NA;"\Verschiebung um 105m nach Suedosten \""""";CCEBAAFEFF3D04FE;NA
+1515;M2;7776;2683558;1253232;437;unbekannt (nahe Ausserdorfstrasse);Sensirion;47.42458;8.54605;10;10;NA;6;27.04.2020 15:20;NA;"\Verschiebung um 85m nach Nordwesten (wegen Badi)""";F68C9DFEFF117776;NA
+1517;M5;E307;2683799;1251670;434;Wallisellenstrasse;Sensirion;47.41051;8.54895;10;5;NA;5(6);27.04.2020 16:10;NA;NA;C8B762FEFF7CE307;NA
+1518;M6;EC8B;2683865;1251222;444;Allenmoosstrasse;Sensirion;47.40647;8.54974;37;<5;NA;NA;27.04.2020 16:50;NA;NA;D20872FEFF18EC8B;NA
+1519;M8;576B;2684095;1250233;507;Frohburgstrasse;Sensirion;47.39755;8.5526;50;10;NA;6(5);28.04.2020 16:15;NA;"\Verschiebung um 110m nach Osten \""""";CA1A8FFEFF67576B;NA
+1520;M9;8D67;2684005;1249728;532;Letziweg;Sensirion;47.39302;8.55132;2;10;NA;6(9);28.04.2020 16:25;NA;NA;E30BD7FEFF3E8D67;NA
+1521;M11;EFDF;2684168;1248743;538;Hadlaubstrasse;Sensirion;47.38414;8.55329;14;0;NA;5;21.04.2020 17:00;NA;NA;D7CB15FEFF22EFDF;NA
+1522;M12;748C;2684223;1248207;510;Voltastrasse/Hochstrasse;Sensirion;47.37931;8.55392;NA;15;NA;6(5);21.04.2020 16:30;NA;NA;FF0C9CFEFF09748C;NA
+1523;M14;BC17;2684305;1247282;436;Steinwiesstrasse;Sensirion;47.37098;8.55483;14;5;NA;5;21.04.2020 14:45;NA;"\Verschiebung um 60m nach Norden, wenig Abschattung durch Baum \""""";F7A552FEFF2DBC17;NA
+1524;M15;2560;2684402;1246727;428;Minervastrasse;Sensirion;47.36598;8.55601;14;10;NA;5(2);21.04.2020 15:00;NA;NA;E2420EFEFF312560;NA
+1525;M17;AEA7;2684492;1245734;415;Wildbachstrasse;Sensirion;47.35703;8.55701;7;15;NA;2;21.04.2020 11:30;NA;NA;C093EDFEFFB3AEA7;NA
+1526;M18;02DA;2684527;1245252;408;Bellerivestrasse;Sensirion;47.35269;8.55738;NA;10;NA;2(B);21.04.2020 10:30;NA;NA;F61EE2FEFFB102DA;NA
+1527;N1;94AB;2684119;1253703;446;Frohbuehlstrasse;Sensirion;47.42875;8.55357;14;40;NA;6;27.04.2020 14:55;NA;NA;D3E547FEFF1294AB;NA
+1528;N2;1158;2684155;1253262;434;Schaffhauserstrasse (parallel);Sensirion;47.42478;8.55397;keine;10;NA;5;27.04.2020 15:05;NA;NA;F579CBFEFF081158;NA
+1529;N4;4D32;2684169;1252266;426;Leutschenbachstrasse;Sensirion;47.41582;8.55397;25;8;NA;2(1);27.04.2020 15:40;NA;grosse Baustelle suedlich;DFB881FEFF544D32;NA
+1531;N5;B44E;2684382;1251701;426;Wallisellenstrasse;Sensirion;47.41071;8.55668;30;25;NA;6(5);27.04.2020 16:30;NA;"\Verschiebung um 90m nach Suedosten \""""";DFD90CFEFF96B44E;NA
+1532;N7;EEBA;2684382;1250792;466;Frohburgstrasse;Sensirion;47.40254;8.55651;72;10;NA;6(A);28.04.2020 13:00;NA;NA;C614C1FEFF8AEEBA;NA
+1533;N11;B40D;2684651;1248768;608;Schloesslistrasse;Sensirion;47.3843;8.55969;11;15;NA;6(5);21.04.2020 16:45;NA;NA;CBA42DFEFF18B40D;NA
+1534;N13;DEB9;2684739;1247765;503;Schneckenmannstrasse;Sensirion;47.37527;8.56067;1,5;8;NA;5;21.04.2020 14:10;NA;NA;CE4CFCFEFFD6DEB9;NA
+1535;N14;4691;2684826;1247289;472;Dolderstrasse;Sensirion;47.37098;8.56173;16;5;NA;5;21.04.2020 14:25;NA;NA;C54731FEFF2A4691;NA
+1536;N16;5346;2684897;1246369;448;Hegibachstrasse;Sensirion;47.36269;8.56249;NA;<5;NA;5;21.04.2020 12:00;NA;"\Verschiebung um 60m nach Nordwesten \""""";E8FEEAFEFF845346;NA
+1537;N17;A860;2684990;1245689;451;Kartausstrasse;Sensirion;47.35656;8.56359;8;50;Laterne;A(9/6);21.04.2020 11:45;NA;"\Verschiebung um 130m nach Sueden \""""";F16715FEFFBEA860;NA
+1538;N19;A4A1;2685051;1244862;421;Fluehgasse;Sensirion;47.34912;8.56424;3;15;NA;5;21.04.2020 10:15;NA;"\Verschiebung um 55m nach Nordwesten \""""";C2F8C8FEFFC9A4A1;NA
+1539;O4;8BEA;2684686;1252262;425;Cornelia-Guggenheim-Weg;Sensirion;47.41572;8.56082;4;8;NA;2;27.04.2020 15:50;NA;"\Verschiebung um 80m nach Suedwesten \""""";D2BB5EFEFFDE8BEA;NA
+1541;O6;0F80;2684850;1251334;431;Heideggerweg;Sensirion;47.40735;8.56281;2;10;NA;6;28.04.2020 15:25;NA;NA;C7952DFEFF5E0F80;NA
+1543;O12;DF9A;2685182;1248324;588;Zuerichbergstrasse;Sensirion;47.38024;8.56664;57;10;NA;6;21.04.2020 13:30;NA;NA;EDD63AFEFF6EDF9A;NA
+1544;O13;E1DE;2685297;1247814;539;Waldhausstrasse;Sensirion;47.37564;8.568;3;60;NA;A;21.04.2020 13:55;NA;NA;F1B162FEFF67E1DE;NA
+1545;O15;6557;2685359;1246808;515;Hitzigweg;Sensirion;47.36658;8.56869;8;15;NA;6(A);21.04.2020 12:30;NA;NA;FF37A4FEFFE16557;NA
+1546;O16;A0D3;2685358;1246416;475;Biberlinstrasse;Sensirion;47.36306;8.5686;2;5;NA;5;21.04.2020 12:15;NA;"\Verschiebung um 65m nach Nordwesten \""""";EC9735FEFF32A0D3;NA
+1547;O18;C79B;2685627;1245419;469;August-Forel-Strasse;Sensirion;47.35405;8.57197;11;45;NA;5;21.04.2020 09:50;NA;grosse Baustelle im Osten (Fotos!);C620F5FEFFC7C79B;NA
+1548;O19;A3E7;2685592;1244803;461;Enzenbuehlstrasse;Sensirion;47.34852;8.57139;2;45;NA;5(D);21.04.2020 10:05;NA;NA;E8286FFEFF9EA3E7;NA
+1549;P5;2496;2685388;1251816;428;Aubruggstrasse;Sensirion;47.41162;8.57003;9;50;NA;5(6/9);28.04.2020 14:50;NA;"\Verschiebung um 85m nach Suedosten, stark befahrene Strasse, 15m von der Glatt entfernt \""""";EF96DFFEFFE02496;NA
+1550;P6;3B2E;2685381;1251384;429;Auhofstrasse;Sensirion;47.40773;8.56986;7;10;NA;5;28.04.2020 15:05;NA;"\evtl. leichte Abschattung durch Baum im Norden \""""";CA007AFEFF4A3B2E;NA
+1551;P12;A729;2685631;1248364;608;Dreiwiesenstrasse;Sensirion;47.38054;8.57259;4;75;NA;9;21.04.2020 13:15;NA;NA;EB5D32FEFF41A729;NA
+1553;P17;C740;2685967;1245934;500;Waserstrasse;Sensirion;47.35864;8.57657;14;10;NA;6(5);20.04.2020 17:25;NA;NA;DBEBD3FEFF77C740;NA
+1554;P18;DD47;2686130;1245427;479;Balgriststrasse;Sensirion;47.35406;8.57863;10;10;NA;5;21.04.2020 09:30;NA;NA;FF24C6FEFF3CDD47;NA
+1555;Q7;C139;2685932;1250964;430;Altwiesenstrasse;Sensirion;47.40388;8.57707;1;5;NA;6;28.04.2020 13:50;NA;NA;C8897CFEFFC5C139;NA
+1556;Q8;4C0A;2686089;1250568;447;Probsteistrasse;Sensirion;47.4003;8.57908;6(?);40;NA;9;28.04.2020 13:30;NA;Knapp 200m an Strasse nach Norden verschoben!;FB43D2FEFF184C0A;NA
+1557;Q17;2BFA;2686463;1245923;569;Witikonerstrasse;Sensirion;47.35848;8.58313;88;5;NA;6;20.04.2020 17:10;NA;NA;C9B40DFEFF8C2BFA;NA
+1558;R6;41CC;2686316;1251458;427;Ueberlandstrasse;Sensirion;47.40827;8.58226;109;5;NA;5;28.04.2020 14:30;NA;NA;DDF870FEFF3C41CC;NA
+1561;R16;A56D;2686998;1246549;606;Loorenhalde;Sensirion;47.36404;8.59034;4;15;Laterne;6;20.04.2020 15:15;NA;"\Laut Anwohner gehoert Lampe nicht ewz, von ihm aus aber ok. \""""";E1BC41FEFF44A56D;NA
+1562;R18;65A1;2687001;1245611;586;unbekannt (nahe Segetenweg);Sensirion;47.3556;8.59019;10;10;Laterne;5;20.04.2020 17:00;NA;NA;CAE649FEFF5B65A1;NA
+1563;S8;5C8F;2686972;1250560;431;Altwiesenstrasse;Sensirion;47.40011;8.59077;32;10;NA;5(6);28.04.2020 14:15;NA;NA;C56CAAFEFF665C8F;NA
+1564;S17;E864;2687439;1246067;616;Oetlisbergerstrasse;Sensirion;47.35964;8.59608;2;<5;NA;5(6);20.04.2020 15:30;NA;NA;F9E7A5FEFF60E864;NA
+1565;S18;573;2687486;1245577;601;Wiesliacher;Sensirion;47.35523;8.59661;14;<5;NA;5;20.04.2020 16:30;NA;NA;F391D4FEFF880573;NA
+1566;T16;4143;2687856;1246652;610;Im Hau;Sensirion;47.36485;8.60171;9;20;NA;9(D/A);20.04.2020 15:00;NA;NA;D670F5FEFF004143;NA
+1567;T17;49A4;2687920;1246205;629;Im Glockenacker;Sensirion;47.36082;8.60247;17;15;Laterne;5(D);20.04.2020 15:40;NA;NA;C85741FEFF8549A4;NA
+1568;Zuerich-Affoltern;C0BD;2681472;1253542;443;Reckenholzstrasse;Sensirion;47.42763;8.51846;42;70;NA;9;27.04.2020 10:30;NA;"\40m von der MeteoSchwiez-Referenzstation entfernt \""""";DF01E5FEFF23C0BD;NA
+1569;Zuerich-Fluntern;8F0E;2685114;1248015;548;Ackermannstrasse;Sensirion;47.37747;8.56568;7;15;NA;5(6);21.04.2020 13:45;NA;"\40m von MeteoSchweiz-Referenzstation entfernt \""""";FCD019FEFF758F0E;NA
+1570;Zuerich-Kaserne;3C6D;2682484;1248039;409;Militaerstrasse;Sensirion;47.37802;8.53086;NA;10;NA;2;23.04.2020 09:10;NA;"\60m nordoestlich der offiziellen Messstation \""""";E23C48FEFFB53C6D;NA
+1571;Zuerich-Schimmelstrasse;0DFB;2681948;1247241;413;Gerhardstrasse/Schimmelstrasse;Sensirion;47.37091;8.52362;1;15;NA;2;22.04.2020 17:30;NA;NA;F44DF7FEFF720DFB;NA
