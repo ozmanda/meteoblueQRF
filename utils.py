@@ -1,8 +1,11 @@
 import os
+import json
 import time
+import logging
+import warnings
 import numpy as np
 import pandas as pd
-import logging
+import _pickle as cPickle
 
 
 def empty_dict(keylist):
@@ -33,6 +36,25 @@ def test_data(file):
         return True
     except KeyError:
         return False
+
+
+def unravel_data(data):
+    unraveled = empty_df(data.keys())
+    for key in data.keys():
+        unraveled[key] = np.ravel(data[key])
+    return unraveled, data[key].shape
+
+
+def load_inferencefile(datapath):
+    with open(datapath, 'rb') as file:
+        data = cPickle.load(file)
+        # data = json.load(file)
+        file.close()
+    if test_data(data):
+        return data, data['datetime'].shape
+    else:
+        warnings.warn(f'File at {datapath} did not pass check.')
+        raise KeyError
 
 
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
