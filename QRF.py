@@ -1,14 +1,16 @@
 import os
-import warnings
-
+import json
 import joblib
+import warnings
 import numpy as np
 import sklearn.utils
-from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split
-from pandas import DataFrame, concat
-from utils import start_timer, end_timer, mse
 from datetime import datetime
+from sklearn.utils import shuffle
+from pandas import DataFrame, concat
+
+import utils
+from utils import start_timer, end_timer, mse
+from sklearn.model_selection import train_test_split
 from quantile_forest import RandomForestQuantileRegressor
 
 
@@ -56,11 +58,26 @@ class QRF:
 
         self.MSE = mse(self.yTest, self.yPred)
 
-    def run_inference(self, data):
+    def run_inference(self, datapath, savedir):
+        # open file, load featuremap and close the data file
+        data, map_shape = utils.load_inferencefile(datapath)
+        _ = data.pop('datetime')
+        _ = data.pop('time')
+        if 'moving average' in data.keys():
+            data['moving_average'] = data['moving average']
+            _ = data.pop('moving average')
+        self.xTest = utils.unravel_data(data)
+
+        # begin and time
         print('  Predicting inference data....     ', end='')
         start_timer()
-
+        self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
         end_timer()
+
+        prediction_map = self.yPred.reshape(map_shape)
+        timenow = datetime.now().replace(second=0, microsecond=0)
+        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
+        savedir = os.path.join(savedir, f'{timenow}_{self.MSE}.csv')
 
     def write_variable_importance(self, modelpath, filename):
         print(f'    Writing variable importance file......')
