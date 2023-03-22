@@ -9,11 +9,13 @@ from DropsetQRF import DropsetQRF
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--type', help='Type of QRF: "training" for normal QRF model training and testing or "dropset"'
+    parser.add_argument('type', help='Type of QRF: "training" for normal QRF model training and testing or "dropset"'
                                        'for error estimation using dropset method, "evaluation" for the evaluation of'
                                        'pretrained models', default=None)
     parser.add_argument('--stationDatapath', help='Relative path to folder containing station data',
                         default='Data/MeasurementFeatures_v6')
+    parser.add_argument('--inferencedata', help='Path to json file containing feature map for inference',
+                        default=None, type=str)
     parser.add_argument('--starttime', help='Date and time of the beginning of the data interval in the format'
                                             'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--endtime', help='Date and time of the end of the data interval in the format'
@@ -36,8 +38,8 @@ if __name__ == '__main__':
 
     # QRF TRAINING RUN
     if args.type == "training":
-        assert args.savedir, 'Directory for saving QRF output is required'
-        assert args.modeldir, 'A path must be given for model saving'
+        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
+        assert os.path.isdir(args.modeldir), 'A path must be given for model saving'
         if args.starttime:
             assert args.endtime, 'If start time(s) for training is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -73,7 +75,7 @@ if __name__ == '__main__':
 
     # DROPSET ERROR ESTIMATION
     if args.type == 'dropset':
-        assert args.savedir, 'Directory for saving QRF output is required'
+        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
         if args.starttime:
             assert args.endtime, 'If start time(s) is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -88,11 +90,14 @@ if __name__ == '__main__':
 
     # INFERENCE
     if args.type == 'inference':
-        assert args.modeldir, 'Model directory must be given'
         assert args.modelname, 'Model name must be given for inference'
-        dataset = utils.load_data(args.stationDatapath)
-        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
-        qrf.run_inference(dataset)
+        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
+        assert os.path.isdir(args.modeldir), 'Model directory must be given'
+
+        # load pretrained qrf model
+        qrf = QRF()
+        qrf.qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
+        qrf.run_inference(args.inferencedata, args.savedir)
 
 
     # VARIABLE IMPORTANCE ANALYSIS
