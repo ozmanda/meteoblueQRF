@@ -1,9 +1,12 @@
 import os
 import json
+import pickle
+
 import joblib
 import warnings
 import numpy as np
 import sklearn.utils
+import _pickle as CPickle
 from datetime import datetime
 from sklearn.utils import shuffle
 from pandas import DataFrame, concat
@@ -60,13 +63,13 @@ class QRF:
 
     def run_inference(self, datapath, savedir):
         # open file, load featuremap and close the data file
-        data, map_shape = utils.load_inferencefile(datapath)
+        data = utils.load_inferencefile(datapath)
         _ = data.pop('datetime')
         _ = data.pop('time')
         if 'moving average' in data.keys():
             data['moving_average'] = data['moving average']
             _ = data.pop('moving average')
-        self.xTest = utils.unravel_data(data)
+        self.xTest, map_shape = utils.unravel_data(data)
 
         # begin and time
         print('  Predicting inference data....     ', end='')
@@ -74,10 +77,16 @@ class QRF:
         self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
         end_timer()
 
-        prediction_map = self.yPred.reshape(map_shape)
+        prediction_map = utils.reshape_preds(self.yPred, map_shape)
         timenow = datetime.now().replace(second=0, microsecond=0)
         timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
-        savedir = os.path.join(savedir, f'{timenow}_{self.MSE}.csv')
+        savedir = os.path.join(savedir, f'{timenow}.json')
+
+        with open(savedir, 'wb') as file:
+            CPickle.dump(prediction_map, file, protocol=pickle.HIGHEST_PROTOCOL)
+            file.close()
+
+        return savedir
 
     def write_variable_importance(self, modelpath, filename):
         print(f'    Writing variable importance file......')
