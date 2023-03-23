@@ -51,10 +51,18 @@ def load_inferencefile(datapath):
         # data = json.load(file)
         file.close()
     if test_data(data):
-        return data, data['datetime'].shape
+        return data
     else:
         warnings.warn(f'File at {datapath} did not pass check.')
         raise KeyError
+
+def reshape_preds(preds, map_shape):
+    '''
+    Reshapes the predictions, which come as a list of three values [lower CI bound, mean, upper CI bound]. The resulting
+    map shape is identical to the loaded maps, with the exception of containing 3-channel data.
+    original map shape (10, 300, 300) --> prediction map shape (10, 300, 300, 3)
+    '''
+    return preds.reshape((map_shape[0], map_shape[1], map_shape[2], 3))
 
 
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
