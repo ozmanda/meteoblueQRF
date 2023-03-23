@@ -97,7 +97,8 @@ if __name__ == '__main__':
         # load pretrained qrf model
         qrf = QRF()
         qrf.qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
-        qrf.run_inference(args.inferencedata, args.savedir)
+        savedir = qrf.run_inference(args.inferencedata, args.savedir)
+        print(f'Inference file saved at: {savedir}')
 
 
     # VARIABLE IMPORTANCE ANALYSIS
