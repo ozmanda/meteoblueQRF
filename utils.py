@@ -22,11 +22,11 @@ def empty_df(keylist):
     return pd.DataFrame(empty_df)
 
 
-def initialise_empty_df(datapath, dropset=False):
+def initialise_empty_df(filepath, dropset=False):
     if not dropset:
-        file = pd.read_csv(os.path.join(datapath, os.listdir(datapath)[0]), delimiter=';')
+        file = pd.read_csv(filepath, delimiter=';')
         if not test_data(file):
-            file = pd.read_csv(os.path.join(datapath, os.listdir(datapath)[0]), delimiter=',')
+            file = pd.read_csv(filepath, delimiter=',')
         return pd.DataFrame(columns=file.columns)
 
 
@@ -45,16 +45,25 @@ def unravel_data(data):
     return unraveled, data[key].shape
 
 
-def load_inferencefile(datapath):
+def load_json(datapath):
     with open(datapath, 'rb') as file:
         data = cPickle.load(file)
         # data = json.load(file)
         file.close()
-    if test_data(data):
-        return data
-    else:
-        warnings.warn(f'File at {datapath} did not pass check.')
-        raise KeyError
+    return data
+
+def load_inferencefile(datapath):
+    with open(datapath, 'rb') as file:
+        data = cPickle.load(file)
+        file.close()
+    return data
+
+    # data = load_data(datapath)
+    # if test_data(data):
+    #     return data
+    # else:
+    #     warnings.warn(f'File at {datapath} did not pass check.')
+    #     raise KeyError
 
 def reshape_preds(preds, map_shape):
     '''
@@ -72,7 +81,7 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
     # Not Dropset: concatenate DataFrames
     if not dropset:
         noData = []
-        data = initialise_empty_df(datapath)
+        data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
         for idx, filename in enumerate(os.listdir(datapath)):
             file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
             # check correct delimiter usage (not uniform)
