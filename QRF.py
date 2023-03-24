@@ -10,9 +10,11 @@ import _pickle as CPickle
 from datetime import datetime
 from sklearn.utils import shuffle
 from pandas import DataFrame, concat
-
+from PIL import Image
+import matplotlib.pyplot as plt
+import seaborn as sns
 import utils
-from utils import start_timer, end_timer, mse
+from utils import start_timer, end_timer, mse, load_json
 from sklearn.model_selection import train_test_split
 from quantile_forest import RandomForestQuantileRegressor
 
@@ -87,6 +89,25 @@ class QRF:
             file.close()
 
         return savedir
+
+    def generate_images(self, inferencefile, imgpath):
+        """
+        Generates images suitable for loading into SR_GAN for training or testing. Note that the inference file loaded
+        contains three prediction values: [CI lower bound, mean prediction, CI upper bound]. Currently only the mean
+        prediction value is used to generate images.
+
+        Normalisation:
+        """
+        inference_maps = load_json(inferencefile)
+        vmin = np.nanmin(inference_maps) - 5
+        vmax = np.nanmax(inference_maps) + 5
+
+        for time in range(inference_maps.shape[0]):
+            tempmap = sns.heatmap(inference_maps[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0, cbar=False,
+                                  yticklabels=False, xticklabels=False)
+            plt.close()
+            fig = tempmap.get_figure()
+            fig.savefig(os.path.join(imgpath, f'tempmap_{time}.png'), bbox_inches='tight', pad_inches=0)
 
     def write_variable_importance(self, modelpath, filename):
         print(f'    Writing variable importance file......')

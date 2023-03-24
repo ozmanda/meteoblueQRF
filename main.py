@@ -31,6 +31,10 @@ if __name__ == '__main__':
     parser.add_argument('--modelname', default=None, help='Name of the model to be evaluated')
     parser.add_argument('--nestimators', default=None, help='Number of OOB predictions used to estimate varaible '
                                                             'importance')
+    parser.add_argument('--generate_images', type=bool, help='Boolean value indicating if images for use in SR_GAN'
+                                                             'should be generated (True/False)', default=False)
+    parser.add_argument('--imagepath', type=str, help='Path to where images should be stored. Default is None, a path'
+                                                      'will be generated automatically if none is given', default=None)
     args = parser.parse_args()
 
     # ASSERT REQUIRED PARAMETERS
@@ -98,6 +102,14 @@ if __name__ == '__main__':
         qrf = QRF()
         qrf.qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
         savedir = qrf.run_inference(args.inferencedata, args.savedir)
+        if args.generate_images:
+            if not args.imagepath:
+                imgpath = os.path.join('Data', 'QRF_Inference_Maps', f'{os.path.split(savedir)[1].split(".json")[0]}')
+            else:
+                imgpath = os.path.join(args.imagepath, f'{os.path.split(savedir)[1].split(".json")[0]}')
+            if not os.path.isdir(imgpath):
+                os.mkdir(imgpath)
+            qrf.generate_images(savedir, imgpath)
         print(f'Inference file saved at: {savedir}')
 
 
