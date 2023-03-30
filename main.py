@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
         qrf = QRF()
         # QRF run with one shuffled time window
-        if not args.test_start and not args.test_end:
+        if not args.test_start:
             dataset = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath))
             qrf = QRF()
             qrf.set_split_data(dataset)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         qrf.save_ouput(os.path.join(os.getcwd(), args.savedir), args.modeldir)
 
     # DROPSET ERROR ESTIMATION
-    if args.type == 'dropset':
+    elif args.type == 'dropset':
         assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
         if args.starttime:
             assert args.endtime, 'If start time(s) is/are given, an end time must be given as well'
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
 
     # INFERENCE
-    if args.type == 'inference':
+    elif args.type == 'inference':
         assert args.modelname, 'Model name must be given for inference'
         assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
         assert os.path.isdir(args.modeldir), 'Model directory must be given'
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
 
     # VARIABLE IMPORTANCE ANALYSIS
-    if args.type == 'evaluation':
+    elif args.type == 'evaluation':
         assert args.modelname, 'Model name flag must be given for model evaluation'
         assert args.modeldir, 'Relative path to trained model directory must be given'
 
