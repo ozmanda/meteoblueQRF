@@ -10,8 +10,8 @@ from DropsetQRF import DropsetQRF
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('type', help='Type of QRF: "training" for normal QRF model training and testing or "dropset"'
-                                       'for error estimation using dropset method, "evaluation" for the evaluation of'
-                                       'pretrained models', default=None)
+                                     'for error estimation using dropset method, "evaluation" for the evaluation of'
+                                     'pretrained models', default=None)
     parser.add_argument('--stationDatapath', help='Relative path to folder containing station data',
                         default='Data/MeasurementFeatures_v6')
     parser.add_argument('--inferencedata', help='Path to json file containing feature map for inference',
@@ -58,16 +58,16 @@ if __name__ == '__main__':
         qrf = QRF()
         # QRF run with one shuffled time window
         if not args.test_start:
-            dataset = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath))
+            dataset = utils.load_data(args.stationDatapath)
             qrf = QRF()
             qrf.set_split_data(dataset)
 
         # QRF run with specific training and test time windows
         else:
-            dataset_train = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
+            dataset_train = utils.load_data(args.stationDatapath,
                                             startDatetime=args.starttime, endDatetime=args.endtime)
             assert len(dataset_train) != 0, 'No data found in training window'
-            dataset_test = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
+            dataset_test = utils.load_data(args.stationDatapath,
                                            startDatetime=args.test_start, endDatetime=args.test_end)
             assert len(dataset_test) != 0, 'No data found in test window'
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':
-        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
+        assert os.path.isdir(args.savedir), 'Directory for saving QRF dropset output is required'
         if args.starttime:
             assert args.endtime, 'If start time(s) is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -99,8 +99,7 @@ if __name__ == '__main__':
         assert os.path.isdir(args.modeldir), 'Model directory must be given'
 
         # load pretrained qrf model
-        qrf = QRF()
-        qrf.qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
+        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
         savedir = qrf.run_inference(args.inferencedata, args.savedir)
         if args.generate_images:
             if not args.imagepath:
