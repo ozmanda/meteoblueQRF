@@ -52,6 +52,7 @@ def load_json(datapath):
         file.close()
     return data
 
+
 def load_inferencefile(datapath):
     with open(datapath, 'rb') as file:
         data = cPickle.load(file)
@@ -64,6 +65,7 @@ def load_inferencefile(datapath):
     # else:
     #     warnings.warn(f'File at {datapath} did not pass check.')
     #     raise KeyError
+
 
 def reshape_preds(preds, map_shape):
     '''
