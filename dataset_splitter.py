@@ -4,7 +4,7 @@ import shutil
 import numpy as np
 import pandas as pd
 from warnings import warn
-from utils import load_data, empty_df, idxs_in_window
+from qrf_utils import empty_df, idxs_in_window
 
 
 def normalise_umlauts(id):
