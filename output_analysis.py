@@ -5,7 +5,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from utils import empty_df, empty_dict
+from qrf_utils import empty_df, empty_dict
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 
@@ -63,7 +63,9 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='True Temperature', y='Deviation', data=file)
-        plt.set(xlabel='True Temperature [°C]', ylabel='Deviation by True Temperature', title='')
+        plt.xlabel('True Temperature [°C]')
+        plt.ylabel('Deviation')
+        plt.title('Deviation by True Temperature')
         plt.savefig(filepath, bbox_inches='tight')
         plt.close()
 
@@ -72,7 +74,9 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='datetime', y='Deviation', data=file)
-        plt.set(xlabel='Datetime', ylabel='Deviation', title='Deviation by Datetime')
+        plt.xlabel('Datetime')
+        plt.ylabel('Deviation')
+        plt.title('Deviation by Datetime')
         plt.xticks(rotation=45)
         plt.savefig(filepath, bbox_inches='tight')
         plt.close()
@@ -82,7 +86,9 @@ def error_distributions(file, savedir):
     if not os.path.isfile(filepath):
         plt.figure()
         fig = sns.scatterplot(x='True Temperature', y='Predicted Temperature', data=file)
-        plt.set(xlabel='True Temperature [°C]', ylabel='Predicted Temperature [°C]', title='True vs. Predicted Temperature')
+        plt.xlabel('True Temperature [°C]')
+        plt.ylabel('Predicted Temperature [°C]')
+        plt.title('True vs. Predicted Temperature')
         plt.savefig(filepath, bbox_inches='tight')
         plt.close()
 
@@ -93,7 +99,9 @@ def error_distributions(file, savedir):
         file['time'] = file['time'].map(normalise_datetime)
         plt.figure()
         fig = sns.scatterplot(x='time', y='Deviation', data=file)
-        plt.set(xlabel='Time', ylabel='Deviation', title='Deviation by Time')
+        plt.xlabel('Time')
+        plt.ylabel('Deviation')
+        plt.title('Deviation by Time')
         plt.xticks(rotation=45)
         plt.savefig(os.path.join(savedir, f'error_by_time.png'), bbox_inches='tight')
         plt.close()
@@ -254,9 +262,6 @@ def interpolated(featurename, testdata, trainingdata, extrapolation_idxs, dev=0.
 
 def int_ext_bystation(data, featurenames, savedir):
     for stationname in data.keys():
-        analysed_stations = ['C0B425A3EF9E']
-        if stationname in analysed_stations:
-            continue
         print(f'Analysing station {stationname}......')
         trainingdata, stationdata = data_preprocessing(data, stationname, featurenames)
 
@@ -292,36 +297,54 @@ def int_ext_errors(data, savedir):
 
 
 def error_frequency(rmses, savepath):
+    # for removing outliers
+    idxs = np.where(rmses < 2)
+    rmses = rmses.iloc[idxs]
+
     plt.figure()
     fig = sns.histplot(rmses, stat='frequency', bins=30)
-    plt.set(xlabel='RMSE', ylabel='Frequency', title='Dropset station prediction error distribution')
+    plt.xlabel('RMSE')
+    plt.ylabel('Frequency')
+    plt.title('Dropset station prediction error distribution')
     plt.savefig(savepath)
     plt.close()
 
 
-def write_dropset(rmses, rmses_vals):
+def write_dropset(savedir, rmses):
     # write txt file
+    rmses_vals = list(rmses['rmse'])
     lines = []
-    lines.append(f'Mean RMSE over all stations: {np.mean(rmses_vals)}\n')
-    min_stat = min(rmses, key=rmses.get)
-    max_stat = max(rmses, key=rmses.get)
-    lines.append(f'Minimum RMSE: {rmses[min_stat]} ({min_stat})\n')
-    lines.append(f'Maximum RMSE: {rmses[max_stat]} ({max_stat})\n')
+    lines.append(f'Mean RMSE over all stations: {np.mean(rmses["rmse"])}\n')
+    min_stat = rmses['rmse'].idxmin()
+    max_stat = rmses['rmse'].idxmax()
+    lines.append(f'Minimum RMSE: {rmses.iloc[min_stat]["rmse"]} ({rmses.iloc[min_stat]["station"]})\n')
+    lines.append(f'Maximum RMSE: {rmses["rmse"][max_stat]} ({rmses["station"][max_stat]})\n')
 
     min05 = rmses_vals[round(len(rmses_vals) * 0.05)]
     max95 = rmses_vals[round(len(rmses_vals) * 0.95)]
 
     lines.append('Lowest and Highest 5% of RMSEs:\n')
-    lowest = []
-    for key in rmses.keys():
-        if rmses[key] <= min05:
-            lines.append(f'{key}:\t {rmses[key]}\n')
-    for key in rmses.keys():
-        if rmses[key] >= max95:
-            lines.append(f'{key}:\t {rmses[key]}\n')
+    for idx in range(len(rmses)):
+        if rmses.iloc[idx] <= min05:
+            lines.append(f'{rmses.iloc[idx]["station"]}:\t {rmses.iloc[idx]["rmse"]}\n')
+    for idx in range(len(rmses)):
+        if rmses.iloc[idx] >= max95:
+            lines.append(f'{rmses.iloc[idx]["station"]}:\t {rmses.iloc[idx]["rmse"]}\n')
 
     with open(os.path.join(savedir, 'dropset_overview.txt'), 'w') as file:
         file.writelines(lines)
+        file.close()
+
+
+def write_stations(savedir, rmses):
+    lines = []
+    for idx in range(len(rmses)):
+        lines.append(f'{rmses["station"][idx]}:\t{rmses["rmse"][idx]}')
+
+    savedir = os.path.join(savedir, 'stations_summary.txt')
+    with open(savedir, 'w') as file:
+        file.writelines(lines)
+        file.close()
 
 
 # +-------------------+
@@ -332,11 +355,14 @@ def test_statistics(datapath, savedir):
     analyse_errors(data, savedir)
 
 
-def dropset_statistics(datapath, featurepath, savedir):
+def dropset_statistics(datapath, featurepath, savedir, intext):
     data = gather_dropsetdata(datapath, featurepath)
-    rmses = {}
+    rmses = []
+    station_metrics = []
     # inter- and extrapolation errors
-    int_ext_errors(data, savedir)
+    print(intext)
+    if intext:
+        int_ext_errors(data, savedir)
 
     # per station analysis
     for stationname in data.keys():
@@ -345,13 +371,13 @@ def dropset_statistics(datapath, featurepath, savedir):
             os.mkdir(stationpath)
         # error_by_feature(data[stationname], stationpath)
         metrics = analyse_errors(data[stationname], stationpath, output=True)
-        rmses[stationname] = metrics['RMSE']
+        rmses.append(metrics['RMSE'])
 
     # nbins = np.round((np.max(rmses.values()) - np.min(rmses.values())))
-    rmses_vals = list(rmses.values())
-    rmses_vals.sort()
-    error_frequency(rmses_vals, os.path.join(savedir, 'error_frequency.png'))
-    write_dropset(rmses, rmses_vals)
+    rmses = DataFrame({'station': data.keys(), 'rmse': rmses})
+    rmses = rmses.sort_values('rmse')
+    error_frequency(rmses['rmse'], os.path.join(savedir, 'error_frequency.png'))
+    write_dropset(savedir, rmses)
 
 
 if __name__ == '__main__':
@@ -359,6 +385,8 @@ if __name__ == '__main__':
     parser.add_argument('--type', default='test', help='Type of output to be analysed (test, dropset, inference)')
     parser.add_argument('--datapath', default=None, help='Relative path to the output data')
     parser.add_argument('--featurepath', default=None, help='Relative path to feature data (for dropset only)')
+    parser.add_argument('--savedir', default=None, help='Directory where ooutput analyses should be saved.')
+    parser.add_argument('--intext', default=False, help='Inter- and extrapolation analysis', type=bool)
     args = parser.parse_args()
 
     assert args.datapath, 'A datapath must be given.'
@@ -368,15 +396,17 @@ if __name__ == '__main__':
         # testing and inference require the same analysis
         assert args.datapath.endswith(".csv"), 'A relative path to a .csv file must be given.'
         foldername = args.datapath.split("/")[-1].split('.csv')[0]
-        savedir = f'Data/Statistics/{"Testing" if args.type == "test" else "Inference"}/{foldername}'
-        if not os.path.isdir(savedir):
-            os.mkdir(savedir)
-        test_statistics(args.datapath, savedir)
+        if not args.savedir:
+            args.savedir = f'Data/Statistics/{"Testing" if args.type == "test" else "Inference"}/{foldername}'
+        if not os.path.isdir(args.savedir):
+            os.mkdir(args.savedir)
+        test_statistics(args.datapath, args.savedir)
 
     elif args.type == 'dropset':
         assert os.path.isdir(args.datapath), 'The specified datapath must be a folder for dropset analysis'
         assert args.featurepath, 'Path to feature data must be given'
-        savedir = f'Data/Statistics/Dropset/{args.datapath.split("/")[-1]}'
-        if not os.path.isdir(savedir):
-            os.mkdir(savedir)
-        dropset_statistics(args.datapath, args.featurepath, savedir)
+        if not args.savedir:
+            args.savedir = f'Data/Statistics/Dropset/{args.datapath.split("/")[-1]}'
+        if not os.path.isdir(args.savedir):
+            os.mkdir(args.savedir)
+        dropset_statistics(args.datapath, args.featurepath, args.savedir, intext=args.intext)
