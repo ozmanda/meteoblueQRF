@@ -2,7 +2,7 @@ import os
 import numpy as np
 from warnings import warn
 from pandas import DataFrame, concat
-from utils import start_timer, end_timer
+from qrf_utils import start_timer, end_timer
 from quantile_forest import RandomForestQuantileRegressor
 
 
