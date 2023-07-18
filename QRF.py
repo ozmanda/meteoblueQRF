@@ -13,8 +13,8 @@ from pandas import DataFrame, concat
 from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
-import utils
-from utils import start_timer, end_timer, mse, load_json
+import qrf_utils
+from qrf_utils import start_timer, end_timer, mse, load_json
 from sklearn.model_selection import train_test_split
 from quantile_forest import RandomForestQuantileRegressor
 
@@ -65,7 +65,7 @@ class QRF:
 
     def run_inference(self, datapath, savedir):
         # open file, load featuremap and close the data file
-        data = utils.load_inferencefile(datapath)
+        data = qrf_utils.load_inferencefile(datapath)
         _ = data.pop('datetime')
         _ = data.pop('time')
         if 'moving average' in data.keys():
@@ -79,7 +79,7 @@ class QRF:
         self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
         end_timer()
 
-        prediction_map = utils.reshape_preds(self.yPred, map_shape)
+        prediction_map = qrf_utils.reshape_preds(self.yPred, map_shape)
         timenow = datetime.now().replace(second=0, microsecond=0)
         timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
         savedir = os.path.join(savedir, f'{timenow}.json')
