@@ -1,5 +1,5 @@
 import os
-import utils
+import qrf_utils
 import joblib
 import argparse
 from QRF import QRF
@@ -58,7 +58,7 @@ if __name__ == '__main__':
         qrf = QRF()
         # QRF run with one shuffled time window
         if not args.test_start:
-            dataset = utils.load_data(args.stationDatapath)
+            dataset = qrf_utils.load_data(args.stationDatapath)
             qrf = QRF()
             qrf.set_split_data(dataset)
 
@@ -79,7 +79,11 @@ if __name__ == '__main__':
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':
-        assert os.path.isdir(args.savedir), 'Directory for saving QRF dropset output is required'
+        # create savedir if it does not already exist
+        assert args.savedir, 'Directory for saving QRF dropset output is required'
+        if not os.path.isdir(args.savedir):
+            os.mkdir(args.savedir)
+
         if args.starttime:
             assert args.endtime, 'If start time(s) is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -95,8 +99,12 @@ if __name__ == '__main__':
     # INFERENCE
     elif args.type == 'inference':
         assert args.modelname, 'Model name must be given for inference'
-        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
+        assert args.savedir, 'Directory for saving QRF output is required'
         assert os.path.isdir(args.modeldir), 'Model directory must be given'
+
+        # create savedir if it does not already exist
+        if not os.path.isdir(args.savedir):
+            os.mkdir(args.savedir)
 
         # load pretrained qrf model
         qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
