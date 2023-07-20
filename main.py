@@ -36,8 +36,6 @@ if __name__ == '__main__':
     parser.add_argument('--imagepath', type=str, help='Path to where images should be stored. Default is None, a path'
                                                       'will be generated automatically if none is given', default=None)
     args = parser.parse_args()
-
-    # ASSERT REQUIRED PARAMETERS
     assert args.type, 'A training type must be given'
 
     # QRF TRAINING RUN
@@ -64,11 +62,11 @@ if __name__ == '__main__':
 
         # QRF run with specific training and test time windows
         else:
-            dataset_train = utils.load_data(args.stationDatapath,
-                                            startDatetime=args.starttime, endDatetime=args.endtime)
+            dataset_train = qrf_utils.load_data(args.stationDatapath,
+                                                startDatetime=args.starttime, endDatetime=args.endtime)
             assert len(dataset_train) != 0, 'No data found in training window'
-            dataset_test = utils.load_data(args.stationDatapath,
-                                           startDatetime=args.test_start, endDatetime=args.test_end)
+            dataset_test = qrf_utils.load_data(args.stationDatapath,
+                                               startDatetime=args.test_start, endDatetime=args.test_end)
             assert len(dataset_test) != 0, 'No data found in test window'
 
             qrf.set_data(dataTrain=dataset_train, dataTest=dataset_test)
@@ -90,8 +88,8 @@ if __name__ == '__main__':
                 warn(f'Number of start and end times for dropset cannot be matched', UserWarning)
                 raise ValueError
 
-        datasets = utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
-                                   startDatetime=args.starttime, endDatetime=args.endtime, dropset=True)
+        datasets = qrf_utils.load_data(os.path.join(os.getcwd(), args.stationDatapath),
+                                       startDatetime=args.starttime, endDatetime=args.endtime, dropset=True)
         dropsetQRF = DropsetQRF(datasets, args.CI)
         dropsetQRF.run_error_estimation()
         dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
