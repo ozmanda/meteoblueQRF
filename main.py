@@ -1,4 +1,6 @@
 import os
+import time
+
 import qrf_utils
 import joblib
 import argparse
@@ -28,7 +30,7 @@ if __name__ == '__main__':
                         default='Data')
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models')
     parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
-    parser.add_argument('--modelname', default=None, help='Name of the model to be evaluated')
+    parser.add_argument('--modelpath', default=None, help='Path to model for inference or evaluation')
     parser.add_argument('--nestimators', default=None, help='Number of OOB predictions used to estimate varaible '
                                                             'importance')
     parser.add_argument('--generate_images', type=bool, help='Boolean value indicating if images for use in SR_GAN'
@@ -96,16 +98,19 @@ if __name__ == '__main__':
 
     # INFERENCE
     elif args.type == 'inference':
-        assert args.modelname, 'Model name must be given for inference'
+        assert os.path.isfile(args.modelpath), 'Model path must be given for inference'
         assert args.savedir, 'Directory for saving QRF output is required'
-        assert os.path.isdir(args.modeldir), 'Model directory must be given'
 
         # create savedir if it does not already exist
         if not os.path.isdir(args.savedir):
             os.mkdir(args.savedir)
 
         # load pretrained qrf model
-        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
+        print('Loading trained QRF model')
+        tic = time.perf_counter()
+        qrf = joblib.load(args.modelpath)
+        toc = time.perf_counter()
+        print(f'    loading time: {toc-tic:0.4f} seconds\n')
         savedir = qrf.run_inference(args.inferencedata, args.savedir)
         if args.generate_images:
             if not args.imagepath:
@@ -120,10 +125,9 @@ if __name__ == '__main__':
 
     # VARIABLE IMPORTANCE ANALYSIS
     elif args.type == 'evaluation':
-        assert args.modelname, 'Model name flag must be given for model evaluation'
-        assert args.modeldir, 'Relative path to trained model directory must be given'
+        assert os.path.isfile(args.modelpath), 'Model path must be a file'
 
         # load trained model and run variable importance analysis
-        qrf = joblib.load(os.path.join(args.modeldir, args.modelname))
-        qrf.run_variable_importance_estimation(args.modeldir, args.modelname)
+        qrf = joblib.load(args.modelpath)
+        qrf.run_variable_importance_estimation(args.modelpath)
 
