@@ -1,9 +1,11 @@
 import os
+import pickle
 import time
 import logging
 import numpy as np
 import pandas as pd
 import _pickle as cPickle
+import joblib
 
 
 def empty_dict(keylist):
@@ -37,32 +39,32 @@ def test_data(file):
 
 
 def unravel_data(data):
+    print('    unravelling data')
     unraveled = empty_df(data.keys())
     for key in data.keys():
         unraveled[key] = np.ravel(data[key])
     return unraveled, data[key].shape
 
 
-def load_json(datapath):
+def load_file(datapath):
     with open(datapath, 'rb') as file:
         data = cPickle.load(file)
         # data = json.load(file)
         file.close()
     return data
 
-
-def load_inferencefile(datapath):
-    with open(datapath, 'rb') as file:
-        data = cPickle.load(file)
-        file.close()
-    return data
-
-    # data = load_data(datapath)
-    # if test_data(data):
-    #     return data
-    # else:
-    #     warnings.warn(f'File at {datapath} did not pass check.')
-    #     raise KeyError
+def save_object(path, object):
+    '''
+    Wrapper for object saving which automatically detects whether an object being saved is a numpy array or not and
+    uses the respective save method. Joblib contains special implementations for NumPy arrays and is significantly
+    faster than Pickle, otherwise Pickle (which is implemented in C) is faster.
+    '''
+    if type(object) == np.ndarray:
+        joblib.dump(object, f'{path}.json', compress=3)
+    else:
+        with open(f'{path}.json', 'wb') as file:
+            cPickle.dump(object, file, protocol=pickle.HIGHEST_PROTOCOL)
+            file.close()
 
 
 def reshape_preds(preds, map_shape):
