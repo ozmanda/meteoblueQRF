@@ -1,6 +1,7 @@
 import os
 import json
 import pickle
+import time
 
 import joblib
 import warnings
@@ -14,7 +15,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 import qrf_utils
-from qrf_utils import start_timer, end_timer, mse, load_json
+from qrf_utils import start_timer, end_timer, mse, load_file, save_object
 from sklearn.model_selection import train_test_split
 from quantile_forest import RandomForestQuantileRegressor
 
@@ -65,16 +66,26 @@ class QRF:
 
     def run_inference(self, datapath, savedir):
         # open file, load featuremap and close the data file
-        data = qrf_utils.load_inferencefile(datapath)
+        print('Loading Data')
+        tic = time.perf_counter()
+        data = qrf_utils.load_file(datapath)
+        toc = time.perf_counter()
+        print(f'    data loading time {toc-tic:0.4f} seconds\n')
+        print('Data preprocessing')
         _ = data.pop('datetime')
         _ = data.pop('time')
+        _ = data.pop('temperature')
         if 'moving average' in data.keys():
             data['moving_average'] = data['moving average']
             _ = data.pop('moving average')
-        self.xTest, map_shape = utils.unravel_data(data)
+        tic = time.perf_counter()
+        self.xTest, map_shape = qrf_utils.unravel_data(data)
+        toc = time.perf_counter()
+        print(f'    unravel time {toc-tic:0.4f} seconds\n')
 
         # begin and time
-        print('  Predicting inference data....     ', end='')
+        print('test')
+        print('Predicting inference data....     ', end=' ')
         start_timer()
         self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
         end_timer()
@@ -84,9 +95,12 @@ class QRF:
         timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
         savedir = os.path.join(savedir, f'{timenow}.json')
 
+        tic = time.perf_counter()
         with open(savedir, 'wb') as file:
             CPickle.dump(prediction_map, file, protocol=pickle.HIGHEST_PROTOCOL)
             file.close()
+        toc = time.perf_counter()
+        print(f'    save time {toc-tic:0.4f} seconds')
 
         return savedir
 
@@ -98,7 +112,7 @@ class QRF:
 
         Normalisation:
         """
-        inference_maps = load_json(inferencefile)
+        inference_maps = load_file(inferencefile)
         vmin = np.nanmin(inference_maps) - 5
         vmax = np.nanmax(inference_maps) + 5
 
@@ -109,9 +123,9 @@ class QRF:
             fig = tempmap.get_figure()
             fig.savefig(os.path.join(imgpath, f'tempmap_{time}.png'), bbox_inches='tight', pad_inches=0)
 
-    def write_variable_importance(self, modelpath, filename):
+    def write_variable_importance(self, filepath):
         print(f'    Writing variable importance file......')
-        filepath = os.path.join(modelpath, f'{filename.split(".z")[0]}_variable_importance.txt')
+        filepath = f'{filepath.split(".z")[0]}_variable_importance.txt'
         lines = []
         for key in self.variable_importance.keys():
             lines.append(f'{key}:\t {self.variable_importance[key]}\n')
@@ -119,7 +133,7 @@ class QRF:
         with open(filepath, 'w') as file:
             file.writelines(lines)
 
-    def run_variable_importance_estimation(self, modelpath, filename, n=10):
+    def run_variable_importance_estimation(self, filepath, n=10):
         # ignores UserWarning "X does not have valid feature names, but RandomForestQuantileRegressor
         # was fitted with feature names" and FutureWarning (iteritems -> .items and series[i:j] -> label-based indexing)
         with warnings.catch_warnings():
@@ -147,7 +161,7 @@ class QRF:
                 self.variable_importance[variable] = np.round((oob_errors[variable] / diffsum)*100, 2)
                 print(f'      {variable}:\t {self.variable_importance[variable]}')
 
-            self.write_variable_importance(modelpath, filename)
+            self.write_variable_importance(filepath)
 
     def save_model(self, modelpath):
         timenow = datetime.now().replace(second=0, microsecond=0)
