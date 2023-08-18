@@ -107,7 +107,7 @@ def stations_loc(boundary, stationdata):
     for _, row in stationscsv.iterrows():
         if boundary['CH_W'] <= int(row["CH_E"]) <= boundary['CH_E'] and boundary['CH_S'] <= int(row["CH_N"]) <= boundary['CH_N']:
             stations[row["stationid_new"]] = {'lat': int(row["CH_N"]), 'lon': int(row["CH_E"]),
-                                              'LCZ': stationscsv["classification"]}
+                                              'LCZ': row["classification"]}
 
     stations = loc_idx(boundary, stations)
     return stations
