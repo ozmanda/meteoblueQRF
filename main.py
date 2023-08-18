@@ -130,15 +130,15 @@ if __name__ == '__main__':
         assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
         assert os.path.isdir(args.stationDatapath), 'Path to station data must be given'
         assert os.path.isfile(args.palmpath), 'Path to PALM simulation file must be given'
+        assert args.savedir, 'Either a save folder or an inference result file must be given'
         qrf = joblib.load(args.modelpath)
-        if args.savedir:
+        if os.path.isfile(args.savedir):
             # passing a savedir will mean that validation has already been run and use the existing inference results
             assert os.path.isfile(args.savedir), 'Inference results must be an .json file or the flag left empty'
             qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath,
                                resultpath=args.savedir, run_inference=False)
         else:
-            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath)
-
+            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath, resultpath=args.savedir)
 
     # VARIABLE IMPORTANCE ANALYSIS
     elif args.type == 'evaluation':
