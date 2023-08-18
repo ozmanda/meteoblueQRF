@@ -16,7 +16,7 @@ if __name__ == '__main__':
                                      'pretrained models', default=None)
     parser.add_argument('--stationDatapath', help='Relative path to folder containing station data',
                         default='Data/MeasurementFeatures_v6')
-    parser.add_argument('--inferencedata', help='Path to json file containing feature map for inference',
+    parser.add_argument('--inferencedata', help='Path to json file containing feature map for inference/validation',
                         default=None, type=str)
     parser.add_argument('--starttime', help='Date and time of the beginning of the data interval in the format'
                                             'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_end', help='Date and time of the beginning of test/inference interval in the format'
                                            'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
-                        default='Data')
+                        default=None)
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models')
     parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
     parser.add_argument('--modelpath', default=None, help='Path to model for inference or evaluation')
@@ -37,6 +37,7 @@ if __name__ == '__main__':
                                                              'should be generated (True/False)', default=False)
     parser.add_argument('--imagepath', type=str, help='Path to where images should be stored. Default is None, a path'
                                                       'will be generated automatically if none is given', default=None)
+    parser.add_argument('--palmpath', type=str, help='Path to PALM simulation file for validation evaluation', default=None)
     args = parser.parse_args()
     assert args.type, 'A training type must be given'
 
@@ -100,6 +101,7 @@ if __name__ == '__main__':
     elif args.type == 'inference':
         assert os.path.isfile(args.modelpath), 'Model path must be given for inference'
         assert args.savedir, 'Directory for saving QRF output is required'
+        assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
 
         # create savedir if it does not already exist
         if not os.path.isdir(args.savedir):
@@ -121,6 +123,21 @@ if __name__ == '__main__':
                 os.mkdir(imgpath)
             qrf.generate_images(savedir, imgpath)
         print(f'Inference file saved at: {savedir}')
+
+    # VALIDATION RUN AND RESULT EVALUATION
+    elif args.type == 'validation':
+        assert os.path.isfile(args.modelpath), 'Model path must be a file'
+        assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
+        assert os.path.isdir(args.stationDatapath), 'Path to station data must be given'
+        assert os.path.isfile(args.palmpath), 'Path to PALM simulation file must be given'
+        qrf = joblib.load(args.modelpath)
+        if args.savedir:
+            # passing a savedir will mean that validation has already been run and use the existing inference results
+            assert os.path.isfile(args.savedir), 'Inference results must be an .json file or the flag left empty'
+            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath,
+                               resultpath=args.savedir, run_inference=False)
+        else:
+            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath)
 
 
     # VARIABLE IMPORTANCE ANALYSIS
