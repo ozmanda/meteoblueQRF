@@ -18,6 +18,7 @@ import qrf_utils
 from qrf_utils import start_timer, end_timer, mse, load_file, save_object
 from sklearn.model_selection import train_test_split
 from quantile_forest import RandomForestQuantileRegressor
+from validation_evaluation import validation_evaluation
 
 
 class QRF:
@@ -66,25 +67,9 @@ class QRF:
 
     def run_inference(self, datapath, savedir):
         # open file, load featuremap and close the data file
-        print('Loading Data')
-        tic = time.perf_counter()
-        data = qrf_utils.load_file(datapath)
-        toc = time.perf_counter()
-        print(f'    data loading time {toc-tic:0.4f} seconds\n')
-        print('Data preprocessing')
-        _ = data.pop('datetime')
-        _ = data.pop('time')
-        _ = data.pop('temperature')
-        if 'moving average' in data.keys():
-            data['moving_average'] = data['moving average']
-            _ = data.pop('moving average')
-        tic = time.perf_counter()
-        self.xTest, map_shape = qrf_utils.unravel_data(data)
-        toc = time.perf_counter()
-        print(f'    unravel time {toc-tic:0.4f} seconds\n')
+        self.xTest, map_shape = qrf_utils.load_inference_data(datapath)
 
         # begin and time
-        print('test')
         print('Predicting inference data....     ', end=' ')
         start_timer()
         self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
@@ -96,13 +81,28 @@ class QRF:
         savedir = os.path.join(savedir, f'{timenow}.json')
 
         tic = time.perf_counter()
-        with open(savedir, 'wb') as file:
-            CPickle.dump(prediction_map, file, protocol=pickle.HIGHEST_PROTOCOL)
-            file.close()
+        save_object(savedir, prediction_map)
         toc = time.perf_counter()
-        print(f'    save time {toc-tic:0.4f} seconds')
+        print(f'    save time {toc-tic:0.2f} seconds')
 
         return savedir
+
+    def run_validation(self, datapath, measurementpath, palmpath, resultpath=None, run_inference=True):
+        '''
+        Performs a validation run. A validation run consists of loading the feature maps, performing inference and
+        evaluating the resulting temperature maps w.r.t. the moving average feature and analysing the accuracy per
+        measurement station.
+        '''
+        if run_inference:
+            resultpath = self.run_inference(datapath, resultpath)
+        else:
+            assert resultpath, 'If inference is not run, a path to inference results must be given'
+        # load boundary
+        boundary = load_file(f'{os.path.splitext(palmpath)[0]}_boundary.z')
+        # infopath = 'Data/stations.csv'
+        infopath = os.path.join(os.path.dirname(os.path.dirname(measurementpath)), 'stations.csv')
+        validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
+
 
     def generate_images(self, inferencefile, imgpath):
         """
