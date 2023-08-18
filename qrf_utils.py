@@ -49,7 +49,6 @@ def unravel_data(data):
 def load_file(datapath):
     with open(datapath, 'rb') as file:
         data = cPickle.load(file)
-        # data = json.load(file)
         file.close()
     return data
 
@@ -117,6 +116,26 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
             logging.debug(f'List of stations with no data:\n{noData}')
 
         return datasets
+
+
+def load_inference_data(datapath):
+    print('Loading Data')
+    tic = time.perf_counter()
+    data = load_file(datapath)
+    toc = time.perf_counter()
+    print(f'    data loading time {toc - tic:0.2f} seconds\n')
+    print('Data preprocessing')
+    _ = data.pop('datetime')
+    _ = data.pop('time')
+    _ = data.pop('temperature')
+    if 'moving average' in data.keys():
+        data['moving_average'] = data['moving average']
+        _ = data.pop('moving average')
+    tic = time.perf_counter()
+    featuremaps, mapshape = unravel_data(data)
+    toc = time.perf_counter()
+    print(f'    unravel time {toc - tic:0.2f} seconds\n')
+    return featuremaps, mapshape
 
 
 def data_in_window(starttimes, endtimes, file, filename):
