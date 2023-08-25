@@ -54,7 +54,7 @@ class DropsetQRF:
             # predict test set
             print('  Predicting test set....     ', end='')
             start_timer()
-            yPred = qrf.predict(xTest, quantiles=[0.025, 0.5, 0.975])
+            yPred = qrf.predict(xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
             end_timer()
 
             # calculate relevant error metrics and fill into dictionary
