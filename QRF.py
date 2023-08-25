@@ -22,10 +22,13 @@ from validation_evaluation import validation_evaluation
 
 
 class QRF:
-    def __init__(self):
+    def __init__(self, confidence_interval=None):
         # variables used later on
         self.yPred = 0
         self.MSE = 0
+        if confidence_interval:
+            self.lowerCI = (100 - CI) / 2
+            self.upperCI = 100 - self.lowerCI
 
     def set_data(self, dataTrain, dataTest):
         # shuffle data
@@ -60,7 +63,7 @@ class QRF:
     def run_test(self):
         print('  Predicting test set....     ', end='')
         start_timer()
-        self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
+        self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         end_timer()
 
         self.MSE = mse(self.yTest, self.yPred)
@@ -72,7 +75,7 @@ class QRF:
         # begin and time
         print('Predicting inference data....     ', end=' ')
         start_timer()
-        self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
+        self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         end_timer()
 
         prediction_map = qrf_utils.reshape_preds(self.yPred, map_shape)
