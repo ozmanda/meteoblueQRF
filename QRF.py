@@ -68,7 +68,7 @@ class QRF:
 
         self.MSE = mse(self.yTest, self.yPred)
 
-    def run_inference(self, datapath, savedir):
+    def run_inference(self, datapath, savedir, img=True):
         # open file, load featuremap and close the data file
         self.xTest, map_shape = qrf_utils.load_inference_data(datapath)
 
@@ -87,6 +87,11 @@ class QRF:
         save_object(savedir, prediction_map)
         toc = time.perf_counter()
         print(f'    save time {toc-tic:0.2f} seconds')
+
+        if img:
+            print('Generating images...')
+            savedir = os.path.join(os.path.dirname(savedir), timenow, 'prediction_maps')
+            qrf_utils.map_vis(prediction_map, savedir)
 
         return savedir
 
