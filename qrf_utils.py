@@ -75,47 +75,48 @@ def reshape_preds(preds, map_shape):
     return preds.reshape((map_shape[0], map_shape[1], map_shape[2], 3))
 
 
+def load_file(datapath):
+    file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+    # check correct delimiter usage (not uniform)
+    if not test_data(file):
+        file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
+    return file
+
+
 def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False):
     # debug configuration
     logging.basicConfig(filename='stationdata.log', level=logging.DEBUG, filemode='w')
 
     # Not Dropset: concatenate DataFrames
-    if not dropset:
-        noData = []
-        data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
-        for idx, filename in enumerate(os.listdir(datapath)):
-            file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
-            # check correct delimiter usage (not uniform)
-            if not test_data(file):
-                file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
-            # extract data points within the time window, if one is given
-            if startDatetime and endDatetime:
-                file, noData = data_in_window(startDatetime, endDatetime, file, filename)
-            data = pd.concat((data, file))
-        if noData:
-            logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
-            logging.debug(f'List of stations with no data:\n{noData}')
-        return data
+    noData = []
+    data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
+    for idx, filename in enumerate(os.listdir(datapath)):
+        file = load_file(datapath)
+        # extract data points within the time window, if one is given
+        if startDatetime and endDatetime:
+            file, noData = data_in_window(startDatetime, endDatetime, file, filename)
+        data = pd.concat((data, file))
+    if noData:
+        logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
+        logging.debug(f'List of stations with no data:\n{noData}')
+    return data
 
+def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
     # For Dropset: dictionary with station name as key and pandas DataFrame as value
-    else:
-        noData = []
-        datasets = {}
-        for idx, filename in enumerate(os.listdir(datapath)):
-            file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
-            # check correct delimiter usage (not uniform)
-            if not test_data(file):
-                file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
-            # extract data points within the time window, if one is given
-            if startDatetime and endDatetime:
-                file, noData = data_in_window(startDatetime, endDatetime, file, filename)
-            # add rows to datasets dictionary for Dropset
-            datasets[f'{filename.split(".csv")[0]}'] = file.dropna()
-        if noData:
-            logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
-            logging.debug(f'List of stations with no data:\n{noData}')
+    noData = []
+    datasets = {}
+    for idx, filename in enumerate(os.listdir(datapath)):
+        file = load_file(datapath)
+        # extract data points within the time window, if one is given
+        if startDatetime and endDatetime:
+            file, noData = data_in_window(startDatetime, endDatetime, file, filename)
+        # add rows to datasets dictionary for Dropset
+        datasets[f'{filename.split(".csv")[0]}'] = file.dropna()
+    if noData:
+        logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
+        logging.debug(f'List of stations with no data:\n{noData}')
 
-        return datasets
+    return datasets
 
 
 def load_inference_data(datapath):
