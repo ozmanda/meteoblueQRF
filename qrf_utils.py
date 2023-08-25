@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import _pickle as cPickle
 import joblib
+from seaborn import heatmap
+import matplotlib.pyplot as plt
 
 
 def empty_dict(keylist):
@@ -167,7 +169,20 @@ def idxs_in_window(starttime, endtime, timecolumn):
     return inWindow
 
 
-_start_time = time.time()
+def map_vis(val_array: np.ndarray, savedir: str):
+    '''
+    Generates images of the given ndarray over all times (presumes 3 dimensions: lat, lon and time)
+    '''
+    if not os.path.isdir(path):
+        os.mkdir(path)
+    for time in range(errormap.shape[0]):
+        savepath = os.path.join(path, f'errormap_t.{time}.png')
+        if not os.path.isfile(savepath):
+            print('    error heatmap')
+            ax = heatmap(errormap[time, :, :])
+            plt.show()
+            plt.savefig(savepath, bbox_inches='tight')
+            plt.close()
 
 
 def mse(ytrue, ypred):
