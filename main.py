@@ -30,6 +30,7 @@ if __name__ == '__main__':
                         default=None)
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models for training or path to '
                                                          'model for inference or evaluation')
+    parser.add_argument('--savemodels', default=False, help='Indicates if individual dropset models should be saved.')
     parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
     parser.add_argument('--generate_images', type=bool, help='Boolean value indicating if images for use in SR_GAN'
                                                              'should be generated (True/False)', default=False)
@@ -54,11 +55,10 @@ if __name__ == '__main__':
                 warn(f'Number of start and end times for test set cannot be matched', UserWarning)
                 raise ValueError
 
-        qrf = QRF()
+        qrf = QRF(confidence_interval=args.CI)
         # QRF run with one shuffled time window
         if not args.test_start:
             dataset = qrf_utils.load_data(args.stationDatapath)
-            qrf = QRF()
             qrf.set_split_data(dataset)
 
         # QRF run with specific training and test time windows
@@ -93,6 +93,7 @@ if __name__ == '__main__':
         datasets = qrf_utils.load_dropset_data(os.path.join(os.getcwd(), args.stationDatapath),
                                        startDatetime=args.starttime, endDatetime=args.endtime)
         dropsetQRF = DropsetQRF(datasets, args.CI)
+        dropsetQRF.run_dropset_estimation(args.savedir, savemodels=args.savemodels)
         dropsetQRF.run_error_estimation()
         dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
 
