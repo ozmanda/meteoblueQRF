@@ -98,8 +98,8 @@ class QRF:
 
         if img:
             print('Generating images...')
-            savedir = os.path.join(os.path.dirname(savedir), timenow, 'prediction_maps')
-            qrf_utils.map_vis(prediction_map, savedir)
+            imgdir = os.path.join(os.path.dirname(savedir), f'{timenow}_maps')
+            qrf.generate_images(self.yPred, imgdir)
 
         return savedir
 
@@ -120,20 +120,24 @@ class QRF:
         validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
 
 
-    def generate_images(self, inferencefile, imgpath):
+    def generate_images(self, inferencedata, imgpath, load=False):
         """
         Generates images suitable for loading into SR_GAN for training or testing. Note that the inference file loaded
         contains three prediction values: [CI lower bound, mean prediction, CI upper bound]. Currently only the mean
         prediction value is used to generate images.
+        Option to pass data location instead of prediction maps for inferencedata parameter, in which case the load
+        flag must be set to True.
 
         Normalisation: normalised using (nan)max/min temp values and adding 5° buffer on each end.
         """
-        inference_maps = load_file(inferencefile)
-        vmin = np.nanmin(inference_maps) - 5
-        vmax = np.nanmax(inference_maps) + 5
+        if load:
+            inferencedata = load_file(inferencedata)
 
-        for time in range(inference_maps.shape[0]):
-            tempmap = sns.heatmap(inference_maps[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0, cbar=False,
+        vmin = np.nanmin(inferencedata) - 5
+        vmax = np.nanmax(inferencedata) + 5
+
+        for time in range(inferencedata.shape[0]):
+            tempmap = sns.heatmap(inferencedata[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0, cbar=False,
                                   yticklabels=False, xticklabels=False)
             plt.close()
             fig = tempmap.get_figure()
