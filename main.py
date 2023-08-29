@@ -111,15 +111,7 @@ if __name__ == '__main__':
         qrf = joblib.load(args.modeldir)
         toc = time.perf_counter()
         print(f'    loading time: {toc-tic:0.4f} seconds\n')
-        savedir = qrf.run_inference(args.inferencedata, args.savedir)
-        if args.generate_images:
-            if not args.imagepath:
-                imgpath = os.path.join('Data', 'QRF_Inference_Maps', f'{os.path.split(savedir)[1].split(".json")[0]}')
-            else:
-                imgpath = os.path.join(args.imagepath, f'{os.path.split(savedir)[1].split(".json")[0]}')
-            if not os.path.isdir(imgpath):
-                os.mkdir(imgpath)
-            qrf.generate_images(savedir, imgpath)
+        savedir = qrf.run_inference(args.inferencedata, args.savedir, img=args.generate_images)
         print(f'Inference file saved at: {savedir}')
 
     # VALIDATION RUN AND RESULT EVALUATION
