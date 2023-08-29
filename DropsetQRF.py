@@ -2,7 +2,7 @@ import os
 import numpy as np
 from warnings import warn
 from pandas import DataFrame, concat
-from qrf_utils import start_timer, end_timer
+from qrf_utils import start_timer, end_timer, sd_mu
 from quantile_forest import RandomForestQuantileRegressor
 import joblib
 
@@ -70,17 +70,27 @@ class DropsetQRF:
             stationData['Deviation'] = yTest - yPred[:, 1]
             stationData['Absolute Deviation'] = np.abs(stationData['Deviation'])
             stationData['MSE'] = np.sum(stationData['Absolute Deviation'] ** 2) / len(stationData['Absolute Deviation'])
+            sd, mu = sd_mu(stationData['Deviation'])
+            stationData['SD'] = sd
+            stationData['ME'] = mu
 
-            # enter station dictionary into ouput dictionary
+            # enter station dictionary into output dictionary
             self.Output[key] = stationData
 
+
     def save_output(self, savepath):
+        station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
         if not os.path.isdir(savepath):
             os.mkdir(savepath)
         for key in self.Output:
-            MSE = self.Output[key].pop('MSE')
-            DataFrame(self.Output[key]).to_csv(os.path.join(savepath, f'errors_{key}.csv'), index=False)
+            station_summary['Station'].append(key)
+            station_summary['MSE'].append(self.Output[key].pop('MSE'))
+            station_summary['Standard Deviation'].append(self.Output[key].pop('SD'))
+            station_summary['Mean Error'].append(self.Output[key].pop('ME'))
+            DataFrame(self.Output[key]).to_csv(os.path.join(savepath, 'errors', f'errors_{key}.csv'), index=False)
+
+        DataFrame(station_summary).to_csv(os.path.join(savepath, 'station_summary.csv'), index = False)
 
     def run_dropset_estimation(self, savepath, savemodels=True):
         self.run_error_estimation(os.path.join(savepath, 'models'), savemodels=savemodels)
-        self.save_output(os.path.join(savepath, 'errors'))
+        self.save_output(savepath)
