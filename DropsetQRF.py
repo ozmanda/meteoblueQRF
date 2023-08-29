@@ -82,5 +82,5 @@ class DropsetQRF:
             DataFrame(self.Output[key]).to_csv(os.path.join(savepath, f'errors_{key}.csv'), index=False)
 
     def run_dropset_estimation(self, savepath, savemodels=True):
-        self.run_error_estimation(os.path.join(savepath, 'models'))
+        self.run_error_estimation(os.path.join(savepath, 'models'), savemodels=savemodels)
         self.save_output(os.path.join(savepath, 'errors'))
