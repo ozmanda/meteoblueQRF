@@ -4,6 +4,7 @@ from warnings import warn
 from pandas import DataFrame, concat
 from qrf_utils import start_timer, end_timer
 from quantile_forest import RandomForestQuantileRegressor
+import joblib
 
 
 class DropsetQRF:
@@ -35,7 +36,7 @@ class DropsetQRF:
 
         return xTrain.dropna(), xTest, yTrain, yTest, xTime
 
-    def run_error_estimation(self):
+    def run_error_estimation(self, savepath, savemodels=True):
         self.Output = {}
         for key in self.stations:
             print(f'Key {key} \n  Generating dataset')
@@ -50,6 +51,8 @@ class DropsetQRF:
             start_timer()
             qrf.fit(xTrain, yTrain)
             end_timer()
+            if savemodels:
+                joblib.dump(qrf, os.path.join(savepath, f'{key}.z'), compress=3)
 
             # predict test set
             print('  Predicting test set....     ', end='')
@@ -79,5 +82,5 @@ class DropsetQRF:
             DataFrame(self.Output[key]).to_csv(os.path.join(savepath, f'errors_{key}.csv'), index=False)
 
     def run_dropset_estimation(self, savepath, savemodels=True):
-        self.run_error_estimation()
-        self.save_output(savepath)
+        self.run_error_estimation(os.path.join(savepath, 'models'))
+        self.save_output(os.path.join(savepath, 'errors'))
