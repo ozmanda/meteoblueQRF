@@ -94,8 +94,6 @@ if __name__ == '__main__':
                                        startDatetime=args.starttime, endDatetime=args.endtime)
         dropsetQRF = DropsetQRF(datasets, args.CI)
         dropsetQRF.run_dropset_estimation(args.savedir, savemodels=args.savemodels)
-        dropsetQRF.run_error_estimation()
-        dropsetQRF.save_output(os.path.join(os.getcwd(), args.savedir))
 
     # INFERENCE
     elif args.type == 'inference':
