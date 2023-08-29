@@ -118,7 +118,7 @@ class QRF:
         contains three prediction values: [CI lower bound, mean prediction, CI upper bound]. Currently only the mean
         prediction value is used to generate images.
 
-        Normalisation:
+        Normalisation: normalised using (nan)max/min temp values and adding 5° buffer on each end.
         """
         inference_maps = load_file(inferencefile)
         vmin = np.nanmin(inference_maps) - 5
