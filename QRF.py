@@ -7,7 +7,7 @@ import joblib
 import warnings
 import numpy as np
 import sklearn.utils
-import _pickle as CPickle
+import _pickle as cPickle
 from datetime import datetime
 from sklearn.utils import shuffle
 from pandas import DataFrame, concat
@@ -29,6 +29,15 @@ class QRF:
         if confidence_interval:
             self.lowerCI = (100 - CI) / 2
             self.upperCI = 100 - self.lowerCI
+        self.qrf = RandomForestQuantileRegressor
+        self.xTrain = []
+        self.xTest = []
+        self.yTrain = []
+        self.yTest = []
+        self.yPred = []
+        self.test_times = []
+        self.variable_importance = {}
+        self.data = DataFrame
 
     def set_data(self, dataTrain, dataTest):
         # shuffle data
@@ -96,11 +105,11 @@ class QRF:
         return savedir
 
     def run_validation(self, datapath, measurementpath, palmpath, resultpath=None, run_inference=True):
-        '''
+        """
         Performs a validation run. A validation run consists of loading the feature maps, performing inference and
         evaluating the resulting temperature maps w.r.t. the moving average feature and analysing the accuracy per
         measurement station.
-        '''
+        """
         if run_inference:
             resultpath = self.run_inference(datapath, resultpath)
         else:
@@ -157,7 +166,7 @@ class QRF:
             for variable in variables:
                 xtrain = self.xTrain
                 var_oob_errors = []
-                for i in range(n):
+                for _ in range(n):
                     xtrain[variable] = sklearn.utils.shuffle(self.xTrain[variable]).values
                     var_oob_preds = self.qrf.predict(xtrain, oob_score=True)
                     var_oob_errors.append(np.mean(np.abs(var_oob_preds - self.yTrain)))
