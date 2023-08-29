@@ -8,11 +8,7 @@ import matplotlib.pyplot as plt
 from pandas import read_csv, Timedelta, Timestamp, to_datetime, DataFrame
 
 
-def sd_mu(val_list):
-    n = len(val_list)
-    mu = round(np.mean(val_list),2)
-    sd = round(np.sqrt((np.sum(val_list-mu)**2) / (n-1)), 2)
-    return sd, mu
+
 
 
 def extract_inference_times(inferencedatapath):

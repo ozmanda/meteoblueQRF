@@ -192,6 +192,13 @@ def mse(ytrue, ypred):
     return np.round((1/len(ytrue)) * np.sum(dev), 4)
 
 
+def sd_mu(val_list):
+    n = len(val_list)
+    mu = round(np.mean(val_list),2)
+    sd = round(np.sqrt((np.sum(val_list-mu)**2) / (n-1)), 2)
+    return sd, mu
+
+
 def start_timer():
     global _start_time
     _start_time = time.time()
