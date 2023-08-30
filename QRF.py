@@ -24,9 +24,9 @@ class QRF:
         # variables used later on
         self.yPred = 0
         self.MSE = 0
-        if confidence_interval:
-            self.lowerCI = (100 - CI) / 2
-            self.upperCI = 100 - self.lowerCI
+        CI = confidence_interval if confidence_interval else 95
+        self.lowerCI = (100 - CI) / 2
+        self.upperCI = 100 - self.lowerCI
         self.qrf = RandomForestQuantileRegressor
         self.xTrain = []
         self.xTest = []
