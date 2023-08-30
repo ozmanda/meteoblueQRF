@@ -8,9 +8,10 @@ import joblib
 
 
 class DropsetQRF:
-    def __init__(self, datasets, CI):
+    def __init__(self, datasets, CI=None):
         self.data = datasets
         self.stations = datasets.keys()
+        CI = CI if CI else 95
         self.lowerCI = (100-CI) / 2
         self.upperCI = 100 - self.lowerCI
 
