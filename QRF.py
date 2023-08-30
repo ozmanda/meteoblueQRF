@@ -85,18 +85,21 @@ class QRF:
         self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         end_timer()
 
+        # restore original map shape
         prediction_map = reshape_preds(self.yPred, map_shape)
 
-        savedir = os.path.join(savedir, f'{timenow()}.json')
-
+        # set .json save path and save output
+        t = timenow()
+        savedir = os.path.join(savedir, f'{t}.json')
         tic = time.perf_counter()
         save_object(savedir, prediction_map)
         toc = time.perf_counter()
         print(f'    save time {toc-tic:0.2f} seconds')
 
+        # generate images
         if img:
             print('Generating images...')
-            imgdir = os.path.join(os.path.dirname(savedir), f'{timenow()}_maps')
+            imgdir = os.path.join(os.path.dirname(savedir), f'{t}_maps')
             qrf.generate_images(self.yPred, imgdir)
 
         return savedir
