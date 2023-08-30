@@ -34,7 +34,7 @@ class QRF:
         self.yTest = []
         self.yPred = []
         self.test_times = []
-        self.variable_importance = {}
+        self.variable_importance = {'Variable': [], 'Importance [%]': []}
         self.data = DataFrame
 
     def set_data(self, dataTrain, dataTest):
@@ -90,9 +90,9 @@ class QRF:
 
         # set .json save path and save output
         t = timenow()
-        savedir = os.path.join(savedir, f'{t}.json')
+        outputpath = os.path.join(savedir, f'{t}.json')
         tic = time.perf_counter()
-        save_object(savedir, prediction_map)
+        save_object(outputpath, prediction_map)
         toc = time.perf_counter()
         print(f'    save time {toc-tic:0.2f} seconds')
 
@@ -111,9 +111,10 @@ class QRF:
         measurement station.
         """
         if run_inference:
+            assert os.path.isdir(resultpath), 'If inference is to be run, resultpath must be the desired save path'
             resultpath = self.run_inference(datapath, resultpath)
         else:
-            assert resultpath, 'If inference is not run, a path to inference results must be given'
+            assert os.path.isfile(resultpath), 'If inference is not run, a path to inference results must be given'
         # load boundary
         boundary = load_file(f'{os.path.splitext(palmpath)[0]}_boundary.z')
         # infopath = 'Data/stations.csv'
@@ -144,16 +145,6 @@ class QRF:
             fig = tempmap.get_figure()
             fig.savefig(os.path.join(imgpath, f'tempmap_{time}.png'), bbox_inches='tight', pad_inches=0)
 
-    def write_variable_importance(self, filepath):
-        print(f'    Writing variable importance file......')
-        filepath = f'{filepath.split(".z")[0]}_variable_importance.txt'
-        lines = []
-        for key in self.variable_importance.keys():
-            lines.append(f'{key}:\t {self.variable_importance[key]}\n')
-
-        with open(filepath, 'w') as file:
-            file.writelines(lines)
-
     def run_variable_importance_estimation(self, filepath, n=10):
         # ignores UserWarning "X does not have valid feature names, but RandomForestQuantileRegressor
         # was fitted with feature names" and FutureWarning (iteritems -> .items and series[i:j] -> label-based indexing)
@@ -165,10 +156,9 @@ class QRF:
             og_oob_error = np.mean(np.abs(oob_preds - self.yTrain))
             diffsum = 0
             oob_errors = {}
-            self.variable_importance = {}
             print(f'    Gathering error differences...........')
             for variable in variables:
-                xtrain = self.xTrain
+                xtrain = self.xTrain.copy()
                 var_oob_errors = []
                 for _ in range(n):
                     xtrain[variable] = sklearn.utils.shuffle(self.xTrain[variable]).values
@@ -179,10 +169,10 @@ class QRF:
 
             print(f'    Calculating variable importances.......')
             for variable in variables:
-                self.variable_importance[variable] = np.round((oob_errors[variable] / diffsum)*100, 2)
-                print(f'      {variable}:\t {self.variable_importance[variable]}')
+                self.variable_importance['Variable'].append(variable)
+                self.variable_importance['Importance [%]'].append(np.round((oob_errors[variable] / diffsum)*100, 2))
 
-            self.write_variable_importance(filepath)
+            DataFrame(self.variable_importance).to_csv(f'{filepath.split(".z")[0]}_variable_importance.csv', index=False)
 
     def save_model(self, modelpath):
         joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
