@@ -209,3 +209,10 @@ def end_timer():
     (t_min, t_sec) = divmod(t_sec, 60)
     (t_hour, t_min) = divmod(t_min, 60)
     print(f'Time: {t_hour}:{t_min}:{t_sec}')
+
+
+def timenow():
+    # outputs the current time in a standardised format
+    timenow = datetime.now().replace(second=0, microsecond=0)
+    timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
+    return timenow

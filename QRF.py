@@ -4,7 +4,6 @@ import pickle
 import time
 import joblib
 import warnings
-import qrf_utils
 import numpy as np
 import sklearn.utils
 import seaborn as sns
@@ -17,7 +16,7 @@ from pandas import DataFrame, concat
 from sklearn.model_selection import train_test_split
 from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
-from qrf_utils import start_timer, end_timer, mse, load_file, save_object
+from qrf_utils import start_timer, end_timer, mse, load_file, save_object, timenow, load_inference_data, reshape_preds
 
 
 class QRF:
@@ -50,8 +49,8 @@ class QRF:
         self.test_times = dataTest['datetime']
         self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
 
-    def set_split_data(self, data):
-        self.data = data
+    def set_split_data(self, dataset):
+        self.data = dataset
         x = self.data.drop(['time', 'temperature'], axis=1)
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -78,7 +77,7 @@ class QRF:
 
     def run_inference(self, datapath, savedir, img=True):
         # open file, load featuremap and close the data file
-        self.xTest, map_shape = qrf_utils.load_inference_data(datapath)
+        self.xTest, map_shape = load_inference_data(datapath)
 
         # begin and time
         print('Predicting inference data....     ', end=' ')
@@ -86,10 +85,9 @@ class QRF:
         self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         end_timer()
 
-        prediction_map = qrf_utils.reshape_preds(self.yPred, map_shape)
-        timenow = datetime.now().replace(second=0, microsecond=0)
-        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
-        savedir = os.path.join(savedir, f'{timenow}.json')
+        prediction_map = reshape_preds(self.yPred, map_shape)
+
+        savedir = os.path.join(savedir, f'{timenow()}.json')
 
         tic = time.perf_counter()
         save_object(savedir, prediction_map)
@@ -98,7 +96,7 @@ class QRF:
 
         if img:
             print('Generating images...')
-            imgdir = os.path.join(os.path.dirname(savedir), f'{timenow}_maps')
+            imgdir = os.path.join(os.path.dirname(savedir), f'{timenow()}_maps')
             qrf.generate_images(self.yPred, imgdir)
 
         return savedir
@@ -184,9 +182,7 @@ class QRF:
             self.write_variable_importance(filepath)
 
     def save_model(self, modelpath):
-        timenow = datetime.now().replace(second=0, microsecond=0)
-        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
-        joblib.dump(self, os.path.join(modelpath, f'{timenow}_{self.MSE}.z'),
+        joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
                     compress=3)
 
     def save_ouput(self, savedir, modelpath):
@@ -194,9 +190,7 @@ class QRF:
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
 
-        timenow = datetime.now().replace(second=0, microsecond=0)
-        timenow = f'{timenow.year}-{timenow.month}-{timenow.day}_{timenow.hour}.{timenow.minute}'
-        savedir = os.path.join(savedir, f'{timenow}_{self.MSE}.csv')
+        savedir = os.path.join(savedir, f'{timenow()}_{self.MSE}.csv')
 
         output = {'datetime': self.test_times}
         for featurekey in self.xTest.keys():
