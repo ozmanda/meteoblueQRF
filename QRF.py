@@ -15,7 +15,7 @@ from pandas import DataFrame, concat
 from sklearn.model_selection import train_test_split
 from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
-from qrf_utils import start_timer, end_timer, mse, load_csv, save_object, timenow, load_inference_data, reshape_preds, load_file
+from qrf_utils import *
 
 
 class QRF:
@@ -35,6 +35,17 @@ class QRF:
         self.test_times = []
         self.variable_importance = {'Variable': [], 'Importance [%]': []}
         self.data = DataFrame
+
+    def load_dataset(self, path, start=None, end=None):
+        if not start:
+            dataset = load_data(path)
+            self.set_split_data(dataset)
+        else:
+            dataset_train = load_data(path, startDatetime=start[0], endDatetime=end[0])
+            assert len(dataset_train) != 0, 'No data found in training window'
+            dataset_test = load_data(path, startDatetime=start[1], endDatetime=end[1])
+            assert len(dataset_test) != 0, 'No data found in test window'
+            self.set_data(dataTrain=dataset_train, dataTest=dataset_test)
 
     def set_data(self, dataTrain, dataTest):
         # shuffle data

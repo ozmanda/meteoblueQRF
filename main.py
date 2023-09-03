@@ -56,22 +56,11 @@ if __name__ == '__main__':
                 raise ValueError
 
         qrf = QRF(confidence_interval=args.CI)
-        # QRF run with one shuffled time window
         if not args.test_start:
-            dataset = qrf_utils.load_data(args.stationDatapath)
-            qrf.set_split_data(dataset)
-
-        # QRF run with specific training and test time windows
+            qrf.load_dataset(args.stationDatapath)
         else:
-            dataset_train = qrf_utils.load_data(args.stationDatapath,
-                                                startDatetime=args.starttime, endDatetime=args.endtime)
-            assert len(dataset_train) != 0, 'No data found in training window'
-            dataset_test = qrf_utils.load_data(args.stationDatapath,
-                                               startDatetime=args.test_start, endDatetime=args.test_end)
-            assert len(dataset_test) != 0, 'No data found in test window'
-
-            qrf.set_data(dataTrain=dataset_train, dataTest=dataset_test)
-
+            qrf.load_dataset(args.stationDatapath, start=[args.starttime, args.test_start],
+                             end=[args.endtime, args.test_end])
         qrf.run_training()
         qrf.run_test()
         qrf.save_ouput(os.path.join(os.getcwd(), args.savedir), args.modeldir)
@@ -137,4 +126,3 @@ if __name__ == '__main__':
         # load trained model and run variable importance analysis
         qrf = joblib.load(args.modeldir)
         qrf.run_variable_importance_estimation(args.modeldir)
-
