@@ -8,6 +8,7 @@ import _pickle as cPickle
 import joblib
 from seaborn import heatmap
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 
 def empty_dict(keylist):
@@ -77,11 +78,11 @@ def reshape_preds(preds, map_shape):
     return preds.reshape((map_shape[0], map_shape[1], map_shape[2], 3))
 
 
-def load_file(datapath):
-    file = pd.read_csv(os.path.join(datapath, filename), delimiter=';')
+def load_csv(datapath):
+    file = pd.read_csv(os.path.join(datapath), delimiter=';')
     # check correct delimiter usage (not uniform)
     if not test_data(file):
-        file = pd.read_csv(os.path.join(datapath, filename), delimiter=',')
+        file = pd.read_csv(os.path.join(datapath), delimiter=',')
     return file
 
 
@@ -93,7 +94,7 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
     noData = []
     data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
     for idx, filename in enumerate(os.listdir(datapath)):
-        file = load_file(datapath)
+        file = load_csv(datapath)
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
             file, noData = data_in_window(startDatetime, endDatetime, file, filename)
@@ -108,7 +109,7 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
     noData = []
     datasets = {}
     for idx, filename in enumerate(os.listdir(datapath)):
-        file = load_file(datapath)
+        file = load_csv(datapath)
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
             file, noData = data_in_window(startDatetime, endDatetime, file, filename)
@@ -124,7 +125,7 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
 def load_inference_data(datapath):
     print('Loading Data')
     tic = time.perf_counter()
-    data = load_file(datapath)
+    data = load_csv(datapath)
     toc = time.perf_counter()
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
@@ -167,22 +168,6 @@ def idxs_in_window(starttime, endtime, timecolumn):
     beforeEnd = (timecolumn <= endtime).to_list()
     inWindow = [a and b for a, b in zip(afterStart, beforeEnd)]
     return inWindow
-
-
-def map_vis(val_array: np.ndarray, savedir: str):
-    '''
-    Generates images of the given ndarray over all times (presumes 3 dimensions: lat, lon and time)
-    '''
-    if not os.path.isdir(path):
-        os.mkdir(path)
-    for time in range(errormap.shape[0]):
-        savepath = os.path.join(path, f'errormap_t.{time}.png')
-        if not os.path.isfile(savepath):
-            print('    error heatmap')
-            ax = heatmap(errormap[time, :, :])
-            plt.show()
-            plt.savefig(savepath, bbox_inches='tight')
-            plt.close()
 
 
 def mse(ytrue, ypred):
