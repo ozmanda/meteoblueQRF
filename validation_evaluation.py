@@ -2,13 +2,10 @@ import os
 import argparse
 import numpy as np
 import qrf_utils
-from qrf_utils import load_file
+from qrf_utils import load_csv, sd_mu, load_file
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pandas import read_csv, Timedelta, Timestamp, to_datetime, DataFrame
-
-
-
 
 
 def extract_inference_times(inferencedatapath):
@@ -68,7 +65,7 @@ def match_times(times: list, measurementpath: str, stationid: str):
     return measurements, matched
 
 
-def load_data(resultpath: str, featuremappath: str, ma=True):
+def load_data(resultpath: str, featuremappath: str):
     '''
     Loads predicted and true temperature maps
     '''
@@ -98,6 +95,7 @@ def loc_idx(boundary, stations, res=32):
 
 def stations_loc(boundary, stationdata):
     print('Identifying stations within the boundary')
+    print(stationdata)
     stationscsv = read_csv(stationdata, delimiter=";")
     stations = {}
     for _, row in stationscsv.iterrows():
@@ -131,12 +129,14 @@ def calculate_station_metrics(tpred, stations, times, measurementpath, savepath)
             station_metrics['LCZ'].append(stations[station]['LCZ'])
             # generate error distribution graph
             station_error_distribution(station, errors, savepath)
-        # else:
-        #     station_metrics['rmse'].append(-9999)
-        #     station_metrics['mean'].append(-9999)
-        #     station_metrics['standard deviation'].append(-9999)
     df = DataFrame(station_metrics)
     df.to_csv(csv_savepath, sep=';', index=False)
+    # histplot of station errors
+    fig = sns.histplot(station_metrics['rmse'])
+    fig.set_title(f'Station Error Distribution')
+    fig.set_xlabel('Prediction Error [°C]')
+    plt.savefig(os.path.join(savepath, f'station_error_distribution.png'))
+    plt.close()
 
 
 def station_error_distribution(stationid, errors, savepath):
@@ -249,33 +249,3 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
     error_map_evaluation(tempmap_pred, tempmap_true, savepath)
     print('Evaluating station errors')
     station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('results', help='Path to inference results')
-    parser.add_argument('featuremap', help='Path to corresponding feature map')
-    parser.add_argument('--savepath', help='Path to folder for analysis results', default=None)
-    parser.add_argument(f'--palmpath', help='Path to PALM simulation file', default=None)
-    parser.add_argument(f'--measurementpath', help='Path to measurement data', default=None)
-    args = parser.parse_args()
-
-    # Generate save folder if none is given and ensure the folder exists
-    if not args.savepath:
-        args.savepath = os.path.join(os.path.dirname(args.results),
-                                     f'{os.path.splitext(os.path.basename(args.results))[0]}')
-    if not os.path.isdir(args.savepath):
-        os.mkdir(args.savepath)
-
-    # loud PALM boundary and stationinfo
-    boundary = load_file(f'{os.path.splitext(args.palmpath)[0]}_boundary.z')
-    infopath = os.path.join(os.path.dirname(args.measurementpath), 'stations.csv')
-
-    tempmap_pred, tempmap_true, times = load_data(args.results, args.PALM, ma=True)
-    error_map_evaluation(args.results, args.featuremap)
-    station_error_evaluation(boundary, infopath)
-
-    errormap = error_map(tempmap_pred, tempmap_true)
-    error_heatmap(errormap, args.savepath)
-    error_hist(errormap, args.savepath)
-    mse = metrics(errormap, args.savepath)
