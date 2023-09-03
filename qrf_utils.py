@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 
+# CUSTOM EMPTY OBJECTS ------------------------------------------------------------------------------------------------
 def empty_dict(keylist):
     empty_dict = {}
     for key in keylist:
@@ -33,51 +34,7 @@ def initialise_empty_df(filepath, dropset=False):
         return pd.DataFrame(columns=file.columns)
 
 
-def test_data(file):
-    try:
-        test = file['datetime']
-        return True
-    except KeyError:
-        return False
-
-
-def unravel_data(data):
-    print('    unravelling data')
-    unraveled = empty_df(data.keys())
-    for key in data.keys():
-        unraveled[key] = np.ravel(data[key])
-    return unraveled, data[key].shape
-
-
-def load_file(datapath):
-    with open(datapath, 'rb') as file:
-        data = cPickle.load(file)
-        file.close()
-    return data
-
-def save_object(path, object):
-    '''
-    Wrapper for object saving which automatically detects whether an object being saved is a numpy array or not and
-    uses the respective save method. Joblib contains special implementations for NumPy arrays and is significantly
-    faster than Pickle, otherwise Pickle (which is implemented in C) is faster.
-    '''
-    if type(object) == np.ndarray:
-        joblib.dump(object, f'{path}.json', compress=3)
-    else:
-        with open(f'{path}.json', 'wb') as file:
-            cPickle.dump(object, file, protocol=pickle.HIGHEST_PROTOCOL)
-            file.close()
-
-
-def reshape_preds(preds, map_shape):
-    '''
-    Reshapes the predictions, which come as a list of three values [lower CI bound, mean, upper CI bound]. The resulting
-    map shape is identical to the loaded maps, with the exception of containing 3-channel data.
-    original map shape (10, 300, 300) --> prediction map shape (10, 300, 300, 3)
-    '''
-    return preds.reshape((map_shape[0], map_shape[1], map_shape[2], 3))
-
-
+# DATA LOADING & SAVING ------------------------------------------------------------------------------------------------
 def load_csv(datapath):
     file = pd.read_csv(os.path.join(datapath), delimiter=';')
     # check correct delimiter usage (not uniform)
@@ -103,6 +60,7 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
         logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
         logging.debug(f'List of stations with no data:\n{noData}')
     return data
+
 
 def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
     # For Dropset: dictionary with station name as key and pandas DataFrame as value
@@ -142,6 +100,53 @@ def load_inference_data(datapath):
     return featuremaps, mapshape
 
 
+def load_file(datapath):
+    with open(datapath, 'rb') as file:
+        data = cPickle.load(file)
+        file.close()
+    return data
+
+def save_object(path, object):
+    '''
+    Wrapper for object saving which automatically detects whether an object being saved is a numpy array or not and
+    uses the respective save method. Joblib contains special implementations for NumPy arrays and is significantly
+    faster than Pickle, otherwise Pickle (which is implemented in C) is faster.
+    '''
+    if type(object) == np.ndarray:
+        joblib.dump(object, f'{path}.json', compress=3)
+    else:
+        with open(f'{path}.json', 'wb') as file:
+            cPickle.dump(object, file, protocol=pickle.HIGHEST_PROTOCOL)
+            file.close()
+
+
+# DATA MANIPULATION ---------------------------------------------------------------------------------------------------
+def test_data(file):
+    try:
+        test = file['datetime']
+        return True
+    except KeyError:
+        return False
+
+
+def unravel_data(data):
+    print('    unravelling data')
+    unraveled = empty_df(data.keys())
+    for key in data.keys():
+        unraveled[key] = np.ravel(data[key])
+    return unraveled, data[key].shape
+
+
+
+def reshape_preds(preds, map_shape):
+    '''
+    Reshapes the predictions, which come as a list of three values [lower CI bound, mean, upper CI bound]. The resulting
+    map shape is identical to the loaded maps, with the exception of containing 3-channel data.
+    original map shape (10, 300, 300) --> prediction map shape (10, 300, 300, 3)
+    '''
+    return preds.reshape((map_shape[0], map_shape[1], map_shape[2], 3))
+
+
 def data_in_window(starttimes, endtimes, file, filename):
     # time formatting
     starttimes = pd.to_datetime(starttimes, format='%Y/%m/%d_%H:%M')
@@ -170,6 +175,27 @@ def idxs_in_window(starttime, endtime, timecolumn):
     return inWindow
 
 
+def time_feature(times, normalise=True):
+    '''
+    Generation of the time feature variable, calculated as minutes since midnight and normalised to one. Takes the
+    'time' feature from the MeasurementFeatures datasets and returns a new column.
+    '''
+    times = times.astype(list)
+    for idx, time in enumerate(times):
+        times[idx] = minutes_since_midnight(time, normalise=normalise)
+
+
+def minutes_since_midnight(time: str, normalise=True):
+    time = pd.to_datetime(time, format='%H:%M')
+    midnight = pd.to_datetime('00:00', format='%H:%M')
+    minutes = int((time - midnight) / pd.Timedelta(minutes=1))
+    if normalise:
+        return minutes / (24*60)
+    else:
+        return minutes
+
+
+# STATISTICS ----------------------------------------------------------------------------------------------------------
 def mse(ytrue, ypred):
     dev = []
     for idx, item in enumerate(ytrue):
@@ -184,6 +210,7 @@ def sd_mu(val_list):
     return sd, mu
 
 
+# TIME FUNCTIONS ------------------------------------------------------------------------------------------------------
 def start_timer():
     global _start_time
     _start_time = time.time()
