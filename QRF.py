@@ -9,14 +9,13 @@ import sklearn.utils
 import seaborn as sns
 from PIL import Image
 import _pickle as cPickle
-from datetime import datetime
 import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from pandas import DataFrame, concat
 from sklearn.model_selection import train_test_split
 from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
-from qrf_utils import start_timer, end_timer, mse, load_file, save_object, timenow, load_inference_data, reshape_preds
+from qrf_utils import start_timer, end_timer, mse, load_csv, save_object, timenow, load_inference_data, reshape_preds, load_file
 
 
 class QRF:
@@ -100,7 +99,7 @@ class QRF:
         if img:
             print('Generating images...')
             imgdir = os.path.join(os.path.dirname(savedir), f'{t}_maps')
-            qrf.generate_images(self.yPred, imgdir)
+            self.generate_images(self.yPred, imgdir)
 
         return savedir
 
@@ -112,11 +111,11 @@ class QRF:
         """
         if run_inference:
             assert os.path.isdir(resultpath), 'If inference is to be run, resultpath must be the desired save path'
-            resultpath = self.run_inference(datapath, resultpath)
+            resultpath = self.run_inference(datapath, resultpath, img=True)
         else:
             assert os.path.isfile(resultpath), 'If inference is not run, a path to inference results must be given'
         # load boundary
-        boundary = load_file(f'{os.path.splitext(palmpath)[0]}_boundary.z')
+        boundary = load_csv(f'{os.path.splitext(palmpath)[0]}_boundary.z')
         # infopath = 'Data/stations.csv'
         infopath = os.path.join(os.path.dirname(os.path.dirname(measurementpath)), 'stations.csv')
         validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
