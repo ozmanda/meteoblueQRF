@@ -36,15 +36,21 @@ class QRF:
         self.variable_importance = {'Variable': [], 'Importance [%]': []}
         self.data = DataFrame
 
-    def load_dataset(self, path, start=None, end=None):
+    def load_dataset(self, path, start=None, end=None, add_time=False):
         if not start:
             dataset = load_data(path)
+            if time:
+                dataset['time'] = time_feature(dataset['time'])
             self.set_split_data(dataset)
         else:
             dataset_train = load_data(path, startDatetime=start[0], endDatetime=end[0])
             assert len(dataset_train) != 0, 'No data found in training window'
             dataset_test = load_data(path, startDatetime=start[1], endDatetime=end[1])
             assert len(dataset_test) != 0, 'No data found in test window'
+            if time:
+                dataset_train['time'] = time_feature(dataset_train['time'], normalise=True)
+                dataset_test['test'] = time_feature(dataset_test['test'], normalise=True)
+
             self.set_data(dataTrain=dataset_train, dataTest=dataset_test)
 
     def set_data(self, dataTrain, dataTest):

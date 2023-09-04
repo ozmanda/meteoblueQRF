@@ -57,10 +57,10 @@ if __name__ == '__main__':
 
         qrf = QRF(confidence_interval=args.CI)
         if not args.test_start:
-            qrf.load_dataset(args.stationDatapath)
+            qrf.load_dataset(args.stationDatapath, add_time=True)
         else:
-            qrf.load_dataset(args.stationDatapath, start=[args.starttime, args.test_start],
-                             end=[args.endtime, args.test_end])
+            qrf.load_dataset(args.stationDatapath, add_time=True,
+                             start=[args.starttime, args.test_start], end=[args.endtime, args.test_end])
         qrf.run_training()
         qrf.run_test()
         qrf.save_ouput(os.path.join(os.getcwd(), args.savedir), args.modeldir)
