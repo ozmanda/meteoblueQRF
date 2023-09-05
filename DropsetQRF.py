@@ -5,6 +5,8 @@ from pandas import DataFrame, concat
 from qrf_utils import start_timer, end_timer, sd_mu
 from quantile_forest import RandomForestQuantileRegressor
 import joblib
+import matplotlib.pyplot as plt
+from seaborn import histplot, scatterplot
 
 
 class DropsetQRF:
@@ -12,7 +14,7 @@ class DropsetQRF:
         self.data = datasets
         self.stations = datasets.keys()
         CI = confidence_interval if confidence_interval else 95
-        self.lowerCI = (100-CI) / 2
+        self.lowerCI = (100 - CI) / 2
         self.upperCI = 100 - self.lowerCI
 
     def xy_generation(self, testkey):
@@ -78,7 +80,6 @@ class DropsetQRF:
             # enter station dictionary into output dictionary
             self.Output[key] = stationData
 
-
     def save_output(self, savepath):
         station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
         if not os.path.isdir(savepath):
@@ -90,7 +91,29 @@ class DropsetQRF:
             station_summary['Mean Error'].append(self.Output[key].pop('ME'))
             DataFrame(self.Output[key]).to_csv(os.path.join(savepath, 'errors', f'errors_{key}.csv'), index=False)
 
-        DataFrame(station_summary).to_csv(os.path.join(savepath, 'station_summary.csv'), index = False)
+        DataFrame(station_summary).to_csv(os.path.join(savepath, 'station_summary.csv'), index=False)
+
+    def generate_images(self, savepath):
+        imgdir = os.path.join(savepath, 'pred_vs_true')
+        dists = os.path.join(savepath, 'distributions')
+        for key in self.Output:
+            self.pred_vs_true(os.path.join(imgdir, f'{key}.png'),
+                              self.Output[key]['Predicted Temperature'], self.Output[key]['True Temperature'])
+
+    def pred_vs_true(self, path, data):
+        if not os.path.isfile(path):
+            plot = scatterplot(data, x='datetime', y='Predicted Temperature', color='r')
+            plot.set_title('Prediction vs. True Temperature')
+            plot.set_xlabel('Time')
+
+    def dist(self, path, errors):
+        if not os.path.isfile(path):
+            errors = np.ravel(errors).astype(list)
+            fig = histplot(errors)
+            fig.set_title('Prediction Error Distribution')
+            fig.set_xlabel('Prediction Error [°C]')
+            plt.savefig(path)
+            plt.close()
 
     def run_dropset_estimation(self, savepath, savemodels=True):
         self.run_error_estimation(os.path.join(savepath, 'models'), savemodels=savemodels)
