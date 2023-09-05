@@ -92,6 +92,11 @@ class QRF:
         self.MSE = mse(self.yTest, self.yPred)
 
     def run_inference(self, datapath, savedir, img=True):
+        # set foldername and create if necessary
+        t = timenow()
+        savedir = os.path.join(savedir, t)
+        if not os.path.isdir(savedir):
+            os.mkdir(savedir)
         # open file, load featuremap and close the data file
         self.xTest, map_shape = load_inference_data(datapath)
 
@@ -105,7 +110,6 @@ class QRF:
         prediction_map = reshape_preds(self.yPred, map_shape)
 
         # set .json save path and save output
-        t = timenow()
         outputpath = os.path.join(savedir, f'{t}.json')
         tic = time.perf_counter()
         save_object(outputpath, prediction_map)
@@ -115,7 +119,7 @@ class QRF:
         # generate images
         if img:
             print('Generating images...')
-            imgdir = os.path.join(os.path.dirname(savedir), f'{t}_maps')
+            imgdir = os.path.join(savedir, f'TempMaps')
             self.generate_images(self.yPred, imgdir)
 
         return savedir
