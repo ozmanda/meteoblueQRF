@@ -83,7 +83,7 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
 def load_inference_data(datapath):
     print('Loading Data')
     tic = time.perf_counter()
-    data = load_csv(datapath)
+    data = load_file(datapath)
     toc = time.perf_counter()
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
@@ -105,6 +105,7 @@ def load_file(datapath):
         data = cPickle.load(file)
         file.close()
     return data
+
 
 def save_object(path, object):
     '''
@@ -135,7 +136,6 @@ def unravel_data(data):
     for key in data.keys():
         unraveled[key] = np.ravel(data[key])
     return unraveled, data[key].shape
-
 
 
 def reshape_preds(preds, map_shape):
