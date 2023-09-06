@@ -97,8 +97,8 @@ class DropsetQRF:
         imgdir = os.path.join(savepath, 'pred_vs_true')
         dists = os.path.join(savepath, 'distributions')
         for key in self.Output:
-            self.pred_vs_true(os.path.join(imgdir, f'{key}.png'),
-                              self.Output[key]['Predicted Temperature'], self.Output[key]['True Temperature'])
+            self.pred_vs_true(os.path.join(imgdir, f'{key}.png'), self.Output[key])
+            self.dist(dists, self.Output[key]['Deviation'])
 
     def pred_vs_true(self, path, data):
         if not os.path.isfile(path):
