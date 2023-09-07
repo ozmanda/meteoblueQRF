@@ -67,7 +67,7 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
     noData = []
     datasets = {}
     for idx, filename in enumerate(os.listdir(datapath)):
-        file = load_csv(datapath)
+        file = load_csv(os.path.join(datapath, filename))
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
             file, noData = data_in_window(startDatetime, endDatetime, file, filename)
