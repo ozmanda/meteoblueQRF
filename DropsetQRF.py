@@ -14,8 +14,8 @@ class DropsetQRF:
         self.data = datasets
         self.stations = datasets.keys()
         CI = confidence_interval if confidence_interval else 95
-        self.lowerCI = (100 - CI) / 2
-        self.upperCI = 100 - self.lowerCI
+        self.lowerCI = ((100 - CI) / 2)/100
+        self.upperCI = (100 - self.lowerCI)/100
 
     def xy_generation(self, testkey):
         # assert the key has data
