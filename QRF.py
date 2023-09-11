@@ -192,7 +192,9 @@ class QRF:
                 self.variable_importance['Variable'].append(variable)
                 self.variable_importance['Importance [%]'].append(np.round((oob_errors[variable] / diffsum)*100, 2))
 
-            DataFrame(self.variable_importance).to_csv(f'{filepath.split(".z")[0]}_variable_importance.csv', index=False)
+            modelname = os.path.splitext(os.path.basename(filepath))[0]
+            savepath = os.path.join(os.path.dirname(filepath), modelname, f'{modelname}_variable_importance.csv')
+            DataFrame(self.variable_importance).to_csv(savepath, index=False)
 
     def save_model(self, modelpath):
         joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
