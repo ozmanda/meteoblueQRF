@@ -30,7 +30,7 @@ if __name__ == '__main__':
                         default=None)
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models for training or path to '
                                                          'model for inference or evaluation')
-    parser.add_argument('--savemodels', default=False, help='Indicates if individual dropset models should be saved.')
+    parser.add_argument('--savemodels', default=True, help='Indicates if individual dropset models should be saved.')
     parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
     parser.add_argument('--generate_images', type=bool, help='Boolean value indicating if images for use in SR_GAN'
                                                              'should be generated (True/False)', default=False)
@@ -124,5 +124,6 @@ if __name__ == '__main__':
         assert os.path.isfile(args.modeldir), 'Model path must be a file'
 
         # load trained model and run variable importance analysis
+        print('Loading trained QRF model')
         qrf = joblib.load(args.modeldir)
         qrf.run_variable_importance_estimation(args.modeldir)
