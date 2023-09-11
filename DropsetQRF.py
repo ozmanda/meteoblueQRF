@@ -40,6 +40,9 @@ class DropsetQRF:
         return xTrain.dropna(), xTest, yTrain, yTest, xTime
 
     def run_error_estimation(self, savepath, savemodels=True):
+        if savemodels:
+            if not os.path.isdir(savepath):
+                os.mkdir(savepath)
         self.Output = {}
         for key in self.stations:
             print(f'Key {key} \n  Generating dataset')
@@ -82,6 +85,7 @@ class DropsetQRF:
 
     def save_output(self, savepath):
         station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
+        savepath = os.path.join(savepath, 'errors')
         if not os.path.isdir(savepath):
             os.mkdir(savepath)
         for key in self.Output:
@@ -89,9 +93,9 @@ class DropsetQRF:
             station_summary['MSE'].append(self.Output[key].pop('MSE'))
             station_summary['Standard Deviation'].append(self.Output[key].pop('SD'))
             station_summary['Mean Error'].append(self.Output[key].pop('ME'))
-            DataFrame(self.Output[key]).to_csv(os.path.join(savepath, 'errors', f'errors_{key}.csv'), index=False)
+            DataFrame(self.Output[key]).to_csv(os.path.join(savepath, f'errors_{key}.csv'), index=False)
 
-        DataFrame(station_summary).to_csv(os.path.join(savepath, 'station_summary.csv'), index=False)
+        DataFrame(station_summary).to_csv(os.path.join(os.path.dirname(savepath), 'station_summary.csv'), index=False)
 
     def generate_images(self, savepath):
         imgdir = os.path.join(savepath, 'pred_vs_true')
