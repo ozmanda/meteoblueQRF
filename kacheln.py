@@ -4,14 +4,13 @@ import numpy as np
 from seaborn import heatmap
 import matplotlib.pyplot as plt
 from qrf_utils import load_file, save_object, reshape_preds, unravel_data
-from datetime import datetime
-import time
 import joblib
 
 """
 Quick analysis to check if LCZ or other model features are causing the "kacheln" we get during inference. 
 !! Changing only inference data & loading pre-trained models for efficiency (kacheln could still occur during training)
 """
+
 
 def load_inference_data(datapath, ):
     data = load_file(datapath)
@@ -38,6 +37,7 @@ def var_replacement(xTest, variable='moving_average', type='uniform'):
         replacement = np.full(shape, 30)
     elif type == 'gradient':
         max = np.nanmax(xTest[variable])
+        min = np.nanmin(xTest[variable])
         step = (max-min)/y
         for row in range(y):
             replacement[:, row] = [min + (step*row)]*x
@@ -57,8 +57,9 @@ def var_replacement(xTest, variable='moving_average', type='uniform'):
 
 def shorten(xTest):
     for key in xTest.keys():
-        xTest[key] = xTest[key][10]
-    return xTest
+        xTest[key] = xTest[key][0:2, :, :]
+    new_shape = xTest[key].shape
+    return xTest, new_shape
 
 
 def map_vis(path: str, val_array: np.ndarray):
@@ -75,15 +76,16 @@ def map_vis(path: str, val_array: np.ndarray):
         plt.close()
 
 
-def run_inference(qrf, xTest, savedir, type):
+def run_inference(qrf, xTest, savedir, type, map_shape):
     print('Predicting inference data....     ')
     yPred = qrf.predict(xTest)
+    prediction_map = yPred.reshape(map_shape[0], map_shape[1], map_shape[2])
+    savepath = os.path.join(savedir, f'{type}')
 
-    prediction_map = reshape_preds(yPred, map_shape)
-    savedir = os.path.join(savedir, f'{type}.json')
-
-    save_object(savedir, prediction_map)
+    save_object(savepath, prediction_map)
     savedir = os.path.join(savedir, 'imgs')
+    if not os.path.isdir(savedir):
+        os.mkdir(savedir)
     map_vis(savedir, prediction_map)
 
 
@@ -104,7 +106,8 @@ if __name__ == '__main__':
     qrf = joblib.load(args.modelpath)
 
     # open file, load featuremap and close the data file
-    xTest, map_shape = load_inference_data(args.inferencedata)
+    xTest, _ = load_inference_data(args.inferencedata)
+    xTest, map_shape = shorten(xTest)
     tests = ['uniform', 'gradient', 'squares']
     for test_type in tests:
         savedir_test = os.path.join(savedir, f'{test_type}')
@@ -112,5 +115,4 @@ if __name__ == '__main__':
             os.mkdir(savedir_test)
         xTest_new = var_replacement(xTest, variable='moving_average', type=test_type)
         xTest_new, _ = unravel_data(xTest_new)
-        xTest_new = shorten(xTest_new)
-        run_inference(qrf.qrf, xTest_new, savedir_test, test_type)
+        run_inference(qrf.qrf, xTest_new, savedir_test, test_type, map_shape)
