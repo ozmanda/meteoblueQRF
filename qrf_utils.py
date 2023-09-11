@@ -51,7 +51,7 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
     noData = []
     data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
     for idx, filename in enumerate(os.listdir(datapath)):
-        file = load_csv(datapath)
+        file = load_csv(os.path.join(datapath, filename))
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
             file, noData = data_in_window(startDatetime, endDatetime, file, filename)
@@ -180,14 +180,14 @@ def time_feature(times, normalise=True):
     Generation of the time feature variable, calculated as minutes since midnight and normalised to one. Takes the
     'time' feature from the MeasurementFeatures datasets and returns a new column.
     '''
-    times = times.astype(list)
+    times = list(times)
     for idx, time in enumerate(times):
         times[idx] = minutes_since_midnight(time, normalise=normalise)
 
 
 def minutes_since_midnight(time: str, normalise=True):
-    time = pd.to_datetime(time, format='%H:%M')
-    midnight = pd.to_datetime('00:00', format='%H:%M')
+    time = pd.to_datetime(time, format='%H:%M:%S')
+    midnight = pd.to_datetime('00:00:00', format='%H:%M:%S')
     minutes = int((time - midnight) / pd.Timedelta(minutes=1))
     if normalise:
         return minutes / (24*60)
