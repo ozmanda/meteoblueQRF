@@ -103,7 +103,10 @@ class QRF:
         # begin and time
         print('Predicting inference data....     ', end=' ')
         start_timer()
-        self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
+        try:
+            self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
+        except AttributeError:
+            self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 9.75])
         end_timer()
 
         # restore original map shape
