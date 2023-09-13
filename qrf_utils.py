@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import _pickle as cPickle
 import joblib
+from pandas import DataFrame
 from seaborn import heatmap
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -83,7 +84,7 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
 def load_inference_data(datapath):
     print('Loading Data')
     tic = time.perf_counter()
-    data = load_file(datapath)
+    data: DataFrame = load_file(datapath)
     toc = time.perf_counter()
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
@@ -203,9 +204,14 @@ def mse(ytrue, ypred):
     return np.round((1/len(ytrue)) * np.sum(dev), 4)
 
 
+def rmse(ytrue, ypred):
+    mse_ = mse(ytrue, ypred)
+    return round(np.sqrt(mse_), 2)
+
+
 def sd_mu(val_list):
     n = len(val_list)
-    mu = round(np.mean(val_list),2)
+    mu = round(np.mean(val_list), 2)
     sd = round(np.sqrt((np.sum(val_list-mu)**2) / (n-1)), 2)
     return sd, mu
 
