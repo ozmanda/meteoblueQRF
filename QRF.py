@@ -106,7 +106,16 @@ class QRF:
         try:
             self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         except AttributeError:
-            self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 9.75])
+            try:
+                self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 9.75])
+            except AttributeError or ValueError as e:
+                for key in self.xTest.keys():
+                    if np.any(np.isinf(self.xTest[key])):
+                        print(key)
+                    if np.any(np.isnan(self.xTest[key])):
+                        print(key)
+                raise e
+
         end_timer()
 
         # restore original map shape
@@ -139,11 +148,10 @@ class QRF:
         else:
             assert os.path.isfile(resultpath), 'If inference is not run, a path to inference results must be given'
         # load boundary
-        boundary = load_csv(f'{os.path.splitext(palmpath)[0]}_boundary.z')
+        boundary = load_file(f'{os.path.splitext(palmpath)[0]}_boundary.z')
         # infopath = 'Data/stations.csv'
         infopath = os.path.join(os.path.dirname(os.path.dirname(measurementpath)), 'stations.csv')
         validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
-
 
     def generate_images(self, inferencedata, imgpath, load=False):
         """

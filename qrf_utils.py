@@ -85,6 +85,7 @@ def load_inference_data(datapath):
     print('Loading Data')
     tic = time.perf_counter()
     data: DataFrame = load_file(datapath)
+    print(f'Moving average shape: {data["moving_average"].shape}')
     toc = time.perf_counter()
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
@@ -94,6 +95,7 @@ def load_inference_data(datapath):
     if 'moving average' in data.keys():
         data['moving_average'] = data['moving average']
         _ = data.pop('moving average')
+    test_inf_nan(data)
     tic = time.perf_counter()
     featuremaps, mapshape = unravel_data(data)
     toc = time.perf_counter()
@@ -135,8 +137,21 @@ def unravel_data(data):
     print('    unravelling data')
     unraveled = empty_df(data.keys())
     for key in data.keys():
-        unraveled[key] = np.ravel(data[key])
+        try:
+            unraveled[key] = np.ravel(data[key])
+        except ValueError as e:
+            print(key)
+            raise e
     return unraveled, data[key].shape
+
+
+def test_inf_nan(data: DataFrame):
+    print('Testing Data for inf and NaNs')
+    for key in data.keys():
+        if np.any(np.isinf(data[key])):
+            print(f'Data has inf values in feature {key}')
+        if np.any(np.isnan(data[key])):
+            print(f'Data has NaN values in feature {key}')
 
 
 def reshape_preds(preds, map_shape):

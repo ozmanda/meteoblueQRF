@@ -80,6 +80,15 @@ def load_data(resultpath: str, featuremappath: str):
     return results, temps, times
 
 
+def isolate_idxs(stations: dict):
+    rows = []
+    cols = []
+    for station in stations.keys():
+        rows.append(stations[station]['row'])
+        cols.append(stations[station]['col'])
+    return rows, cols
+
+
 def loc_idx(boundary, stations, res=32):
     '''
     Determines the indices of the station on the map using the boundary, map resolution and station coordinates.
@@ -155,6 +164,7 @@ def station_error_evaluation(pred, boundary, stationinfo, times, measurementpath
     # search for stations within boundary
     stations = stations_loc(boundary, stationinfo)
     calculate_station_metrics(pred, stations, times, measurementpath, savedir)
+    return stations
 
 
 def error_map(pred, true):
@@ -167,18 +177,19 @@ def error_map(pred, true):
     return errormap
 
 
-def error_heatmap(errormap, path):
+def error_heatmap(errormap, stations, path):
     '''
-    Generates images of the spatial error distribution for all times.
+    Generates images of the spatial error distribution for all times. Plots the location of measurement stations
     '''
-    path = os.path.join(path, 'ErrorMaps')
+    rows, cols = isolate_idxs(stations)
+    path = os.path.join(path, 'ErrorMaps_new_v2')
     if not os.path.isdir(path):
         os.mkdir(path)
     for time in range(errormap.shape[0]):
         savepath = os.path.join(path, f'errormap_t.{time}.png')
         if not os.path.isfile(savepath):
-            print('    error heatmap')
             ax = sns.heatmap(errormap[time, :, :])
+            ax.scatter(rows, cols, marker='*', color='blue')
             plt.show()
             plt.savefig(savepath, bbox_inches='tight')
             plt.close()
@@ -221,13 +232,13 @@ def error_metrics(error_map, path):
             file.close()
 
 
-def error_map_evaluation(pred, true, savepath):
+def error_map_evaluation(pred, true, stations, savepath):
     ''' Wrapper for error evaluation of the predicted temperature maps w.r.t. the moving average feature. '''
     # calculate error maps, calculate metrics and generate heatmaps
     errormaps = error_map(pred, true)
     error_metrics(errormaps, savepath)
     error_hist(errormaps, savepath)
-    error_heatmap(errormaps, savepath)
+    error_heatmap(errormaps, stations, savepath)
 
 
 def validation_evaluation(result_path, true_path, boundary, stationinfo, measurementpath):
@@ -245,7 +256,7 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
     tempmap_pred, tempmap_true, times = load_data(result_path, true_path)
 
     # evaluate error map and station errors
-    print('Evaluating temperature maps')
-    error_map_evaluation(tempmap_pred, tempmap_true, savepath)
     print('Evaluating station errors')
-    station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
+    stations = station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
+    print('Evaluating temperature maps')
+    error_map_evaluation(tempmap_pred, tempmap_true, stations, savepath)
