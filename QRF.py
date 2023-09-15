@@ -188,13 +188,17 @@ class QRF:
             diffsum = 0
             oob_errors = {}
             print(f'    Gathering error differences...........')
-            for variable in variables:
+            nvar = len(variables)
+            for idx, variable in enumerate(variables):
+                print(f'      variable {idx}/{nvar} ({variable})')
                 xtrain = self.xTrain.copy()
                 var_oob_errors = []
-                for _ in range(n):
+                for i in range(n):
+                    print(f'        run {i+1}', end='\r')
                     xtrain[variable] = sklearn.utils.shuffle(self.xTrain[variable]).values
                     var_oob_preds = self.qrf.predict(xtrain, oob_score=True)
                     var_oob_errors.append(np.mean(np.abs(var_oob_preds - self.yTrain)))
+                print(end='\x1b[2k')
                 oob_errors[variable] = np.mean(var_oob_errors) - og_oob_error
                 diffsum += oob_errors[variable]
 
