@@ -107,7 +107,7 @@ class QRF:
             self.yPred = self.qrf.predict(self.xTest, quantiles=[self.lowerCI, 0.5, self.upperCI])
         except AttributeError:
             try:
-                self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 9.75])
+                self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
             except AttributeError or ValueError as e:
                 for key in self.xTest.keys():
                     if np.any(np.isinf(self.xTest[key])):
@@ -122,7 +122,7 @@ class QRF:
         prediction_map = reshape_preds(self.yPred, map_shape)
 
         # set .json save path and save output
-        outputpath = os.path.join(savedir, f'{t}.json')
+        outputpath = os.path.join(savedir, t)
         tic = time.perf_counter()
         save_object(outputpath, prediction_map)
         toc = time.perf_counter()
@@ -132,7 +132,7 @@ class QRF:
         if img:
             print('Generating images...')
             imgdir = os.path.join(savedir, f'TempMaps')
-            self.generate_images(self.yPred, imgdir)
+            self.generate_images(prediction_map, imgdir)
 
         return savedir
 
@@ -153,7 +153,8 @@ class QRF:
         infopath = os.path.join(os.path.dirname(os.path.dirname(measurementpath)), 'stations.csv')
         validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
 
-    def generate_images(self, inferencedata, imgpath, load=False):
+    @staticmethod
+    def generate_images(inferencedata, imgpath, load=False):
         """
         Generates images suitable for loading into SR_GAN for training or testing. Note that the inference file loaded
         contains three prediction values: [CI lower bound, mean prediction, CI upper bound]. Currently only the mean
@@ -166,11 +167,11 @@ class QRF:
         if load:
             inferencedata = load_file(inferencedata)
 
-        vmin = np.nanmin(inferencedata) - 5
-        vmax = np.nanmax(inferencedata) + 5
+        vmin = np.nanmin(inferencedata)
+        vmax = np.nanmax(inferencedata)
 
         for time in range(inferencedata.shape[0]):
-            tempmap = sns.heatmap(inferencedata[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0, cbar=False,
+            tempmap = sns.heatmap(inferencedata[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0,
                                   yticklabels=False, xticklabels=False)
             plt.close()
             fig = tempmap.get_figure()

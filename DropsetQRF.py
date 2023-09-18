@@ -8,6 +8,7 @@ from quantile_forest import RandomForestQuantileRegressor
 import joblib
 import matplotlib.pyplot as plt
 from seaborn import histplot, scatterplot
+from lcz_analysis import lcz_analysis
 
 
 class DropsetQRF:
@@ -141,7 +142,8 @@ class DropsetQRF:
         self.error_hist(station_cleaned, os.path.join(path, 'average_station_errors.png'),
                         'Average station dropset error distribution')
 
-    def error_hist(self, data, savepath, title):
+    @staticmethod
+    def error_hist(data, savepath, title):
         fig = histplot(data, x='error', stat='probability')
         fig.set_title(title)
         fig.set_xlabel('Prediction error [°C]')
@@ -149,7 +151,8 @@ class DropsetQRF:
         plt.xticks(rotation=45)
         plt.savefig(savepath, bbox_inches='tight')
 
-    def pred_vs_true(self, path, data):
+    @staticmethod
+    def pred_vs_true(path, data):
         if not os.path.isfile(path):
             plot = scatterplot(data, x='datetime', y='Predicted Temperature', color='r')
             plot.set_title('Prediction vs. True Temperature')
@@ -157,7 +160,8 @@ class DropsetQRF:
             plt.xticks(rotation=45)
             plt.savefig(path, bbox_inches='tight')
 
-    def station_dists(self, path, errors):
+    @staticmethod
+    def station_dists(path, errors):
         if not os.path.isfile(path):
             errors = np.ravel(errors).astype(list)
             fig = histplot(errors)
@@ -170,3 +174,4 @@ class DropsetQRF:
         self.run_error_estimation(os.path.join(savepath, 'models'), savemodels=savemodels)
         self.save_output(savepath)
         self.generate_images(savepath)
+        lcz_analysis(savepath)

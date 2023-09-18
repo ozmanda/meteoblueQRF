@@ -1,10 +1,9 @@
 import os
-import argparse
 import numpy as np
-import qrf_utils
 from qrf_utils import load_csv, sd_mu, load_file
 import seaborn as sns
 import matplotlib.pyplot as plt
+import imageio
 from pandas import read_csv, Timedelta, Timestamp, to_datetime, DataFrame
 
 
@@ -111,7 +110,6 @@ def stations_loc(boundary, stationdata):
         if boundary['CH_W'] <= int(row["CH_E"]) <= boundary['CH_E'] and boundary['CH_S'] <= int(row["CH_N"]) <= boundary['CH_N']:
             stations[row["stationid_new"]] = {'lat': int(row["CH_N"]), 'lon': int(row["CH_E"]),
                                               'LCZ': row["classification"]}
-
     stations = loc_idx(boundary, stations)
     return stations
 
@@ -122,30 +120,31 @@ def calculate_station_metrics(tpred, stations, times, measurementpath, savepath)
     prediction times are extracted and for each station, a dictionary containing all relevant metrics is generated.
     '''
     csv_savepath = os.path.join(savepath, 'station_metrics.csv')
-    # create empty dict with one entry per station and fill with metrics
-    station_metrics = {'stationid': [], 'rmse': [], 'mean': [], 'standard deviation': [], 'LCZ': []}
-    for station in stations.keys():
-        measurements, matched_times = match_times(times, measurementpath, station)
-        if not measurements.empty:
-            station_metrics['stationid'].append(station)
-            # calculate metrics
-            preds = tpred[:, stations[station]['row'], stations[station]['col'], 1][matched_times]
-            errors = preds - measurements['temp']
-            station_metrics['rmse'].append(round(np.sqrt((1 / len(errors)) * (np.sum(errors ** 2))), 2))
-            sd, mu = sd_mu(errors)
-            station_metrics['mean'].append(mu)
-            station_metrics['standard deviation'].append(sd)
-            station_metrics['LCZ'].append(stations[station]['LCZ'])
-            # generate error distribution graph
-            station_error_distribution(station, errors, savepath)
-    df = DataFrame(station_metrics)
-    df.to_csv(csv_savepath, sep=';', index=False)
-    # histplot of station errors
-    fig = sns.histplot(station_metrics['rmse'])
-    fig.set_title(f'Station Error Distribution')
-    fig.set_xlabel('Prediction Error [°C]')
-    plt.savefig(os.path.join(savepath, f'station_error_distribution.png'))
-    plt.close()
+    if not os.path.isfile(os.path.join(savepath, f'station_error_distribution.png')):
+        # create empty dict with one entry per station and fill with metrics
+        station_metrics = {'stationid': [], 'rmse': [], 'mean': [], 'standard deviation': [], 'LCZ': []}
+        for station in stations.keys():
+            measurements, matched_times = match_times(times, measurementpath, station)
+            if not measurements.empty:
+                station_metrics['stationid'].append(station)
+                # calculate metrics
+                preds = tpred[:, stations[station]['row'], stations[station]['col'], 1][matched_times]
+                errors = preds - measurements['temp']
+                station_metrics['rmse'].append(round(np.sqrt((1 / len(errors)) * (np.sum(errors ** 2))), 2))
+                sd, mu = sd_mu(errors)
+                station_metrics['mean'].append(mu)
+                station_metrics['standard deviation'].append(sd)
+                station_metrics['LCZ'].append(stations[station]['LCZ'])
+                # generate error distribution graph
+                station_error_distribution(station, errors, savepath)
+        df = DataFrame(station_metrics)
+        df.to_csv(csv_savepath, sep=';', index=False)
+        # histplot of station errors
+        fig = sns.histplot(station_metrics['rmse'])
+        fig.set_title(f'Station Error Distribution')
+        fig.set_xlabel('Prediction Error [°C]')
+        plt.savefig(os.path.join(savepath, f'station_error_distribution.png'))
+        plt.close()
 
 
 def station_error_distribution(stationid, errors, savepath):
@@ -155,8 +154,10 @@ def station_error_distribution(stationid, errors, savepath):
     fig = sns.histplot(errors)
     fig.set_title(f'Error Distribution for station {stationid}')
     fig.set_xlabel('Prediction Error [°C]')
-    plt.savefig(os.path.join(savepath, f'{stationid}.png'))
+    plt.savefig(os.path.join(savepath, f'{stationid}_hist.png'))
     plt.close()
+
+    fig = sns.boxplot(errors)
 
 
 def station_error_evaluation(pred, boundary, stationinfo, times, measurementpath, savedir):
@@ -177,22 +178,34 @@ def error_map(pred, true):
     return errormap
 
 
-def error_heatmap(errormap, stations, path):
+def error_heatmap(errormap, times, stations, path):
     '''
     Generates images of the spatial error distribution for all times. Plots the location of measurement stations
     '''
     rows, cols = isolate_idxs(stations)
-    path = os.path.join(path, 'ErrorMaps_new_v2')
+    path = os.path.join(path, 'ErrorMaps_PiYG')
+    error_max = np.nanmax(errormap)
+    error_min = np.nanmin(errormap)
     if not os.path.isdir(path):
         os.mkdir(path)
     for time in range(errormap.shape[0]):
         savepath = os.path.join(path, f'errormap_t.{time}.png')
         if not os.path.isfile(savepath):
-            ax = sns.heatmap(errormap[time, :, :])
+            ax = sns.heatmap(errormap[time, :, :], cmap='PiYG', center=0, vmin=error_min, vmax=error_max)
             ax.scatter(rows, cols, marker='*', color='blue')
+            ax.set_title(f'Errors {times[time]}')
             plt.show()
             plt.savefig(savepath, bbox_inches='tight')
             plt.close()
+    animate_heatmaps(path, os.path.dirname(path))
+
+
+def animate_heatmaps(imgpath, savepath):
+    savepath = os.path.join(savepath, 'errors.gif')
+    imgs = []
+    for filename in os.listdir(imgpath):
+        imgs.append(imageio.imread(os.path.join(imgpath, filename)))
+    imageio.mimsave(savepath, imgs)
 
 
 def error_hist(errormap, path):
@@ -232,13 +245,13 @@ def error_metrics(error_map, path):
             file.close()
 
 
-def error_map_evaluation(pred, true, stations, savepath):
+def error_map_evaluation(pred, true, times, stations, savepath):
     ''' Wrapper for error evaluation of the predicted temperature maps w.r.t. the moving average feature. '''
     # calculate error maps, calculate metrics and generate heatmaps
     errormaps = error_map(pred, true)
     error_metrics(errormaps, savepath)
     error_hist(errormaps, savepath)
-    error_heatmap(errormaps, stations, savepath)
+    error_heatmap(errormaps, times, stations, savepath)
 
 
 def validation_evaluation(result_path, true_path, boundary, stationinfo, measurementpath):
@@ -247,7 +260,7 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
     feature and measurement station error analysis.
     '''
     # generate new save folder based on the result path
-    savepath = os.path.join(os.path.dirname(result_path), f'{os.path.splitext(os.path.basename(result_path))[0]}')
+    savepath = os.path.dirname(result_path)
     if not os.path.isdir(savepath):
         os.mkdir(savepath)
 
@@ -259,4 +272,48 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
     print('Evaluating station errors')
     stations = station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
     print('Evaluating temperature maps')
-    error_map_evaluation(tempmap_pred, tempmap_true, stations, savepath)
+    error_map_evaluation(tempmap_pred, tempmap_true, times, stations, savepath)
+
+
+def wgs84_to_lv(wgs84_lat, wgs84_lon, type, h_wgs=None, unit='deg'):
+    if unit == 'deg':
+        wgs84_lat *= 3600
+        wgs84_lon *= 3600
+    # Breite = latitude = phi, Länge = longitude = lambda
+    phi_prime = (wgs84_lat - 169028.66) / 10000
+    lambda_prime = (wgs84_lon - 26782.5) / 10000
+
+
+    # E = longitude, N = latitude
+    lv95_lon =  2600072.37 \
+                + 211455.93 * lambda_prime \
+                - 10938.51 * lambda_prime * phi_prime \
+                - 0.36 * lambda_prime * phi_prime** 2 \
+                - 44.54 * lambda_prime** 3
+
+    lv95_lat = 1200147.07 \
+               + 308807.95 * phi_prime \
+               + 3745.25 * lambda_prime** 2 \
+               + 76.63 * phi_prime** 2 \
+               - 194.56 * lambda_prime**2 * phi_prime \
+               + 119.79 * phi_prime**3
+
+    if h_wgs:
+        h_lv = h_wgs - 49.55 \
+               + 2.73 * lambda_prime \
+               + 6.94 * phi_prime
+
+    if type == 'lv95' and h_wgs:
+        return lv95_lat, lv95_lon, h_lv
+    elif type == 'lv95' and not h_wgs:
+        return lv95_lat, lv95_lon
+    elif type == 'lv03':
+        lv03_lat, lv03_lon = lv95_to_lv03(lv95_lat, lv95_lon)
+        if h_wgs:
+            return lv03_lat, lv03_lon, h_lv
+        else:
+            return lv03_lat, lv03_lon
+
+
+def lv95_to_lv03(lv95_lat, lv95_lon):
+    return lv95_lat - 1000000, lv95_lon - 2000000

@@ -57,7 +57,7 @@ def var_replacement(xTest, variable='moving_average', type='uniform'):
 
 def shorten(xTest):
     for key in xTest.keys():
-        xTest[key] = xTest[key][0:2, :, :]
+        xTest[key] = xTest[key][0:10, :, :]
     new_shape = xTest[key].shape
     return xTest, new_shape
 
@@ -70,7 +70,8 @@ def map_vis(path: str, val_array: np.ndarray):
         os.mkdir(path)
     for time in range(val_array.shape[0]):
         savepath = os.path.join(path, f'time_{time}.png')
-        ax = heatmap(val_array[time, :, :])
+        map = val_array[time, :, :]
+        ax = heatmap(map, vmin=np.nanmin(map), vmax=np.nanmax(map))
         plt.show()
         plt.savefig(savepath, bbox_inches='tight')
         plt.close()

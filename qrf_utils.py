@@ -105,7 +105,7 @@ def load_inference_data(datapath):
 
 def load_file(datapath):
     with open(datapath, 'rb') as file:
-        data = cPickle.load(file)
+        data = joblib.load(file)
         file.close()
     return data
 
