@@ -105,8 +105,8 @@ def error_distribution(errors, path, name, group=False):
         fig.set_title(f'Prediction Error Distribution for {name} by Local Climate Zone')
         fig.set_xlabel('LCZ')
     else:
-        fig = boxplot(errors)
-        fig.set_title(f'Prediction Error Distribution for {name}')
+        fig = boxplot(y=errors)
+        fig.set_title(f'Prediction Error Distribution for {LCZs[name]["Name"]}')
     fig.set_ylabel('Prediction Error [°C]')
     plt.savefig(imgpath)
     plt.close()
@@ -137,8 +137,8 @@ def lcz_analysis(path):
     summary_file = load_summary(os.path.join(path, 'station_summary.csv'))
     lcz_data, group_data = gather_errors(summary_file, path)
     imgpath = os.path.join(path, 'LCZ_analysis')
-    if not os.path.isdir(path):
-        os.mkdir(path)
+    if not os.path.isdir(imgpath):
+        os.mkdir(imgpath)
 
     # graphs for LCZs individually
     for lcz in LCZs.keys():
