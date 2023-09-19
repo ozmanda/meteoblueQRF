@@ -93,7 +93,7 @@ def loc_idx(boundary, stations, res=32):
     Determines the indices of the station on the map using the boundary, map resolution and station coordinates.
     (0, 0) is the top left corner, 0 is at boundary['CH_N'] for station latitude and boundary['CH_W'] for station
     longitude. The index coordinates are therefore:
-    (boundary['CH_N'] - station_lat, boundary['CH_W'] + station_lon)
+    (boundary['CH_N'] - station_lat, boundary['CH_W'] + station_lon) / resolution
     '''
     for stationid in stations.keys():
         stations[stationid]['row'] = int((boundary['CH_N'] - stations[stationid]['lat'])/res)
@@ -106,12 +106,16 @@ def stations_loc(boundary, stationdata):
     print(stationdata)
     stationscsv = read_csv(stationdata, delimiter=";")
     stations = {}
+    stations_unavailable = {}
     for _, row in stationscsv.iterrows():
         if boundary['CH_W'] <= int(row["CH_E"]) <= boundary['CH_E'] and boundary['CH_S'] <= int(row["CH_N"]) <= boundary['CH_N']:
             stations[row["stationid_new"]] = {'lat': int(row["CH_N"]), 'lon': int(row["CH_E"]),
                                               'LCZ': row["classification"]}
+        else:
+            stations[row["stationid_new"]] = {'lat': int(row["CH_N"]), 'lon': int(row["CH_E"])}
     stations = loc_idx(boundary, stations)
-    return stations
+    stations_unavailable = loc_idx(boundary, stations_unavailable)
+    return stations, stations_unavailable
 
 
 def calculate_station_metrics(tpred, stations, times, measurementpath, savepath):
@@ -157,15 +161,19 @@ def station_error_distribution(stationid, errors, savepath):
     plt.savefig(os.path.join(savepath, f'{stationid}_hist.png'))
     plt.close()
 
-    fig = sns.boxplot(errors)
+    fig = sns.boxplot(y=errors)
+    fig.set_title(f'Error Distribution for station {stationid}')
+    fig.set_xlabel('Prediction Error [°C]')
+    plt.savefig(os.path.join(savepath, f'{stationid}_box.png'))
+    plt.close()
 
 
 def station_error_evaluation(pred, boundary, stationinfo, times, measurementpath, savedir):
     ''' Wrapper for evaluation of measurement station errors '''
     # search for stations within boundary
-    stations = stations_loc(boundary, stationinfo)
+    stations, unavailable_stations = stations_loc(boundary, stationinfo)
     calculate_station_metrics(pred, stations, times, measurementpath, savedir)
-    return stations
+    return stations, unavailable_stations
 
 
 def error_map(pred, true):
@@ -178,11 +186,12 @@ def error_map(pred, true):
     return errormap
 
 
-def error_heatmap(errormap, times, stations, path):
+def error_heatmap(errormap, times, stations, unavailable, path):
     '''
     Generates images of the spatial error distribution for all times. Plots the location of measurement stations
     '''
     rows, cols = isolate_idxs(stations)
+    rows_u, cols_u = isolate_idxs(unavailable)
     path = os.path.join(path, 'ErrorMaps_PiYG')
     error_max = np.nanmax(errormap)
     error_min = np.nanmin(errormap)
@@ -193,6 +202,7 @@ def error_heatmap(errormap, times, stations, path):
         if not os.path.isfile(savepath):
             ax = sns.heatmap(errormap[time, :, :], cmap='PiYG', center=0, vmin=error_min, vmax=error_max)
             ax.scatter(rows, cols, marker='*', color='blue')
+            ax.scatter(rows_u, cols_u, marker='*', color='red')
             ax.set_title(f'Errors {times[time]}')
             plt.show()
             plt.savefig(savepath, bbox_inches='tight')
@@ -245,13 +255,13 @@ def error_metrics(error_map, path):
             file.close()
 
 
-def error_map_evaluation(pred, true, times, stations, savepath):
+def error_map_evaluation(pred, true, times, stations, unavailable, savepath):
     ''' Wrapper for error evaluation of the predicted temperature maps w.r.t. the moving average feature. '''
     # calculate error maps, calculate metrics and generate heatmaps
     errormaps = error_map(pred, true)
     error_metrics(errormaps, savepath)
     error_hist(errormaps, savepath)
-    error_heatmap(errormaps, times, stations, savepath)
+    error_heatmap(errormaps, times, stations, unavailable, savepath)
 
 
 def validation_evaluation(result_path, true_path, boundary, stationinfo, measurementpath):
@@ -270,9 +280,9 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
 
     # evaluate error map and station errors
     print('Evaluating station errors')
-    stations = station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
+    stations, station_unavailable = station_error_evaluation(tempmap_pred, boundary, stationinfo, times, measurementpath, savepath)
     print('Evaluating temperature maps')
-    error_map_evaluation(tempmap_pred, tempmap_true, times, stations, savepath)
+    error_map_evaluation(tempmap_pred, tempmap_true, times, stations, station_unavailable, savepath)
 
 
 def wgs84_to_lv(wgs84_lat, wgs84_lon, type, h_wgs=None, unit='deg'):
