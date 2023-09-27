@@ -43,8 +43,8 @@ class DropsetQRF:
 
         return xTrain.dropna(), xTest, yTrain, yTest, xTime
 
-    def run_error_estimation(self, savepath, savemodels=True):
-        if savemodels:
+    def run_error_estimation(self, savepath=None):
+        if savepath:
             if not os.path.isdir(savepath):
                 os.mkdir(savepath)
         for key in self.stations:
@@ -60,7 +60,7 @@ class DropsetQRF:
             start_timer()
             qrf.fit(xTrain, yTrain)
             end_timer()
-            if savemodels:
+            if savepath:
                 joblib.dump(qrf, os.path.join(savepath, f'{key}.z'), compress=3)
 
             # predict test set
@@ -90,6 +90,8 @@ class DropsetQRF:
         errorpath = os.path.join(savepath, 'errors')
         if not os.path.isdir(savepath):
             os.mkdir(savepath)
+        if not os.path.isdir(errorpath):
+            os.mkdir(errorpath)
         for key in self.Output:
             self.station_summary['Station'].append(key)
             self.station_summary['MSE'].append(self.Output[key].pop('MSE'))
@@ -112,9 +114,11 @@ class DropsetQRF:
         self.summary_graphs(savepath)
         for key in self.Output:
             self.pred_vs_true(os.path.join(imgdir, f'{key}.png'), self.Output[key])
-            self.station_dists(os.path.join(dists, f'{key}.png'), self.Output[key]['Deviation'])
+            self.error_hist(os.path.join(dists, f'{key}.png'), self.Output[key]['Deviation'],
+                            f'Prediction error distribution for station {key}')
             cleaned_devs, _ = qrf_utils.pop_outliers_std(DataFrame(self.Output[key]), 'Deviation')
-            self.station_dists(os.path.join(dists, f'{key}_cleaned.png'), cleaned_devs['Deviation'])
+            self.error_hist(os.path.join(dists, f'{key}_cleaned.png'), cleaned_devs['Deviation'],
+                            f'Cleaned prediction error distribution for station {key}')
 
     def summary_graphs(self, path):
         """
@@ -144,34 +148,27 @@ class DropsetQRF:
 
     @staticmethod
     def error_hist(data, savepath, title):
-        fig = histplot(data, x='error', stat='probability')
-        fig.set_title(title)
-        fig.set_xlabel('Prediction error [°C]')
-        fig.set_ylabel('Probability')
-        plt.xticks(rotation=45)
-        plt.savefig(savepath, bbox_inches='tight')
+        if not os.path.isfile(savepath):
+            fig = histplot(data, x='error', stat='probability')
+            fig.set_title(title)
+            fig.set_xlabel('Prediction error [°C]')
+            fig.set_ylabel('Probability')
+            plt.xticks(rotation=45)
+            plt.savefig(savepath, bbox_inches='tight')
 
     @staticmethod
     def pred_vs_true(path, data):
         if not os.path.isfile(path):
-            plot = scatterplot(data, x='datetime', y='Predicted Temperature', color='r')
+            plot = scatterplot(data, x='datetime', y='Predicted Temperature', color='r', label='Predicted Temperature')
+            plt.plot(data, x='datetime', y='True Temperature', label='True Temperature')
             plot.set_title('Prediction vs. True Temperature')
             plot.set_xlabel('Time')
+            plt.legend()
             plt.xticks(rotation=45)
             plt.savefig(path, bbox_inches='tight')
 
-    @staticmethod
-    def station_dists(path, errors):
-        if not os.path.isfile(path):
-            errors = np.ravel(errors).astype(list)
-            fig = histplot(errors)
-            fig.set_title('Prediction Error Distribution')
-            fig.set_xlabel('Prediction Error [°C]')
-            plt.savefig(path)
-            plt.close()
-
     def run_dropset_estimation(self, savepath, savemodels=True):
-        self.run_error_estimation(os.path.join(savepath, 'models'), savemodels=savemodels)
+        self.run_error_estimation(os.path.join(savepath, 'models') if savemodels else None)
         self.save_output(savepath)
         self.generate_images(savepath)
         lcz_analysis(savepath)
