@@ -397,7 +397,8 @@ if __name__ == '__main__':
         assert args.datapath.endswith(".csv"), 'A relative path to a .csv file must be given.'
         foldername = args.datapath.split("/")[-1].split('.csv')[0]
         if not args.savedir:
-            args.savedir = f'Data/Statistics/{"Testing" if args.type == "test" else "Inference"}/{foldername}'
+            args.savedir = f'Data/Statistics/{"Testing" if args.type == "test" else "Inference"}'
+        args.savedir = os.path.join(args.savedir, foldername)
         if not os.path.isdir(args.savedir):
             os.mkdir(args.savedir)
         test_statistics(args.datapath, args.savedir)

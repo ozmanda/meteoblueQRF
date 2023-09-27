@@ -39,7 +39,7 @@ class QRF:
     def load_dataset(self, path, start=None, end=None, add_time=False):
         if not start:
             dataset = load_data(path)
-            if time:
+            if add_time:
                 dataset['time'] = time_feature(dataset['time'])
             self.set_split_data(dataset)
         else:
@@ -47,7 +47,7 @@ class QRF:
             assert len(dataset_train) != 0, 'No data found in training window'
             dataset_test = load_data(path, startDatetime=start[1], endDatetime=end[1])
             assert len(dataset_test) != 0, 'No data found in test window'
-            if time:
+            if add_time:
                 dataset_train['time'] = time_feature(dataset_train['time'], normalise=True)
                 dataset_test['test'] = time_feature(dataset_test['test'], normalise=True)
 
@@ -60,14 +60,14 @@ class QRF:
 
         # assign data
         self.yTrain = dataTrain['temperature']
-        self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature'], axis=1)
+        self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
         self.yTest = dataTest['temperature']
         self.test_times = dataTest['datetime']
-        self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
+        self.xTest = dataTest.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
 
     def set_split_data(self, dataset):
         self.data = dataset
-        x = self.data.drop(['time', 'temperature'], axis=1)
+        x = self.data.drop(['time', 'temperature', 'moving_average'], axis=1)
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
@@ -77,7 +77,7 @@ class QRF:
         self.xTest = self.xTest.drop(['datetime'], axis=1)
 
     def run_training(self):
-        self.qrf = RandomForestQuantileRegressor()
+        self.qrf = RandomForestQuantileRegressor(max_depth=12)
         print('  Training QRF Regressor....     ', end='')
         start_timer()
         self.qrf.fit(self.xTrain, self.yTrain)

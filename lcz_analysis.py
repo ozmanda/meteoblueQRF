@@ -2,11 +2,10 @@ import os
 import re
 import argparse
 import numpy
-from seaborn import histplot
+from seaborn import histplot, boxplot
 import matplotlib.pyplot as plt
 import pandas as pd
 from qrf_utils import empty_df, empty_dict, sd_mu, rmse
-
 
 LCZs = {'A': {'Name': 'Dense trees', 'groups': ['Land Cover']},
         'B': {'Name': 'Scattered trees', 'groups': ['Land Cover']},
@@ -73,12 +72,12 @@ def gather_errors(summary_file, path):
         station = row['Station']
         station_data = pd.read_csv(os.path.join(path, 'errors', f'errors_{station}.csv'))
         station_data = station_data[['datetime', 'True Temperature', 'Predicted Temperature', 'Deviation']]
-        station_data['station'] = [station]*len(station_data)
+        station_data['station'] = [station] * len(station_data)
         for lcz in row['LCZ']:
             lcz_dfs[lcz] = pd.concat([lcz_dfs[lcz], station_data])
             lcz_dfs[lcz].reset_index()
             for group in LCZs[lcz]['groups']:
-                station_data['LCZ'] = [lcz]*len(station_data)
+                station_data['LCZ'] = [lcz] * len(station_data)
                 group_dfs[group] = pd.concat([group_dfs[group], station_data])
 
     lcz_summary(lcz_dfs, os.path.dirname(path))
@@ -87,7 +86,8 @@ def gather_errors(summary_file, path):
 
 
 def error_distribution(errors, path, name, group=False):
-    path = os.path.join(path, f'{name}.png')
+    # histplot
+    imgpath = os.path.join(path, f'{name}_hist.png')
     if group:
         fig = histplot(data=errors, x='Deviation', hue='LCZ', stat='probability')
     else:
@@ -95,7 +95,20 @@ def error_distribution(errors, path, name, group=False):
     fig.set_title(f'Prediction Error Distribution for {name}')
     fig.set_xlabel('Prediction Error [°C]')
     fig.set_ylabel('Probability')
-    plt.savefig(path)
+    plt.savefig(imgpath)
+    plt.close()
+
+    # boxplot
+    imgpath = os.path.join(path, f'{name}_box.png')
+    if group:
+        fig = boxplot(data=errors, y='Deviation', x='LCZ')
+        fig.set_title(f'Prediction Error Distribution for {name} by Local Climate Zone')
+        fig.set_xlabel('LCZ')
+    else:
+        fig = boxplot(y=errors)
+        fig.set_title(f'Prediction Error Distribution for {LCZs[name]["Name"]}')
+    fig.set_ylabel('Prediction Error [°C]')
+    plt.savefig(imgpath)
     plt.close()
 
 
@@ -124,8 +137,8 @@ def lcz_analysis(path):
     summary_file = load_summary(os.path.join(path, 'station_summary.csv'))
     lcz_data, group_data = gather_errors(summary_file, path)
     imgpath = os.path.join(path, 'LCZ_analysis')
-    if not os.path.isdir(path):
-        os.mkdir(path)
+    if not os.path.isdir(imgpath):
+        os.mkdir(imgpath)
 
     # graphs for LCZs individually
     for lcz in LCZs.keys():
@@ -142,5 +155,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     lcz_analysis(args.datapath)
-
-

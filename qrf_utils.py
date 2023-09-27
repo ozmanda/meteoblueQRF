@@ -199,6 +199,7 @@ def time_feature(times, normalise=True):
     times = list(times)
     for idx, time in enumerate(times):
         times[idx] = minutes_since_midnight(time, normalise=normalise)
+    return times
 
 
 def minutes_since_midnight(time: str, normalise=True):
