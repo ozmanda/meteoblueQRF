@@ -12,16 +12,23 @@ from lcz_analysis import lcz_analysis
 
 
 class DropsetQRF:
-    def __init__(self, datasets, confidence_interval=None):
-        self.Output = {}
-        self.station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
-        self.data = datasets
+    def __init__(self, datasets: dict, confidence_interval=None):
+        """
+        Class for QRF error estimation using the "dropset" method, similar to the Leave-One-Out Cross-Validation, or a
+        k-wise cross-validation with k=1.
+        :param datasets: dropset dataset, delivered as a dictionary containing a DataFrame for each station
+        :param confidence_interval: confidence interval for testing, must be between 0 and 1
+        """
+        self.Output: dict = {}
+        self.station_summary: dict = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
+        self.data: dict = datasets
         self.stations = datasets.keys()
-        CI = confidence_interval if confidence_interval else 95
-        self.lowerCI = ((100 - CI) / 2)/100
-        self.upperCI = (100 - self.lowerCI)/100
+        CI: float = confidence_interval if confidence_interval else 95
+        self.lowerCI: float = ((100 - CI) / 2)/100
+        self.upperCI: float = (100 - self.lowerCI)/100
+        self.aggregated_errors: DataFrame = DataFrame()
 
-    def xy_generation(self, testkey):
+    def xy_generation(self, testkey: str):
         # assert the key has data
         assert len(self.data[testkey]) != 0, f'No data available for key {testkey}'
         # separate test from training data
@@ -99,7 +106,14 @@ class DropsetQRF:
             self.station_summary['Mean Error'].append(self.Output[key].pop('ME'))
             DataFrame(self.Output[key]).to_csv(os.path.join(errorpath, f'errors_{key}.csv'), index=False)
 
-        DataFrame(self.station_summary).to_csv(os.path.join(savepath, 'station_summary.csv'), index=False)
+        summary = DataFrame(self.station_summary)
+        summary.to_csv(os.path.join(savepath, 'station_summary.csv'), index=False)
+
+        # sd and rmse
+        with open(os.path.join(savepath, 'summary.txt'), 'w') as file:
+            file.writelines([f'Standard Deviation: {np.mean(summary["Standard Deviation"])}',
+                             f'Mean Error: {np.mean(summary["Mean Error"])}'])
+            file.close()
 
     def generate_images(self, savepath):
         """
