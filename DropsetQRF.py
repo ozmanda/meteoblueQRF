@@ -13,6 +13,14 @@ from lcz_analysis import lcz_analysis
 
 class DropsetQRF:
     def __init__(self, datasets, confidence_interval=None):
+        """
+        Class for QRF error estimation using the "dropset" method, similar to leave-one-out cross validation or
+        k-fold cross validation. The data is split into training and test sets, with the test set being a single station.
+
+        Args:
+            datasets (_type_): _description_
+            confidence_interval (_type_, optional): if none is. Defaults to None.
+        """
         self.Output = {}
         self.station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
         self.data = datasets
