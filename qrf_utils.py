@@ -248,7 +248,7 @@ def determine_outlier_thresholds_std(mu, sd):
 
 def pop_outliers_std(df: DataFrame, col_name):
     lower_boundary, upper_boundary = determine_outlier_thresholds_std(np.mean(df[col_name]), np.std(df[col_name]))
-    if df[(df[col_name] > upper_boundary) | (df[col_name] < lower_boundary)].any():
+    if np.sum(df[col_name] > upper_boundary) | np.sum(df[col_name] < lower_boundary):
         outliers = list((df[col_name] > upper_boundary) | (df[col_name] < lower_boundary))
         cleaned_df = df[[not x for x in outliers]]
         outliers = df[outliers]

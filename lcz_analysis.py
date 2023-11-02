@@ -86,30 +86,31 @@ def gather_errors(summary_file, path):
 
 
 def error_distribution(errors, path, name, group=False):
-    # histplot
-    imgpath = os.path.join(path, f'{name}_hist.png')
-    if group:
-        fig = histplot(data=errors, x='Deviation', hue='LCZ', stat='probability')
-    else:
-        fig = histplot(errors, stat='probability')
-    fig.set_title(f'Prediction Error Distribution for {name}')
-    fig.set_xlabel('Prediction Error [°C]')
-    fig.set_ylabel('Probability')
-    plt.savefig(imgpath)
-    plt.close()
+    if not errors.empty:
+        # histplot
+        imgpath = os.path.join(path, f'{name}_hist.png')
+        if group:
+            fig = histplot(data=errors, x='Deviation', hue='LCZ', stat='probability')
+        else:
+            fig = histplot(errors, stat='probability')
+        fig.set_title(f'Prediction Error Distribution for {name}')
+        fig.set_xlabel('Prediction Error [°C]')
+        fig.set_ylabel('Probability')
+        plt.savefig(imgpath)
+        plt.close()
 
-    # boxplot
-    imgpath = os.path.join(path, f'{name}_box.png')
-    if group:
-        fig = boxplot(data=errors, y='Deviation', x='LCZ')
-        fig.set_title(f'Prediction Error Distribution for {name} by Local Climate Zone')
-        fig.set_xlabel('LCZ')
-    else:
-        fig = boxplot(y=errors)
-        fig.set_title(f'Prediction Error Distribution for {LCZs[name]["Name"]}')
-    fig.set_ylabel('Prediction Error [°C]')
-    plt.savefig(imgpath)
-    plt.close()
+        # boxplot
+        imgpath = os.path.join(path, f'{name}_box.png')
+        if group:
+            fig = boxplot(data=errors, y='Deviation', x='LCZ')
+            fig.set_title(f'Prediction Error Distribution for {name} by Local Climate Zone')
+            fig.set_xlabel('LCZ')
+        else:
+            fig = boxplot(y=errors)
+            fig.set_title(f'Prediction Error Distribution for {LCZs[name]["Name"]}')
+        fig.set_ylabel('Prediction Error [°C]')
+        plt.savefig(imgpath)
+        plt.close()
 
 
 def load_summary(datapath):
@@ -154,4 +155,5 @@ if __name__ == '__main__':
     parser.add_argument('datapath', type=str, help='Path to output file')
     args = parser.parse_args()
 
+    #! LCZ analysis produces empty graphs, not important enough to fix right now
     lcz_analysis(args.datapath)

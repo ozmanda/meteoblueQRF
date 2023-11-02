@@ -28,6 +28,7 @@ if __name__ == '__main__':
                                            'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
                         default=None)
+    parser.add_argument('--infopath', default='', help='Path to file containing station information for LCZ analysis')
     parser.add_argument('--modeldir', default=None, help='Path to directory for trained models for training or path to '
                                                          'model for inference or evaluation')
     parser.add_argument('--savemodels', default=True, help='Indicates if individual dropset models should be saved.')
@@ -70,6 +71,7 @@ if __name__ == '__main__':
         # create savedir if it does not already exist
         assert os.path.isdir(args.stationDatapath)
         assert args.savedir, 'Directory for saving QRF dropset output is required'
+        assert args.infopath, 'infopath must be given for LCZ extraction'
         if not os.path.isdir(args.savedir):
             os.mkdir(args.savedir)
 
@@ -81,7 +83,7 @@ if __name__ == '__main__':
 
         datasets = qrf_utils.load_dropset_data(os.path.join(os.getcwd(), args.stationDatapath),
                                        startDatetime=args.starttime, endDatetime=args.endtime)
-        dropsetQRF = DropsetQRF(datasets, args.CI)
+        dropsetQRF = DropsetQRF(datasets, args.infopath, args.CI)
         dropsetQRF.run_dropset_estimation(args.savedir, savemodels=args.savemodels)
 
     # INFERENCE

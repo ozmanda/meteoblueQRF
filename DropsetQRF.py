@@ -9,10 +9,11 @@ import joblib
 import matplotlib.pyplot as plt
 from seaborn import histplot, scatterplot
 from lcz_analysis import lcz_analysis
+import pandas as pd
 
 
 class DropsetQRF:
-    def __init__(self, datasets, confidence_interval=None):
+    def __init__(self, datasets, infopath, confidence_interval=None):
         """
         Class for QRF error estimation using the "dropset" method, similar to leave-one-out cross validation or
         k-fold cross validation. The data is split into training and test sets, with the test set being a single station.
@@ -22,13 +23,15 @@ class DropsetQRF:
             confidence_interval (_type_, optional): confidence interval for testing, must be between 0 and 1. Defaults to None.
         """
         self.Output = {}
-        self.station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': []}
+        #! station summary LCZ column is unfilled
+        self.station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': [], 'LCZ': []}
         self.data = datasets
         self.stations = datasets.keys()
         CI: float = confidence_interval if confidence_interval else 95
         self.lowerCI: float = ((100 - CI) / 2)/100
         self.upperCI: float = (100 - self.lowerCI)/100
         self.aggregated_errors: DataFrame = DataFrame()
+        self.info = pd.read_csv(infopath, delimiter=';')
 
     def xy_generation(self, testkey: str):
         # assert the key has data
@@ -95,7 +98,7 @@ class DropsetQRF:
             # enter station dictionary into output dictionary
             self.Output[key] = stationData
 
-    def save_output(self, savepath):
+    def save_output(self, savepath:str):
         errorpath = os.path.join(savepath, 'errors')
         if not os.path.isdir(savepath):
             os.mkdir(savepath)
@@ -103,6 +106,7 @@ class DropsetQRF:
             os.mkdir(errorpath)
         for key in self.Output:
             self.station_summary['Station'].append(key)
+            self.station_summary['LCZ'].extend(list(self.info[self.info['stationid_new'] == key]['classification']))
             self.station_summary['MSE'].append(self.Output[key].pop('MSE'))
             self.station_summary['Standard Deviation'].append(self.Output[key].pop('SD'))
             self.station_summary['Mean Error'].append(self.Output[key].pop('ME'))
@@ -124,17 +128,21 @@ class DropsetQRF:
         :return: none
         """
         imgdir = os.path.join(savepath, 'pred_vs_true')
+        if not os.path.isdir(imgdir):
+            os.mkdir(imgdir)
         dists = os.path.join(savepath, 'distributions')
+        if not os.path.isdir(dists):
+            os.mkdir(dists)
 
         # summary and per station graphs
         self.summary_graphs(savepath)
         for key in self.Output:
             self.pred_vs_true(os.path.join(imgdir, f'{key}.png'), self.Output[key])
-            self.error_hist(os.path.join(dists, f'{key}.png'), self.Output[key]['Deviation'],
-                            f'Prediction error distribution for station {key}')
+            self.error_hist(self.Output[key], os.path.join(dists, f'{key}.png'), 
+                            f'Prediction error distribution for station {key}', key='Deviation')
             cleaned_devs, _ = qrf_utils.pop_outliers_std(DataFrame(self.Output[key]), 'Deviation')
-            self.error_hist(os.path.join(dists, f'{key}_cleaned.png'), cleaned_devs['Deviation'],
-                            f'Cleaned prediction error distribution for station {key}')
+            self.error_hist(cleaned_devs, os.path.join(dists, f'{key}_cleaned.png'), 
+                            f'Cleaned prediction error distribution for station {key}', key='Deviation')
 
     def summary_graphs(self, path):
         """
@@ -144,44 +152,47 @@ class DropsetQRF:
         """
         dropset_errors = {'error': [], 'datetime': []}
         for key in self.Output.keys():
-            dropset_errors['error'].append(self.Output[key]['Deviation'])
-            dropset_errors['datetime'].append(self.Output[key]['datetime'])
+            dropset_errors['error'].extend(self.Output[key]['Deviation'])
+            dropset_errors['datetime'].extend(self.Output[key]['datetime'])
         dropset_errors = DataFrame(dropset_errors)
         dropset_clean, dropset_outliers = qrf_utils.pop_outliers_std(dropset_errors, 'error')
 
         self.error_hist(dropset_errors, os.path.join(path, 'all_station_errors.png'),
                         'Dropset error distribution over all stations')
         self.error_hist(dropset_clean, os.path.join(path, 'all_station_errors_cleaned.png'),
-                        'Dropset error distribution over all station')
+                        'Dropset error distribution over all stations')
 
         station_errors = DataFrame(self.station_summary)
         station_cleaned, station_outliers = qrf_utils.pop_outliers_std(station_errors, 'Mean Error')
 
         self.error_hist(station_errors, os.path.join(path, 'average_station_errors.png'),
-                        'Average station dropset error distribution')
+                        'Average station dropset error distribution', key='Mean Error')
         self.error_hist(station_cleaned, os.path.join(path, 'average_station_errors.png'),
-                        'Average station dropset error distribution')
+                        'Average station dropset error distribution', key='Mean Error')
 
     @staticmethod
-    def error_hist(data, savepath, title):
+    def error_hist(data, savepath, title, key='error'):
         if not os.path.isfile(savepath):
-            fig = histplot(data, x='error', stat='probability')
+            fig = histplot(data, x=key, stat='probability')
             fig.set_title(title)
             fig.set_xlabel('Prediction error [°C]')
             fig.set_ylabel('Probability')
             plt.xticks(rotation=45)
             plt.savefig(savepath, bbox_inches='tight')
+            plt.close()
 
     @staticmethod
     def pred_vs_true(path, data):
+        df = DataFrame(data)
         if not os.path.isfile(path):
-            plot = scatterplot(data, x='datetime', y='Predicted Temperature', color='r', label='Predicted Temperature')
-            plt.plot(data, x='datetime', y='True Temperature', label='True Temperature')
+            plot = scatterplot(data=df, x='datetime', y='Predicted Temperature', color='r', label='Predicted Temperature')
+            plt.plot(df['datetime'], df['True Temperature'], label='True Temperature')
             plot.set_title('Prediction vs. True Temperature')
             plot.set_xlabel('Time')
             plt.legend()
             plt.xticks(rotation=45)
             plt.savefig(path, bbox_inches='tight')
+            plt.close()
 
     def run_dropset_estimation(self, savepath, savemodels=True):
         self.run_error_estimation(os.path.join(savepath, 'models') if savemodels else None)
