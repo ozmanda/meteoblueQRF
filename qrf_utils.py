@@ -4,7 +4,7 @@ import time
 import logging
 import numpy as np
 import pandas as pd
-import _pickle as cPickle
+import pickle as cPickle
 import joblib
 from pandas import DataFrame
 from seaborn import heatmap
