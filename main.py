@@ -99,7 +99,7 @@ if __name__ == '__main__':
         # load pretrained qrf model
         print('Loading trained QRF model')
         tic = time.perf_counter()
-        qrf = joblib.load(args.modeldir)
+        qrf: QRF = joblib.load(args.modeldir)
         toc = time.perf_counter()
         print(f'    loading time: {toc-tic:0.4f} seconds\n')
         savedir = qrf.run_inference(args.inferencedata, args.savedir, img=args.generate_images)
