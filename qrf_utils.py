@@ -232,7 +232,7 @@ def sd_mu(val_list):
     return sd, mu
 
 
-def determine_outlier_thresholds_std(mu, sd):
+def determine_outlier_thresholds_std(mu, sd, factor):
     """
     Calculates the upper and lower threshold for what is considered an outlier. Currently using 3 standard deviations,
     meaning that 99.7% of the data falls within these boundaries. Alternatively: 68% of the data falls within 1 and
@@ -241,13 +241,13 @@ def determine_outlier_thresholds_std(mu, sd):
     :param sd:
     :return:
     """
-    upper_boundary = mu + 3 * sd
-    lower_boundary = mu - 3 * sd
+    upper_boundary = mu + factor * sd
+    lower_boundary = mu - factor * sd
     return lower_boundary, upper_boundary
 
 
-def pop_outliers_std(df: DataFrame, col_name):
-    lower_boundary, upper_boundary = determine_outlier_thresholds_std(np.mean(df[col_name]), np.std(df[col_name]))
+def pop_outliers_std(df: DataFrame, col_name, factor=3):
+    lower_boundary, upper_boundary = determine_outlier_thresholds_std(np.mean(df[col_name]), np.std(df[col_name]), factor)
     if np.sum(df[col_name] > upper_boundary) | np.sum(df[col_name] < lower_boundary):
         outliers = list((df[col_name] > upper_boundary) | (df[col_name] < lower_boundary))
         cleaned_df = df[[not x for x in outliers]]
