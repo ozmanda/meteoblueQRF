@@ -23,7 +23,6 @@ class DropsetQRF:
             confidence_interval (_type_, optional): confidence interval for testing, must be between 0 and 1. Defaults to None.
         """
         self.Output = {}
-        #! station summary LCZ column is unfilled
         self.station_summary = {'Station': [], 'MSE': [], 'Standard Deviation': [], 'Mean Error': [], 'LCZ': []}
         self.data = datasets
         self.stations = datasets.keys()
