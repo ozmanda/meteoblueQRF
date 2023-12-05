@@ -173,25 +173,36 @@ def run_lcz_scatterplot(outliers, lcz_dict, run, lczs):
     return run_outliers
 
 
-def feaeture_gif(featurepath, featurename):
-    if not os.path.isdir(savepath):
-        os.mkdir(savepath)
-    featurename = 'moving_average'
+def feature_imgs(featurepath, featurename, cmap=None):
     savepath = os.path.join(savepath, featurename)
     if not os.path.isdir(savepath):
         os.mkdir(savepath)
     featuremap = joblib.load(featurepath)
-    times = featuremap['datetime']
+    times = featuremap['datetime'].unique()
     featuremap = featuremap[featurename]
 
     for time in range(featuremap.shape[0]):
         path = os.path.join(savepath, f'{featurename}_{time}.png')
         ax = sns.heatmap(featuremap[time, :, :], vmax=np.nanmax(featuremap), vmin=np.nanmin(featuremap))
-        ax.set_title(times[time, 0, 0])
+        ax.set_title(times[time])
         plt.show()
         plt.savefig(path, bbox_inches='tight')
         plt.close()
+
+def data_imgs(data, times, savepath, featurename, cmap='Spectral'):
+    if not os.path.isdir(savepath):
+        os.mkdir(savepath)
+    
+    fig, ax = plt.subplots()
+    for time in range(data.shape[0]):
+        path = os.path.join(savepath, f'{featurename}_{time}.png')
+        ax = sns.heatmap(data[time, :, :], cmap=cmap, vmax=np.nanmax(data), vmin=np.nanmin(data))
+        ax.set_title(times[time])
+        plt.savefig(path, bbox_inches='tight')
+        plt.close()
+
+def data_gif(path, featurename):
     imgs = []
-    for filename in os.listdir(path):
-        imgs.append(imageio.imread(os.path.join(savepath, filename)))
+    for frame in range(len(os.listdir(path))-1):
+        imgs.append(imageio.imread(os.path.join(path, f'{featurename}_{frame}.png')))
     imageio.mimsave(os.path.join(path, f'{featurename}.gif'), imgs)
