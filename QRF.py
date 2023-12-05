@@ -8,7 +8,7 @@ import numpy as np
 import sklearn.utils
 import seaborn as sns
 from PIL import Image
-import _pickle as cPickle
+import pickle as cPickle
 import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from pandas import DataFrame, concat
@@ -132,6 +132,9 @@ class QRF:
         if img:
             print('Generating images...')
             imgdir = os.path.join(savedir, f'TempMaps')
+            if not os.path.isdir(imgdir):
+                os.mkdir(imgdir)
+                
             self.generate_images(prediction_map, imgdir)
 
         return savedir
@@ -162,7 +165,7 @@ class QRF:
         Option to pass data location instead of prediction maps for inferencedata parameter, in which case the load
         flag must be set to True.
 
-        Normalisation: normalised using (nan)max/min temp values and adding 5° buffer on each end.
+        Normalisation: normalised using (nan)max/min temp values
         """
         if load:
             inferencedata = load_file(inferencedata)
