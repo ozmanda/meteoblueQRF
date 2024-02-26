@@ -206,3 +206,27 @@ def data_gif(path, featurename):
     for frame in range(len(os.listdir(path))-1):
         imgs.append(imageio.imread(os.path.join(path, f'{featurename}_{frame}.png')))
     imageio.mimsave(os.path.join(path, f'{featurename}.gif'), imgs)
+
+def determine_outlier_thresholds_std(mu, sd, factor):
+    """
+    Calculates the upper and lower threshold for what is considered an outlier. Currently using 3 standard deviations,
+    meaning that 99.7% of the data falls within these boundaries. Alternatively: 68% of the data falls within 1 and
+    95% standard deviation of the mean (depends on how radically you want to trim outliers.
+    :param mu:
+    :param sd:
+    :return:
+    """
+    upper_boundary = mu + factor * sd
+    lower_boundary = mu - factor * sd
+    return lower_boundary, upper_boundary
+
+
+def pop_outliers_std(datalist: list, col_name, factor=3):
+    lower_boundary, upper_boundary = determine_outlier_thresholds_std(np.mean(datalist), np.std(datalist), factor)
+    if np.sum(datalist > upper_boundary) | np.sum(datalist < lower_boundary):
+        outliers = list((datalist > upper_boundary) | (datalist < lower_boundary))
+        cleaned_df = datalist[[not x for x in outliers]]
+        outliers = datalist[outliers]
+        return cleaned_df, outliers
+    else:
+        return datalist, None
