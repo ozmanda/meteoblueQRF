@@ -117,7 +117,7 @@ if __name__ == '__main__':
             # passing a savedir will mean that validation has already been run and use the existing inference results
             assert os.path.isfile(args.savedir), 'Inference results must be an .json file or the flag left empty'
             qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath,
-                               resultpath=args.savedir, run_inference=False)
+                               resultpath=args.savedir, run_inference=False, generate_imgs=args.generate_images)
         else:
             qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath, resultpath=args.savedir)
 
