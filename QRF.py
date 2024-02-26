@@ -60,14 +60,17 @@ class QRF:
 
         # assign data
         self.yTrain = dataTrain['temperature']
-        self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
+        # self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
+        self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature'], axis=1)
         self.yTest = dataTest['temperature']
         self.test_times = dataTest['datetime']
-        self.xTest = dataTest.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
+        # self.xTest = dataTest.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
+        self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
 
     def set_split_data(self, dataset):
         self.data = dataset
-        x = self.data.drop(['time', 'temperature', 'moving_average'], axis=1)
+        # x = self.data.drop(['time', 'temperature', 'moving_average'], axis=1)
+        x = self.data.drop(['time', 'temperature'], axis=1)
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
@@ -110,6 +113,7 @@ class QRF:
                 self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
             except AttributeError or ValueError as e:
                 for key in self.xTest.keys():
+                    print(f'Feature {key} \n\t min = {np.min(self.xTest[key])}\n\t max = {np.max(self.xTest[key])}')
                     if np.any(np.isinf(self.xTest[key])):
                         print(key)
                     if np.any(np.isnan(self.xTest[key])):
@@ -139,7 +143,7 @@ class QRF:
 
         return savedir
 
-    def run_validation(self, datapath, measurementpath, palmpath, resultpath=None, run_inference=True):
+    def run_validation(self, datapath, measurementpath, palmpath, resultpath=None, run_inference=True, generate_imgs=False):
         """
         Performs a validation run. A validation run consists of loading the feature maps, performing inference and
         evaluating the resulting temperature maps w.r.t. the moving average feature and analysing the accuracy per
@@ -147,7 +151,7 @@ class QRF:
         """
         if run_inference:
             assert os.path.isdir(resultpath), 'If inference is to be run, resultpath must be the desired save path'
-            resultpath = self.run_inference(datapath, resultpath, img=True)
+            resultpath = self.run_inference(datapath, resultpath, img=generate_imgs)
         else:
             assert os.path.isfile(resultpath), 'If inference is not run, a path to inference results must be given'
         # load boundary
