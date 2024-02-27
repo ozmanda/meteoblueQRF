@@ -15,7 +15,7 @@ if __name__ == '__main__':
                                      'for error estimation using dropset method, "evaluation" for the evaluation of'
                                      'pretrained models', default=None)
     parser.add_argument('--stationDatapath', help='Relative path to folder containing station data',
-                        default='Data/MeasurementFeatures_v6')
+                        default='~/meteoblue/DATA/Measurement_Datasets/run3/')
     parser.add_argument('--inferencedata', help='Path to json file containing feature map for inference/validation',
                         default=None, type=str)
     parser.add_argument('--starttime', help='Date and time of the beginning of the data interval in the format'
