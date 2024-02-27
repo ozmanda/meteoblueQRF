@@ -11,6 +11,9 @@ from seaborn import heatmap
 import matplotlib.pyplot as plt
 from datetime import datetime
 
+faulty_stations = ['C059A2225266', 'D63DFE9B164B', 'D07769DF208C', 'DF15D23E4B15', 'E2A0DF1A4941', 'E437CB2AF225', 'F5C16A4B6340',
+                   'F033A8C6BB79', 'F4683D808CFB', 'D3FE8EEF188C', 'D883D89E6A24', 'EC032D8260EB']
+
 
 # CUSTOM EMPTY OBJECTS ------------------------------------------------------------------------------------------------
 def empty_dict(keylist):
@@ -52,6 +55,9 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
     noData = []
     data = initialise_empty_df(os.path.join(datapath, os.listdir(datapath)[0]))
     for idx, filename in enumerate(os.listdir(datapath)):
+        stationid = filename.split(".csv")[0]
+        if stationid in faulty_stations:
+            continue
         file = load_csv(os.path.join(datapath, filename))
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
