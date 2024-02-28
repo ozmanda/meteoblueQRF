@@ -50,7 +50,7 @@ class QRF:
             assert len(dataset_test) != 0, 'No data found in test window'
             if add_time:
                 dataset_train['time'] = time_feature(dataset_train['time'], normalise=True)
-                dataset_test['test'] = time_feature(dataset_test['test'], normalise=True)
+                dataset_test['time'] = time_feature(dataset_test['time'], normalise=True)
 
             self.set_data(dataTrain=dataset_train, dataTest=dataset_test)
 
@@ -238,8 +238,7 @@ class QRF:
 
 
     def save_model(self, modelpath):
-        joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
-                    compress=3)
+        joblib.dump(self, f'{modelpath}.z', compress=3)
 
 
     def output_file(self):
