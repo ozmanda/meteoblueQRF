@@ -45,6 +45,7 @@ if __name__ == '__main__':
     if args.type == "training":
         assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
         assert os.path.isdir(os.path.dirname(args.modelpath)), 'A path must be given for model saving'
+        # test
         if args.starttime:
             assert args.endtime, 'If start time(s) for training is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
