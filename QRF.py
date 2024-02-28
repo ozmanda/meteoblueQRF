@@ -17,6 +17,8 @@ from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
 from qrf_utils import *
 
+non_training_variables = ['datetime', 'time', 'temperature', 'stationid']
+
 
 class QRF:
     def __init__(self, confidence_interval=None):
@@ -60,27 +62,30 @@ class QRF:
         dataTrain = shuffle(dataTrain)
         dataTest = shuffle(dataTest)
 
-        # assign data
+        # assign training and test data
         self.yTrain = dataTrain['temperature']
-        # self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
-        self.xTrain = dataTrain.drop(['datetime', 'time', 'temperature'], axis=1)
+        self.xTrain = dataTrain.drop(non_training_variables, axis=1)
         self.yTest = dataTest['temperature']
+        self.xTest = dataTest.drop(non_training_variables, axis=1)
+        
+        # save times and station IDs for later analyses (training times currently not analysed, but kept for future use)
+        self.train_stations = dataTrain['stationid']
+        self.train_times = dataTrain['datetime']
         self.test_times = dataTest['datetime']
-        # self.xTest = dataTest.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
-        self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
+        self.test_stations = dataTest['stationid']
 
 
     def set_split_data(self, dataset):
         self.data = dataset
-        # x = self.data.drop(['time', 'temperature', 'moving_average'], axis=1)
         x = self.data.drop(['time', 'temperature'], axis=1)
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
-        # extract time and remove as feature variable
+        # extract time and station ID and remove as feature variable (not saved for training data)
+        self.test_stations = self.xTest['stationid']
         self.test_times = self.xTest['datetime']
-        self.xTrain = self.xTrain.drop(['datetime'], axis=1)
-        self.xTest = self.xTest.drop(['datetime'], axis=1)
+        self.xTrain = self.xTrain.drop(['datetime', 'stationid'], axis=1)
+        self.xTest = self.xTest.drop(['datetime', 'stationid'], axis=1)
 
 
     def run_training(self):
@@ -247,6 +252,7 @@ class QRF:
             output[featurekey] = self.xTest[featurekey]
         output['Prediction'] = self.yPred
         output['True Temperature'] = self.yTest
+        output['stationid'] = self.test_stations
 
         for key in output.keys():
             output[key] = list(output[key])

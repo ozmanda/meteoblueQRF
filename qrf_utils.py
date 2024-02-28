@@ -35,7 +35,9 @@ def initialise_empty_df(filepath, dropset=False):
         file = pd.read_csv(filepath, delimiter=';')
         if not test_data(file):
             file = pd.read_csv(filepath, delimiter=',')
-        return pd.DataFrame(columns=file.columns)
+    cols = file.columns
+    cols.append(pd.Index(['stationid']))
+    return pd.DataFrame(columns=file.columns)
 
 
 # DATA LOADING & SAVING ------------------------------------------------------------------------------------------------
@@ -62,6 +64,7 @@ def load_data(datapath, startDatetime = None, endDatetime = None, dropset=False)
         # extract data points within the time window, if one is given
         if startDatetime and endDatetime:
             file, noData = data_in_window(startDatetime, endDatetime, file, filename)
+        file['stationid'] = [stationid] * len(file)
         data = pd.concat((data, file))
     if noData:
         logging.debug( f'{len(noData)} stations of {len(os.listdir(datapath))} have no data within the given time period')
