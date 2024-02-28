@@ -269,6 +269,7 @@ def set_test_times(starttimes, endtimes):
     test_start = []
     test_end = []
     for idx, time in enumerate(endtimes):
+        time = pd.to_datetime(time, format='%Y/%m/%d_%H:%M')
         test_start.append(time)
         test_end.append(time + pd.Timedelta(days=1))
     return test_start, test_end

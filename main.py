@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # QRF TRAINING RUN
     if args.type == "training":
         assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
-        assert os.path.isdir(args.modeldir), 'A path must be given for model saving'
+        assert os.path.isdir(os.path.dirname(args.modelpath)), 'A path must be given for model saving'
         if args.starttime:
             assert args.endtime, 'If start time(s) for training is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -67,7 +67,7 @@ if __name__ == '__main__':
                              start=[args.starttime, args.test_start], end=[args.endtime, args.test_end])
         qrf.run_training()
         qrf.run_test()
-        qrf.save_ouput(args.savedir, args.modeldir)
+        qrf.save_ouput(args.savedir, args.modelpath)
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':
@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
     # INFERENCE
     elif args.type == 'inference':
-        assert os.path.isfile(args.modeldir), 'Model path must be given for inference'
+        assert os.path.isfile(args.modelpath), 'Model path must be given for inference'
         assert args.savedir, 'Directory for saving QRF output is required'
         assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         # load pretrained qrf model
         print('Loading trained QRF model')
         tic = time.perf_counter()
-        qrf: QRF = joblib.load(args.modeldir)
+        qrf: QRF = joblib.load(args.modelpath)
         toc = time.perf_counter()
         print(f'    loading time: {toc-tic:0.4f} seconds\n')
         savedir = qrf.run_inference(args.inferencedata, args.savedir, img=args.generate_images)
@@ -110,12 +110,12 @@ if __name__ == '__main__':
 
     # VALIDATION RUN AND RESULT EVALUATION
     elif args.type == 'validation':
-        assert os.path.isfile(args.modeldir), 'Model path must be a file'
+        assert os.path.isfile(args.modelpath), 'Model path must be a file'
         assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
         assert os.path.isdir(args.stationDatapath), 'Path to station data must be given'
         assert os.path.isfile(args.palmpath), 'Path to PALM simulation file must be given'
         assert args.savedir, 'Either a save folder or an inference result file must be given'
-        qrf = joblib.load(args.modeldir)
+        qrf = joblib.load(args.modelpath)
         if os.path.isfile(args.savedir):
             # passing a savedir will mean that validation has already been run and use the existing inference results
             assert os.path.isfile(args.savedir), 'Inference results must be an .json file or the flag left empty'
@@ -126,9 +126,9 @@ if __name__ == '__main__':
 
     # VARIABLE IMPORTANCE ANALYSIS
     elif args.type == 'evaluation':
-        assert os.path.isfile(args.modeldir), 'Model path must be a file'
+        assert os.path.isfile(args.modelpath), 'Model path must be a file'
 
         # load trained model and run variable importance analysis
         print('Loading trained QRF model')
-        qrf = joblib.load(args.modeldir)
-        qrf.run_variable_importance_estimation(args.modeldir)
+        qrf = joblib.load(args.modelpath)
+        qrf.run_variable_importance_estimation(args.modelpath)
