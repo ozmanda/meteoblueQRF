@@ -36,6 +36,7 @@ class QRF:
         self.variable_importance = {'Variable': [], 'Importance [%]': []}
         self.data = DataFrame
 
+
     def load_dataset(self, path, start=None, end=None, add_time=False):
         if not start:
             dataset = load_data(path)
@@ -53,6 +54,7 @@ class QRF:
 
             self.set_data(dataTrain=dataset_train, dataTest=dataset_test)
 
+
     def set_data(self, dataTrain, dataTest):
         # shuffle data
         dataTrain = shuffle(dataTrain)
@@ -67,6 +69,7 @@ class QRF:
         # self.xTest = dataTest.drop(['datetime', 'time', 'temperature', 'moving_average'], axis=1)
         self.xTest = dataTest.drop(['datetime', 'time', 'temperature'], axis=1)
 
+
     def set_split_data(self, dataset):
         self.data = dataset
         # x = self.data.drop(['time', 'temperature', 'moving_average'], axis=1)
@@ -79,12 +82,14 @@ class QRF:
         self.xTrain = self.xTrain.drop(['datetime'], axis=1)
         self.xTest = self.xTest.drop(['datetime'], axis=1)
 
+
     def run_training(self):
         self.qrf = RandomForestQuantileRegressor(max_depth=12)
         print('  Training QRF Regressor....     ', end='')
         start_timer()
         self.qrf.fit(self.xTrain, self.yTrain)
         end_timer()
+
 
     def run_test(self):
         print('  Predicting test set....     ', end='')
@@ -93,6 +98,7 @@ class QRF:
         end_timer()
 
         self.MSE = mse(self.yTest, self.yPred)
+
 
     def run_inference(self, datapath, savedir, img=True):
         # set foldername and create if necessary
@@ -143,6 +149,7 @@ class QRF:
 
         return savedir
 
+
     def run_validation(self, datapath, measurementpath, palmpath, resultpath=None, run_inference=True, generate_imgs=False):
         """
         Performs a validation run. A validation run consists of loading the feature maps, performing inference and
@@ -159,6 +166,7 @@ class QRF:
         # infopath = 'Data/stations.csv'
         infopath = os.path.join(os.path.dirname(os.path.dirname(measurementpath)), 'stations.csv')
         validation_evaluation(resultpath, datapath, boundary, infopath, measurementpath)
+
 
     @staticmethod
     def generate_images(inferencedata, imgpath, load=False):
@@ -183,6 +191,7 @@ class QRF:
             plt.close()
             fig = tempmap.get_figure()
             fig.savefig(os.path.join(imgpath, f'tempmap_{time}.png'), bbox_inches='tight', pad_inches=0)
+
 
     def run_variable_importance_estimation(self, filepath, n=10):
         # ignores UserWarning "X does not have valid feature names, but RandomForestQuantileRegressor
@@ -219,17 +228,21 @@ class QRF:
             savepath = os.path.join(os.path.dirname(filepath), modelname, f'{modelname}_variable_importance.csv')
             DataFrame(self.variable_importance).to_csv(savepath, index=False)
 
-    def save_model(self, modelpath):
-        joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
-                    compress=3)
 
     def save_ouput(self, savedir, modelpath):
         self.save_model(modelpath)
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
+        output_df = self.output_file()
+        output_df.to_csv(os.path.join(savedir, f'{os.path.basename(modelpath)}.csv'), index=False)
 
-        savedir = os.path.join(savedir, f'{timenow()}_{self.MSE}.csv')
 
+    def save_model(self, modelpath):
+        joblib.dump(self, os.path.join(modelpath, f'{timenow()}_{self.MSE}.z'),
+                    compress=3)
+
+
+    def output_file(self):
         output = {'datetime': self.test_times}
         for featurekey in self.xTest.keys():
             output[featurekey] = self.xTest[featurekey]
@@ -238,7 +251,5 @@ class QRF:
 
         for key in output.keys():
             output[key] = list(output[key])
-        output_df = DataFrame(output)
 
-        # save data output and model
-        output_df.to_csv(savedir, index=False)
+        return DataFrame(output)

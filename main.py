@@ -29,8 +29,8 @@ if __name__ == '__main__':
     parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
                         default=None)
     parser.add_argument('--infopath', default='', help='Path to file containing station information for LCZ analysis')
-    parser.add_argument('--modeldir', default=None, help='Path to directory for trained models for training or path to '
-                                                         'model for inference or evaluation')
+    parser.add_argument('--modelpath', default=None, help='Save path for trained models or path to model for '
+                                                         'inference or evaluation (including model name)')
     parser.add_argument('--savemodels', default=True, help='Indicates if individual dropset models should be saved.')
     parser.add_argument('--CI', default=95, help='Confidence interval in percent (i.e. 95 for the 95% CI)')
     parser.add_argument('--generate_images', type=bool, help='Boolean value indicating if images for use in SR_GAN'
@@ -50,6 +50,9 @@ if __name__ == '__main__':
             if len(args.starttime) != len(args.endtime):
                 warn(f'Number of start and end times for training set cannot be matched', UserWarning)
                 raise ValueError
+            if not args.test_start or not args.test_end:
+                args.test_start, args.test_end = qrf_utils.set_test_times(args.starttime, args.endtime)
+
         if args.test_start:
             assert args.test_end, 'If start time(s) for testing is/are given, an end time must be given as well'
             if len(args.test_start) != len(args.test_end):
@@ -64,7 +67,7 @@ if __name__ == '__main__':
                              start=[args.starttime, args.test_start], end=[args.endtime, args.test_end])
         qrf.run_training()
         qrf.run_test()
-        qrf.save_ouput(os.path.join(os.getcwd(), args.savedir), args.modeldir)
+        qrf.save_ouput(args.savedir, args.modeldir)
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':

@@ -264,6 +264,15 @@ def pop_outliers_std(df: DataFrame, col_name, factor=3):
 
 
 # TIME FUNCTIONS ------------------------------------------------------------------------------------------------------
+def set_test_times(starttimes, endtimes):
+    """set start and end of test times to the 24hrs following the training time window"""
+    test_start = []
+    test_end = []
+    for idx, time in enumerate(endtimes):
+        test_start.append(time)
+        test_end.append(time + pd.Timedelta(days=1))
+    return test_start, test_end
+
 def start_timer():
     global _start_time
     _start_time = time.time()
