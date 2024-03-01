@@ -26,8 +26,8 @@ if __name__ == '__main__':
                                              'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
     parser.add_argument('--test_end', help='Date and time of the beginning of test/inference interval in the format'
                                            'YYYY/MM/DD_HH:MM', default=None, nargs="*", type=str)
-    parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made)',
-                        default=None)
+    parser.add_argument('--savedir', help='Relative path to the save directory for QRF output (new folder will be made).'
+                                          'For inference, include the desired filename', default=None)
     parser.add_argument('--infopath', default='', help='Path to file containing station information for LCZ analysis')
     parser.add_argument('--modelpath', default=None, help='Save path for trained models or path to model for '
                                                          'inference or evaluation (including model name)')
@@ -59,15 +59,13 @@ if __name__ == '__main__':
                 warn(f'Number of start and end times for test set cannot be matched', UserWarning)
                 raise ValueError
 
-        qrf = QRF(confidence_interval=args.CI)
-        if not args.test_start:
-            qrf.load_dataset(args.stationDatapath, add_time=True)
-        else:
-            qrf.load_dataset(args.stationDatapath, add_time=True,
-                             start=[args.starttime, args.test_start], end=[args.endtime, args.test_end])
+        qrf = QRF(modelname=os.path.basename(args.modelpath) ,confidence_interval=args.CI)
+        qrf.load_training_data(args.stationDatapath, start=args.starttime, end=args.endtime)
+        qrf.load_test_data(args.stationDatapath, start=args.test_start, end=args.test_end)
         qrf.run_training()
         qrf.run_test()
-        qrf.save_ouput(args.savedir, args.modelpath)
+        qrf.save_model(args.modelpath)
+        qrf.save_ouput(args.savedir)
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':
@@ -93,7 +91,9 @@ if __name__ == '__main__':
     elif args.type == 'inference':
         assert os.path.isfile(args.modelpath), 'Model path must be given for inference'
         assert args.savedir, 'Directory for saving QRF output is required'
-        assert os.path.isfile(args.inferencedata), 'Data must be given for validation'
+        assert os.path.isdir(args.stationDatapath), 'Data must be given for inference'
+        assert args.test_start, 'Start time for inference must be given'
+        assert args.test_end, 'End time for inference must be given'
 
         # create savedir if it does not already exist
         if not os.path.isdir(args.savedir):
@@ -104,9 +104,10 @@ if __name__ == '__main__':
         tic = time.perf_counter()
         qrf: QRF = joblib.load(args.modelpath)
         toc = time.perf_counter()
+        qrf.load_test_data(args.stationDatapath, start=args.test_start, end=args.test_end)
         print(f'    loading time: {toc-tic:0.4f} seconds\n')
-        savedir = qrf.run_inference(args.inferencedata, args.savedir, img=args.generate_images)
-        print(f'Inference file saved at: {savedir}')
+        qrf.run_test()
+        qrf.save_ouput(args.savedir, inference=True)
 
     # VALIDATION RUN AND RESULT EVALUATION
     elif args.type == 'validation':

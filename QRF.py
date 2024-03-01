@@ -21,8 +21,10 @@ non_training_variables = ['datetime', 'time', 'temperature', 'stationid']
 
 
 class QRF:
-    def __init__(self, confidence_interval=None):
+    def __init__(self, modelname=None, confidence_interval=None):
         # variables used later on
+        if modelname:
+            self.modelname = modelname
         self.yPred = 0
         self.MSE = 0
         CI = confidence_interval if confidence_interval else 95
@@ -39,38 +41,33 @@ class QRF:
         self.data = DataFrame
 
 
-    def load_dataset(self, path, start=None, end=None, add_time=False):
-        if not start:
-            dataset = load_data(path)
-            if add_time:
-                dataset['time'] = time_feature(dataset['time'])
+    def load_training_data(self, path, start=None, end=None, test_split=False):
+        dataset = load_data(path, startDatetime=start, endDatetime=end)
+        if test_split:
             self.set_split_data(dataset)
         else:
-            dataset_train = load_data(path, startDatetime=start[0], endDatetime=end[0])
-            assert len(dataset_train) != 0, 'No data found in training window'
-            dataset_test = load_data(path, startDatetime=start[1], endDatetime=end[1])
-            assert len(dataset_test) != 0, 'No data found in test window'
-            if add_time:
-                dataset_train['time'] = time_feature(dataset_train['time'], normalise=True)
-                dataset_test['time'] = time_feature(dataset_test['time'], normalise=True)
+            self.set_training_data(dataset)
+    
 
-            self.set_data(dataTrain=dataset_train, dataTest=dataset_test)
+    def load_test_data(self, path, start=None, end=None):
+        dataset = load_data(path, startDatetime=start, endDatetime=end)
+        self.set_test_data(dataset)
 
 
-    def set_data(self, dataTrain, dataTest):
-        # shuffle data
+    def set_training_data (self, dataTrain):
+        assert len(dataTrain) != 0, 'Cannot set en empty training set'
         dataTrain = shuffle(dataTrain)
-        dataTest = shuffle(dataTest)
-
-        # assign training and test data
         self.yTrain = dataTrain['temperature']
         self.xTrain = dataTrain.drop(non_training_variables, axis=1)
-        self.yTest = dataTest['temperature']
-        self.xTest = dataTest.drop(non_training_variables, axis=1)
-        
-        # save times and station IDs for later analyses (training times currently not analysed, but kept for future use)
         self.train_stations = dataTrain['stationid']
         self.train_times = dataTrain['datetime']
+
+
+    def set_test_data(self,  dataTest):
+        assert len(dataTest) != 0, 'Cannot set en empty test set'
+        dataTest = shuffle(dataTest)
+        self.yTest = dataTest['temperature']
+        self.xTest = dataTest.drop(non_training_variables, axis=1)
         self.test_times = dataTest['datetime']
         self.test_stations = dataTest['stationid']
 
@@ -234,16 +231,23 @@ class QRF:
             DataFrame(self.variable_importance).to_csv(savepath, index=False)
 
 
-    def save_ouput(self, savedir, modelpath):
-        self.save_model(modelpath)
-        if not os.path.isdir(savedir):
-            os.mkdir(savedir)
+    def save_ouput(self, savedir, inference=False):
         output_df = self.output_file()
-        output_df.to_csv(os.path.join(savedir, f'{os.path.basename(modelpath)}.csv'), index=False)
+        if inference:
+            if not os.path.isdir(os.path.dirname(savedir)):
+                os.mkdir(os.path.dirname(savedir))
+            output_df.to_csv(f'{savedir}.csv', index=False)
+            print(f'  Inference output saved to {os.path.dirname(savedir)}')
+        else:
+            if not os.path.isdir(savedir):
+                os.mkdir(savedir)
+            output_df.to_csv(os.path.join(savedir, f'{self.modelname}.csv'), index=False)
+            print(f'  Test output saved to {savedir}')
 
 
     def save_model(self, modelpath):
         joblib.dump(self, f'{modelpath}.z', compress=3)
+        print(f'  Model {self.modelname} saved to {os.path.dirname(modelpath)}')
 
 
     def output_file(self):
