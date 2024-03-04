@@ -66,6 +66,7 @@ if __name__ == '__main__':
         qrf.run_test()
         qrf.save_model(args.modelpath)
         qrf.save_ouput(args.savedir)
+        qrf.save_trainingset(args.savedir)
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':

@@ -244,12 +244,32 @@ class QRF:
             output_df.to_csv(os.path.join(savedir, f'{self.modelname}.csv'), index=False)
             print(f'  Test output saved to {savedir}')
 
+    
+    def save_trainingset(self, savedir):
+        if not os.path.isdir(savedir):
+            os.mkdir(savedir)
+        self.training_file().to_csv(os.path.join(savedir, f'{self.modelname}_trainingset.csv'), index=False)
+        print(f'  Training set saved to {savedir}')
+
 
     def save_model(self, modelpath):
         joblib.dump(self, f'{modelpath}.z', compress=3)
         print(f'  Model {self.modelname} saved to {os.path.dirname(modelpath)}')
 
 
+    def training_file(self):
+        output = {'datetime': self.train_times}
+        for featurekey in self.xTrain.keys():
+            output[featurekey] = self.xTrain[featurekey]
+        output['Temperature'] = self.yTrain
+        output['stationid'] = self.train_stations
+
+        for key in output.keys():
+            output[key] = list(output[key])
+
+        return DataFrame(output)
+    
+    
     def output_file(self):
         output = {'datetime': self.test_times}
         for featurekey in self.xTest.keys():
