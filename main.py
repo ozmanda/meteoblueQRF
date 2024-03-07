@@ -124,7 +124,7 @@ if __name__ == '__main__':
             qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath,
                                resultpath=args.savedir, run_inference=False, generate_imgs=args.generate_images)
         else:
-            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath, resultpath=args.savedir)
+            qrf.run_validation(args.inferencedata, args.stationDatapath, args.palmpath, resultpath=args.savedir, generate_imgs=args.generate_images)
 
     # VARIABLE IMPORTANCE ANALYSIS
     elif args.type == 'evaluation':
