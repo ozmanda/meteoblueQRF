@@ -108,10 +108,10 @@ class QRF:
         savedir = os.path.join(savedir, t)
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
-        # open file, load featuremap and close the data file
+
         self.xTest, map_shape = load_inference_data(datapath)
 
-        # begin and time
+        # begin inference and time
         print('Predicting inference data....     ', end=' ')
         start_timer()
         try:
@@ -120,13 +120,7 @@ class QRF:
             try:
                 self.yPred = self.qrf.predict(self.xTest, quantiles=[0.025, 0.5, 0.975])
             except AttributeError or ValueError as e:
-                for key in self.xTest.keys():
-                    print(f'Feature {key} \n\t min = {np.min(self.xTest[key])}\n\t max = {np.max(self.xTest[key])}')
-                    if np.any(np.isinf(self.xTest[key])):
-                        print(key)
-                    if np.any(np.isnan(self.xTest[key])):
-                        print(key)
-                raise e
+                inf_nan_test(self.xTest)
 
         end_timer()
 
@@ -143,7 +137,7 @@ class QRF:
         # generate images
         if img:
             print('Generating images...')
-            imgdir = os.path.join(savedir, f'TempMaps')
+            imgdir = os.path.join(savedir, f'GANMaps')
             if not os.path.isdir(imgdir):
                 os.mkdir(imgdir)
                 
@@ -189,7 +183,7 @@ class QRF:
 
         for time in range(inferencedata.shape[0]):
             tempmap = sns.heatmap(inferencedata[time, :, :, 1], vmin=vmin, vmax=vmax, linewidth=0,
-                                  yticklabels=False, xticklabels=False)
+                                  yticklabels=False, xticklabels=False, cbar=False)
             plt.close()
             fig = tempmap.get_figure()
             fig.savefig(os.path.join(imgpath, f'tempmap_{time}.png'), bbox_inches='tight', pad_inches=0)
