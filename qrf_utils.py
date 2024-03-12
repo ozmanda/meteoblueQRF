@@ -91,10 +91,14 @@ def load_dropset_data(datapath, startDatetime = None, endDatetime = None):
 
 
 def load_inference_data(datapath):
+    '''
+    Loads inference data from a .json file containing a pandas DataFrame.  The datetime and temperature feater are extracted
+    and the remaining features are unraveled into a 2D array. 
+    RETURN: featuremaps, original map shape 
+    '''
     print('Loading Data')
     tic = time.perf_counter()
     data: DataFrame = load_file(datapath)
-    print(f'Moving average shape: {data["moving_average"].shape}')
     toc = time.perf_counter()
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
@@ -140,8 +144,17 @@ def test_data(file):
         return True
     except KeyError:
         return False
+    
 
-
+def inf_nan_test(xTest):
+    for key in xTest.keys():
+        print(f'Feature {key} \n\t min = {np.min(xTest[key])}\n\t max = {np.max(xTest[key])}')
+        if np.any(np.isinf(xTest[key])):
+            print(f'{key} has inf values')
+        if np.any(np.isnan(xTest[key])):
+            print(f'{key} has NaN values')
+    
+    
 def unravel_data(data):
     print('    unravelling data')
     unraveled = empty_df(data.keys())
@@ -267,11 +280,11 @@ def pop_outliers_std(df: DataFrame, col_name, factor=3):
 
 
 # TIME FUNCTIONS ------------------------------------------------------------------------------------------------------
-def set_test_times(starttimes, endtimes):
+def set_test_times(endtimes):
     """set start and end of test times to the 24hrs following the training time window"""
     test_start = []
     test_end = []
-    for idx, time in enumerate(endtimes):
+    for _, time in enumerate(endtimes):
         time = pd.to_datetime(time, format='%Y/%m/%d_%H:%M')
         test_start.append(time)
         test_end.append(time + pd.Timedelta(days=1))
