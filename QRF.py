@@ -17,7 +17,9 @@ from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
 from qrf_utils import *
 
-non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
+# non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
+#! experimenting with adding the time feature --> this might need to be removed again
+non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
 
 
 class QRF:
@@ -59,6 +61,8 @@ class QRF:
         dataTrain = shuffle(dataTrain)
         self.yTrain = dataTrain['temperature']
         self.xTrain = dataTrain.drop(non_training_variables, axis=1)
+        #! experimenting with adding the time feature --> this might need to be removed again
+        self.xTrain['time'] = time_feature(dataTrain['time'])
         self.train_stations = dataTrain['stationid']
         self.train_times = dataTrain['datetime']
 
@@ -68,6 +72,8 @@ class QRF:
         dataTest = shuffle(dataTest)
         self.yTest = dataTest['temperature']
         self.xTest = dataTest.drop(non_training_variables, axis=1)
+        #! experimenting with adding the time feature --> this might need to be removed again
+        self.xTest['time'] = time_feature(dataTest['time'])
         self.test_times = dataTest['datetime']
         self.test_stations = dataTest['stationid']
 
