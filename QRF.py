@@ -17,7 +17,7 @@ from validation_evaluation import validation_evaluation
 from quantile_forest import RandomForestQuantileRegressor
 from qrf_utils import *
 
-non_training_variables = ['datetime', 'time', 'temperature', 'stationid']
+non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
 
 
 class QRF:

@@ -105,9 +105,10 @@ def load_inference_data(datapath):
     _ = data.pop('datetime')
     _ = data.pop('time')
     _ = data.pop('temperature')
-    if 'moving average' in data.keys():
-        data['moving_average'] = data['moving average']
-        _ = data.pop('moving average')
+    # if 'moving average' in data.keys():
+    #     data['moving_average'] = data['moving average']
+    #     _ = data.pop('moving average')
+    _ = data.pop('moving_average')
     test_inf_nan(data)
     tic = time.perf_counter()
     featuremaps, mapshape = unravel_data(data)
