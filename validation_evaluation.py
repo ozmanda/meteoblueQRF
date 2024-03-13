@@ -269,6 +269,9 @@ def validation_evaluation(result_path, true_path, boundary, stationinfo, measure
     Wrapper function for validation evaluation, which consists generation of error maps using the moving average
     feature and measurement station error analysis.
     '''
+    # check if resultpath is a directory or a file
+    if os.path.isdir(result_path):
+        result_path = os.path.join(result_path, f'{os.path.basename(result_path)}.json')
     # generate new save folder based on the result path
     savepath = os.path.dirname(result_path)
     if not os.path.isdir(savepath):
