@@ -103,7 +103,7 @@ def load_inference_data(datapath):
     print(f'    data loading time {toc - tic:0.2f} seconds\n')
     print('Data preprocessing')
     _ = data.pop('datetime')
-    _ = data.pop('time')
+    # _ = data.pop('time')
     _ = data.pop('temperature')
     # if 'moving average' in data.keys():
     #     data['moving_average'] = data['moving average']
@@ -114,6 +114,7 @@ def load_inference_data(datapath):
     featuremaps, mapshape = unravel_data(data)
     toc = time.perf_counter()
     print(f'    unravel time {toc - tic:0.2f} seconds\n')
+    featuremaps['time'] = time_feature(featuremaps['time'])
     return featuremaps, mapshape
 
 
@@ -171,6 +172,8 @@ def unravel_data(data):
 def test_inf_nan(data: DataFrame):
     print('Testing Data for inf and NaNs')
     for key in data.keys():
+        if key == 'time':
+            continue
         if np.any(np.isinf(data[key])):
             print(f'Data has inf values in feature {key}')
         if np.any(np.isnan(data[key])):
