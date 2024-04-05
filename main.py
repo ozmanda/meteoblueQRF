@@ -108,7 +108,7 @@ if __name__ == '__main__':
         qrf.load_test_data(args.stationDatapath, start=args.test_start, end=args.test_end)
         print(f'    loading time: {toc-tic:0.4f} seconds\n')
         qrf.run_test()
-        qrf.save_ouput(args.savedir, inference=True)
+        qrf.save_inference_ouput(args.savedir)
 
     # VALIDATION RUN AND RESULT EVALUATION
     elif args.type == 'validation':

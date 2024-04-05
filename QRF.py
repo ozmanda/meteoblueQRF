@@ -18,7 +18,7 @@ from quantile_forest import RandomForestQuantileRegressor
 from qrf_utils import *
 
 # non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
-#! experimenting with adding the time feature --> this might need to be removed again
+#! experimenting with removing the moving_average feature
 non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
 
 
@@ -56,8 +56,8 @@ class QRF:
         self.set_test_data(dataset)
 
 
-    def set_training_data (self, dataTrain):
-        assert len(dataTrain) != 0, 'Cannot set en empty training set'
+    def set_training_data(self, dataTrain):
+        assert len(dataTrain), 'Cannot set en empty training set'
         dataTrain = shuffle(dataTrain)
         self.yTrain = dataTrain['temperature']
         self.xTrain = dataTrain.drop(non_training_variables, axis=1)
@@ -172,6 +172,7 @@ class QRF:
 
     @staticmethod
     def generate_images(inferencedata, imgpath, load=False):
+        # TODO: move this function into the utils script
         """
         Generates images suitable for loading into SR_GAN for training or testing. Note that the inference file loaded
         contains three prediction values: [CI lower bound, mean prediction, CI upper bound]. Currently only the mean
@@ -231,24 +232,33 @@ class QRF:
             DataFrame(self.variable_importance).to_csv(savepath, index=False)
 
 
-    def save_ouput(self, savedir, inference=False):
+    def save_ouput(self, savedir):
         output_df = self.output_file()
-        if inference:
-            if not os.path.isdir(os.path.dirname(savedir)):
-                os.mkdir(os.path.dirname(savedir))
-            output_df.to_csv(f'{savedir}.csv', index=False)
-            print(f'  Inference output saved to {os.path.dirname(savedir)}')
-        else:
-            if not os.path.isdir(savedir):
-                os.mkdir(savedir)
-            output_df.to_csv(os.path.join(savedir, f'{self.modelname}.csv'), index=False)
-            print(f'  Test output saved to {savedir}')
+        if not os.path.isdir(savedir):
+            os.mkdir(savedir)
+        path = os.path.join(savedir, f'{self.modelname}.csv')
+        if os.path.isfile(path):
+            path = path.split('.csv')[0] + '_1.csv'
+        output_df.to_csv(path, index=False)
+        print(f'  Test output saved to {savedir}')
+
+
+    def save_inference_output(self, savedir):
+        # TODO: implement HR / LR image saving (must be a .json file)
+        output_df = self.output_file()
+        if not os.path.isdir(os.path.dirname(savedir)):
+            os.mkdir(os.path.dirname(savedir))
+        output_df.to_csv(f'{savedir}.csv', index=False)
+        print(f'  Inference output saved to {os.path.dirname(savedir)}')
 
     
     def save_trainingset(self, savedir):
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
-        self.training_file().to_csv(os.path.join(savedir, f'{self.modelname}_trainingset.csv'), index=False)
+        path = os.path.join(savedir, f'{self.modelname}_trainingset.csv')
+        if os.path.isfile(path):
+            path = path.split('.csv')[0] + '_1.csv'
+        self.training_file().to_csv(path, index=False)
         print(f'  Training set saved to {savedir}')
 
 
