@@ -2,8 +2,11 @@ import numpy as np
 import pandas as pd
 from warnings import warn
 import time
-import pickle 
+import pickle
+from metpy.calc import relative_humidity_from_mixing_ratio
+from metpy.units import units
 
+PRESSURE = 1013.25
 
 # COORDINATES -----------------------------------------------------------------
 def lv95_to_lv03(lv95_lat: float, lv95_lon: float):
@@ -247,25 +250,37 @@ def reduce_resolution(original_array, resolution):
     return new_array
 
 
-def extract_surfacetemps(palmpath):
+def extract_surfacedata(palmpath):
     palmfile = pd.Dataset(palmpath, 'r', format='NETCDF4')
     try:
         temps = palmfile['theta_xy']
     except IndexError:
         temps = palmfile['theta']
+    all_mr = palmfile['q_xy']
+    palmfile.close()
+
     surf_temps = np.zeros(shape=(temps.shape[0], temps.shape[2], temps.shape[3]))
+    surf_humis = np.zeros(shape=surf_temps.shape)
+
     for time in range(temps.shape[0]):
         for idxs, _ in np.ndenumerate(temps[time, 0, :, :]):
             for layer in range(temps.shape[1]):
                 if temps[time, layer, idxs[0], idxs[1]] != -9999:
                     surf_temps[time, :, :][idxs] = temps[time, layer, idxs[0], idxs[1]] - 273.15
+                    surface_mixing_ratio = all_mr[time, layer, idxs[0], idxs[1]]
+                    temp = palmfile['theta_xy'][time, layer, idxs[0], idxs[1]]
+                    relative_humidity = relative_humidity_from_mixing_ratio(PRESSURE*units.hPa,
+                                                                            (temp - 273.15) * units.degC,
+                                                                            surface_mixing_ratio).to('percent')
+                    relative_humidity = round(float(relative_humidity), 2)
+                    surf_humis[time, idxs[0], idxs[1]] = relative_humidity
                     break
                 else:
                     continue
     # flip maps to account for PALM having origin at the bottom left, not top left
     surf_temps = np.flip(surf_temps, axis=1)
 
-    return surf_temps
+    return surf_temps, surf_humis
 
 
 def moving_average(temps: np.ndarray, datetimes: list, timedelta=pd.Timedelta(minutes=60)):
