@@ -13,16 +13,12 @@ FAULTYSTATIONS = ['C059A2225266', 'C3FD36A6C1BC','D07769DF208C', 'D883D89E6A24',
 
 
 class DataGenerator:
-    def __init__(self, datapath: str, geopath: str, savepath: str, infofile: str, convolutions: list[int] = None, movingaverage: bool = False):
+    def __init__(self, datapath: str, geopath: str, savepath: str, infofile: str, convolutions: list[int] = None):
         self.datapath: str = datapath
         self.geodatapath: str = geopath
         self.savepath: str = savepath
         self.infofile: pd.DataFrame = pd.read_csv(infofile, delimiter=';')
         self.convolutions: list[int] = CONVOLUTIONS
-        self.ma = movingaverage
-        
-        if convolutions:
-            self.convolutions = convolutions
 
     def generate(self):
         for filename in os.listdir(self.datapath):
@@ -44,13 +40,11 @@ class DataGenerator:
         geofeatures, targetlat, targetlon = geofeatures(stationid, len(temps))
         irradiation = irradiation.irradiationcalc(times, targetlat, targetlon)
         times, datetimes = self.time_formatting(times)
-        if self.ma:
-            ma_temps = datautils.moving_average(temps, datetimes)
-            return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, moving_average=ma_temps)    
-        return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps)
+        ma_temps = datautils.moving_average(temps, datetimes)
+        return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, ma_temps)    
 
 
-    def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average = None) -> pd.DataFrame:
+    def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average) -> pd.DataFrame:
         df = self.empty_df()
         df['datetime'] = datetimes
         df['time'] = times
@@ -58,8 +52,7 @@ class DataGenerator:
             df[geofeature] = geofeatures[geofeature]
         df['humidity'] = humis
         df['irradiation'] = irradiation
-        if self.ma:
-            df['moving_average'] = moving_average
+        df['moving_average'] = moving_average
         df['temperature'] = temps
         return df
 
@@ -99,8 +92,7 @@ class DataGenerator:
         cols: list[str]  = ['datetime', 'time']
         cols.extend(self.conv_features())
         cols.extend(['humidity', 'irradiation'])
-        if self.ma:
-            cols.append('moving_average')
+        cols.append('moving_average')
         cols.append('temperature')
         df: pd.DataFrame = pd.DataFrame(columns=cols)
         return df
