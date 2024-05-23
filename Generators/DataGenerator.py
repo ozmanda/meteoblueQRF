@@ -4,7 +4,6 @@ import os
 import datautils
 from warnings import warn
 from typing import Tuple
-import irradiation
 
 CONVOLUTIONS = [10, 30, 100, 200, 500]
 GEOFEATURES = ['altitude', 'buildings', 'forests', 'pavedsurfaces', 'surfacewater', 'urbangreen']
@@ -45,7 +44,8 @@ class DataGenerator:
         times, datetimes = self.time_formatting(times)
         if self.ma:
             ma_temps = datautils.moving_average(temps, datetimes)
-        df = self.generate_df()
+            return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, moving_average=ma_temps)    
+        return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps)
 
 
     def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average = None) -> pd.DataFrame:
