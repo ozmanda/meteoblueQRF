@@ -59,7 +59,7 @@ if __name__ == '__main__':
                 warn(f'Number of start and end times for test set cannot be matched', UserWarning)
                 raise ValueError
 
-        qrf = QRF(modelname=os.path.basename(args.modelpath) ,confidence_interval=args.CI)
+        qrf = QRF(modelname = os.path.basename(args.modelpath), confidence_interval = args.CI)
         qrf.load_training_data(args.stationDatapath, start=args.starttime, end=args.endtime)
         qrf.load_test_data(args.stationDatapath, start=args.test_start, end=args.test_end)
         qrf.run_training()
