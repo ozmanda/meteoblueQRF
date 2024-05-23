@@ -279,6 +279,7 @@ def extract_surfacedata(palmpath):
                     continue
     # flip maps to account for PALM having origin at the bottom left, not top left
     surf_temps = np.flip(surf_temps, axis=1)
+    surf_humis = np.flip(surf_humis, axis=1)
 
     return surf_temps, surf_humis
 
