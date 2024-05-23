@@ -8,22 +8,19 @@ from pandas import read_csv
 from spatialconvolutions import convolutions
 import pvlib.irradiance as rad
 
+#! fixed to be meaningful for a resolution of 16m, original convs are [10, 30, 100, 200, 500]
+#* convs must always be even when divided by the resolution (considers either side)
+convs = [32, 48, 112, 208, 512]
+
 def geogen(geopath: str, boundary: dict, humimaps: np.ndarray):
     geofeaturelist = ["altitude", "buildings", "forests", "pavedsurfaces", "surfacewater", "urbangreen"]
-    #! fixed to be meaningful for a resolution of 16m, original convs are [10, 30, 100, 200, 500]
-    #* convs must always be even when divided by the resolution (considers either side)
-    convs = [32, 48, 112, 208, 512]
     geomaps = generate_geomap(geopath, boundary, humimaps.shape, geofeaturelist, convs)
-    try:
-        geomaps.dump(os.path.join(os.getcwd(), 'geomaps_nores.pickle'))
-    except OverflowError:
-        warn('Data larger than 4GiB and cannot be serialised for saving.')
-
     return geomaps
 
-
+#! This now returns a dictionary, but is untested.
 def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: list, 
                     convs: list, sigma:int = 3, resolution=16):
+    # TODO: change to dict
     '''
     Generates a geomap from the given geofeatures and convolutions.
     :param geopath: path to geofeatures
@@ -34,8 +31,10 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
     :param sigma: sigma for gaussian convolution
     :return: geomap with shape (n_geofeatures * n_convolutions+1, height of humimap, width of humimap)
     '''
+    empty_geomap = np.zeros(shape=(shape[0], shape[1], shape[2]))
+    geomaps = {}
     # geomaps is in the shape which considers the resolution (i.e., it is already reduced)
-    geomaps = np.zeros(shape=(len(geofeaturelist) * (len(convs) + 1), shape[0], shape[1], shape[2]))
+    geomaps = np.zeros(shape=(shape[0], shape[1], shape[2]))
     print('\nGenerating Geofeatures')
     for idx, geofeature in enumerate(geofeaturelist):
         print(f'    {geofeature}...')
@@ -63,12 +62,9 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
         
         #* there is data within the geomap at this point
         # add uncovoluted feature map to geomaps after adjusting to the proper resolution
-        geomaps[geofeature_idx, :, :, :] = datautils.reduce_resolution(featuremap[palm_geoidxs['N']:palm_geoidxs['S'], 
-                                                                        palm_geoidxs['W']:palm_geoidxs['E']],
-                                                                resolution)
-        # print(f'geomap min/max = {np.min(geomaps[geofeature_idx, 0, :, :])}/{np.max(geomaps[idx*(len(convs)+1), 0, :, :])}')
-        
-        
+        geomaps[geofeature] = datautils.reduce_resolution(featuremap[palm_geoidxs['N']:palm_geoidxs['S'], 
+                                                                     palm_geoidxs['W']:palm_geoidxs['E']],
+                                                                     resolution)        
         if geofeature != 'altitude':
             # create padded feature map for convolutions - full resolution
             padded_featuremap = np.empty(shape=((shape[1]*resolution + np.max(convs)), 
@@ -127,6 +123,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                         'W': int(0+max_conv_pad), 
                         'E': int(padded_featuremap.shape[1]-max_conv_pad)}
             for conv_idx, conv in enumerate(convs):
+                convname = f'{geofeature}_{conv}'
                 conv_pad = (conv/2)/resolution
                 print(f'      conv {conv}')
                 # empty array for convolutions in reduced size
@@ -151,7 +148,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                         conv_array[lat, lon] = np.nanmean(gaussian_array)
                 if np.sum(np.isnan(conv_array)) != 0:
                     print(np.sum(np.isnan(conv_array)))
-                geomaps[geofeature_idx+conv_idx+1, :, :, :] = conv_array
+                geomaps[convname] = conv_array
     return geomaps
 
 
