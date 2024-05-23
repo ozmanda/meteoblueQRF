@@ -60,7 +60,6 @@ def irradiationmap(boundary, times, altitudes):
 
         irradmap[idx, :, :] = np.mean([radSW, radNW, radSE, radNE])
 
-
     return irradmap
 
 
