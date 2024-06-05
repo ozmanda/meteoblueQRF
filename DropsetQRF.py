@@ -8,7 +8,7 @@ from quantile_forest import RandomForestQuantileRegressor
 import joblib
 import matplotlib.pyplot as plt
 from seaborn import histplot, scatterplot
-from lcz_analysis import lcz_analysis
+# from lcz_analysis import lcz_analysis
 import pandas as pd
 
 
@@ -197,4 +197,4 @@ class DropsetQRF:
         self.run_error_estimation(os.path.join(savepath, 'models') if savemodels else None)
         self.save_output(savepath)
         self.generate_images(savepath)
-        lcz_analysis(savepath)
+        # lcz_analysis(savepath)

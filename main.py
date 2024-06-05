@@ -43,8 +43,9 @@ if __name__ == '__main__':
 
     # QRF TRAINING RUN
     if args.type == "training":
-        assert os.path.isdir(args.savedir), 'Directory for saving QRF output is required'
-        assert os.path.isdir(os.path.dirname(args.modelpath)), 'A path must be given for model saving'
+        assert args.modelpath, 'A path must be given for model saving'
+        if not os.path.isdir(args.modelpath):
+            os.mkdir(args.modelpath)
         if args.starttime:
             assert args.endtime, 'If start time(s) for training is/are given, an end time must be given as well'
             if len(args.starttime) != len(args.endtime):
@@ -65,8 +66,8 @@ if __name__ == '__main__':
         qrf.run_training()
         qrf.run_test()
         qrf.save_model(args.modelpath)
-        qrf.save_ouput(args.savedir)
-        qrf.save_trainingset(args.savedir)
+        qrf.save_ouput(args.modelpath)
+        qrf.save_trainingset(args.modelpath)
 
     # DROPSET ERROR ESTIMATION
     elif args.type == 'dropset':

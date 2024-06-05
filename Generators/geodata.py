@@ -4,9 +4,10 @@ import rasterio
 import pickle
 import datautils
 from warnings import warn
-from pandas import read_csv
+import pandas as pd
 from spatialconvolutions import convolutions
 import pvlib.irradiance as rad
+from typing import List
 
 #! fixed to be meaningful for a resolution of 16m, original convs are [10, 30, 100, 200, 500]
 #* convs must always be even when divided by the resolution (considers either side)
@@ -20,7 +21,7 @@ def geogen(geopath: str, boundary: dict, humimaps: np.ndarray):
 #! This now returns a dictionary, but is untested.
 def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: list, 
                     convs: list, sigma:int = 3, resolution=16):
-    # TODO: change to dict
+    # TODO: change to dict (done but untested!)
     '''
     Generates a geomap from the given geofeatures and convolutions.
     :param geopath: path to geofeatures
@@ -31,19 +32,11 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
     :param sigma: sigma for gaussian convolution
     :return: geomap with shape (n_geofeatures * n_convolutions+1, height of humimap, width of humimap)
     '''
-    empty_geomap = np.zeros(shape=(shape[0], shape[1], shape[2]))
     geomaps = {}
     # geomaps is in the shape which considers the resolution (i.e., it is already reduced)
-    geomaps = np.zeros(shape=(shape[0], shape[1], shape[2]))
     print('\nGenerating Geofeatures')
     for idx, geofeature in enumerate(geofeaturelist):
         print(f'    {geofeature}...')
-        if geofeature == 'altitude':
-            geofeature_idx = 0
-        else:
-            geofeature_idx = idx*(len(convs)+1)-5
-
-        #* issue with geofeatures is not from loading
         # load feature map, get border and check that it is complete. Any negative values are assign NaN
         featuremap, geo_border = load_geomap(os.path.join(geopath, f'{geofeature}.tif'))
         featuremap[featuremap < 0] = np.nan
@@ -60,7 +53,6 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                         'W': int(np.round(boundary['CH_W'] - geo_border['W'])),
                         'E': int(np.round(boundary['CH_E'] - geo_border['W']))}
         
-        #* there is data within the geomap at this point
         # add uncovoluted feature map to geomaps after adjusting to the proper resolution
         geomaps[geofeature] = datautils.reduce_resolution(featuremap[palm_geoidxs['N']:palm_geoidxs['S'], 
                                                                      palm_geoidxs['W']:palm_geoidxs['E']],
@@ -122,7 +114,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                         'S': int(padded_featuremap.shape[0]-max_conv_pad),
                         'W': int(0+max_conv_pad), 
                         'E': int(padded_featuremap.shape[1]-max_conv_pad)}
-            for conv_idx, conv in enumerate(convs):
+            for conv in convs:
                 convname = f'{geofeature}_{conv}'
                 conv_pad = (conv/2)/resolution
                 print(f'      conv {conv}')
@@ -152,7 +144,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
     return geomaps
 
 
-def load_geomap(path):
+def load_geomap(path: str):
     featuremap = rasterio.open(path)
     geo_N = featuremap.meta['transform'][5]  # gives northern boundary
     geo_W = featuremap.meta['transform'][2]  # gives western boundary
@@ -166,7 +158,7 @@ def load_geomap(path):
     return featuremap, borders
 
 
-def get_loc(stationid, infofilepath):
+def get_loc(stationid: str, infofile: pd.DataFrame):
     """
     Determines the latitude and longitude of the measurement station using
     the input parameter stationid: the ID of the station, corresponding to
@@ -175,10 +167,9 @@ def get_loc(stationid, infofilepath):
     Returns the latitude and longitude of the station corrected to LV09
     coordinates
     """
-    stationscsv = read_csv(infofilepath, delimiter=';')
     targetlat = None
     targetlon = None
-    for _, row in stationscsv.iterrows():
+    for _, row in infofile.iterrows():
         if row['stationid_new'] == stationid:
             targetlat = row['CH_N'] if row['CH_N'] < 1000000 else row['CH_N'] - 1000000
             targetlon = row['CH_E'] if row['CH_E'] < 2000000 else row['CH_E'] - 2000000
@@ -190,7 +181,7 @@ def get_loc(stationid, infofilepath):
     return targetlat, targetlon
 
 
-def extract_feature(targetlat, targetlon, featurename, geopath, convs, num):
+def extract_feature(targetlat: int, targetlon: int, featurename: str, geopath: str, num: int) -> dict:
     if f'{featurename}.tif' in os.listdir(geopath):
         featuremap = rasterio.open(os.path.join(geopath, f'{featurename}.tif'))
         originlat = featuremap.meta['transform'][5]  # gives northern boundary
@@ -216,33 +207,30 @@ def extract_feature(targetlat, targetlon, featurename, geopath, convs, num):
              f'check path', Warning)
         raise FileNotFoundError
 
-    if not convs:
-        feature = np.empty(shape=(num, 1))
-        feature[:, 0] = featuremap[0, int(idxlat), int(idxlon)]
-        return feature
+    if featurename == 'altitude':
+        featurevector = [featuremap[0, int(idxlat), int(idxlon)]]*num
+        return {featurename: featurevector}
     else:
+        featuredict = {featurename: [featuremap[0, int(idxlat), int(idxlon)]]*num}
+        featurenames = [f'{featurename}_{conv}' for conv in convs]
         featureconvs = convolutions(convs, featuremap, idxlat, idxlon)
-        feature = np.empty(shape=(num, len(convs)+1))
-        feature[:, :] = featureconvs
-        return feature
+        for idx, feature in enumerate(featurenames):
+            featuredict.update({feature: [featureconvs[idx]]*num})
+        return featuredict
 
 
-def get_geofeatures(stationid, geopath, num, convs, geofeaturelist, infofile):
+def get_geofeatures(stationid: str, geopath: str, num: int, geofeaturelist: List[str], infofile: str):
     # list of static / geographic features to be considered
     geofeatures = np.empty(shape=(num, 0))
-
     targetlat, targetlon = get_loc(stationid, infofile)
 
-    for idx, feature in enumerate(geofeaturelist):
-        if feature == 'altitude':
-            geofeatures = np.append(geofeatures, extract_feature(targetlat, targetlon, feature, geopath, None, num), axis=1)
-        else:
-            geofeatures = np.append(geofeatures, extract_feature(targetlat, targetlon, feature, geopath, convs, num), axis=1)
+    for feature in geofeaturelist:
+        geofeatures = np.append(geofeatures, extract_feature(targetlat, targetlon, feature, geopath, num), axis=1)
 
     return geofeatures, targetlat, targetlon
 
 
-def load_geofeatures(geodir, shape):
+def load_geofeatures(geodir: str, shape: tuple):
     """
     This function either loads the geofeatures from an existing .PICKLE file, or it generate the
     feature data using the shape of the new NetCDF file and its layermasks.
@@ -310,7 +298,7 @@ def load_geofeatures(geodir, shape):
     return geofeatures, geolist
 
 
-def convert_raster(data, newdim):
+def convert_raster(data: np.ndarray, newdim: tuple):
     newraster = np.zeros(shape=newdim)
 
     istep = np.floor(data.shape[0] / newdim[0])

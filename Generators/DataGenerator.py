@@ -3,9 +3,11 @@ import pandas as pd
 import os
 import datautils
 from warnings import warn
-from typing import Tuple
+from typing import Tuple, List
+import geodata
+import irradiation as solar
 
-CONVOLUTIONS = [10, 30, 100, 200, 500]
+CONVOLUTIONS = [32, 48, 112, 208, 512]
 GEOFEATURES = ['altitude', 'buildings', 'forests', 'pavedsurfaces', 'surfacewater', 'urbangreen']
 FAULTYSTATIONS = ['C059A2225266', 'C3FD36A6C1BC','D07769DF208C', 'D883D89E6A24', 'D083B9FD07FB', 'D3FE8EEF188C',
                   'D63DFE9B164B','DF15D23E4B15','E2A0DF1A4941','E437CB2AF225','F033A8C6BB79','F4683D808CFB',
@@ -13,21 +15,25 @@ FAULTYSTATIONS = ['C059A2225266', 'C3FD36A6C1BC','D07769DF208C', 'D883D89E6A24',
 
 
 class DataGenerator:
-    def __init__(self, datapath: str, geopath: str, savepath: str, infofile: str, convolutions: list[int] = None):
+    def __init__(self, datapath: str, geopath: str, savepath: str, infofile: str, convolutions: List[int] = None):
         self.datapath: str = datapath
         self.geodatapath: str = geopath
         self.savepath: str = savepath
         self.infofile: pd.DataFrame = pd.read_csv(infofile, delimiter=';')
-        self.convolutions: list[int] = CONVOLUTIONS
 
     def generate(self):
         for filename in os.listdir(self.datapath):
             if filename.startswith('temp'):
                 stationid = filename.split('.csv')[0].split('_')[1]
-                if stationid in FAULTYSTATIONS:
+                savepath = os.path.join(self.savepath, f'{stationid}.csv')
+                if os.path.exists(savepath) or stationid in FAULTYSTATIONS:
                     continue
-                station_df = self.station_dataset(stationid)
-                station_df.to_csv(os.path.join(self.savepath, f'{stationid}.csv'), index=False, sep=';')
+                try:
+                    station_df = self.station_dataset(stationid)
+                except ValueError: 
+                    warn(f'Error in processing station {stationid}, skipping this station', Warning)
+                    continue
+                station_df.to_csv(savepath, index=False, sep=';')
                 print('Done')
                 
                     
@@ -37,33 +43,34 @@ class DataGenerator:
         humi = humifile['humi'].to_list()
         times = datautils.DST_TZ(tempfile['datetime'].to_list())
         temps = tempfile.reset_index()['temp'].to_list()
-        geofeatures, targetlat, targetlon = geofeatures(stationid, len(temps))
-        irradiation = irradiation.irradiationcalc(times, targetlat, targetlon)
+        geofeatures, targetlat, targetlon = self.get_geofeatures(stationid, len(temps)) #* keys are correct here
+        irradiation = solar.irradiationcalc(times, targetlat, targetlon)
         times, datetimes = self.time_formatting(times)
         ma_temps = datautils.moving_average(temps, datetimes)
         return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, ma_temps)    
 
 
     def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average) -> pd.DataFrame:
-        df = self.empty_df()
+        df = {}
         df['datetime'] = datetimes
         df['time'] = times
-        for geofeature in self.geofeatures:
+        for geofeature in geofeatures.keys():
             df[geofeature] = geofeatures[geofeature]
         df['humidity'] = humis
         df['irradiation'] = irradiation
         df['moving_average'] = moving_average
         df['temperature'] = temps
+        df = pd.DataFrame(df)
         return df
 
 
     def get_geofeatures(self, stationid, num):
         #! Geofeatures changed from array to dictionary, ensure this works!
         geofeatures = {}
-        targetlat, targetlon = datautils.get_loc(stationid, self.infofile)
+        targetlat, targetlon = geodata.get_loc(stationid, self.infofile)
 
         for geofeature in GEOFEATURES:
-            geofeatures[geofeature] = datautils.extract_feature(targetlat, targetlon, geofeature, self.geopath, None, num)
+            geofeatures.update(geodata.extract_feature(targetlat, targetlon, geofeature, self.geodatapath, num))
 
         return geofeatures, targetlat, targetlon
 
@@ -83,27 +90,9 @@ class DataGenerator:
         
         if len(humi) != len(temp):
             warn(f'the number of measured temperatures and measured humidities do not coincide, matching...', Warning)
-            tempfile, humifile = datautils.file_matching(tempfile, humifile)
+            temp, humi = datautils.file_matching(temp, humi)
         
         return humi, temp
-
-
-    def empty_df(self) -> pd.DataFrame:
-        cols: list[str]  = ['datetime', 'time']
-        cols.extend(self.conv_features())
-        cols.extend(['humidity', 'irradiation'])
-        cols.append('moving_average')
-        cols.append('temperature')
-        df: pd.DataFrame = pd.DataFrame(columns=cols)
-        return df
-    
-
-    def conv_features(self) -> list[str]:
-        self.geofeatures = []
-        for geofeatures in GEOFEATURES:
-            for convolution in self.convolutions:
-                self.geofeatures.append(f'{geofeatures}_{convolution}')
-        return self.geofeatures
     
 
     def time_formatting(self, times):

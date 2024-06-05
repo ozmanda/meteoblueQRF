@@ -5,6 +5,7 @@ import time
 import pickle
 from metpy.calc import relative_humidity_from_mixing_ratio
 from metpy.units import units
+from typing import List
 
 PRESSURE = 1013.25
 
@@ -51,7 +52,7 @@ def lv_to_wgs84(lv_lat: float, lv_lon: float, type: float, h_lv: float = 0):
         return wgs84_lat, wgs84_lon
 
 
-def wgs84_to_lv(wgs84_lat: float, wgs84_lon: float, type, 
+def wgs84_to_lv(wgs84_lat: float, wgs84_lon: float, type: str, 
                 h_wgs: float = 0, unit: str = 'deg'):
     if unit == 'deg':
         wgs84_lat *= 3600
@@ -183,7 +184,7 @@ def remove_emptytimes(maps: np.ndarray, times: np.ndarray):
     return maps, times
 
 
-def preprocessing(filepath):
+def preprocessing(filepath: str):
     """
     Loads measurements files and executes two preprocessing steps: rounding
     times to 5 minutes and removes duplicate lines.
@@ -191,11 +192,11 @@ def preprocessing(filepath):
     csvfile = pd.read_csv(filepath, delimiter=";")
     csvfile['datetime'] = pd.to_datetime(csvfile['datetime'])
     for idx, row in csvfile.iterrows():
-        csvfile.iloc[idx, 0] = pd.roundTime(row['datetime'])
+        csvfile.iloc[idx, 0] = roundTime(row['datetime'])
     csvfile = csvfile.drop_duplicates()
     return csvfile
 
-def file_matching(tempfile, humifile):
+def file_matching(tempfile: pd.DataFrame, humifile: pd.DataFrame):
     # new arrays
     newhumi = np.empty(shape=(0, 2))
     newtemp = np.empty(shape=(0, 2))
@@ -233,7 +234,7 @@ def file_matching(tempfile, humifile):
     return newtemp, newhumi
 
 
-def reduce_resolution(original_array, resolution):
+def reduce_resolution(original_array: np.ndarray, resolution: int):
     """
     Reduces the dimension of a given array by the resolution. A 10x10 array with a resolution of 2 would return a 5x5 
     array. The method uses a simple average 
@@ -250,7 +251,7 @@ def reduce_resolution(original_array, resolution):
     return new_array
 
 
-def extract_surfacedata(palmpath):
+def extract_surfacedata(palmpath: str):
     palmfile = pd.Dataset(palmpath, 'r', format='NETCDF4')
     try:
         temps = palmfile['theta_xy']
@@ -284,7 +285,7 @@ def extract_surfacedata(palmpath):
     return surf_temps, surf_humis
 
 
-def moving_average(temps: np.ndarray, datetimes: list, timedelta=pd.Timedelta(minutes=60)):
+def moving_average(temps: List[float], datetimes: list, timedelta=pd.Timedelta(minutes=60)):
     #! this moving average calculate is not correct, it doesn't consider that observations are lost
     movingaverage = []
     for i, time in enumerate(datetimes):
@@ -299,67 +300,9 @@ def moving_average(temps: np.ndarray, datetimes: list, timedelta=pd.Timedelta(mi
         else:
             movingaverage.append(np.mean(ma, axis=0))
 
-    movingaverage = np.array(movingaverage)
-    if movingaverage.shape != temps.shape:
+    if len(movingaverage) != len(temps):
         warn(f'Shape of moving average vector ({movingaverage.shape}) is not equivalent to the length of the '
              f'temperature vector ({temps.shape})')
         raise ValueError
-
-    print(f'movingaverage final shape: {movingaverage.shape}')
     return movingaverage
-
-
-def file_matching(tempfile, humifile):
-    # new arrays
-    newhumi = np.empty(shape=(0, 2))
-    newtemp = np.empty(shape=(0, 2))
-
-    if len(tempfile) < len(humifile):
-        humitimes = humifile['datetime'].to_list()
-        for _, row in tempfile.iterrows():
-            try:
-                idx = humitimes.index(row['datetime'])
-                humidat = [[humitimes[idx], humifile.iloc[idx, 1]]]
-                tempdat = [[row['datetime'], row['temp']]]
-            except ValueError:
-                continue
-            newtemp = np.append(newtemp, tempdat, axis=0)
-            newhumi = np.append(newhumi, humidat, axis=0)
-
-    elif len(humifile) < len(tempfile):
-        temptimes = tempfile['datetime'].to_list()
-        for _, row in humifile.iterrows():
-            try:
-                idx = temptimes.index(row['datetime'])
-                tempdat = [[temptimes[idx], tempfile.iloc[idx, 1]]]
-                humidat = [[row['datetime'], row['humi']]]
-            except ValueError:
-                continue
-            newtemp = np.append(newtemp, tempdat, axis=0)
-            newhumi = np.append(newhumi, humidat, axis=0)
-
-    else:
-        warn("file_matching function called unnecessarily", Warning)
-        return tempfile, humifile
-
-    newtemp = pd.DataFrame(newtemp, columns=['datetime', 'temp'])
-    newhumi = pd.DataFrame(newhumi, columns=['datetime', 'humi'])
-    return newtemp, newhumi
-
-
-def reduce_resolution(original_array, resolution):
-    """
-    Reduces the dimension of a given array by the resolution. A 10x10 array with a resolution of 2 would return a 5x5 
-    array. The method uses a simple average 
-    """
-    new_array = np.zeros(shape=(int(original_array.shape[0]/resolution), int(original_array.shape[1]/resolution)))
-    for row in range(new_array.shape[0]):
-        for col in range(new_array.shape[1]):
-            arr = original_array[row*resolution:row*resolution+resolution, col*resolution:col*resolution+resolution]
-            if np.isnan(arr).all():
-                new_array[row, col] = np.nan
-            else:
-                new_array[row, col] = np.nanmean(arr)
-        
-    return new_array
 

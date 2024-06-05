@@ -5,6 +5,7 @@ from warnings import warn
 import datautils
 import geodata
 import irradiation
+from typing import List
 
 # GLOBAL VARIABLES
 RESOLUTION = 16
@@ -33,13 +34,13 @@ class FeatureMapGenerator():
         self.savepath: str = savepath
         self.features: dict = {}
 
-    def generate(self, boundary: list[float] = [], time: str = '', palmfile: str = '', palmhumi: bool = True, palmtemp: bool = False):       
+    def generate(self, boundary: List[float] = [], time: str = '', palmfile: str = '', palmhumi: bool = True, palmtemp: bool = False):       
         if self.mode == 'inference':
             assert boundary, 'boundary must be given for inference'
-            self.boundary: list[float] = boundary
+            self.boundary: List[float] = boundary
             try:
                 times = pd.to_datetime(time, format='%Y/%m/%d_%H:%M')
-                self.times_aware: list[pd.DatetimeIndex] = list(times)
+                self.times_aware: List[pd.DatetimeIndex] = list(times)
             except ValueError as e:
                 warn('Inference times were entered in an unreadable format. Try again with "YYYY/MM/DD_HH:MM"')
                 raise e
@@ -88,7 +89,7 @@ class FeatureMapGenerator():
         self.savefile = f'{os.path.basename(self.palmfile).split(".nc")[0]}_featuremaps.json'
 
 
-    def datetime_maps(self, t_bool: list[bool]):
+    def datetime_maps(self, t_bool: List[bool]):
         # create time and datetime maps
         self.date_time_sep()
         shape = self.features['temperature'].shape
@@ -152,7 +153,7 @@ class FeatureMapGenerator():
         return datautils.moving_average(self.features['temperature'], self.features['times'])
     
 
-    def moving_average(self, t: list[bool]):
+    def moving_average(self, t: List[bool]):
         """
         Performs moving average calculation using the array of surface temperatures using the boolean list 
         indicating for which times a MA exists --> implies the stride length for the moving average calculation,
@@ -169,7 +170,7 @@ class FeatureMapGenerator():
         return ma
 
 
-    def geofeatures(self, t_bool: list[bool]):
+    def geofeatures(self, t_bool: List[bool]):
         print('Generating geofeatures............................')
         if os.path.isfile(os.path.join(self.folder, 'geomaps.z')):
             self.geomaps: dict = datautils.load_file(os.path.join(self.folder, 'geomaps.z'))

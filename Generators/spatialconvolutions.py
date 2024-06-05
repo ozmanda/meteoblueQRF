@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import signal
+from typing import List
 
 
 # CAREFUL - THIS IS PROGRAMMED ASSUMING CELL SIZE 16x16 METERS
@@ -50,7 +51,7 @@ def spatial_convolutions(feature, kernels, shape):
     return convs
 
 
-def convolutions(convs, fmap, lat, lon, sigma=3):
+def convolutions(convs, fmap, lat, lon, sigma=3) -> List[float]:
     featureconvs = np.empty(shape=0)
     featureconvs = np.append(featureconvs, fmap[0, int(lat), int(lon)])
 
@@ -60,7 +61,7 @@ def convolutions(convs, fmap, lat, lon, sigma=3):
 
         kernel = signal.gaussian(conv+1, std=sigma)
         kernel = np.outer(kernel, kernel)
-        feature = np.nanmean(fmap[0, int(lat - conv/2):int(lat + conv/2 + 1),
+        feature: float = np.nanmean(fmap[0, int(lat - conv/2):int(lat + conv/2 + 1),
                              int(lon - conv/2):int(lon + conv/2 + 1)] * kernel)
 
         featureconvs = np.append(featureconvs, [feature], axis=0)
