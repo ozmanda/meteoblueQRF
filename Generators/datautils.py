@@ -6,6 +6,7 @@ import pickle
 from metpy.calc import relative_humidity_from_mixing_ratio
 from metpy.units import units
 from typing import List
+import netCDF4 as nc
 
 PRESSURE = 1013.25
 
@@ -306,3 +307,51 @@ def moving_average(temps: List[float], datetimes: list, timedelta=pd.Timedelta(m
         raise ValueError
     return movingaverage
 
+
+def extract_palm_data(palmpath: str, res: int):
+    #* has been checked, times are correct
+    """
+    Extracts times, temperature and boundary coordinates from PALM file. PALM coordinates are extracted as latitude
+    and longitude (WGS84) and converted to LV95 projection coordinates.
+    PALM: origin_x contains the longitude, origin_y contains the latitude.
+    
+    times: array of times
+    t: list of boolean values, indicating if a moving-average value is available
+    """
+    print('Extracting PALM File data....................')
+    print('    loading PALM file........................')
+    palmfile: nc.Dataset = nc.Dataset(palmpath, 'r', format='NETCDF4')
+
+    print('    determining boundary.....................')
+    CH_S, CH_W = lv03_to_lv95(palmfile.origin_y, palmfile.origin_x)
+    # CH_S, CH_W, _ = wgs84_to_lv(palmfile.origin_lat, palmfile.origin_lon, 'lv95') #type: ignore
+    CH_N = CH_S + palmfile.dimensions['y'].size * res
+    CH_E = CH_W + palmfile.dimensions['x'].size * res
+    boundary = {'CH_S': CH_S, 'CH_N': CH_N, 'CH_E': CH_E, 'CH_W': CH_W}
+
+    print('    extracting times.........................')
+    times, t_bool = extract_times(pd.to_datetime(palmfile.origin_time), palmfile['time'])
+    times = np.array(times)
+
+    return boundary, times, t_bool
+
+
+def extract_surfacetemps(palmpath):
+    palmfile = nc.Dataset(palmpath, 'r', format='NETCDF4')
+    try:
+        temps = palmfile['theta_xy']
+    except IndexError:
+        temps = palmfile['theta']
+    surf_temps = np.zeros(shape=(temps.shape[0], temps.shape[2], temps.shape[3]))
+    for time in range(temps.shape[0]):
+        for idxs, _ in np.ndenumerate(temps[time, 0, :, :]):
+            for layer in range(temps.shape[1]):
+                if temps[time, layer, idxs[0], idxs[1]] != -9999:
+                    surf_temps[time, :, :][idxs] = temps[time, layer, idxs[0], idxs[1]] - 273.15
+                    break
+                else:
+                    continue
+    # flip maps to account for PALM having origin at the bottom left, not top left
+    surf_temps = np.flip(surf_temps, axis=1)
+
+    return surf_temps

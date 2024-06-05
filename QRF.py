@@ -19,7 +19,8 @@ from qrf_utils import *
 
 # non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
 #! experimenting with removing the moving_average feature
-non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
+# non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
+non_training_variables = ['datetime', 'temperature', 'stationid']
 
 
 class QRF:
