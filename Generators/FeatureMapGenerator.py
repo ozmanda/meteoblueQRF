@@ -70,7 +70,7 @@ class FeatureMapGenerator():
         self.features['temperature'] = temps[t_bool, :, :]
         self.features['humidity'] = humis[t_bool, :, :]
         self.features['moving_average'] = self.moving_average(t_bool)      
-        self.geofeatures()
+        self.geofeatures(t_bool)
         self.features.update(self.geomaps)
         self.features['irradiation'] = self.irradiation()[t_bool, :, :]
         datetime_map, time_map = self.datetime_maps(t_bool)
@@ -124,7 +124,7 @@ class FeatureMapGenerator():
             temps = datautils.load_file(os.path.join(self.folder, 'PALM_surfacetemps.z'))
             humis = datautils.load_file(os.path.join(self.folder, 'PALM_surfacehumis.z'))
         else:
-            temps, humis = datautils.extract_surfacetemps(self.palmfile)
+            temps, humis = datautils.extract_surfacedata(self.palmfile)
             datautils.dump_file(os.path.join(self.folder, 'PALM_surfacetemps.z'), temps)
             datautils.dump_file(os.path.join(self.folder, 'PALM_surfacehumis.z'), humis)
         return temps, humis #TODO: check typing
@@ -174,11 +174,13 @@ class FeatureMapGenerator():
         print('Generating geofeatures............................')
         if os.path.isfile(os.path.join(self.folder, 'geomaps.z')):
             self.geomaps: dict = datautils.load_file(os.path.join(self.folder, 'geomaps.z'))
+            print(f'Geomaps loaded from file with keys:\n{self.geomaps.keys()}')
         else:
-            geomaps_full: dict = geodata.geogen(self.geopath, self.boundary, self.features['humidity'].shape[1], self.features['humidity'].shape[2])
+            geomaps_full: dict = geodata.geogen(self.geopath, self.boundary, (self.features['humidity'].shape[1], self.features['humidity'].shape[2]))
             self.geomaps = {}
-            for key in self.geomaps:
+            for key in self.geomaps_full.keys():
                 self.geomaps[key] = geomaps_full[key][t_bool, :, :]
+            print(f'Generated geomaps with keys:\n{self.geomaps.keys()}')
             datautils.dump_file(os.path.join(self.folder, 'geomaps.z'), self.geomaps)
 
 
@@ -187,6 +189,7 @@ class FeatureMapGenerator():
         if os.path.isfile(os.path.join(self.folder, 'irrad.z')):
             irrad = datautils.load_file(os.path.join(self.folder, 'irrad.z'))
         else:
-            irrad = irradiation.irradiationmap(self.boundary, self.times_aware, self.geomaps[0, 0, :, :])
+            print(self.geomaps.keys())
+            irrad = irradiation.irradiationmap(self.boundary, self.times_aware, self.geomaps['altitude'][0, :, :])
             datautils.dump_file(os.path.join(self.folder, 'irrad.z'), irrad)
             return irrad
