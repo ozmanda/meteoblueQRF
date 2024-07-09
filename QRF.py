@@ -44,9 +44,9 @@ class QRF:
         self.data = DataFrame
 
 
-    def load_training_data(self, path, start=None, end=None, test_split=False):
+    def load_training_data(self, path, start=None, end=None):
         dataset = load_data(path, startDatetime=start, endDatetime=end)
-        if test_split:
+        if not start:
             self.set_split_data(dataset)
         else:
             self.set_training_data(dataset)
@@ -107,6 +107,7 @@ class QRF:
         end_timer()
 
         self.MSE = mse(self.yTest, self.yPred)
+        
 
 
     def run_inference(self, datapath, savedir, img=True):
