@@ -130,7 +130,6 @@ def extract_times(origintime: np.datetime64, times_list: list):
     series (certain observations are required to create the moving average).
     """
     times = []
-    print(f'times list length: {len(times_list)}')
     for _, time in enumerate(times_list):
         times.append(origintime + pd.Timedelta(minutes=np.round(time * 24 * 60)))
 
@@ -253,13 +252,12 @@ def reduce_resolution(original_array: np.ndarray, resolution: int):
 
 
 def extract_surfacedata(palmpath: str):
-    palmfile = pd.Dataset(palmpath, 'r', format='NETCDF4')
+    palmfile = nc.Dataset(palmpath, 'r', format='NETCDF4')
     try:
         temps = palmfile['theta_xy']
     except IndexError:
         temps = palmfile['theta']
     all_mr = palmfile['q_xy']
-    palmfile.close()
 
     surf_temps = np.zeros(shape=(temps.shape[0], temps.shape[2], temps.shape[3]))
     surf_humis = np.zeros(shape=surf_temps.shape)
