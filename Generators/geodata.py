@@ -8,18 +8,20 @@ import pandas as pd
 from spatialconvolutions import convolutions
 import pvlib.irradiance as rad
 from typing import List
+from scipy import signal
 
 #! fixed to be meaningful for a resolution of 16m, original convs are [10, 30, 100, 200, 500]
 #* convs must always be even when divided by the resolution (considers either side)
 convs = [32, 48, 112, 208, 512]
 
-def geogen(geopath: str, boundary: dict, humimaps: np.ndarray):
+def geogen(geopath: str, boundary: dict, mapshape: tuple):
     geofeaturelist = ["altitude", "buildings", "forests", "pavedsurfaces", "surfacewater", "urbangreen"]
-    geomaps = generate_geomap(geopath, boundary, humimaps.shape, geofeaturelist, convs)
+    geomaps = generate_geomap(geopath, boundary, mapshape, geofeaturelist, convs)
+    print(f'Geodata geomap keys: {geomaps.keys()}')
     return geomaps
 
 #! This now returns a dictionary, but is untested.
-def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: list, 
+def generate_geomap(geopath: str, boundary: dict, mapshape: tuple, geofeaturelist: list, 
                     convs: list, sigma:int = 3, resolution=16):
     # TODO: change to dict (done but untested!)
     '''
@@ -35,7 +37,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
     geomaps = {}
     # geomaps is in the shape which considers the resolution (i.e., it is already reduced)
     print('\nGenerating Geofeatures')
-    for idx, geofeature in enumerate(geofeaturelist):
+    for geofeature in geofeaturelist:
         print(f'    {geofeature}...')
         # load feature map, get border and check that it is complete. Any negative values are assign NaN
         featuremap, geo_border = load_geomap(os.path.join(geopath, f'{geofeature}.tif'))
@@ -59,8 +61,8 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                                                                      resolution)        
         if geofeature != 'altitude':
             # create padded feature map for convolutions - full resolution
-            padded_featuremap = np.empty(shape=((shape[1]*resolution + np.max(convs)), 
-                                                (shape[2]*resolution + np.max(convs))))
+            padded_featuremap = np.empty(shape=((mapshape[0]*resolution + np.max(convs)), 
+                                                (mapshape[1]*resolution + np.max(convs))))
             padded_featuremap[:] = np.NaN
 
             # calculate the amount that padding exceeds geofeature map per edge
@@ -119,7 +121,7 @@ def generate_geomap(geopath: str, boundary: dict, shape: tuple, geofeaturelist: 
                 conv_pad = (conv/2)/resolution
                 print(f'      conv {conv}')
                 # empty array for convolutions in reduced size
-                conv_array = np.zeros(shape=(shape[1], shape[2]))
+                conv_array = np.zeros(shape=(mapshape[0], mapshape[1]))
                 kernel = signal.gaussian(conv/resolution + 1, std=sigma) # type: ignore
                 kernel = np.outer(kernel, kernel)
 
