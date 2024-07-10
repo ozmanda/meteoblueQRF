@@ -19,8 +19,8 @@ from qrf_utils import *
 
 # non_training_variables = ['datetime', 'time', 'temperature', 'stationid', 'moving_average']
 #! experimenting with removing the moving_average feature
-# non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
-non_training_variables = ['datetime', 'temperature', 'stationid']
+non_training_variables = ['datetime', 'temperature', 'stationid', 'moving_average']
+# non_training_variables = ['datetime', 'temperature', 'stationid']
 
 
 class QRF:
@@ -81,15 +81,17 @@ class QRF:
 
     def set_split_data(self, dataset):
         self.data = dataset
-        x = self.data.drop(non_training_variables, axis=1)
+        x = self.data
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
         # extract time and station ID and remove as feature variable (not saved for training data)
         self.test_stations = self.xTest['stationid']
         self.test_times = self.xTest['datetime']
-        self.xTrain = self.xTrain.drop(['datetime', 'stationid'], axis=1)
-        self.xTest = self.xTest.drop(['datetime', 'stationid'], axis=1)
+        self.xTrain = self.xTrain.drop(non_training_variables, axis=1)
+        self.xTrain['time'] = time_feature(self.xTrain['time'])
+        self.xTest = self.xTest.drop(non_training_variables, axis=1)
+        self.xTest['time'] = time_feature(self.xTest['time'])
 
 
     def run_training(self):
