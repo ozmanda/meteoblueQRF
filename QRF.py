@@ -234,11 +234,14 @@ class QRF:
             DataFrame(self.variable_importance).to_csv(savepath, index=False)
 
 
-    def save_ouput(self, savedir):
+    def save_ouput(self, savedir, type='training'):
         output_df = self.output_file()
         if not os.path.isdir(savedir):
             os.mkdir(savedir)
-        path = os.path.join(savedir, f'{self.modelname}.csv')
+        if type == 'training':
+            path = os.path.join(savedir, f'{self.modelname}.csv')
+        else:
+            path = os.path.join(savedir, f'{os.path.basename(savedir)}.csv')
         if os.path.isfile(path):
             path = path.split('.csv')[0] + '_1.csv'
         output_df.to_csv(path, index=False)
