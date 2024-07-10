@@ -81,7 +81,7 @@ class QRF:
 
     def set_split_data(self, dataset):
         self.data = dataset
-        x = self.data.drop(['time', 'temperature'], axis=1)
+        x = self.data.drop(non_training_variables, axis=1)
         y = self.data['temperature']
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
