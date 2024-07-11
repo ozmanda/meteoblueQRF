@@ -86,10 +86,13 @@ class QRF:
         self.xTrain, self.xTest, self.yTrain, self.yTest = train_test_split(x, y, test_size=0.2, random_state=42)
 
         # extract time and station ID and remove as feature variable (not saved for training data)
-        self.test_stations = self.xTest['stationid']
-        self.test_times = self.xTest['datetime']
+        self.train_times = self.xTrain['datetime']
+        self.train_stations = self.xTrain['stationid']
         self.xTrain = self.xTrain.drop(non_training_variables, axis=1)
         self.xTrain['time'] = time_feature(self.xTrain['time'])
+        
+        self.test_stations = self.xTest['stationid']
+        self.test_times = self.xTest['datetime']
         self.xTest = self.xTest.drop(non_training_variables, axis=1)
         self.xTest['time'] = time_feature(self.xTest['time'])
 
