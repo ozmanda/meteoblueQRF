@@ -9,6 +9,8 @@ from typing import List
 import netCDF4 as nc
 
 PRESSURE = 1013.25
+ERROR_MEAN = -0.25
+ERROR_STANDARD_DEVIATION = 0.25
 
 # COORDINATES -----------------------------------------------------------------
 def lv95_to_lv03(lv95_lat: float, lv95_lon: float):
@@ -353,3 +355,13 @@ def extract_surfacetemps(palmpath):
     surf_temps = np.flip(surf_temps, axis=1)
 
     return surf_temps
+
+
+def generate_noise_forecast(temps):
+    noise = generate_noise(temps.shape)
+    noise_forecast = temps + noise
+    return noise_forecast
+
+def generate_noise(shape, mu=ERROR_MEAN, sigma=ERROR_STANDARD_DEVIATION):
+    noise = np.random.normal(mu, sigma, shape)
+    return noise

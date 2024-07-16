@@ -47,10 +47,11 @@ class DataGenerator:
         irradiation = solar.irradiationcalc(times, targetlat, targetlon)
         times, datetimes = self.time_formatting(times)
         ma_temps = datautils.moving_average(temps, datetimes)
-        return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, ma_temps)    
+        noise_forecast = datautils.generate_noise_forecast(temps, datetimes)
+        return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, ma_temps, noise_forecast)    
 
 
-    def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average) -> pd.DataFrame:
+    def generate_df(self, datetimes, times, geofeatures, humis, irradiation, temps, moving_average, noise_forecast) -> pd.DataFrame:
         df = {}
         df['datetime'] = datetimes
         df['time'] = times
@@ -59,6 +60,7 @@ class DataGenerator:
         df['humidity'] = humis
         df['irradiation'] = irradiation
         df['moving_average'] = moving_average
+        df['forecast'] = noise_forecast
         df['temperature'] = temps
         df = pd.DataFrame(df)
         return df
