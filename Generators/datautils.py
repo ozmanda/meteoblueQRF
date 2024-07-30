@@ -358,7 +358,7 @@ def extract_surfacetemps(palmpath):
 
 
 def generate_noise_forecast(temps):
-    noise = generate_noise(temps.shape)
+    noise = generate_noise(len(temps))
     noise_forecast = temps + noise
     return noise_forecast
 
