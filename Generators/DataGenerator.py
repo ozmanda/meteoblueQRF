@@ -47,7 +47,7 @@ class DataGenerator:
         irradiation = solar.irradiationcalc(times, targetlat, targetlon)
         times, datetimes = self.time_formatting(times)
         ma_temps = datautils.moving_average(temps, datetimes)
-        noise_forecast = datautils.generate_noise_forecast(temps, datetimes)
+        noise_forecast = datautils.generate_noise_forecast(temps)
         return self.generate_df(datetimes, times, geofeatures, humi, irradiation, temps, ma_temps, noise_forecast)    
 
 
